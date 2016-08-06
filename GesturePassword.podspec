@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.author             = { "huangboju" => "529940945@qq.com" }
   s.platform     = :ios,'8.0'
   s.source       = { :git => "https://github.com/huangboju/GesturePassword.git", :tag => "#{s.version}" }
-  s.source_files  = "GesturePassword/Classes/**/*.{h,swift}"
+  s.source_files  = "GesturePassword/Classes/**/*.swift"
   s.framework  = "UIKit"
   s.requires_arc = true
 end
