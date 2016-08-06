@@ -15,21 +15,6 @@
 		D8FB374F1D55852E0031BBF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8FB374D1D55852E0031BBF4 /* LaunchScreen.storyboard */; };
 		D8FB375A1D55852E0031BBF4 /* GesturePasswordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37591D55852E0031BBF4 /* GesturePasswordTests.swift */; };
 		D8FB37651D55852E0031BBF4 /* GesturePasswordUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37641D55852E0031BBF4 /* GesturePasswordUITests.swift */; };
-		D8FB37A31D55CCDB0031BBF4 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37941D55CCDB0031BBF4 /* CALayer+Extension.swift */; };
-		D8FB37A41D55CCDB0031BBF4 /* CoreArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37951D55CCDB0031BBF4 /* CoreArchive.swift */; };
-		D8FB37A51D55CCDB0031BBF4 /* CoreLockConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37961D55CCDB0031BBF4 /* CoreLockConst.swift */; };
-		D8FB37A61D55CCDB0031BBF4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37971D55CCDB0031BBF4 /* Extensions.swift */; };
-		D8FB37A71D55CCDB0031BBF4 /* LockCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37981D55CCDB0031BBF4 /* LockCenter.swift */; };
-		D8FB37A81D55CCDB0031BBF4 /* LockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37991D55CCDB0031BBF4 /* LockController.swift */; };
-		D8FB37A91D55CCDB0031BBF4 /* LockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB379A1D55CCDB0031BBF4 /* LockDataSource.swift */; };
-		D8FB37AA1D55CCDB0031BBF4 /* LockDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB379B1D55CCDB0031BBF4 /* LockDelegate.swift */; };
-		D8FB37AB1D55CCDB0031BBF4 /* LockInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB379C1D55CCDB0031BBF4 /* LockInfoView.swift */; };
-		D8FB37AC1D55CCDB0031BBF4 /* LockItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB379D1D55CCDB0031BBF4 /* LockItemView.swift */; };
-		D8FB37AD1D55CCDB0031BBF4 /* LockLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB379E1D55CCDB0031BBF4 /* LockLabel.swift */; };
-		D8FB37AE1D55CCDB0031BBF4 /* LockMainNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB379F1D55CCDB0031BBF4 /* LockMainNav.swift */; };
-		D8FB37AF1D55CCDB0031BBF4 /* LockOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37A01D55CCDB0031BBF4 /* LockOptions.swift */; };
-		D8FB37B01D55CCDB0031BBF4 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37A11D55CCDB0031BBF4 /* LockView.swift */; };
-		D8FB37B11D55CCDB0031BBF4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37A21D55CCDB0031BBF4 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,21 +51,6 @@
 		D8FB37601D55852E0031BBF4 /* GesturePasswordUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GesturePasswordUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FB37641D55852E0031BBF4 /* GesturePasswordUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturePasswordUITests.swift; sourceTree = "<group>"; };
 		D8FB37661D55852E0031BBF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8FB37941D55CCDB0031BBF4 /* CALayer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
-		D8FB37951D55CCDB0031BBF4 /* CoreArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreArchive.swift; sourceTree = "<group>"; };
-		D8FB37961D55CCDB0031BBF4 /* CoreLockConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLockConst.swift; sourceTree = "<group>"; };
-		D8FB37971D55CCDB0031BBF4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		D8FB37981D55CCDB0031BBF4 /* LockCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockCenter.swift; sourceTree = "<group>"; };
-		D8FB37991D55CCDB0031BBF4 /* LockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockController.swift; sourceTree = "<group>"; };
-		D8FB379A1D55CCDB0031BBF4 /* LockDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockDataSource.swift; sourceTree = "<group>"; };
-		D8FB379B1D55CCDB0031BBF4 /* LockDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockDelegate.swift; sourceTree = "<group>"; };
-		D8FB379C1D55CCDB0031BBF4 /* LockInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockInfoView.swift; sourceTree = "<group>"; };
-		D8FB379D1D55CCDB0031BBF4 /* LockItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockItemView.swift; sourceTree = "<group>"; };
-		D8FB379E1D55CCDB0031BBF4 /* LockLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockLabel.swift; sourceTree = "<group>"; };
-		D8FB379F1D55CCDB0031BBF4 /* LockMainNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockMainNav.swift; sourceTree = "<group>"; };
-		D8FB37A01D55CCDB0031BBF4 /* LockOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockOptions.swift; sourceTree = "<group>"; };
-		D8FB37A11D55CCDB0031BBF4 /* LockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
-		D8FB37A21D55CCDB0031BBF4 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		E9C1CC8ACB6C58C1FE0473F1 /* Pods-GesturePassword.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GesturePassword.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GesturePassword/Pods-GesturePassword.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				D8602C621D55D91E0022E93D /* Bridging.h */,
-				D8FB37921D55CCDB0031BBF4 /* Classes */,
 				D8FB37441D55852E0031BBF4 /* AppDelegate.swift */,
 				D8FB37461D55852E0031BBF4 /* ViewController.swift */,
 				D8FB37481D55852E0031BBF4 /* Main.storyboard */,
@@ -180,29 +149,6 @@
 				D8FB37661D55852E0031BBF4 /* Info.plist */,
 			);
 			path = GesturePasswordUITests;
-			sourceTree = "<group>";
-		};
-		D8FB37921D55CCDB0031BBF4 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				D8FB37941D55CCDB0031BBF4 /* CALayer+Extension.swift */,
-				D8FB37951D55CCDB0031BBF4 /* CoreArchive.swift */,
-				D8FB37961D55CCDB0031BBF4 /* CoreLockConst.swift */,
-				D8FB37971D55CCDB0031BBF4 /* Extensions.swift */,
-				D8FB37981D55CCDB0031BBF4 /* LockCenter.swift */,
-				D8FB37991D55CCDB0031BBF4 /* LockController.swift */,
-				D8FB379A1D55CCDB0031BBF4 /* LockDataSource.swift */,
-				D8FB379B1D55CCDB0031BBF4 /* LockDelegate.swift */,
-				D8FB379C1D55CCDB0031BBF4 /* LockInfoView.swift */,
-				D8FB379D1D55CCDB0031BBF4 /* LockItemView.swift */,
-				D8FB379E1D55CCDB0031BBF4 /* LockLabel.swift */,
-				D8FB379F1D55CCDB0031BBF4 /* LockMainNav.swift */,
-				D8FB37A01D55CCDB0031BBF4 /* LockOptions.swift */,
-				D8FB37A11D55CCDB0031BBF4 /* LockView.swift */,
-				D8FB37A21D55CCDB0031BBF4 /* Utils.swift */,
-			);
-			name = Classes;
-			path = ../../Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,22 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8FB37471D55852E0031BBF4 /* ViewController.swift in Sources */,
-				D8FB37A61D55CCDB0031BBF4 /* Extensions.swift in Sources */,
-				D8FB37AB1D55CCDB0031BBF4 /* LockInfoView.swift in Sources */,
 				D8FB37451D55852E0031BBF4 /* AppDelegate.swift in Sources */,
-				D8FB37AD1D55CCDB0031BBF4 /* LockLabel.swift in Sources */,
-				D8FB37AC1D55CCDB0031BBF4 /* LockItemView.swift in Sources */,
-				D8FB37A31D55CCDB0031BBF4 /* CALayer+Extension.swift in Sources */,
-				D8FB37AE1D55CCDB0031BBF4 /* LockMainNav.swift in Sources */,
-				D8FB37A81D55CCDB0031BBF4 /* LockController.swift in Sources */,
-				D8FB37B11D55CCDB0031BBF4 /* Utils.swift in Sources */,
-				D8FB37A41D55CCDB0031BBF4 /* CoreArchive.swift in Sources */,
-				D8FB37A71D55CCDB0031BBF4 /* LockCenter.swift in Sources */,
-				D8FB37AA1D55CCDB0031BBF4 /* LockDelegate.swift in Sources */,
-				D8FB37A51D55CCDB0031BBF4 /* CoreLockConst.swift in Sources */,
-				D8FB37B01D55CCDB0031BBF4 /* LockView.swift in Sources */,
-				D8FB37AF1D55CCDB0031BBF4 /* LockOptions.swift in Sources */,
-				D8FB37A91D55CCDB0031BBF4 /* LockDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
