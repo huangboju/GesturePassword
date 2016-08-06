@@ -2,11 +2,11 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-protocol LockDelegate {
-    var hideBarBottomLine: Bool { get }
-    var barTintColor: UIColor { get }
-    var barTittleColor: UIColor {  get }
-    var barTittleFont: UIFont { get }
+public protocol LockDelegate {
+    public var hideBarBottomLine: Bool { get }
+    public var barTintColor: UIColor { get }
+    public var barTittleColor: UIColor {  get }
+    public var barTittleFont: UIFont { get }
 }
 
 extension LockDelegate {
