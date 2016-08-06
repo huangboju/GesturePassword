@@ -1,6 +1,6 @@
 PODS:
   - Eureka (1.7.0)
-  - GesturePassword (0.0.1)
+  - GesturePassword (0.0.3)
 
 DEPENDENCIES:
   - Eureka (~> 1.7)
@@ -8,7 +8,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Eureka: 2020d9faeef7b7e9adeb9e3d8af779e5931c1897
-  GesturePassword: 625fb24b175468228ea72b14e6f3f7fb060ba768
+  GesturePassword: d8ca73e988d5e99220a1dc8794efd70cc1843195
 
 PODFILE CHECKSUM: d5e85009f09a3fbc758181aca2dbf38f32b30000
 

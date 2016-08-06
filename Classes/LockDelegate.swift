@@ -10,15 +10,15 @@ public protocol LockDelegate {
 }
 
 extension LockDelegate {
-    var hideBarBottomLine: Bool {
+    public var hideBarBottomLine: Bool {
         return false
     }
 
-    var barTintColor: UIColor {
+    public var barTintColor: UIColor {
         return UIColor.redColor()
     }
 
-    var barTittleFont: UIFont {
+    public var barTittleFont: UIFont {
         return UIFont.systemFontOfSize(18)
     }
 }

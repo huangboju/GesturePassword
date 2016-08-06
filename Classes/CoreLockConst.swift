@@ -18,7 +18,7 @@ typealias strHandle = (String) -> Void
 
 typealias boolHandle = (Bool) -> Void
 
-typealias controllerHandle = (LockController) -> Void
+public typealias controllerHandle = (LockController) -> Void
 
 func rgba(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
     return UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: a)

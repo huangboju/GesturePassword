@@ -8,7 +8,7 @@ enum CoreLockType: Int {
     case Modify
 }
 
-class LockController: UIViewController, BackBarButtonItemDelegate {
+public class LockController: UIViewController, BackBarButtonItemDelegate {
     
     var forget: controllerHandle?
     var success: controllerHandle?
@@ -59,7 +59,7 @@ class LockController: UIViewController, BackBarButtonItemDelegate {
         return resetItem
     }()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         onPrepare()
         controllerPrepare()
@@ -185,12 +185,12 @@ class LockController: UIViewController, BackBarButtonItemDelegate {
         return UIBarButtonItem(title: title, style: .Plain, target: self, action: #selector(dismissAction))
     }
     
-    func viewControllerShouldPopOnBackBarButtonItem() -> Bool {
+    public func viewControllerShouldPopOnBackBarButtonItem() -> Bool {
         navigationController?.viewControllers.first?.dismissViewControllerAnimated(true, completion: nil)
         return false
     }
 
-    override func didReceiveMemoryWarning() {
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

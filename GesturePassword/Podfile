@@ -3,5 +3,4 @@ use_frameworks!
 
 target 'GesturePassword' do
     pod 'Eureka', '~> 1.7'
-    pod 'GesturePassword'
 end
