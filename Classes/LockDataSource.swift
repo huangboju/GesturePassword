@@ -2,7 +2,7 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-protocol LockDataSource {
+public protocol LockDataSource {
 
     /// 选中圆大小比例
     var scale: CGFloat { get }
