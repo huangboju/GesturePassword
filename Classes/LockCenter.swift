@@ -3,7 +3,7 @@
 //
 
 public class LockCenter {
-    public var options = LockOptions()
+    var options = LockOptions()
 
     public static let sharedInstance = LockCenter()
     // 私有化构造方法，阻止其他对象使用这个类的默认的'()'构造方法
@@ -11,15 +11,15 @@ public class LockCenter {
 
     }
 
-    public func hasPassword() -> Bool {
+    func hasPassword() -> Bool {
         return CoreArchive.strFor(PASSWORD_KEY + options.passwordKeySuffix) != nil
     }
 
-    public func removePassword(key: String) {
+    func removePassword(key: String) {
         CoreArchive.removeValueFor(PASSWORD_KEY + options.passwordKeySuffix)
     }
 
-    public func showSettingLockControllerIn(controller: UIViewController, success: controllerHandle) -> LockController {
+    func showSettingLockControllerIn(controller: UIViewController, success: controllerHandle) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.settingTittle
         lockVC.type = .Set
@@ -27,7 +27,7 @@ public class LockCenter {
         return lockVC
     }
 
-    public func showVerifyLockControllerIn(controller: UIViewController, forget: controllerHandle, success: controllerHandle, overrunTimes: controllerHandle) -> LockController {
+    func showVerifyLockControllerIn(controller: UIViewController, forget: controllerHandle, success: controllerHandle, overrunTimes: controllerHandle) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.verifyTittle
         lockVC.type = .Verify
@@ -37,7 +37,7 @@ public class LockCenter {
         return lockVC
     }
 
-    public func showModifyLockControllerIn(controller: UIViewController, success: controllerHandle) -> LockController {
+    func showModifyLockControllerIn(controller: UIViewController, success: controllerHandle) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.modifyTittle
         lockVC.type = .Modify
