@@ -52,6 +52,7 @@
 /* Begin PBXFileReference section */
 		2CB02F168E83160363AAA2B8 /* Pods-GesturePassword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GesturePassword.release.xcconfig"; path = "Pods/Target Support Files/Pods-GesturePassword/Pods-GesturePassword.release.xcconfig"; sourceTree = "<group>"; };
 		ACC63F358680250C4319861A /* Pods_GesturePassword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePassword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8602C621D55D91E0022E93D /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		D8FB37411D55852E0031BBF4 /* GesturePassword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GesturePassword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FB37441D55852E0031BBF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8FB37461D55852E0031BBF4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		D8FB37601D55852E0031BBF4 /* GesturePasswordUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GesturePasswordUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FB37641D55852E0031BBF4 /* GesturePasswordUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturePasswordUITests.swift; sourceTree = "<group>"; };
 		D8FB37661D55852E0031BBF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8FB37931D55CCDB0031BBF4 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		D8FB37941D55CCDB0031BBF4 /* CALayer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 		D8FB37951D55CCDB0031BBF4 /* CoreArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreArchive.swift; sourceTree = "<group>"; };
 		D8FB37961D55CCDB0031BBF4 /* CoreLockConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLockConst.swift; sourceTree = "<group>"; };
@@ -152,6 +152,7 @@
 		D8FB37431D55852E0031BBF4 /* GesturePassword */ = {
 			isa = PBXGroup;
 			children = (
+				D8602C621D55D91E0022E93D /* Bridging.h */,
 				D8FB37921D55CCDB0031BBF4 /* Classes */,
 				D8FB37441D55852E0031BBF4 /* AppDelegate.swift */,
 				D8FB37461D55852E0031BBF4 /* ViewController.swift */,
@@ -184,7 +185,6 @@
 		D8FB37921D55CCDB0031BBF4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D8FB37931D55CCDB0031BBF4 /* Bridging.h */,
 				D8FB37941D55CCDB0031BBF4 /* CALayer+Extension.swift */,
 				D8FB37951D55CCDB0031BBF4 /* CoreArchive.swift */,
 				D8FB37961D55CCDB0031BBF4 /* CoreLockConst.swift */,
@@ -551,7 +551,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/bojuhuang/Desktop/杂/GesturePassword/GesturePassword/Classes/Bridging.h";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/bojuhuang/Desktop/GesturePassword/GesturePassword/GesturePassword/Bridging.h;
 			};
 			name = Debug;
 		};
@@ -565,7 +565,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/bojuhuang/Desktop/杂/GesturePassword/GesturePassword/Classes/Bridging.h";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/bojuhuang/Desktop/GesturePassword/GesturePassword/GesturePassword/Bridging.h;
 			};
 			name = Release;
 		};
