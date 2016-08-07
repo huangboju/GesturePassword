@@ -179,7 +179,8 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
     
     func redraw(sender: UIBarButtonItem) {
         sender.enabled = false
-        label.showNormal(options.confirmPassword)
+        label.showNormal(options.secondPassword)
+        lockView.resetPassword()
     }
     
     func getBarButton(title: String?) -> UIBarButtonItem {

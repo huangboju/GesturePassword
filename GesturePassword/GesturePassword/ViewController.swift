@@ -18,11 +18,11 @@ class ViewController: FormViewController {
             <<< ButtonRow("设置密码") {
                 $0.title = $0.tag
                 $0.onCellSelection({ (cell, row) in
-                    if LockCenter.sharedInstance.hasPassword() {
+                    if !LockCenter.sharedInstance.hasPassword() {
                         
                     } else {
                         LockCenter.sharedInstance.showSettingLockControllerIn(self, success: { (controller) in
-                            controller.dismiss(1)
+                            
                         })
                     }
                 })
