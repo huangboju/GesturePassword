@@ -160,7 +160,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
         }
     }
     
-    func dismiss(interval: NSTimeInterval = 0, conmpletion: (() -> Void)? = nil) {
+    public func dismiss(interval: NSTimeInterval = 0, conmpletion: (() -> Void)? = nil) {
         delay(interval) {
             self.dismissViewControllerAnimated(true, completion: conmpletion)
         }
