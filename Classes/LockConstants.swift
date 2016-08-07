@@ -12,6 +12,8 @@ let TOP_MARGIN: CGFloat =  (UIScreen.mainScreen().bounds.height - UIScreen.mainS
 
 let ITEM_MARGIN: CGFloat = 36
 
+let PASSWORD_KEY = "gesture_password_key_"
+
 typealias handle = () -> Void
 
 typealias strHandle = (String) -> Void
@@ -24,4 +26,11 @@ func rgba(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
     return UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: a)
 }
 
-let PASSWORD_KEY = "gesture_password_key_"
+func delay(interval: NSTimeInterval, handle: () -> Void) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(interval * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), handle)
+}

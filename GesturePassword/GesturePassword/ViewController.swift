@@ -13,15 +13,15 @@ class ViewController: FormViewController {
         
         var options = LockOptions()
         options.passwordKeySuffix = "mmmm"
-        LockCenter.sharedInstance.options = options
+        LockManager.options = options
         form +++ Section("手势密码")
             <<< ButtonRow("设置密码") {
                 $0.title = $0.tag
                 $0.onCellSelection({ (cell, row) in
-                    if !LockCenter.sharedInstance.hasPassword() {
+                    if LockManager.hasPassword() {
                         
                     } else {
-                        LockCenter.sharedInstance.showSettingLockControllerIn(self, success: { (controller) in
+                        LockManager.showSettingLockControllerIn(self, success: { (controller) in
                             
                         })
                     }
@@ -30,10 +30,10 @@ class ViewController: FormViewController {
             <<< ButtonRow("验证密码") {
                 $0.title = $0.tag
                 $0.onCellSelection({ (cell, row) in
-                    if !LockCenter.sharedInstance.hasPassword() {
+                    if !LockManager.hasPassword() {
                         
                     } else {
-                        LockCenter.sharedInstance.showVerifyLockControllerIn(self, forget: { (controller) in
+                        LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
                             print("forget")
                             }, success: { (controller) in
                                 print("success")
@@ -46,10 +46,10 @@ class ViewController: FormViewController {
             <<< ButtonRow("修改密码") {
                 $0.title = $0.tag
                 $0.onCellSelection({ (cell, row) in
-                    if !LockCenter.sharedInstance.hasPassword() {
+                    if !LockManager.hasPassword() {
                         
                     } else {
-                        LockCenter.sharedInstance.showModifyLockControllerIn(self, success: { (controller) in
+                        LockManager.showModifyLockControllerIn(self, success: { (controller) in
                             print("修改成功")
                         })
                     }

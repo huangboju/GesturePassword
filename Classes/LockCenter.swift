@@ -17,7 +17,7 @@ public class LockCenter {
         return CoreArchive.strFor(PASSWORD_KEY + options.passwordKeySuffix) != nil
     }
 
-    public func removePassword(key: String) {
+    public func removePassword() {
         CoreArchive.removeValueFor(PASSWORD_KEY + options.passwordKeySuffix)
     }
 

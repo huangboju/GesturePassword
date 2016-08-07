@@ -7,6 +7,7 @@ public protocol LockDelegate {
     var barTintColor: UIColor { get }
     var barTittleColor: UIColor {  get }
     var barTittleFont: UIFont { get }
+    var barBackgroundColor: UIColor? { get }
 }
 
 extension LockDelegate {
@@ -20,5 +21,9 @@ extension LockDelegate {
 
     public var barTittleFont: UIFont {
         return UIFont.systemFontOfSize(18)
+    }
+    
+    public var barBackgroundColor: UIColor? {
+        return nil
     }
 }

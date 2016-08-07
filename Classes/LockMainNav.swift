@@ -7,13 +7,16 @@ class LockMainNav: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: LockCenter.sharedInstance.options.barTittleColor, NSFontAttributeName: LockCenter.sharedInstance.options.barTittleFont]
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: LockManager.options.barTittleColor, NSFontAttributeName: LockManager.options.barTittleFont]
 
-        if LockCenter.sharedInstance.options.hideBarBottomLine {
+        if LockManager.options.hideBarBottomLine {
             navigationBar.hideBottomHairline()
         }
-
-        navigationBar.tintColor = LockCenter.sharedInstance.options.barTintColor
+        
+        if let backgroundColor = LockManager.options.barBackgroundColor {
+            navigationBar.setMyBackgroundColor(backgroundColor)
+        }
+        navigationBar.tintColor = LockManager.options.barTintColor
     }
 
     override func didReceiveMemoryWarning() {

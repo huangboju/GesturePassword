@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7C1C2E9880A30B0AF45ED175 /* Pods_GesturePassword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC63F358680250C4319861A /* Pods_GesturePassword.framework */; };
-		D8602C741D55FEB00022E93D /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C651D55FEB00022E93D /* CALayer+Extension.swift */; };
-		D8602C751D55FEB00022E93D /* CoreArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C661D55FEB00022E93D /* CoreArchive.swift */; };
-		D8602C761D55FEB00022E93D /* CoreLockConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C671D55FEB00022E93D /* CoreLockConst.swift */; };
+		D8602C751D55FEB00022E93D /* LockArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C661D55FEB00022E93D /* LockArchive.swift */; };
+		D8602C761D55FEB00022E93D /* LockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C671D55FEB00022E93D /* LockConstants.swift */; };
 		D8602C771D55FEB00022E93D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C681D55FEB00022E93D /* Extensions.swift */; };
 		D8602C781D55FEB00022E93D /* LockCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C691D55FEB00022E93D /* LockCenter.swift */; };
 		D8602C791D55FEB00022E93D /* LockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6A1D55FEB00022E93D /* LockController.swift */; };
@@ -53,9 +52,8 @@
 		2CB02F168E83160363AAA2B8 /* Pods-GesturePassword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GesturePassword.release.xcconfig"; path = "Pods/Target Support Files/Pods-GesturePassword/Pods-GesturePassword.release.xcconfig"; sourceTree = "<group>"; };
 		ACC63F358680250C4319861A /* Pods_GesturePassword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePassword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8602C621D55D91E0022E93D /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
-		D8602C651D55FEB00022E93D /* CALayer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
-		D8602C661D55FEB00022E93D /* CoreArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreArchive.swift; sourceTree = "<group>"; };
-		D8602C671D55FEB00022E93D /* CoreLockConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreLockConst.swift; sourceTree = "<group>"; };
+		D8602C661D55FEB00022E93D /* LockArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockArchive.swift; sourceTree = "<group>"; };
+		D8602C671D55FEB00022E93D /* LockConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockConstants.swift; sourceTree = "<group>"; };
 		D8602C681D55FEB00022E93D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D8602C691D55FEB00022E93D /* LockCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockCenter.swift; sourceTree = "<group>"; };
 		D8602C6A1D55FEB00022E93D /* LockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockController.swift; sourceTree = "<group>"; };
@@ -130,9 +128,8 @@
 		D8602C641D55FEB00022E93D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D8602C651D55FEB00022E93D /* CALayer+Extension.swift */,
-				D8602C661D55FEB00022E93D /* CoreArchive.swift */,
-				D8602C671D55FEB00022E93D /* CoreLockConst.swift */,
+				D8602C661D55FEB00022E93D /* LockArchive.swift */,
+				D8602C671D55FEB00022E93D /* LockConstants.swift */,
 				D8602C681D55FEB00022E93D /* Extensions.swift */,
 				D8602C691D55FEB00022E93D /* LockCenter.swift */,
 				D8602C6A1D55FEB00022E93D /* LockController.swift */,
@@ -393,14 +390,13 @@
 				D8FB37451D55852E0031BBF4 /* AppDelegate.swift in Sources */,
 				D8602C7E1D55FEB00022E93D /* LockLabel.swift in Sources */,
 				D8602C7D1D55FEB00022E93D /* LockItemView.swift in Sources */,
-				D8602C741D55FEB00022E93D /* CALayer+Extension.swift in Sources */,
 				D8602C7F1D55FEB00022E93D /* LockMainNav.swift in Sources */,
 				D8602C791D55FEB00022E93D /* LockController.swift in Sources */,
 				D8602C821D55FEB00022E93D /* Utils.swift in Sources */,
-				D8602C751D55FEB00022E93D /* CoreArchive.swift in Sources */,
+				D8602C751D55FEB00022E93D /* LockArchive.swift in Sources */,
 				D8602C781D55FEB00022E93D /* LockCenter.swift in Sources */,
 				D8602C7B1D55FEB00022E93D /* LockDelegate.swift in Sources */,
-				D8602C761D55FEB00022E93D /* CoreLockConst.swift in Sources */,
+				D8602C761D55FEB00022E93D /* LockConstants.swift in Sources */,
 				D8602C811D55FEB00022E93D /* LockView.swift in Sources */,
 				D8602C801D55FEB00022E93D /* LockOptions.swift in Sources */,
 				D8602C7A1D55FEB00022E93D /* LockDataSource.swift in Sources */,
