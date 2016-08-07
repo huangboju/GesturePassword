@@ -2,6 +2,8 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
+public let LockManager = LockCenter.sharedInstance
+
 public class LockCenter {
     public var options = LockOptions()
 
