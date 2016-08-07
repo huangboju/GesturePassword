@@ -10,17 +10,17 @@ class LockView: UIView {
     var passwordTwiceDifferentHandle: ((password1: String, passwordNow: String) -> Void)?
     var passwordFirstRightHandle: handle?
     var setSuccessHandle: strHandle?
-    
+
     var verifyHandle: boolHandle?
-    
+
     var modifyHandle: boolHandle?
-    
+
     private var itemViews = [LockItemView]()
     private var passwordContainer = ""
     private var firstPassword = ""
-    
+
     private var options: LockOptions!
-    
+
     init(frame: CGRect, options: LockOptions) {
         super.init(frame: frame)
         self.options = options
@@ -30,27 +30,27 @@ class LockView: UIView {
             addSubview(itemView)
         }
     }
-    
+
     override func drawRect(rect: CGRect) {
         if itemViews.isEmpty { return }
         let context = UIGraphicsGetCurrentContext()
         CGContextAddRect(context, rect)
         itemViews.forEach { (itemView) in
-            
+
             CGContextAddEllipseInRect(context, itemView.frame)
         }
-        
+
         //剪裁
         CGContextEOClip(context)
-        
+
         //新建路径：管理线条
         let path = CGPathCreateMutable()
-        
+
         options.lockLineColor.set()
         CGContextSetLineCap(context, .Round)
         CGContextSetLineJoin(context, .Round)
         CGContextSetLineWidth(context, 1)
-        
+
         for (idx, itemView) in itemViews.enumerate() {
             let directPoint = itemView.center
             if idx == 0 {
@@ -62,7 +62,7 @@ class LockView: UIView {
         CGContextAddPath(context, path)
         CGContextStrokePath(context)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         let itemViewWH = (frame.width - 4 * ITEM_MARGIN) / 3
@@ -76,25 +76,25 @@ class LockView: UIView {
             subview.frame = rect
         }
     }
-    
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         lockHandle(touches)
         handleBack()
     }
-    
+
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         lockHandle(touches)
     }
-    
+
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         gestureEnd()
     }
-    
+
     // 电话等打断触摸过程时，会调用这个方法。
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         gestureEnd()
     }
-    
+
     func gestureEnd() {
         if !passwordContainer.isEmpty {
             let count = itemViews.count
@@ -102,12 +102,12 @@ class LockView: UIView {
                 if let passwordTooShortHandle = passwordTooShortHandle {
                     passwordTooShortHandle()
                 }
-                delay(0.4, handle: { 
+                delay(0.4, handle: {
                     self.resetItem()
                 })
                 return
             }
-            
+
             if type == .Set {
                 setPassword()
             } else if type == .Verify {
@@ -126,7 +126,7 @@ class LockView: UIView {
         }
         resetItem()
     }
-    
+
     func handleBack() {
         if type == .Set {
             if firstPassword.isEmpty {
@@ -148,7 +148,7 @@ class LockView: UIView {
 //            }
         }
     }
-    
+
     private func setPassword() {
         if firstPassword.isEmpty {
             firstPassword = passwordContainer
@@ -167,7 +167,7 @@ class LockView: UIView {
             }
         }
     }
-    
+
     func lockHandle(touches: Set<UITouch>) {
         let touch = touches.first
         let location = touch?.locationInView(self)
@@ -182,18 +182,18 @@ class LockView: UIView {
             setNeedsDisplay()
         }
     }
-    
+
     func calDirect() {
         let count = itemViews.count
         if itemViews.count > 1 {
             let last_1_ItemView = itemViews.last
             let last_2_ItemView = itemViews[count - 2]
-            
+
             let last_1_x = last_1_ItemView?.frame.minX
             let last_1_y = last_1_ItemView?.frame.minY
             let last_2_x = last_2_ItemView.frame.minX
             let last_2_y = last_2_ItemView.frame.minY
-            
+
             if last_2_x == last_1_x && last_2_y > last_1_y {
                 last_2_ItemView.direct = .Top
             }
@@ -220,7 +220,7 @@ class LockView: UIView {
             }
         }
     }
-    
+
     func itemViewWithTouchLocation(location: CGPoint?) -> LockItemView? {
         var item: LockItemView?
         for subView in subviews {
@@ -234,11 +234,11 @@ class LockView: UIView {
         }
         return item
     }
-    
+
     func resetPassword() {
         firstPassword = ""
     }
-    
+
     private func resetItem() {
         for item in itemViews {
             item.selected = false
@@ -248,7 +248,7 @@ class LockView: UIView {
         setNeedsDisplay()
         passwordContainer = ""
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

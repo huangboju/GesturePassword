@@ -99,6 +99,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
             CoreArchive.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
             self?.view.userInteractionEnabled = false
             if let success = self?.success {
+                self?.dismiss()
                 success(self!)
             }
         }
@@ -160,7 +161,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
         }
     }
     
-    public func dismiss(interval: NSTimeInterval = 0, conmpletion: (() -> Void)? = nil) {
+    func dismiss(interval: NSTimeInterval = 0, conmpletion: (() -> Void)? = nil) {
         delay(interval) {
             self.dismissViewControllerAnimated(true, completion: conmpletion)
         }

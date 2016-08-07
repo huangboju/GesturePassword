@@ -27,7 +27,7 @@ class LockItemView: UIView {
             setNeedsDisplay()
         }
     }
-    
+
     private var calRect: CGRect {
         set {
             storeCalRect = newValue
@@ -58,17 +58,17 @@ class LockItemView: UIView {
     private var storeSelectedRect = CGRect()
     private var angle: CGFloat?
     private var options: LockOptions!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     convenience init(options: LockOptions) {
         self.init(frame: CGRect.zero)
         self.options = options
         backgroundColor = options.backgroundColor
     }
-    
+
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         //上下文旋转
@@ -85,19 +85,19 @@ class LockItemView: UIView {
             direct(context, rect: rect)
         }
     }
-    
+
     func transForm(context: CGContextRef?, rect: CGRect) {
         let translateXY = rect.width * 0.5
-        
+
         //平移
         CGContextTranslateCTM(context, translateXY, translateXY)
-        
+
         CGContextRotateCTM(context, angle ?? 0)
-        
+
         //再平移回来
         CGContextTranslateCTM(context, -translateXY, -translateXY)
     }
-    
+
     /*
      *  三角形：方向标识
      */
@@ -109,25 +109,25 @@ class LockItemView: UIView {
         let h: CGFloat = 5
         let topX = rect.minX + rect.width * 0.5
         let topY = rect.minY + (rect.width * 0.5 - h - marginSelectedCirclev - selectedRect.height * 0.5)
-        
+
         CGPathMoveToPoint(trianglePathM, nil, topX, topY)
-        
+
         //添加左边点
         let leftPointX = topX - w * 0.5
         let leftPointY = topY + h
         CGPathAddLineToPoint(trianglePathM, nil, leftPointX, leftPointY)
-        
+
         //右边的点
         let rightPointX = topX + w * 0.5
         CGPathAddLineToPoint(trianglePathM, nil, rightPointX, leftPointY)
-        
+
         //将路径添加到上下文中
         CGContextAddPath(context, trianglePathM)
-        
+
         //绘制圆环
         CGContextFillPath(context)
     }
-    
+
     func propertySetting(context: CGContextRef?) {
         //设置线宽
         CGContextSetLineWidth(context, options.arcLineWidht)
@@ -137,68 +137,68 @@ class LockItemView: UIView {
             options.circleLineNormalColor.set()
         }
     }
-    
+
     func circleNormal(context: CGContextRef?, rect: CGRect) {
         //新建路径：外环
         let loopPath = CGPathCreateMutable()
-        
+
         //添加一个圆环路径
         CGPathAddEllipseInRect(loopPath, nil, calRect)
-        
+
         //将路径添加到上下文中
         CGContextAddPath(context, loopPath)
-        
+
         //绘制圆环
         CGContextStrokePath(context)
     }
-    
+
     func circleSelected(contenxt: CGContextRef?, rect: CGRect) {
         //新建路径：外环
         let circlePath = CGPathCreateMutable()
-        
+
         //绘制一个圆形
         CGPathAddEllipseInRect(circlePath, nil, selectedRect)
-        
+
         options.circleLineSelectedCircleColor.set()
-        
+
         //将路径添加到上下文中
-        CGContextAddPath(contenxt, circlePath);
-        
+        CGContextAddPath(contenxt, circlePath)
+
         //绘制圆环
         CGContextFillPath(contenxt)
     }
-    
+
     func direct(ctx: CGContextRef?, rect: CGRect) {
         //新建路径：三角形
         if direct == nil {
             return
         }
         let trianglePathM = CGPathCreateMutable()
-        
+
         let marginSelectedCirclev: CGFloat = 4
         let w: CGFloat = 8
         let h: CGFloat = 5
         let topX = rect.minX + rect.size.width * 0.5
         let topY = rect.minY + (rect.size.width * 0.5 - h - marginSelectedCirclev - selectedRect.size.height * 0.5)
-        
+
         CGPathMoveToPoint(trianglePathM, nil, topX, topY)
-        
+
         //添加左边点
         let leftPointX = topX - w * 0.5
         let leftPointY = topY + h
         CGPathAddLineToPoint(trianglePathM, nil, leftPointX, leftPointY)
-        
+
         //右边的点
         let rightPointX = topX + w * 0.5
         CGPathAddLineToPoint(trianglePathM, nil, rightPointX, leftPointY)
-        
+
         //将路径添加到上下文中
         CGContextAddPath(ctx, trianglePathM)
-        
+
         //绘制圆环
         CGContextFillPath(ctx)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
