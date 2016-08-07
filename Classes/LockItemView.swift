@@ -43,9 +43,6 @@ class LockItemView: UIView {
     }
     private var storeCalRect = CGRect()
     private var selectedRect: CGRect {
-        set {
-            storeSelectedRect = newValue
-        }
         get {
             if CGRectEqualToRect(self.storeSelectedRect, CGRect.zero) {
                 let selectRectWH = bounds.width * options.scale
@@ -178,8 +175,8 @@ class LockItemView: UIView {
         let marginSelectedCirclev: CGFloat = 4
         let w: CGFloat = 8
         let h: CGFloat = 5
-        let topX = rect.minX + rect.size.width * 0.5
-        let topY = rect.minY + (rect.size.width * 0.5 - h - marginSelectedCirclev - selectedRect.size.height * 0.5)
+        let topX = rect.minX + rect.width * 0.5
+        let topY = rect.minY + (rect.width * 0.5 - h - marginSelectedCirclev - selectedRect.height * 0.5)
 
         CGPathMoveToPoint(trianglePathM, nil, topX, topY)
 
