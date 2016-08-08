@@ -2,7 +2,7 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-struct CoreArchive {
+struct LockArchive {
     static func setStr(value: String?, key: String) {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(value, forKey: key)

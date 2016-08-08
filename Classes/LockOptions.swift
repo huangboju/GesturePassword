@@ -3,6 +3,8 @@
 //
 
 public struct LockOptions: LockDataSource {
+    
+    public init() {}
 
     /// 选中圆大小比例
     public var scale: CGFloat = 0.3

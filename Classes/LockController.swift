@@ -96,7 +96,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
         
         lockView.setSuccessHandle = { [weak self] (password) in
             self?.label.showNormal(self?.options.setSuccess)
-            CoreArchive.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
+            LockArchive.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
             self?.view.userInteractionEnabled = false
             if let success = self?.success {
                 self?.dismiss()

@@ -112,12 +112,12 @@ class LockView: UIView {
                 setPassword()
             } else if type == .Verify {
                 if let verifyHandle = verifyHandle {
-                    let pwdLocal = CoreArchive.strFor(PASSWORD_KEY + options.passwordKeySuffix)
+                    let pwdLocal = LockArchive.strFor(PASSWORD_KEY + options.passwordKeySuffix)
                     let result = (pwdLocal == passwordContainer)
                     verifyHandle(result)
                 }
             } else if type == .Modify {
-                let pwdLocal = CoreArchive.strFor(PASSWORD_KEY + options.passwordKeySuffix)
+                let pwdLocal = LockArchive.strFor(PASSWORD_KEY + options.passwordKeySuffix)
                 let result = (pwdLocal == passwordContainer)
                 if let modifyHandle = modifyHandle {
                     modifyHandle(result)
