@@ -14,7 +14,7 @@ let ITEM_MARGIN: CGFloat = 36
 
 let PASSWORD_KEY = "gesture_password_key_"
 
-typealias handle = () -> Void
+public typealias handle = () -> Void
 
 typealias strHandle = (String) -> Void
 

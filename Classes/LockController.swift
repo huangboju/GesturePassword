@@ -9,14 +9,14 @@ enum CoreLockType: Int {
 }
 
 public class LockController: UIViewController, BackBarButtonItemDelegate {
-    
+
     var forget: controllerHandle?
     var success: controllerHandle?
     var overrunTimes: controllerHandle?
     var controller: UIViewController?
-    
+
     private let options = LockManager.options
-    
+
     private var errorTimes = 1
     private var message: String?
     private var modifyCurrentTitle: String?
@@ -37,7 +37,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
             }
         }
     }
-    
+
     var type: CoreLockType? {
         didSet {
             if type == .Set {
@@ -49,16 +49,16 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
             }
         }
     }
-    
+
     private lazy var label: LockLabel = {
         return LockLabel(frame: CGRect(x: 0, y: TOP_MARGIN, width: self.view.frame.width, height: LABEL_HEIGHT), options: self.options)
     }()
-    
+
     private lazy var resetItem: UIBarButtonItem = {
         let resetItem = UIBarButtonItem(title: "重绘", style: .Plain, target: self, action: #selector(redraw))
         return resetItem
     }()
-    
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         onPrepare()
@@ -66,7 +66,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
         dataTransfer()
         event()
     }
-    
+
     private func onPrepare() {
         if type == .Set {
             label.frame.origin.y = label.frame.minY + 30
@@ -78,22 +78,22 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
         view.addSubview(lockView)
         view.addSubview(label)
     }
-    
+
     func event() {
         lockView.passwordTooShortHandle = { [unowned self] in
             self.label.showWarn("请连接至少\(self.options.passwordMinCount)个点")
         }
-        
+
         lockView.passwordTwiceDifferentHandle = { [weak self] (pwd1, pwdNow) in
             self?.label.showWarn(self?.options.differentPassword)
             self?.resetItem.enabled = true
         }
-        
+
         lockView.passwordFirstRightHandle = { [weak self] in
             // 在这里绘制infoView路径
             self?.label.showNormal(self?.options.confirmPassword)
         }
-        
+
         lockView.setSuccessHandle = { [weak self] (password) in
             self?.label.showNormal(self?.options.setSuccess)
             LockArchive.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
@@ -103,8 +103,8 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
                 success(self!)
             }
         }
-        
-       
+
+
         lockView.verifyHandle = { [unowned self] (flag) in
             if flag {
                 self.label.showNormal(self.options.passwordCorrect)
@@ -125,7 +125,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
                 }
             }
         }
-        
+
         lockView.modifyHandle = { [unowned self] flag in
             if flag {
                 self.label.showNormal(self.options.passwordCorrect)
@@ -138,12 +138,12 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
             }
         }
     }
-    
+
     func dataTransfer() {
         label.showNormal(message)
         lockView.type = type
     }
-    
+
     func controllerPrepare() {
         view.backgroundColor = options.backgroundColor
         navigationItem.rightBarButtonItem = nil
@@ -160,33 +160,33 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
             navigationItem.rightBarButtonItem = resetItem
         }
     }
-    
-    func dismiss(interval: NSTimeInterval = 0, conmpletion: handle? = nil) {
+
+    public func dismiss(interval: NSTimeInterval = 0, conmpletion: handle? = nil) {
         delay(interval) {
             self.dismissViewControllerAnimated(true, completion: conmpletion)
         }
     }
-    
+
     func forgetPwdAction() {
         if let forget = forget {
             forget(self)
         }
     }
-    
+
     func dismissAction() {
         dismiss()
     }
-    
+
     func redraw(sender: UIBarButtonItem) {
         sender.enabled = false
         label.showNormal(options.secondPassword)
         lockView.resetPassword()
     }
-    
+
     func getBarButton(title: String?) -> UIBarButtonItem {
         return UIBarButtonItem(title: title, style: .Plain, target: self, action: #selector(dismissAction))
     }
-    
+
     public func viewControllerShouldPopOnBackBarButtonItem() -> Bool {
         navigationController?.viewControllers.first?.dismissViewControllerAnimated(true, completion: nil)
         return false
