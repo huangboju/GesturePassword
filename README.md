@@ -1,17 +1,6 @@
 # GesturePassword 是一个Swift的手势密码库
-
-<table>
-    <tr>
-        <td>设置密码</td>
-    </tr>
-    <tr>
-        <td>验证密码</td>
-    </tr>
-    <tr>
-        <td>修改密码</td>
-    </tr>
-</table>
-
+>
+>
 `pod 'GesturePassword'`
 
 >
