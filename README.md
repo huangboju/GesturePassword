@@ -10,12 +10,14 @@ pod 'GesturePassword'
 ###设置密码
 
 ```swift
+import GesturePassword
 LockManager.showSettingLockControllerIn(self, success: { (controller) in
                             
                         })
 ```
 ###验证密码
 ```swift
+import GesturePassword
 LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
                             print("forget")
                             }, success: { (controller) in
@@ -27,6 +29,7 @@ LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
 
 ###修改密码
 ```swift
+import GesturePassword
 LockManager.showModifyLockControllerIn(self, success: { (controller) in
                             print("修改成功")
                         })
