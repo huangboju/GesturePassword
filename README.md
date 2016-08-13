@@ -7,4 +7,8 @@ pod 'GesturePassword'
 
 ***
 
-![2016-08-07 20_57_25](https://cloud.githubusercontent.com/assets/14818224/17462559/a792fee4-5ce3-11e6-9d26-843571c871d3.gif)
+###设置密码
+
+###验证密码
+
+###修改密码
