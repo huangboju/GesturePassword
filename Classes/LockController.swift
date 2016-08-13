@@ -8,7 +8,7 @@ enum CoreLockType: Int {
     case Modify
 }
 
-public class LockController: UIViewController, BackBarButtonItemDelegate {
+public class LockController: UIViewController {
 
     var forget: controllerHandle?
     var success: controllerHandle?
@@ -101,9 +101,9 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
             LockArchive.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
             self?.view.userInteractionEnabled = false
             if let success = self?.success {
-                self?.dismiss()
                 success(self!)
             }
+            self?.dismiss()
         }
 
 
@@ -165,7 +165,8 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
 
     public func dismiss(interval: NSTimeInterval = 0, conmpletion: handle? = nil) {
         delay(interval) {
-            self.dismissViewControllerAnimated(true, completion: conmpletion)
+            let controller = self.navigationController?.viewControllers.first
+            controller?.dismissViewControllerAnimated(true, completion: conmpletion)
         }
     }
 
@@ -190,13 +191,15 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
         return UIBarButtonItem(title: title, style: .Plain, target: self, action: #selector(dismissAction))
     }
 
-    public func viewControllerShouldPopOnBackBarButtonItem() -> Bool {
-        navigationController?.viewControllers.first?.dismissViewControllerAnimated(true, completion: nil)
-        return false
-    }
-
     public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension LockController: BackBarButtonItemDelegate {
+    public func viewControllerShouldPopOnBackBarButtonItem() -> Bool {
+        navigationController?.viewControllers.first?.dismissViewControllerAnimated(true, completion: nil)
+        return false
     }
 }

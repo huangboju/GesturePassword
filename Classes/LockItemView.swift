@@ -44,15 +44,14 @@ class LockItemView: UIView {
     private var storeCalRect = CGRect()
     private var selectedRect: CGRect {
         get {
-            if CGRectEqualToRect(storeSelectedRect, CGRect.zero) {
+            if CGRectEqualToRect(CGRect(), CGRect.zero) {
                 let selectRectWH = bounds.width * options.scale
                 let selectRectXY = bounds.width * (1 - options.scale) * 0.5
-                storeSelectedRect = CGRect(x: selectRectXY, y: selectRectXY, width: selectRectWH, height: selectRectWH)
+                return CGRect(x: selectRectXY, y: selectRectXY, width: selectRectWH, height: selectRectWH)
             }
-            return storeSelectedRect
+            return CGRect.zero
         }
     }
-    private var storeSelectedRect = CGRect()
     private var angle: CGFloat?
     private var options: LockOptions!
 
