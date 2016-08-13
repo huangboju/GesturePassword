@@ -34,8 +34,8 @@ class LockItemView: UIView {
         }
         get {
             if CGRectEqualToRect(storeCalRect, CGRect.zero) {
-                let sizeWH = bounds.width - options.arcLineWidht
-                let originXY = options.arcLineWidht * 0.5
+                let sizeWH = bounds.width - options.arcLineWidth
+                let originXY = options.arcLineWidth * 0.5
                 self.storeCalRect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
             }
             return storeCalRect
@@ -127,7 +127,7 @@ class LockItemView: UIView {
 
     func propertySetting(context: CGContextRef?) {
         //设置线宽
-        CGContextSetLineWidth(context, options.arcLineWidht)
+        CGContextSetLineWidth(context, options.arcLineWidth)
         if selected {
             options.circleLineSelectedColor.set()
         } else {

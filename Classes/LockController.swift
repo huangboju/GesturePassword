@@ -136,7 +136,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
                 lockVC.type = .Set
                 self.navigationController?.pushViewController(lockVC, animated: true)
             } else {
-                self.label.showWarn(self.options.enterPasswordWrong)
+                self.label.showWarn(self.options.passwordWrong)
             }
         }
     }

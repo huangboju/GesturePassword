@@ -31,7 +31,7 @@ public class LockCenter {
 
     public func showVerifyLockControllerIn(controller: UIViewController, forget: controllerHandle, success: controllerHandle, overrunTimes: controllerHandle) -> LockController {
         let lockVC = self.lockVC(controller)
-        lockVC.title = options.verifyTittle
+        lockVC.title = options.verifyPassword
         lockVC.type = .Verify
         lockVC.success = success
         lockVC.forget = forget
@@ -41,7 +41,7 @@ public class LockCenter {
 
     public func showModifyLockControllerIn(controller: UIViewController, success: controllerHandle) -> LockController {
         let lockVC = self.lockVC(controller)
-        lockVC.title = options.modifyTittle
+        lockVC.title = options.modifyPassword
         lockVC.type = .Modify
         lockVC.success = success
         return lockVC

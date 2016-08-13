@@ -8,7 +8,7 @@ public protocol LockDataSource {
     var scale: CGFloat { get }
 
     /// 选中圆大小的线宽
-    var arcLineWidht: CGFloat { get }
+    var arcLineWidth: CGFloat { get }
 
     /// 密码后缀
     var passwordKeySuffix: String { get }
@@ -41,13 +41,13 @@ public protocol LockDataSource {
 
     // MARK: - 验证密码
 
-    var verifyTittle: String { get }
+    var verifyPassword: String { get }
 
     /// 验证密码：普通提示文字
     var enterPassword: String { get }
 
     /// 验证密码：密码错误
-    var enterPasswordWrong: String { get }
+    var passwordWrong: String { get }
 
 
     /// 验证密码：验证成功
@@ -56,7 +56,7 @@ public protocol LockDataSource {
 
     //MARK: - 修改密码
 
-    var modifyTittle: String { get }
+    var modifyPassword: String { get }
 
     /// 修改密码：普通提示文字
     var enterOldPassword: String { get }

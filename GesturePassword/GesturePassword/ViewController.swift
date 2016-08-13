@@ -13,7 +13,6 @@ class ViewController: FormViewController {
         
         var options = LockOptions()
         options.passwordKeySuffix = "mmmm"
-        LockManager.options = options
         form +++ Section("手势密码")
             <<< ButtonRow("设置密码") {
                 $0.title = $0.tag
