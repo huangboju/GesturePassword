@@ -8,7 +8,7 @@ class LockView: UIView {
     var confirmPasswordHandle: handle?
     var passwordTooShortHandle: handle?
     var passwordTwiceDifferentHandle: ((password1: String, passwordNow: String) -> Void)?
-    var passwordFirstRightHandle: handle?
+    var passwordFirstRightHandle: strHandle?
     var setSuccessHandle: strHandle?
 
     var verifyHandle: boolHandle?
@@ -156,7 +156,7 @@ class LockView: UIView {
         if firstPassword.isEmpty {
             firstPassword = passwordContainer
             if let passwordFirstRightHandle = passwordFirstRightHandle {
-                passwordFirstRightHandle()
+                passwordFirstRightHandle(firstPassword)
             }
         } else {
             if firstPassword != passwordContainer {

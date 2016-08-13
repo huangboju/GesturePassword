@@ -92,7 +92,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
 
         lockView.passwordFirstRightHandle = { [weak self] in
             // 在这里绘制infoView路径
-            self?.infoView.setNeedsDisplay()
+            self?.infoView.showSelectedItems($0)
             self?.label.showNormal(self?.options.confirmPassword)
         }
 
@@ -181,6 +181,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
 
     func redraw(sender: UIBarButtonItem) {
         sender.enabled = false
+        infoView.resetItems()
         label.showNormal(options.secondPassword)
         lockView.resetPassword()
     }
