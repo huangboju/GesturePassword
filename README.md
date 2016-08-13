@@ -1,4 +1,6 @@
 # GesturePassword 是一个Swift的手势密码库
+## 是对[CoreLock](https://github.com/CharlinFeng/CoreLock)的翻译，在它的基础上进行了改进，优化。在此谢谢原著
+##如果对你有帮助，给个star吧！
 >
 ```ruby
 pod 'GesturePassword'
@@ -6,7 +8,7 @@ pod 'GesturePassword'
 
 
 
-###设置密码
+###1.设置密码
 ![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/setting.gif)
 
 >
@@ -18,7 +20,7 @@ LockManager.showSettingLockControllerIn(self, success: { (controller) in
                         })
 ```
 
-###验证密码
+###2.验证密码
 ![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/Verify.gif)
 
 >
@@ -34,7 +36,7 @@ LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
                         })
 ```
 
-###修改密码
+###3.修改密码
 ![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/Modify.gif)
 
 >
@@ -46,7 +48,7 @@ LockManager.showModifyLockControllerIn(self, success: { (controller) in
                         })
 ```
 
-###自定义
+###4.自定义
 ######如果你只是需要自定义一点点东西，这样就好了
 
 >
@@ -59,7 +61,7 @@ var options = LockOptions()
 
 >
 
-######如果你需要大量自定义
+######5.如果你需要大量自定义
 ```swift
 struct YourOptions: LockDataSource, LockDelegate {
     
