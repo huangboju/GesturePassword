@@ -18,6 +18,10 @@ class LockMainNav: UINavigationController {
         }
         navigationBar.tintColor = LockManager.options.barTintColor
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return LockManager.options.statusBarStyle
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -2,7 +2,7 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-public struct LockOptions: LockDataSource {
+public struct LockOptions: LockDataSource, LockDelegate {
     
     public init() {}
 
@@ -182,10 +182,50 @@ public struct LockOptions: LockDataSource {
             LockManager.options.normalTitleColor = newValue
         }
     }
-}
-
-extension LockOptions: LockDelegate {
-    public var barTittleColor: UIColor {
-        return UIColor.blackColor()
+    
+    // MARK: - LockDelegate
+    
+    /// 导航栏titleColor Default black
+    public var barTittleColor: UIColor = UIColor.blackColor() {
+        willSet {
+            LockManager.options.barTittleColor = newValue
+        }
+    }
+    
+    /// 导航栏底部黑线是否隐藏 Default false
+    public var hideBarBottomLine: Bool = false {
+        willSet {
+            if newValue {
+                LockManager.options.hideBarBottomLine = newValue
+            }
+        }
+    }
+    
+    /// barButton文字颜色 Default red
+    public var barTintColor: UIColor = UIColor.redColor() {
+        willSet {
+            LockManager.options.barTintColor = newValue
+        }
+    }
+    
+    /// barButton文字大小 Default 18
+    public var barTittleFont: UIFont = UIFont.systemFontOfSize(18) {
+        willSet {
+            LockManager.options.barTittleFont = newValue
+        }
+    }
+    
+    /// 导航栏背景颜色 Default nil
+    public var barBackgroundColor: UIColor? = nil {
+        willSet {
+            LockManager.options.barBackgroundColor = newValue
+        }
+    }
+    
+    /// 状态栏字体颜色 Default black
+    public var statusBarStyle: UIStatusBarStyle = .Default {
+        willSet {
+            LockManager.options.statusBarStyle = newValue
+        }
     }
 }
