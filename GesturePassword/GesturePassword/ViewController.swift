@@ -50,9 +50,9 @@ class ViewController: FormViewController {
                         
                     } else {
                         LockManager.showModifyLockControllerIn(self, success: { (controller) in
-                            print("修改成功")
+                            print("success")
                             }, forget: { (controller) in
-                            print("忘记密码")
+                            print("forget")
                         })
                     }
                 })
