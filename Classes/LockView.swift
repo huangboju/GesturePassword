@@ -32,11 +32,14 @@ class LockView: UIView {
     }
 
     override func drawRect(rect: CGRect) {
+        
         if itemViews.isEmpty { return }
+        
         let context = UIGraphicsGetCurrentContext()
+       
         CGContextAddRect(context, rect)
+        
         itemViews.forEach { (itemView) in
-
             CGContextAddEllipseInRect(context, itemView.frame)
         }
 

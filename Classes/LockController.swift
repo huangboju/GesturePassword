@@ -21,6 +21,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
     private var message: String?
     private var modifyCurrentTitle: String?
     private var isDirectModify = false
+    private var infoView: LockInfoView!
     private var lockView: LockView! {
         didSet {
             if type != .Set {
@@ -70,7 +71,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
     private func onPrepare() {
         if type == .Set {
             label.frame.origin.y = label.frame.minY + 30
-            let infoView = LockInfoView(frame: CGRect(x: (view.frame.width - INFO_VIEW_WIDTH) / 2, y: label.frame.minY - 50, width: INFO_VIEW_WIDTH, height: INFO_VIEW_WIDTH), options: options)
+            infoView = LockInfoView(frame: CGRect(x: (view.frame.width - INFO_VIEW_WIDTH) / 2, y: label.frame.minY - 50, width: INFO_VIEW_WIDTH, height: INFO_VIEW_WIDTH), options: options)
             view.addSubview(infoView)
         }
         lockView = LockView(frame: CGRect(x: 0, y: label.frame.minY + 15, width: view.frame.width, height: view.frame.width), options: options)
@@ -91,6 +92,7 @@ public class LockController: UIViewController, BackBarButtonItemDelegate {
 
         lockView.passwordFirstRightHandle = { [weak self] in
             // 在这里绘制infoView路径
+            self?.infoView.setNeedsDisplay()
             self?.label.showNormal(self?.options.confirmPassword)
         }
 

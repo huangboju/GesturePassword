@@ -22,7 +22,7 @@ class LockInfoView: UIView {
         CGContextSetLineWidth(context, self.options?.arcLineWidht ?? 1)
 
         self.options?.normalTitleColor.set()
-
+        
         let path = CGPathCreateMutable()
 
         let marginV: CGFloat = 3
@@ -32,6 +32,7 @@ class LockInfoView: UIView {
         for idx in 0..<9 {
             let row = CGFloat(idx % 3)
             let col = CGFloat(idx / 3)
+            
             let rectX = (rectWH + marginV) * row + padding
             let rectY = (rectWH + marginV) * col + padding
             let rect = CGRect(x: rectX, y: rectY, width: rectWH, height: rectWH)

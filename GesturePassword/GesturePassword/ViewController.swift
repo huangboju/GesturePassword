@@ -18,7 +18,7 @@ class ViewController: FormViewController {
             <<< ButtonRow("设置密码") {
                 $0.title = $0.tag
                 $0.onCellSelection({ (cell, row) in
-                    if LockManager.hasPassword() {
+                    if !LockManager.hasPassword() {
                         
                     } else {
                         LockManager.showSettingLockControllerIn(self, success: { (controller) in
