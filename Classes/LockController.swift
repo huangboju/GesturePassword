@@ -134,6 +134,7 @@ public class LockController: UIViewController {
                 let lockVC = LockController()
                 lockVC.isDirectModify = true
                 lockVC.type = .Set
+                lockVC.success = self.success
                 self.navigationController?.pushViewController(lockVC, animated: true)
             } else {
                 self.label.showWarn(self.options.passwordWrong)
