@@ -33,10 +33,10 @@ class ViewController: FormViewController {
                     if !LockManager.hasPassword("mmmm") {
                         
                     } else {
-                        LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
-                            print("forget")
-                            }, success: { (controller) in
+                        LockManager.showVerifyLockControllerIn(self, success: { (controller) in
                                 print("success")
+                            }, forget: { (controller) in
+                                print("forget")
                             }, overrunTimes: { (controller) in
                                 print("overrunTimes")
                         })
@@ -51,6 +51,8 @@ class ViewController: FormViewController {
                     } else {
                         LockManager.showModifyLockControllerIn(self, success: { (controller) in
                             print("修改成功")
+                            }, forget: { (controller) in
+                            print("忘记密码")
                         })
                     }
                 })

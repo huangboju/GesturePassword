@@ -29,7 +29,7 @@ public class LockCenter {
         return lockVC
     }
 
-    public func showVerifyLockControllerIn(controller: UIViewController, forget: controllerHandle, success: controllerHandle, overrunTimes: controllerHandle) -> LockController {
+    public func showVerifyLockControllerIn(controller: UIViewController,  success: controllerHandle, forget: controllerHandle, overrunTimes: controllerHandle) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.verifyPassword
         lockVC.type = .Verify
@@ -39,11 +39,12 @@ public class LockCenter {
         return lockVC
     }
 
-    public func showModifyLockControllerIn(controller: UIViewController, success: controllerHandle) -> LockController {
+    public func showModifyLockControllerIn(controller: UIViewController, success: controllerHandle, forget: controllerHandle) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.modifyPassword
         lockVC.type = .Modify
         lockVC.success = success
+        lockVC.forget = forget
         return lockVC
     }
 
