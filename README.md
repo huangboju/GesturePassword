@@ -1,8 +1,7 @@
 # GesturePassword 是一个Swift的手势密码库
-> 是对[CoreLock](https://github.com/CharlinFeng/CoreLock)的翻译，在它的基础上进行了改进，优化。在此谢谢原著
->如果对你有帮助，Star一下吧！
->有任何问题请Issues，我会尽快修正
+> 是对[CoreLock](https://github.com/CharlinFeng/CoreLock)的翻译，在它的基础上进行了改进，优化。在此谢谢原著。
 >
+>如果对你有帮助，Star一下吧！有任何问题请Issues，我会尽快修正
 ```ruby
 pod 'GesturePassword'
 ```
