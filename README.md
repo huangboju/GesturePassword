@@ -8,15 +8,18 @@ pod 'GesturePassword'
 ***
 
 ###设置密码
-
+![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/setting.gif)
+>
 ```swift
 import GesturePassword
 LockManager.showSettingLockControllerIn(self, success: { (controller) in
                             
                         })
 ```
-###验证密码
 
+###验证密码
+![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/Verify.gif)
+>
 ```swift
 import GesturePassword
 LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
@@ -30,6 +33,7 @@ LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
 
 ###修改密码
 ![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/Modify.gif)
+>
 ```swift
 import GesturePassword
 LockManager.showModifyLockControllerIn(self, success: { (controller) in
