@@ -21,7 +21,7 @@ public class LockCenter {
         LockArchive.removeValueFor(PASSWORD_KEY + passwordKeySuffix)
     }
 
-    public func showSettingLockControllerIn(controller: UIViewController, success: controllerHandle) -> LockController {
+    public func showSettingLockControllerIn(controller: UIViewController, success: controllerHandle? = nil) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.settingTittle
         lockVC.type = .Set
@@ -29,7 +29,7 @@ public class LockCenter {
         return lockVC
     }
 
-    public func showVerifyLockControllerIn(controller: UIViewController,  success: controllerHandle, forget: controllerHandle, overrunTimes: controllerHandle) -> LockController {
+    public func showVerifyLockControllerIn(controller: UIViewController,  success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.verifyPassword
         lockVC.type = .Verify
@@ -39,7 +39,7 @@ public class LockCenter {
         return lockVC
     }
 
-    public func showModifyLockControllerIn(controller: UIViewController, success: controllerHandle, forget: controllerHandle) -> LockController {
+    public func showModifyLockControllerIn(controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.modifyPassword
         lockVC.type = .Modify
