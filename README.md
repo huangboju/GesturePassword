@@ -16,7 +16,7 @@ pod 'GesturePassword'
 ```swift
 import GesturePassword
 var options = LockOptions()
-        options.passwordKeySuffix = "xiAo_Ju" // 设置密码是最好设置一个后缀
+        options.passwordKeySuffix = "xiAo_Ju" // 设置密码时最好设置一个后缀
 LockManager.showSettingLockControllerIn(self, success: { (controller) in
                             
                         })
