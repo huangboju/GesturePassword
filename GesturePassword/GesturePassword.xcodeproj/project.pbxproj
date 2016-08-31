@@ -543,7 +543,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/bojuhuang/Desktop/Repository/GesturePassword/GesturePassword/GesturePassword/Bridging.h;
+				SWIFT_OBJC_BRIDGING_HEADER = GesturePassword/Bridging.h;
 			};
 			name = Debug;
 		};
@@ -557,7 +557,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/bojuhuang/Desktop/Repository/GesturePassword/GesturePassword/GesturePassword/Bridging.h;
+				SWIFT_OBJC_BRIDGING_HEADER = GesturePassword/Bridging.h;
 			};
 			name = Release;
 		};
