@@ -72,35 +72,19 @@ struct YourOptions: LockDataSource, LockDelegate {
     init() {}
 
     /// 选中圆大小比例
-    var scale: CGFloat = 0.3 {
-        willSet {
-            LockManager.options.scale = newValue
-        }
-    }
+    var scale: CGFloat = 0.3 
  
     /// 选中圆大小的线宽
-    var arcLineWidth: CGFloat = 1 {
-        willSet {
-            LockManager.options.arcLineWidth = newValue
-        }
-    }
+    var arcLineWidth: CGFloat = 1 
 
     /// 密码后缀
-    var passwordKeySuffix = "" {
-        willSet {
-            LockManager.options.passwordKeySuffix = newValue
-        }
-    }
+    var passwordKeySuffix = "" 
 
 
     // MARK: - 设置密码
 
     /// 最低设置密码数目
-    var settingTittle = "设置密码" {
-        willSet {
-            LockManager.options.settingTittle = newValue
-        }
-    }
+    var settingTittle = "设置密码"
 }
   LockManager.options = YourOptions()
 ```
