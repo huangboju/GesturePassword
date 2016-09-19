@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0CAF879F99A8A697F8465D /* Pods_GesturePasswordTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83071E8A1070C7EFC331498C /* Pods_GesturePasswordTests.framework */; };
 		7C1C2E9880A30B0AF45ED175 /* Pods_GesturePassword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC63F358680250C4319861A /* Pods_GesturePassword.framework */; };
 		D8602C751D55FEB00022E93D /* LockArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C661D55FEB00022E93D /* LockArchive.swift */; };
 		D8602C761D55FEB00022E93D /* LockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C671D55FEB00022E93D /* LockConstants.swift */; };
@@ -48,7 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C0AFB6A4BEBBC7E4CC97686 /* Pods-GesturePasswordTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GesturePasswordTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GesturePasswordTests/Pods-GesturePasswordTests.release.xcconfig"; sourceTree = "<group>"; };
 		2CB02F168E83160363AAA2B8 /* Pods-GesturePassword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GesturePassword.release.xcconfig"; path = "Pods/Target Support Files/Pods-GesturePassword/Pods-GesturePassword.release.xcconfig"; sourceTree = "<group>"; };
+		83071E8A1070C7EFC331498C /* Pods_GesturePasswordTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePasswordTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8926C647A7132D09F43E6574 /* Pods-GesturePasswordTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GesturePasswordTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GesturePasswordTests/Pods-GesturePasswordTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ACC63F358680250C4319861A /* Pods_GesturePassword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePassword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8602C621D55D91E0022E93D /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		D8602C661D55FEB00022E93D /* LockArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockArchive.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0CAF879F99A8A697F8465D /* Pods_GesturePasswordTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				ACC63F358680250C4319861A /* Pods_GesturePassword.framework */,
+				83071E8A1070C7EFC331498C /* Pods_GesturePasswordTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,6 +125,8 @@
 			children = (
 				E9C1CC8ACB6C58C1FE0473F1 /* Pods-GesturePassword.debug.xcconfig */,
 				2CB02F168E83160363AAA2B8 /* Pods-GesturePassword.release.xcconfig */,
+				8926C647A7132D09F43E6574 /* Pods-GesturePasswordTests.debug.xcconfig */,
+				2C0AFB6A4BEBBC7E4CC97686 /* Pods-GesturePasswordTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -226,9 +234,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8FB376C1D55852E0031BBF4 /* Build configuration list for PBXNativeTarget "GesturePasswordTests" */;
 			buildPhases = (
+				6E2CB5D68A165B7562E7AAEE /* Check Pods Manifest.lock */,
 				D8FB37511D55852E0031BBF4 /* Sources */,
 				D8FB37521D55852E0031BBF4 /* Frameworks */,
 				D8FB37531D55852E0031BBF4 /* Resources */,
+				297D22ADAD5B99805F2AF01E /* Embed Pods Frameworks */,
+				A50A3ABF2449834B860645FB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,13 +281,16 @@
 				TargetAttributes = {
 					D8FB37401D55852E0031BBF4 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					D8FB37541D55852E0031BBF4 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = D8FB37401D55852E0031BBF4;
 					};
 					D8FB375F1D55852E0031BBF4 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = D8FB37401D55852E0031BBF4;
 					};
 				};
@@ -359,6 +373,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GesturePassword/Pods-GesturePassword-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		297D22ADAD5B99805F2AF01E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GesturePasswordTests/Pods-GesturePasswordTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		52DA672B7E38797F4345B053 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,6 +401,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GesturePassword/Pods-GesturePassword-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E2CB5D68A165B7562E7AAEE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A50A3ABF2449834B860645FB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GesturePasswordTests/Pods-GesturePasswordTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -544,6 +603,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = GesturePassword/Bridging.h;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -558,29 +618,34 @@
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = GesturePassword/Bridging.h;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
 		D8FB376D1D55852E0031BBF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8926C647A7132D09F43E6574 /* Pods-GesturePasswordTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = GesturePasswordTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePasswordTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GesturePassword.app/GesturePassword";
 			};
 			name = Debug;
 		};
 		D8FB376E1D55852E0031BBF4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C0AFB6A4BEBBC7E4CC97686 /* Pods-GesturePasswordTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = GesturePasswordTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePasswordTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GesturePassword.app/GesturePassword";
 			};
 			name = Release;
@@ -592,6 +657,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePasswordUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = GesturePassword;
 			};
 			name = Debug;
@@ -603,6 +669,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePasswordUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = GesturePassword;
 			};
 			name = Release;

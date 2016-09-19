@@ -66,23 +66,24 @@ class LockItemView: UIView {
     }
 
     override func drawRect(rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()
-        //上下文旋转
-        transForm(context, rect: rect)
-        //上下文属性设置
-        propertySetting(context)
-        //外环：普通
-        circleNormal(context, rect: rect)
-        //选中情况下，绘制背景色
-        if selected {
-            //外环：选中
-            circleSelected(context, rect: rect)
-            //三角形：方向标识
-            direct(context, rect: rect)
+        if let context = UIGraphicsGetCurrentContext() {
+            //上下文旋转
+            transForm(context, rect: rect)
+            //上下文属性设置
+            propertySetting(context)
+            //外环：普通
+            circleNormal(context, rect: rect)
+            //选中情况下，绘制背景色
+            if selected {
+                //外环：选中
+                circleSelected(context, rect: rect)
+                //三角形：方向标识
+                direct(context, rect: rect)
+            }
         }
     }
 
-    func transForm(context: CGContextRef?, rect: CGRect) {
+    func transForm(context: CGContextRef, rect: CGRect) {
         let translateXY = rect.width * 0.5
 
         //平移
@@ -124,7 +125,7 @@ class LockItemView: UIView {
         CGContextFillPath(context)
     }
 
-    func propertySetting(context: CGContextRef?) {
+    func propertySetting(context: CGContextRef) {
         //设置线宽
         CGContextSetLineWidth(context, options.arcLineWidth)
         if selected {
@@ -134,7 +135,7 @@ class LockItemView: UIView {
         }
     }
 
-    func circleNormal(context: CGContextRef?, rect: CGRect) {
+    func circleNormal(context: CGContextRef, rect: CGRect) {
         //新建路径：外环
         let loopPath = CGPathCreateMutable()
 
@@ -148,7 +149,7 @@ class LockItemView: UIView {
         CGContextStrokePath(context)
     }
 
-    func circleSelected(contenxt: CGContextRef?, rect: CGRect) {
+    func circleSelected(contenxt: CGContextRef, rect: CGRect) {
         //新建路径：外环
         let circlePath = CGPathCreateMutable()
 
@@ -164,7 +165,7 @@ class LockItemView: UIView {
         CGContextFillPath(contenxt)
     }
 
-    func direct(ctx: CGContextRef?, rect: CGRect) {
+    func direct(ctx: CGContextRef, rect: CGRect) {
         //新建路径：三角形
         if direct == nil {
             return

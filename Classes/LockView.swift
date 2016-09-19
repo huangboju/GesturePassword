@@ -35,7 +35,7 @@ class LockView: UIView {
         
         if itemViews.isEmpty { return }
         
-        let context = UIGraphicsGetCurrentContext()
+        guard let context = UIGraphicsGetCurrentContext() else { return }
        
         CGContextAddRect(context, rect)
         
