@@ -186,7 +186,7 @@ public struct LockOptions: LockDataSource, LockDelegate {
     // MARK: - LockDelegate
     
     /// 导航栏titleColor Default black
-    public var barTittleColor: UIColor = UIColor.blackColor() {
+    public var barTittleColor: UIColor = UIColor.black {
         willSet {
             LockManager.options.barTittleColor = newValue
         }
@@ -202,14 +202,14 @@ public struct LockOptions: LockDataSource, LockDelegate {
     }
     
     /// barButton文字颜色 Default red
-    public var barTintColor: UIColor = UIColor.redColor() {
+    public var barTintColor: UIColor = UIColor.red {
         willSet {
             LockManager.options.barTintColor = newValue
         }
     }
     
     /// barButton文字大小 Default 18
-    public var barTittleFont: UIFont = UIFont.systemFontOfSize(18) {
+    public var barTittleFont: UIFont = UIFont.systemFont(ofSize: 18) {
         willSet {
             LockManager.options.barTittleFont = newValue
         }
@@ -223,7 +223,7 @@ public struct LockOptions: LockDataSource, LockDelegate {
     }
     
     /// 状态栏字体颜色 Default black
-    public var statusBarStyle: UIStatusBarStyle = .Default {
+    public var statusBarStyle: UIStatusBarStyle = .default {
         willSet {
             LockManager.options.statusBarStyle = newValue
         }

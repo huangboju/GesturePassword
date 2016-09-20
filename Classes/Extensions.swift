@@ -8,8 +8,8 @@ public protocol BackBarButtonItemDelegate {
 }
 
 extension UINavigationController {
-    public func navigationBar(navigationBar: UINavigationBar, shouldPopItem item: UINavigationItem) -> Bool {
-        if viewControllers.count < navigationBar.items?.count {
+    public func navigationBar(_ navigationBar: UINavigationBar, shouldPopItem item: UINavigationItem) -> Bool {
+        if viewControllers.count < (navigationBar.items?.count)! {
             return true
         }
         var shouldPop = true
@@ -17,14 +17,14 @@ extension UINavigationController {
             shouldPop = viewController.viewControllerShouldPopOnBackBarButtonItem()
         }
         if shouldPop {
-            dispatch_async(dispatch_get_main_queue()) {
-                self.popViewControllerAnimated(true)
+            DispatchQueue.main.async {
+                self.popViewController(animated: true)
             }
         } else {
             // Prevent the back button from staying in an disabled state
             for view in navigationBar.subviews {
                 if view.alpha < 1.0 {
-                    UIView.animateWithDuration(0.25, animations: { () in
+                    UIView.animate(withDuration: 0.25, animations: { () in
                         view.alpha = 1.0
                     })
                 }
@@ -40,16 +40,16 @@ extension UINavigationBar {
     
     func hideBottomHairline() {
         let navigationBarImageView = hairlineImageViewInNavigationBar(self)
-        navigationBarImageView?.hidden = true
+        navigationBarImageView?.isHidden = true
     }
     
     func showBottomHairline() {
         let navigationBarImageView = hairlineImageViewInNavigationBar(self)
-        navigationBarImageView?.hidden = false
+        navigationBarImageView?.isHidden = false
     }
     
-    private func hairlineImageViewInNavigationBar(view: UIView) -> UIImageView? {
-        if view.isKindOfClass(UIImageView) && view.bounds.height <= 1.0 {
+    fileprivate func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
+        if view.isKind(of: UIImageView.self) && view.bounds.height <= 1.0 {
             return (view as? UIImageView)
         }
         
@@ -79,27 +79,27 @@ extension UINavigationBar {
     }
     
     //在透明导航栏需要渐变时使用
-    func setMyBackgroundColor(color: UIColor, alpha: CGFloat = 0) {
+    func setMyBackgroundColor(_ color: UIColor, alpha: CGFloat = 0) {
         if let coverView = self.coverView {
             coverView.backgroundColor = color
         } else {
-            setBackgroundImage(UIImage(), forBarMetrics: .Default)
+            setBackgroundImage(UIImage(), for: .default)
             shadowImage = UIImage()
             
-            let view = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.mainScreen().bounds.size.width, height: bounds.height + 20))
-            view.userInteractionEnabled = false
-            view.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-            insertSubview(view, atIndex: 0)
+            let view = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.main.bounds.size.width, height: bounds.height + 20))
+            view.isUserInteractionEnabled = false
+            view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            insertSubview(view, at: 0)
             
             view.backgroundColor = color
             coverView = view
         }
-        titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor().colorWithAlphaComponent(alpha)]
+        titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(alpha)]
     }
     
-    func setMyBackgroundColorAlpha(alpha: CGFloat) {
+    func setMyBackgroundColorAlpha(_ alpha: CGFloat) {
         if let coverView = self.coverView {
-            coverView.backgroundColor = coverView.backgroundColor?.colorWithAlphaComponent(alpha)
+            coverView.backgroundColor = coverView.backgroundColor?.withAlphaComponent(alpha)
         }
     }
 }
@@ -111,6 +111,6 @@ extension CALayer {
         keyFrameAnimation.values = [0, -s, 0, s, 0, -s, 0, s, 0]
         keyFrameAnimation.duration = 0.1
         keyFrameAnimation.repeatCount = 2
-        addAnimation(keyFrameAnimation, forKey: "shake")
+        add(keyFrameAnimation, forKey: "shake")
     }
 }

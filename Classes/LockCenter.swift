@@ -4,54 +4,54 @@
 
 public let LockManager = LockCenter.sharedInstance
 
-public class LockCenter {
-    public var options = LockOptions()
+open class LockCenter {
+    open var options = LockOptions()
 
-    public static let sharedInstance = LockCenter()
+    open static let sharedInstance = LockCenter()
     // 私有化构造方法，阻止其他对象使用这个类的默认的'()'构造方法
-    private init () {
+    fileprivate init () {
 
     }
 
-    public func hasPassword(passwordKeySuffix: String = "") -> Bool {
+    open func hasPassword(_ passwordKeySuffix: String = "") -> Bool {
         return LockArchive.strFor(PASSWORD_KEY + passwordKeySuffix) != nil
     }
 
-    public func removePassword(passwordKeySuffix: String = "") {
+    open func removePassword(_ passwordKeySuffix: String = "") {
         LockArchive.removeValueFor(PASSWORD_KEY + passwordKeySuffix)
     }
 
-    public func showSettingLockControllerIn(controller: UIViewController, success: controllerHandle? = nil) -> LockController {
+    open func showSettingLockControllerIn(_ controller: UIViewController, success: controllerHandle? = nil) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.settingTittle
-        lockVC.type = .Set
+        lockVC.type = .set
         lockVC.success = success
         return lockVC
     }
 
-    public func showVerifyLockControllerIn(controller: UIViewController,  success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) -> LockController {
+    open func showVerifyLockControllerIn(_ controller: UIViewController,  success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.verifyPassword
-        lockVC.type = .Verify
+        lockVC.type = .verify
         lockVC.success = success
         lockVC.forget = forget
         lockVC.overrunTimes = overrunTimes
         return lockVC
     }
 
-    public func showModifyLockControllerIn(controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil) -> LockController {
+    open func showModifyLockControllerIn(_ controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil) -> LockController {
         let lockVC = self.lockVC(controller)
         lockVC.title = options.modifyPassword
-        lockVC.type = .Modify
+        lockVC.type = .modify
         lockVC.success = success
         lockVC.forget = forget
         return lockVC
     }
 
-    private func lockVC(controller: UIViewController) -> LockController {
+    fileprivate func lockVC(_ controller: UIViewController) -> LockController {
         let lockVC = LockController()
         lockVC.controller = controller
-        controller.presentViewController(LockMainNav(rootViewController: lockVC), animated: true, completion: nil)
+        controller.present(LockMainNav(rootViewController: lockVC), animated: true, completion: nil)
         return lockVC
     }
 }

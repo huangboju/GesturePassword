@@ -4,7 +4,7 @@
 
 class LockInfoView: UIView {
 
-    private var itemViews = [LockItemView]()
+    fileprivate var itemViews = [LockItemView]()
 
     init(frame: CGRect, options: LockOptions) {
         super.init(frame: frame)
@@ -17,7 +17,7 @@ class LockInfoView: UIView {
         }
     }
     
-    func showSelectedItems(passwordStr: String) {
+    func showSelectedItems(_ passwordStr: String) {
         for char in passwordStr.characters {
             itemViews[Int("\(char)")!].selected = true
         }
@@ -37,7 +37,7 @@ class LockInfoView: UIView {
         super.layoutSubviews()
         let marginV: CGFloat = 3
         let rectWH = (frame.width - marginV * 2) / 3
-        for (idx, subview) in subviews.enumerate() {
+        for (idx, subview) in subviews.enumerated() {
             let row = CGFloat(idx % 3)
             let col = CGFloat(idx / 3)
             let rectX = (rectWH + marginV) * row
