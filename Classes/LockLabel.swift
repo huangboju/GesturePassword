@@ -8,17 +8,17 @@ class LockLabel: UILabel {
 
     init(frame: CGRect, options: LockOptions) {
         super.init(frame: frame)
-        textAlignment = .Center
+        textAlignment = .center
         backgroundColor = options.backgroundColor
         self.options = options
     }
 
-    func showNormal(message: String?) {
+    func showNormal(_ message: String?) {
         text = message
         textColor = options.normalTitleColor
     }
 
-    func showWarn(message: String?) {
+    func showWarn(_ message: String?) {
         text = message
         textColor = options.warningTitleColor
         layer.shake()
