@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "GesturePassword"
-  s.version      = "1.4.3"
+  s.version      = "1.4.4"
   s.summary      = "GesturePassword is a simple gesture password written in Swift 2.2"
   s.homepage     = "https://github.com/huangboju/GesturePassword"
   s.license      = "MIT"
