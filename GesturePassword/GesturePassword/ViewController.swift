@@ -33,7 +33,7 @@ class ViewController: FormViewController {
                     if !LockManager.hasPassword("mmmm") {
                         
                     } else {
-                        LockManager.showVerifyLockControllerIn(self, success: { (controller) in
+                       LockManager.showVerifyLockControllerIn(self, success: { (controller) in
                                 print("success", controller.title)
                             }, forget: { (controller) in
                                 print("forget", controller.title)
