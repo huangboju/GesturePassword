@@ -2,8 +2,8 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-public struct LockOptions: LockDataSource, LockDelegate {
-    
+public struct LockOptions {
+
     public init() {}
 
     /// 选中圆大小比例
@@ -221,7 +221,7 @@ public struct LockOptions: LockDataSource, LockDelegate {
             LockManager.options.barBackgroundColor = newValue
         }
     }
-    
+
     /// 状态栏字体颜色 Default black
     public var statusBarStyle: UIStatusBarStyle = .default {
         willSet {
