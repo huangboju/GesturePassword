@@ -39,9 +39,7 @@ class LockView: UIView {
        
         context.addRect(rect)
         
-        itemViews.forEach { (itemView) in
-            context.addEllipse(in: itemView.frame)
-        }
+        itemViews.forEach { context.addEllipse(in: $0.frame) }
 
         //剪裁
         context.clip()
@@ -172,9 +170,8 @@ class LockView: UIView {
     }
 
     func lockHandle(_ touches: Set<UITouch>) {
-        let touch = touches.first
-        let location = touch?.location(in: self)
-        if let itemView = itemViewWithTouchLocation(location) {
+        let location = touches.first!.location(in: self)
+        if let itemView = itemView(with: location) {
             if itemViews.contains(itemView) {
                 return
             }
@@ -192,43 +189,43 @@ class LockView: UIView {
             let last_1_ItemView = itemViews.last
             let last_2_ItemView = itemViews[count - 2]
 
-            let last_1_x = last_1_ItemView?.frame.minX
-            let last_1_y = last_1_ItemView?.frame.minY
+            let last_1_x = last_1_ItemView!.frame.minX
+            let last_1_y = last_1_ItemView!.frame.minY
             let last_2_x = last_2_ItemView.frame.minX
             let last_2_y = last_2_ItemView.frame.minY
 
-            if last_2_x == last_1_x && last_2_y > last_1_y! {
+            if last_2_x == last_1_x && last_2_y > last_1_y {
                 last_2_ItemView.direct = .top
             }
-            if last_2_y == last_1_y && last_2_x > last_1_x! {
+            if last_2_y == last_1_y && last_2_x > last_1_x {
                 last_2_ItemView.direct = .left
             }
-            if last_2_x == last_1_x && last_2_y < last_1_y! {
+            if last_2_x == last_1_x && last_2_y < last_1_y {
                 last_2_ItemView.direct = .bottom
             }
-            if last_2_y == last_1_y && last_2_x < last_1_x! {
+            if last_2_y == last_1_y && last_2_x < last_1_x {
                 last_2_ItemView.direct = .right
             }
-            if last_2_x > last_1_x! && last_2_y > last_1_y! {
+            if last_2_x > last_1_x && last_2_y > last_1_y {
                 last_2_ItemView.direct = .leftTop
             }
-            if last_2_x < last_1_x! && last_2_y > last_1_y! {
+            if last_2_x < last_1_x && last_2_y > last_1_y {
                 last_2_ItemView.direct = .rightTop
             }
-            if last_2_x > last_1_x! && last_2_y < last_1_y! {
+            if last_2_x > last_1_x && last_2_y < last_1_y {
                 last_2_ItemView.direct = .leftBottom
             }
-            if last_2_x < last_1_x! && last_2_y < last_1_y! {
+            if last_2_x < last_1_x && last_2_y < last_1_y {
                 last_2_ItemView.direct = .rightBottom
             }
         }
     }
 
-    func itemViewWithTouchLocation(_ location: CGPoint?) -> LockItemView? {
+    func itemView(with touchLocation: CGPoint) -> LockItemView? {
         var item: LockItemView?
         for subView in subviews {
             if let itemView = (subView as? LockItemView) {
-                if !itemView.frame.contains(location!) {
+                if !itemView.frame.contains(touchLocation) {
                     continue
                 }
                 item = itemView
