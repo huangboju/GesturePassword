@@ -33,7 +33,7 @@ class LockItemView: UIView {
             storeCalRect = newValue
         }
         get {
-            if storeCalRect.equalTo(CGRect.zero) {
+            if storeCalRect.equalTo(.zero) {
                 let sizeWH = bounds.width - options.arcLineWidth
                 let originXY = options.arcLineWidth * 0.5
                 self.storeCalRect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
@@ -43,14 +43,9 @@ class LockItemView: UIView {
     }
     fileprivate var storeCalRect = CGRect()
     fileprivate var selectedRect: CGRect {
-        get {
-            if CGRect().equalTo(CGRect.zero) {
-                let selectRectWH = bounds.width * options.scale
-                let selectRectXY = bounds.width * (1 - options.scale) * 0.5
-                return CGRect(x: selectRectXY, y: selectRectXY, width: selectRectWH, height: selectRectWH)
-            }
-            return CGRect.zero
-        }
+        let selectRectWH = bounds.width * options.scale
+        let selectRectXY = bounds.width * (1 - options.scale) * 0.5
+        return CGRect(x: selectRectXY, y: selectRectXY, width: selectRectWH, height: selectRectWH)
     }
     fileprivate var angle: CGFloat?
     fileprivate var options: LockOptions!
@@ -60,7 +55,7 @@ class LockItemView: UIView {
     }
 
     convenience init(options: LockOptions) {
-        self.init(frame: CGRect.zero)
+        self.init(frame: .zero)
         self.options = options
         backgroundColor = options.backgroundColor
     }
@@ -107,7 +102,6 @@ class LockItemView: UIView {
         let topX = rect.minX + rect.width * 0.5
         let topY = rect.minY + (rect.width * 0.5 - h - marginSelectedCirclev - selectedRect.height * 0.5)
 
-        
         trianglePathM.move(to: CGPoint(x: topX, y: topY))
 
         //添加左边点

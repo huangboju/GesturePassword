@@ -26,6 +26,14 @@ public struct LockOptions {
             LockManager.options.passwordKeySuffix = newValue
         }
     }
+    
+    
+    // MARK: - 存放格式
+    public var usingKeychain: Bool = false {
+        willSet {
+            LockManager.storage = newValue ? LockKeychain() : LockUserDefaults()
+        }
+    }
 
 
     // MARK: - 设置密码

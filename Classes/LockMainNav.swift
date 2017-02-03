@@ -12,7 +12,7 @@ class LockMainNav: UINavigationController {
         if LockManager.options.hideBarBottomLine {
             navigationBar.hideBottomHairline()
         }
-        
+
         if let backgroundColor = LockManager.options.barBackgroundColor {
             navigationBar.setMyBackgroundColor(backgroundColor)
         }

@@ -2,7 +2,7 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-enum CoreLockType: Int {
+enum CoreLockType {
     case set
     case verify
     case modify
@@ -98,7 +98,7 @@ open class LockController: UIViewController {
 
         lockView.setSuccessHandle = { [weak self] (password) in
             self?.label.showNormal(self?.options.setSuccess)
-            LockArchive.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
+            LockManager.storage.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
             self?.view.isUserInteractionEnabled = false
             if let success = self?.success {
                 success(self!)

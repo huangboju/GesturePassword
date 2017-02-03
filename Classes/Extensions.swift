@@ -72,7 +72,7 @@ extension UINavigationBar {
             //这句的意思大概可以理解为利用key在self中取出对应的对象,如果没有key对应的对象就返回niu
             return objc_getAssociatedObject(self, &AssociatedKeys.NAV_BAR_KEY) as? UIView
         }
-        
+
         set {
             //与上面对应是重新设置这个对象，最后一个参数如果学过oc的话很好理解，就是代表这个newValue的属性
             //OBJC_ASSOCIATION_RETAIN_NONATOMIC意味着:strong,nonatomic
@@ -100,7 +100,7 @@ extension UINavigationBar {
     }
     
     func setMyBackgroundColorAlpha(_ alpha: CGFloat) {
-        if let coverView = self.coverView {
+        if let coverView = coverView {
             coverView.backgroundColor = coverView.backgroundColor?.withAlphaComponent(alpha)
         }
     }
