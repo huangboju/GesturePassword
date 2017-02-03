@@ -22,7 +22,7 @@ class ViewController: FormViewController {
                         
                     } else {
                         LockManager.showSettingLockControllerIn(self, success: { (controller) in
-                            print(controller.title)
+                            print(controller.title as Any)
                         })
                     }
                 })
@@ -34,11 +34,11 @@ class ViewController: FormViewController {
                         
                     } else {
                        LockManager.showVerifyLockControllerIn(self, success: { (controller) in
-                                print("success", controller.title)
+                                print("success", controller.title as Any)
                             }, forget: { (controller) in
-                                print("forget", controller.title)
+                                print("forget", controller.title as Any)
                             }, overrunTimes: { (controller) in
-                                print("overrunTimes", controller.title)
+                                print("overrunTimes", controller.title as Any)
                         })
                     }
                 })
