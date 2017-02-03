@@ -9,12 +9,12 @@ struct LockArchive {
         defaults.synchronize()
     }
 
-    static func strFor(_ key: String) -> String? {
-        return UserDefaults.standard.string(forKey: key)
+    static func str(forKey name: String) -> String? {
+        return UserDefaults.standard.string(forKey: name)
     }
 
-    static func removeValueFor(_ key: String) {
-        setStr(nil, key: key)
+    static func removeValue(forKey name: String) {
+        setStr(nil, key: name)
     }
 
     static func setInt(_ value: Int, key: String) {
@@ -23,8 +23,8 @@ struct LockArchive {
         defaults.synchronize()
     }
 
-    static func intFor(_ key: String) -> Int {
-        return UserDefaults.standard.integer(forKey: key)
+    static func int(forKey name: String) -> Int {
+        return UserDefaults.standard.integer(forKey: name)
     }
 
     static func setFloat(_ value: Float, key: String) {
@@ -34,8 +34,8 @@ struct LockArchive {
         defaults.synchronize()
     }
 
-    static func floatFor(_ key: String) -> Float {
-        return UserDefaults.standard.float(forKey: key)
+    static func float(forKey name: String) -> Float {
+        return UserDefaults.standard.float(forKey: name)
     }
 
     static func setBool(_ value: Bool, key: String) {
@@ -44,8 +44,8 @@ struct LockArchive {
         defaults.synchronize()
     }
 
-    static func boolFor(_ key: String) -> Bool {
-        return UserDefaults.standard.bool(forKey: key)
+    static func bool(forKey name: String) -> Bool {
+        return UserDefaults.standard.bool(forKey: name)
     }
 
     //MARK: - 归档

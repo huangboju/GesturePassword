@@ -14,11 +14,11 @@ open class LockCenter {
     }
 
     open func hasPassword(_ passwordKeySuffix: String = "") -> Bool {
-        return LockArchive.strFor(PASSWORD_KEY + passwordKeySuffix) != nil
+        return LockArchive.str(forKey: PASSWORD_KEY + passwordKeySuffix) != nil
     }
 
     open func removePassword(_ passwordKeySuffix: String = "") {
-        LockArchive.removeValueFor(PASSWORD_KEY + passwordKeySuffix)
+        LockArchive.removeValue(forKey: PASSWORD_KEY + passwordKeySuffix)
     }
 
     open func showSettingLockControllerIn(_ controller: UIViewController, success: controllerHandle? = nil) {
