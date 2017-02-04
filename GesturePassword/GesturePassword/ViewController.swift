@@ -15,9 +15,9 @@ class ViewController: FormViewController {
             <<< ButtonRow("设置密码") {
             $0.title = $0.tag
             $0.onCellSelection({ (cell, row) in
-                if Lock.hasPassword {
+                if AppLock.hasPassword {
                 } else {
-                    Lock.set(controller: self, success: { (controller) in
+                    AppLock.set(controller: self, success: { (controller) in
                         print(controller.title as Any)
                     })
                 }
@@ -26,10 +26,10 @@ class ViewController: FormViewController {
             <<< ButtonRow("验证密码") {
             $0.title = $0.tag
             $0.onCellSelection({ (cell, row) in
-                if !Lock.hasPassword {
+                if !AppLock.hasPassword {
                     print("没有密码")
                 } else {
-                    Lock.verify(controller: self, success: { (controller) in
+                    AppLock.verify(controller: self, success: { (controller) in
                         print("success", controller.title as Any)
                     }, forget: { (controller) in
                         print("forget", controller.title as Any)
@@ -42,10 +42,10 @@ class ViewController: FormViewController {
             <<< ButtonRow("修改密码") {
             $0.title = $0.tag
             $0.onCellSelection({ (cell, row) in
-                if !Lock.hasPassword {
+                if !AppLock.hasPassword {
                     print("没有密码")
                 } else {
-                    Lock.modify(controller: self, success: { (controller) in
+                    AppLock.modify(controller: self, success: { (controller) in
                         print("success")
                     }, forget: { (controller) in
                         print("forget")

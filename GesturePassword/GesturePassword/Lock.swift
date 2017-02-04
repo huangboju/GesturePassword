@@ -2,9 +2,13 @@
 //  Copyright © 2016年 cmcaifu.com. All rights reserved.
 //
 
-class Lock {
+let AppLock = Lock.shared
 
-    private static func config() {
+class Lock {
+    
+    static let shared = Lock()
+    
+    private init() {
         var options = LockOptions()
         options.passwordKeySuffix = "test"
         options.usingKeychain = true
@@ -12,26 +16,23 @@ class Lock {
         options.lockLineColor = options.circleLineSelectedColor
     }
 
-    static func set(controller: UIViewController, success: controllerHandle? = nil) {
-        config()
-        LockManager.showSettingLockControllerIn(controller, success: success)
+    func set(controller: UIViewController, success: controllerHandle? = nil) {
+        LockManager.showSettingLockController(in: controller, success: success)
     }
 
-    static func verify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?, overrunTimes: controllerHandle?) {
-        config()
-        LockManager.showVerifyLockControllerIn(controller, success: success, forget: forget, overrunTimes: overrunTimes)
+    func verify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?, overrunTimes: controllerHandle?) {
+        LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
     }
 
-    static func modify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?) {
-        config()
-        LockManager.showModifyLockControllerIn(controller, success: success, forget: forget)
+    func modify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?) {
+        LockManager.showModifyLockController(in: controller, success: success, forget: forget)
     }
 
-    static var hasPassword: Bool {
+    var hasPassword: Bool {
         return LockManager.hasPassword("test")
     }
 
-    static func removePassword() {
+    func removePassword() {
         LockManager.removePassword("test")
     }
 }

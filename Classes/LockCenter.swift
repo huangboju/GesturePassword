@@ -21,19 +21,19 @@ open class LockCenter {
         storage.removeValue(forKey: PASSWORD_KEY + passwordKeySuffix)
     }
 
-    open func showSettingLockControllerIn(_ controller: UIViewController, success: controllerHandle? = nil) {
+    open func showSettingLockController(in controller: UIViewController, success: controllerHandle? = nil) {
         let lockVC = self.lockVC(controller, title: options.settingTittle, type: .set, success: success)
         lockVC.success = success
     }
 
-    open func showVerifyLockControllerIn(_ controller: UIViewController,  success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) {
+    open func showVerifyLockController(in controller: UIViewController,  success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) {
         let lockVC = self.lockVC(controller, title: options.verifyPassword, type: .verify, success: success)
         lockVC.success = success
         lockVC.forget = forget
         lockVC.overrunTimes = overrunTimes
     }
 
-    open func showModifyLockControllerIn(_ controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil) {
+    open func showModifyLockController(in controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil) {
         let lockVC = self.lockVC(controller, title: options.modifyPassword, type: .modify, success: success)
         lockVC.forget = forget
     }
