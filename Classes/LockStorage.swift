@@ -5,13 +5,14 @@
 import Security
 
 protocol Storagable {
+
     func setStr(_ value: String, key: String)
     func str(forKey name: String) -> String?
     func removeValue(forKey name: String)
 }
 
 struct LockKeychain: Storagable {
-    
+
     private let keychain: Keychain
     
     init() {
@@ -36,7 +37,7 @@ struct LockKeychain: Storagable {
 }
 
 struct LockUserDefaults: Storagable {
-    
+
     private let defaults: UserDefaults
     
     init() {
