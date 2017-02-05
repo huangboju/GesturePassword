@@ -15,42 +15,31 @@ class ViewController: FormViewController {
             <<< ButtonRow("设置密码") {
             $0.title = $0.tag
             $0.onCellSelection({ (cell, row) in
-                if AppLock.hasPassword {
-                } else {
-                    AppLock.set(controller: self, success: { (controller) in
-                        print(controller.title as Any)
-                    })
-                }
+                AppLock.set(controller: self, success: { (controller) in
+                    print(controller.title as Any)
+                })
             })
         }
             <<< ButtonRow("验证密码") {
             $0.title = $0.tag
             $0.onCellSelection({ (cell, row) in
-                if !AppLock.hasPassword {
-                    print("没有密码")
-                } else {
-                    AppLock.verify(controller: self, success: { (controller) in
-                        print("success", controller.title as Any)
-                    }, forget: { (controller) in
-                        print("forget", controller.title as Any)
-                    }, overrunTimes: { (controller) in
-                        print("overrunTimes", controller.title as Any)
-                    })
-                }
+                AppLock.verify(controller: self, success: { (controller) in
+                    print("success", controller.title as Any)
+                }, forget: { (controller) in
+                    print("forget", controller.title as Any)
+                }, overrunTimes: { (controller) in
+                    print("overrunTimes", controller.title as Any)
+                })
             })
         }
             <<< ButtonRow("修改密码") {
             $0.title = $0.tag
             $0.onCellSelection({ (cell, row) in
-                if !AppLock.hasPassword {
-                    print("没有密码")
-                } else {
-                    AppLock.modify(controller: self, success: { (controller) in
-                        print("success")
-                    }, forget: { (controller) in
-                        print("forget")
-                    })
-                }
+                AppLock.modify(controller: self, success: { (controller) in
+                    print("success")
+                }, forget: { (controller) in
+                    print("forget")
+                })
             })
         }
     }

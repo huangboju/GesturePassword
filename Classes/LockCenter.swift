@@ -13,12 +13,12 @@ open class LockCenter {
     // 私有化构造方法，阻止其他对象使用这个类的默认的'()'构造方法
     fileprivate init () {}
 
-    open func hasPassword(for passwordKeySuffix: String = "") -> Bool {
-        return storage.str(forKey: PASSWORD_KEY + passwordKeySuffix) != nil
+    open func hasPassword(for passwordKeySuffix: String? = nil) -> Bool {
+        return storage.str(forKey: PASSWORD_KEY + (passwordKeySuffix ?? options.passwordKeySuffix)) != nil
     }
 
-    open func removePassword(for passwordKeySuffix: String = "") {
-        storage.removeValue(forKey: PASSWORD_KEY + passwordKeySuffix)
+    open func removePassword(for passwordKeySuffix: String? = nil) {
+        storage.removeValue(forKey: PASSWORD_KEY + (passwordKeySuffix ?? options.passwordKeySuffix))
     }
 
     open func showSettingLockController(in controller: UIViewController, success: controllerHandle? = nil) {

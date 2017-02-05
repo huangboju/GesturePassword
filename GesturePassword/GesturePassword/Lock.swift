@@ -18,24 +18,37 @@ class Lock {
     }
 
     func set(controller: UIViewController, success: controllerHandle? = nil) {
-        LockManager.showSettingLockController(in: controller, success: success)
+        if hasPassword {
+            print("还没有密码")
+        } else {
+           LockManager.showSettingLockController(in: controller, success: success)
+        }
     }
 
     func verify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?, overrunTimes: controllerHandle?) {
-        LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
+        if !hasPassword {
+            print("没有密码")
+        } else {
+            LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
+        }
+        
     }
 
     func modify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?) {
-        LockManager.showModifyLockController(in: controller, success: success, forget: forget)
+        if !hasPassword {
+            print("没有密码")
+        } else {
+            LockManager.showModifyLockController(in: controller, success: success, forget: forget)
+        }
     }
 
     var hasPassword: Bool {
-        // key建议设置
-        return LockManager.hasPassword(for: "test")
+        // 这里密码后缀可以自己传值，默认为上面设置的passwordKeySuffix
+        return LockManager.hasPassword()
     }
 
     func removePassword() {
-        // key建议设置
-        LockManager.removePassword(for: "test")
+        // 这里密码后缀可以自己传值，默认为上面设置的passwordKeySuffix
+        LockManager.removePassword()
     }
 }
