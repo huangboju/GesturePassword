@@ -17,12 +17,9 @@ pod 'GesturePassword'
 >
 
 ```swift
-import GesturePassword
-var options = LockOptions()
-        options.passwordKeySuffix = "xiAo_Ju" // 设置密码时最好设置一个后缀
-LockManager.showSettingLockControllerIn(self, success: { (controller) in
-                            
-                        })
+AppLock.set(controller: self, success: { (controller) in
+                    print(controller.title as Any)
+                })
 ```
 
 ###2.验证密码
@@ -31,14 +28,13 @@ LockManager.showSettingLockControllerIn(self, success: { (controller) in
 >
 
 ```swift
-import GesturePassword
-LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
-                            print("forget")
-                            }, success: { (controller) in
-                                print("success")
-                            }, overrunTimes: { (controller) in
-                                print("overrunTimes")
-                        })
+AppLock.verify(controller: self, success: { (controller) in
+                    print("success", controller.title as Any)
+                }, forget: { (controller) in
+                    print("forget", controller.title as Any)
+                }, overrunTimes: { (controller) in
+                    print("overrunTimes", controller.title as Any)
+                })
 ```
 
 ###3.修改密码
@@ -47,12 +43,11 @@ LockManager.showVerifyLockControllerIn(self, forget: { (controller) in
 >
 
 ```swift
-import GesturePassword
-LockManager.showModifyLockControllerIn(self, success: { (controller) in
-                            print("success")
-                            }, forget: { (controller) in
-                            print("forget")
-                        })
+AppLock.modify(controller: self, success: { (controller) in
+                    print("success")
+                }, forget: { (controller) in
+                    print("forget")
+                })
 ```
 
 # Usage
@@ -100,13 +95,13 @@ class Lock {
     }
 
     var hasPassword: Bool {
-        // key建议设置
-        return LockManager.hasPassword(for: "test")
+        // 这里密码后缀可以自己传值，默认为上面设置的passwordKeySuffix
+        return LockManager.hasPassword()
     }
 
     func removePassword() {
-        // key建议设置
-        LockManager.removePassword(for: "test")
+        // 这里密码后缀可以自己传值，默认为上面设置的passwordKeySuffix
+        LockManager.removePassword()
     }
 }
 
