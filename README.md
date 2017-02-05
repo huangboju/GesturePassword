@@ -2,6 +2,9 @@
 > 是对[CoreLock](https://github.com/CharlinFeng/CoreLock)的翻译，在它的基础上进行了改进，优化。在此谢谢原著。
 >
 >如果对你有帮助，Star一下吧！有任何问题请Issues，我会尽快修正
+
+# Cocoapods
+
 ```ruby
 pod 'GesturePassword'
 ```
@@ -52,39 +55,60 @@ LockManager.showModifyLockControllerIn(self, success: { (controller) in
                         })
 ```
 
-###4.自定义
-######如果你只是需要自定义一点点东西，这样就好了
-
->
-
+# Usage
+1. 将Lock.swift文件拖入你的工程
+2. 使用二次封装的AppLock类自己调用**设置密码**、**修改密码**、**验证密码**
 ```swift
-var options = LockOptions()
-        options.passwordKeySuffix = "xiAo_Ju"
-        options.arcLineWidht = 1
-```
+let AppLock = Lock.shared
 
->
-
-######5.如果你需要大量自定义
-```swift
-struct YourOptions: LockDataSource, LockDelegate {
+class Lock {
     
-    init() {}
+    static let shared = Lock()
+    
+    private init() {
+        // 在这里自定义你的UI
+        var options = LockOptions()
+        options.passwordKeySuffix = "test"
+        options.usingKeychain = true
+        options.circleLineSelectedCircleColor = options.circleLineSelectedColor
+        options.lockLineColor = options.circleLineSelectedColor
+    }
 
-    /// 选中圆大小比例
-    var scale: CGFloat = 0.3 
- 
-    /// 选中圆大小的线宽
-    var arcLineWidth: CGFloat = 1 
+    func set(controller: UIViewController, success: controllerHandle? = nil) {
+        if hasPassword {
+            print("还没有密码")
+        } else {
+           LockManager.showSettingLockController(in: controller, success: success)
+        }
+    }
 
-    /// 密码后缀
-    var passwordKeySuffix = "" 
+    func verify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?, overrunTimes: controllerHandle?) {
+        if !hasPassword {
+            print("没有密码")
+        } else {
+            LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
+        }
+        
+    }
 
+    func modify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?) {
+        if !hasPassword {
+            print("没有密码")
+        } else {
+            LockManager.showModifyLockController(in: controller, success: success, forget: forget)
+        }
+    }
 
-    // MARK: - 设置密码
+    var hasPassword: Bool {
+        // key建议设置
+        return LockManager.hasPassword(for: "test")
+    }
 
-    /// 最低设置密码数目
-    var settingTittle = "设置密码"
+    func removePassword() {
+        // key建议设置
+        LockManager.removePassword(for: "test")
+    }
 }
-  LockManager.options = YourOptions()
+
 ```
+
