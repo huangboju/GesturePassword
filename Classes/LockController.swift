@@ -52,7 +52,7 @@ open class LockController: UIViewController {
     }
 
     fileprivate lazy var label: LockLabel = {
-        return LockLabel(frame: CGRect(x: 0, y: TOP_MARGIN, width: self.view.frame.width, height: LABEL_HEIGHT), options: self.options)
+        return LockLabel(frame: CGRect(x: 0, y: TOP_MARGIN, width: self.view.frame.width, height: LABEL_HEIGHT))
     }()
 
     fileprivate lazy var resetItem: UIBarButtonItem = {
@@ -155,9 +155,7 @@ open class LockController: UIViewController {
             if isDirectModify { return }
             navigationItem.leftBarButtonItem = getBarButton("关闭")
         } else if type == .set {
-            if isDirectModify {
-                return
-            }
+            if isDirectModify { return }
             navigationItem.leftBarButtonItem = getBarButton("取消")
             resetItem.isEnabled = false
             navigationItem.rightBarButtonItem = resetItem

@@ -9,6 +9,7 @@ class Lock {
     static let shared = Lock()
     
     private init() {
+        // 在这里自定义你的UI
         var options = LockOptions()
         options.passwordKeySuffix = "test"
         options.usingKeychain = true
@@ -29,10 +30,12 @@ class Lock {
     }
 
     var hasPassword: Bool {
-        return LockManager.hasPassword("test")
+        // key建议设置
+        return LockManager.hasPassword(for: "test")
     }
 
     func removePassword() {
-        LockManager.removePassword("test")
+        // key建议设置
+        LockManager.removePassword(for: "test")
     }
 }
