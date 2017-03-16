@@ -11,7 +11,9 @@ pod 'GesturePassword'
 
 
 
-###1.设置密码
+### 1.设置密码
+
+
 ![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/setting.gif)
 
 >
@@ -22,8 +24,10 @@ AppLock.set(controller: self, success: { (controller) in
                 })
 ```
 
-###2.验证密码
+### 2.验证密码
+
 ![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/Verify.gif)
+
 
 >
 
@@ -37,8 +41,10 @@ AppLock.verify(controller: self, success: { (controller) in
                 })
 ```
 
-###3.修改密码
+### 3.修改密码
+
 ![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/Modify.gif)
+
 
 >
 
