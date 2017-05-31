@@ -25,26 +25,26 @@ class LockView: UIView {
         super.init(frame: frame)
         self.options = options
         backgroundColor = options.backgroundColor
-        for _ in 0..<9 {
+        for _ in 0 ..< 9 {
             let itemView = LockItemView(options: options)
             addSubview(itemView)
         }
     }
 
     override func draw(_ rect: CGRect) {
-        
+
         if itemViews.isEmpty { return }
-        
+
         guard let context = UIGraphicsGetCurrentContext() else { return }
-       
+
         context.addRect(rect)
-        
+
         itemViews.forEach { context.addEllipse(in: $0.frame) }
 
-        //剪裁
+        // 剪裁
         context.clip()
 
-        //新建路径：管理线条
+        // 新建路径：管理线条
         let path = CGMutablePath()
 
         options.lockLineColor.set()
@@ -78,21 +78,21 @@ class LockView: UIView {
         }
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         lockHandle(touches)
         handleBack()
     }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
         lockHandle(touches)
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_: Set<UITouch>, with _: UIEvent?) {
         gestureEnd()
     }
 
     // 电话等打断触摸过程时，会调用这个方法。
-    override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
+    override func touchesCancelled(_: Set<UITouch>?, with _: UIEvent?) {
         gestureEnd()
     }
 
@@ -140,13 +140,13 @@ class LockView: UIView {
                 }
             }
         } else if type == .verify {
-//            if let verifyPasswordHandle = verifyPasswordHandle {
-//                verifyPasswordHandle()
-//            }
+            //            if let verifyPasswordHandle = verifyPasswordHandle {
+            //                verifyPasswordHandle()
+            //            }
         } else if type == .modify {
-//            if let modifyPasswordHandle = modifyPasswordHandle {
-//                modifyPasswordHandle()
-//            }
+            //            if let modifyPasswordHandle = modifyPasswordHandle {
+            //                modifyPasswordHandle()
+            //            }
         }
     }
 
@@ -249,7 +249,7 @@ class LockView: UIView {
         passwordContainer = ""
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

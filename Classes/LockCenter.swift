@@ -6,12 +6,12 @@ public let LockManager = LockCenter.shared
 
 open class LockCenter {
     open var options = LockOptions()
-    
+
     var storage: Storagable = LockUserDefaults()
 
     open static let shared = LockCenter()
     // 私有化构造方法，阻止其他对象使用这个类的默认的'()'构造方法
-    fileprivate init () {}
+    fileprivate init() {}
 
     open func hasPassword(for passwordKeySuffix: String? = nil) -> Bool {
         return storage.str(forKey: PASSWORD_KEY + (passwordKeySuffix ?? options.passwordKeySuffix)) != nil
@@ -26,7 +26,7 @@ open class LockCenter {
         lockVC.success = success
     }
 
-    open func showVerifyLockController(in controller: UIViewController,  success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) {
+    open func showVerifyLockController(in controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) {
         let lockVC = self.lockVC(controller, title: options.verifyPassword, type: .verify, success: success)
         lockVC.success = success
         lockVC.forget = forget

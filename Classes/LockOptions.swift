@@ -12,7 +12,7 @@ public struct LockOptions {
             LockManager.options.scale = newValue
         }
     }
- 
+
     /// 选中圆大小的线宽
     public var arcLineWidth: CGFloat = 1 {
         willSet {
@@ -26,15 +26,13 @@ public struct LockOptions {
             LockManager.options.passwordKeySuffix = newValue
         }
     }
-    
-    
+
     // MARK: - 存放格式
     public var usingKeychain: Bool = false {
         willSet {
             LockManager.storage = newValue ? LockKeychain() : LockUserDefaults()
         }
     }
-
 
     // MARK: - 设置密码
 
@@ -115,7 +113,6 @@ public struct LockOptions {
         }
     }
 
-
     /// 验证密码：验证成功
     public var passwordCorrect = "密码正确" {
         willSet {
@@ -123,8 +120,7 @@ public struct LockOptions {
         }
     }
 
-
-    //MARK: - 修改密码
+    // MARK: - 修改密码
 
     public var modifyPassword = "修改密码" {
         willSet {
@@ -139,8 +135,7 @@ public struct LockOptions {
         }
     }
 
-
-    //MARK: - 颜色
+    // MARK: - 颜色
 
     /// 背景色
     public var backgroundColor = rgba(255, g: 255, b: 255, a: 1) {
@@ -190,16 +185,16 @@ public struct LockOptions {
             LockManager.options.normalTitleColor = newValue
         }
     }
-    
+
     // MARK: - LockDelegate
-    
+
     /// 导航栏titleColor Default black
     public var barTittleColor: UIColor = UIColor.black {
         willSet {
             LockManager.options.barTittleColor = newValue
         }
     }
-    
+
     /// 导航栏底部黑线是否隐藏 Default false
     public var hideBarBottomLine: Bool = false {
         willSet {
@@ -208,23 +203,23 @@ public struct LockOptions {
             }
         }
     }
-    
+
     /// barButton文字颜色 Default red
     public var barTintColor: UIColor = UIColor.red {
         willSet {
             LockManager.options.barTintColor = newValue
         }
     }
-    
+
     /// barButton文字大小 Default 18
     public var barTittleFont: UIFont = UIFont.systemFont(ofSize: 18) {
         willSet {
             LockManager.options.barTittleFont = newValue
         }
     }
-    
+
     /// 导航栏背景颜色 Default nil
-    public var barBackgroundColor: UIColor? = nil {
+    public var barBackgroundColor: UIColor? {
         willSet {
             LockManager.options.barBackgroundColor = newValue
         }

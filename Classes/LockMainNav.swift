@@ -18,8 +18,8 @@ class LockMainNav: UINavigationController {
         }
         navigationBar.tintColor = LockManager.options.barTintColor
     }
-    
-    override var preferredStatusBarStyle : UIStatusBarStyle {
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return LockManager.options.statusBarStyle
     }
 

@@ -52,7 +52,7 @@ open class LockController: UIViewController {
     }
 
     fileprivate lazy var label: LockLabel = {
-        return LockLabel(frame: CGRect(x: 0, y: TOP_MARGIN, width: self.view.frame.width, height: LABEL_HEIGHT))
+        LockLabel(frame: CGRect(x: 0, y: TOP_MARGIN, width: self.view.frame.width, height: LABEL_HEIGHT))
     }()
 
     fileprivate lazy var resetItem: UIBarButtonItem = {
@@ -75,7 +75,7 @@ open class LockController: UIViewController {
             view.addSubview(infoView)
         }
         lockView = LockView(frame: CGRect(x: 0, y: label.frame.minY + 15, width: view.frame.width, height: view.frame.width), options: options)
-        //添加顺序不要反 因为lockView的背景颜色不为透明
+        // 添加顺序不要反 因为lockView的背景颜色不为透明
         view.addSubview(lockView)
         view.addSubview(label)
     }
@@ -85,7 +85,7 @@ open class LockController: UIViewController {
             self.label.showWarn("请连接至少\(self.options.passwordMinCount)个点")
         }
 
-        lockView.passwordTwiceDifferentHandle = { [weak self] (pwd1, pwdNow) in
+        lockView.passwordTwiceDifferentHandle = { [weak self] _, _ in
             self?.label.showWarn(self?.options.differentPassword)
             self?.resetItem.isEnabled = true
         }
@@ -96,7 +96,7 @@ open class LockController: UIViewController {
             self?.label.showNormal(self?.options.confirmPassword)
         }
 
-        lockView.setSuccessHandle = { [weak self] (password) in
+        lockView.setSuccessHandle = { [weak self] password in
             self?.label.showNormal(self?.options.setSuccess)
             LockManager.storage.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
             self?.view.isUserInteractionEnabled = false
@@ -106,8 +106,7 @@ open class LockController: UIViewController {
             self?.dismiss()
         }
 
-
-        lockView.verifyHandle = { [unowned self] (flag) in
+        lockView.verifyHandle = { [unowned self] flag in
             if flag {
                 self.label.showNormal(self.options.passwordCorrect)
                 if let success = self.success {

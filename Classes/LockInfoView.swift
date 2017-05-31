@@ -9,30 +9,30 @@ class LockInfoView: UIView {
     init(frame: CGRect, options: LockOptions) {
         super.init(frame: frame)
         backgroundColor = options.backgroundColor
-        
-        for _ in 0..<9 {
+
+        for _ in 0 ..< 9 {
             let itemView = LockItemView(options: options)
             itemViews.append(itemView)
             addSubview(itemView)
         }
     }
-    
+
     func showSelectedItems(_ passwordStr: String) {
         for char in passwordStr.characters {
             itemViews[Int("\(char)")!].selected = true
         }
     }
-    
+
     func resetItems() {
         itemViews.forEach {
             $0.selected = false
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         let marginV: CGFloat = 3

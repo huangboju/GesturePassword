@@ -8,7 +8,7 @@ let INFO_VIEW_WIDTH: CGFloat = 30
 
 let BUTTON_SPACE: CGFloat = 50
 
-let TOP_MARGIN: CGFloat =  (UIScreen.main.bounds.height - UIScreen.main.bounds.width) / 2 + 30
+let TOP_MARGIN: CGFloat = (UIScreen.main.bounds.height - UIScreen.main.bounds.width) / 2 + 30
 
 let ITEM_MARGIN: CGFloat = 36
 

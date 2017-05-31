@@ -5,9 +5,9 @@
 let AppLock = Lock.shared
 
 class Lock {
-    
+
     static let shared = Lock()
-    
+
     private init() {
         // 在这里自定义你的UI
         var options = LockOptions()
@@ -21,7 +21,7 @@ class Lock {
         if hasPassword {
             print("还没有密码")
         } else {
-           LockManager.showSettingLockController(in: controller, success: success)
+            LockManager.showSettingLockController(in: controller, success: success)
         }
     }
 
@@ -31,7 +31,6 @@ class Lock {
         } else {
             LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
         }
-        
     }
 
     func modify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?) {
