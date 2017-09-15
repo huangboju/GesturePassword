@@ -158,13 +158,9 @@ class LockView: UIView {
             }
         } else {
             if firstPassword != passwordContainer {
-                if let passwordTwiceDifferentHandle = passwordTwiceDifferentHandle {
-                    passwordTwiceDifferentHandle(firstPassword, passwordContainer)
-                }
+                passwordTwiceDifferentHandle?(firstPassword, passwordContainer)
             } else {
-                if let setSuccessHandle = setSuccessHandle {
-                    setSuccessHandle(firstPassword)
-                }
+                setSuccessHandle?(firstPassword)
             }
         }
     }

@@ -138,49 +138,49 @@ public struct LockOptions {
     // MARK: - 颜色
 
     /// 背景色
-    public var backgroundColor = rgba(255, g: 255, b: 255, a: 1) {
+    public var backgroundColor = UIColor(r: 255, g: 255, b: 255) {
         willSet {
             LockManager.options.backgroundColor = newValue
         }
     }
 
     /// 外环线条颜色：默认
-    public var circleLineNormalColor = rgba(173, g: 216, b: 230, a: 1) {
+    public var circleLineNormalColor = UIColor(r: 173, g: 216, b: 230) {
         willSet {
             LockManager.options.circleLineNormalColor = newValue
         }
     }
 
     /// 外环线条颜色：选中
-    public var circleLineSelectedColor = rgba(0, g: 191, b: 255, a: 1) {
+    public var circleLineSelectedColor = UIColor(r: 0, g: 191, b: 255) {
         willSet {
             LockManager.options.circleLineSelectedColor = newValue
         }
     }
 
     /// 实心圆
-    public var circleLineSelectedCircleColor = rgba(0, g: 191, b: 255, a: 1) {
+    public var circleLineSelectedCircleColor = UIColor(r: 0, g: 191, b: 255) {
         willSet {
             LockManager.options.circleLineSelectedCircleColor = newValue
         }
     }
 
     /// 连线颜色
-    public var lockLineColor = rgba(0, g: 191, b: 255, a: 1) {
+    public var lockLineColor = UIColor(r: 0, g: 191, b: 255) {
         willSet {
             LockManager.options.lockLineColor = newValue
         }
     }
 
     /// 警示文字颜色
-    public var warningTitleColor = rgba(254, g: 82, b: 92, a: 1) {
+    public var warningTitleColor = UIColor(r: 254, g: 82, b: 92) {
         willSet {
             LockManager.options.warningTitleColor = newValue
         }
     }
 
     /// 普通文字颜色
-    public var normalTitleColor = rgba(192, g: 192, b: 192, a: 1) {
+    public var normalTitleColor = UIColor(r: 192, g: 192, b: 192) {
         willSet {
             LockManager.options.normalTitleColor = newValue
         }

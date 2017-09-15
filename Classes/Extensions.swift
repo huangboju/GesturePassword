@@ -108,12 +108,9 @@ extension UINavigationBar {
     }
 
     func setMyBackgroundColorAlpha(_ alpha: CGFloat) {
-        if let coverView = coverView {
-            coverView.backgroundColor = coverView.backgroundColor?.withAlphaComponent(alpha)
-        }
+        coverView?.backgroundColor = coverView.backgroundColor?.withAlphaComponent(alpha)
     }
 }
-
 
 extension CALayer {
     func shake() {
@@ -123,5 +120,11 @@ extension CALayer {
         keyFrameAnimation.duration = 0.1
         keyFrameAnimation.repeatCount = 2
         add(keyFrameAnimation, forKey: "shake")
+    }
+}
+
+extension UIColor {
+    convenience init(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1) {
+        self.init(red: r / 255, green: g / 255, blue: b / 255, alpha: a)
     }
 }

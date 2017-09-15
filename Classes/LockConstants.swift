@@ -22,11 +22,6 @@ typealias boolHandle = (Bool) -> Void
 
 public typealias controllerHandle = (LockController) -> Void
 
-func rgba(_ r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
-    return UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: a)
-}
-
 func delay(_ interval: TimeInterval, handle: @escaping () -> Void) {
-    DispatchQueue.main.asyncAfter(
-        deadline: DispatchTime.now() + Double(Int64(interval * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: handle)
+    DispatchQueue.main.asyncAfter(deadline: .now() + interval, execute: handle)
 }
