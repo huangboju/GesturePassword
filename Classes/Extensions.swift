@@ -34,6 +34,14 @@ extension UINavigationController {
     }
 }
 
+//
+//  UINavigationBar+Extension.swift
+//  Libertine
+//
+//  Created by 黄伯驹 on 2017/9/15.
+//  Copyright © 2017年 伯驹 黄. All rights reserved.
+//
+
 extension UINavigationBar {
 
     private struct AssociatedKeys {
@@ -51,17 +59,17 @@ extension UINavigationBar {
     }
 
     fileprivate func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
-        if view.isKind(of: UIImageView.self) && view.bounds.height <= 1.0 {
-            return (view as? UIImageView)
+        if let imageView = view as? UIImageView && view.bounds.height <= 1.0 {
+            return imageView
         }
-
-        let subviews = (view.subviews as [UIView])
-        for subview: UIView in subviews {
-            if let imageView = hairlineImageViewInNavigationBar(subview) {
-                return imageView
+        
+        for subview in view.subviews {
+            guard let imageView = hairlineImageViewInNavigationBar(subview) else {
+                continue
             }
+            return imageView
         }
-
+        
         return nil
     }
 
@@ -72,7 +80,7 @@ extension UINavigationBar {
             // 这句的意思大概可以理解为利用key在self中取出对应的对象,如果没有key对应的对象就返回niu
             return objc_getAssociatedObject(self, &AssociatedKeys.NAV_BAR_KEY) as? UIView
         }
-
+        
         set {
             // 与上面对应是重新设置这个对象，最后一个参数如果学过oc的话很好理解，就是代表这个newValue的属性
             // OBJC_ASSOCIATION_RETAIN_NONATOMIC意味着:strong,nonatomic
@@ -87,12 +95,12 @@ extension UINavigationBar {
         } else {
             setBackgroundImage(UIImage(), for: .default)
             shadowImage = UIImage()
-
-            let view = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.main.bounds.size.width, height: bounds.height + 20))
+            
+            let view = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.main.bounds.width, height: bounds.height + 20))
             view.isUserInteractionEnabled = false
             view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             insertSubview(view, at: 0)
-
+            
             view.backgroundColor = color
             coverView = view
         }
@@ -105,6 +113,7 @@ extension UINavigationBar {
         }
     }
 }
+
 
 extension CALayer {
     func shake() {
