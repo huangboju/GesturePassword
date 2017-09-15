@@ -59,7 +59,7 @@ extension UINavigationBar {
     }
 
     fileprivate func hairlineImageViewInNavigationBar(_ view: UIView) -> UIImageView? {
-        if let imageView = view as? UIImageView && view.bounds.height <= 1.0 {
+        if let imageView = view as? UIImageView, view.bounds.height <= 1.0 {
             return imageView
         }
         
@@ -108,7 +108,7 @@ extension UINavigationBar {
     }
 
     func setMyBackgroundColorAlpha(_ alpha: CGFloat) {
-        coverView?.backgroundColor = coverView.backgroundColor?.withAlphaComponent(alpha)
+        coverView?.backgroundColor = coverView?.backgroundColor?.withAlphaComponent(alpha)
     }
 }
 

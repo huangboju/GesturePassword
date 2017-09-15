@@ -17,7 +17,7 @@ class LockItemView: UIView {
     var direct: LockItemViewDirect? {
         willSet {
             if let newValue = newValue {
-                angle = CGFloat(M_PI_4) * CGFloat(newValue.rawValue - 1)
+                angle = CGFloat.pi / 4 * CGFloat(newValue.rawValue - 1)
                 setNeedsDisplay()
             }
         }
@@ -34,7 +34,7 @@ class LockItemView: UIView {
             storeCalRect = newValue
         }
         get {
-            if storeCalRect.equalTo(.zero) {
+            if storeCalRect == .zero {
                 let sizeWH = bounds.width - options.arcLineWidth
                 let originXY = options.arcLineWidth * 0.5
                 self.storeCalRect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)

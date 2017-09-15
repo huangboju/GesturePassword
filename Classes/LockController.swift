@@ -82,22 +82,22 @@ open class LockController: UIViewController {
 
     func event() {
         lockView.passwordTooShortHandle = { [unowned self] in
-            self.label.showWarn("请连接至少\(self.options.passwordMinCount)个点")
+            self.label.showWarn(with: "请连接至少\(self.options.passwordMinCount)个点")
         }
 
         lockView.passwordTwiceDifferentHandle = { [weak self] _, _ in
-            self?.label.showWarn(self?.options.differentPassword)
+            self?.label.showWarn(with: self?.options.differentPassword)
             self?.resetItem.isEnabled = true
         }
 
         lockView.passwordFirstRightHandle = { [weak self] in
             // 在这里绘制infoView路径
             self?.infoView.showSelectedItems($0)
-            self?.label.showNormal(self?.options.confirmPassword)
+            self?.label.showNormal(with: self?.options.confirmPassword)
         }
 
         lockView.setSuccessHandle = { [weak self] password in
-            self?.label.showNormal(self?.options.setSuccess)
+            self?.label.showNormal(with: self?.options.setSuccess)
             LockManager.storage.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
             self?.view.isUserInteractionEnabled = false
             if let success = self?.success {
@@ -108,7 +108,7 @@ open class LockController: UIViewController {
 
         lockView.verifyHandle = { [unowned self] flag in
             if flag {
-                self.label.showNormal(self.options.passwordCorrect)
+                self.label.showNormal(with: self.options.passwordCorrect)
                 if let success = self.success {
                     success(self)
                 }
@@ -116,10 +116,10 @@ open class LockController: UIViewController {
                 self.dismiss()
             } else {
                 if self.errorTimes < self.options.errorTimes {
-                    self.label.showWarn("您还可以尝试\(self.options.errorTimes - self.errorTimes)次")
+                    self.label.showWarn(with: "您还可以尝试\(self.options.errorTimes - self.errorTimes)次")
                     self.errorTimes += 1
                 } else {
-                    self.label.showWarn("错误次数已达上限")
+                    self.label.showWarn(with: "错误次数已达上限")
                     if let overrunTimes = self.overrunTimes {
                         overrunTimes(self)
                     }
@@ -129,20 +129,20 @@ open class LockController: UIViewController {
 
         lockView.modifyHandle = { [unowned self] flag in
             if flag {
-                self.label.showNormal(self.options.passwordCorrect)
+                self.label.showNormal(with: self.options.passwordCorrect)
                 let lockVC = LockController()
                 lockVC.isDirectModify = true
                 lockVC.type = .set
                 lockVC.success = self.success
                 self.navigationController?.pushViewController(lockVC, animated: true)
             } else {
-                self.label.showWarn(self.options.passwordWrong)
+                self.label.showWarn(with: self.options.passwordWrong)
             }
         }
     }
 
     func dataTransfer() {
-        label.showNormal(message)
+        label.showNormal(with: message)
         lockView.type = type
     }
 
@@ -150,11 +150,10 @@ open class LockController: UIViewController {
         view.backgroundColor = options.backgroundColor
         navigationItem.rightBarButtonItem = nil
         modifyCurrentTitle = options.enterOldPassword
+        if isDirectModify { return }
         if type == .modify {
-            if isDirectModify { return }
             navigationItem.leftBarButtonItem = getBarButton("关闭")
         } else if type == .set {
-            if isDirectModify { return }
             navigationItem.leftBarButtonItem = getBarButton("取消")
             resetItem.isEnabled = false
             navigationItem.rightBarButtonItem = resetItem
@@ -181,7 +180,7 @@ open class LockController: UIViewController {
     func redraw(_ sender: UIBarButtonItem) {
         sender.isEnabled = false
         infoView.resetItems()
-        label.showNormal(options.secondPassword)
+        label.showNormal(with: options.secondPassword)
         lockView.resetPassword()
     }
 

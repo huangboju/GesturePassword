@@ -10,12 +10,12 @@ class LockLabel: UILabel {
         backgroundColor = LockManager.options.backgroundColor
     }
 
-    func showNormal(_ message: String?) {
+    func showNormal(with message: String?) {
         text = message
         textColor = LockManager.options.normalTitleColor
     }
 
-    func showWarn(_ message: String?) {
+    func showWarn(with message: String?) {
         text = message
         textColor = LockManager.options.warningTitleColor
         layer.shake()
