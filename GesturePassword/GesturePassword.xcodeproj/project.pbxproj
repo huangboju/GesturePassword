@@ -615,7 +615,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E9C1CC8ACB6C58C1FE0473F1 /* Pods-GesturePassword.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 46A8679957;
 				INFOPLIST_FILE = GesturePassword/Info.plist;
@@ -632,7 +632,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2CB02F168E83160363AAA2B8 /* Pods-GesturePassword.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 46A8679957;
 				INFOPLIST_FILE = GesturePassword/Info.plist;
