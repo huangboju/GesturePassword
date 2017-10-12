@@ -4,8 +4,6 @@ platform:ios,'8.0'
 use_frameworks!
 
 target "GesturePassword" do
-    pod 'Eureka'
+    # pod 'Eureka'
 end
 
-target "GesturePasswordTests" do
-end

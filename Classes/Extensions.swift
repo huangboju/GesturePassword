@@ -104,7 +104,7 @@ extension UINavigationBar {
             view.backgroundColor = color
             coverView = view
         }
-        titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white.withAlphaComponent(alpha)]
+        titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(alpha)]
     }
 
     func setMyBackgroundColorAlpha(_ alpha: CGFloat) {

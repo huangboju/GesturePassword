@@ -27,9 +27,9 @@ open class LockController: UIViewController {
             if type != .set {
                 let forgetButton = UIButton()
                 forgetButton.backgroundColor = options.backgroundColor
-                forgetButton.setTitleColor(options.circleLineNormalColor, for: UIControlState())
+                forgetButton.setTitleColor(options.circleLineNormalColor, for: .normal)
                 forgetButton.setTitleColor(options.circleLineSelectedColor, for: .highlighted)
-                forgetButton.setTitle("忘记密码", for: UIControlState())
+                forgetButton.setTitle("忘记密码", for: .normal)
                 forgetButton.sizeToFit()
                 forgetButton.addTarget(self, action: #selector(forgetPwdAction), for: .touchUpInside)
                 forgetButton.center.x = view.center.x
@@ -167,17 +167,15 @@ open class LockController: UIViewController {
         }
     }
 
-    func forgetPwdAction() {
-        if let forget = forget {
-            forget(self)
-        }
+    @objc func forgetPwdAction() {
+        forget?(self)
     }
 
-    func dismissAction() {
+    @objc func dismissAction() {
         dismiss()
     }
 
-    func redraw(_ sender: UIBarButtonItem) {
+    @objc func redraw(_ sender: UIBarButtonItem) {
         sender.isEnabled = false
         infoView.resetItems()
         label.showNormal(with: options.secondPassword)
@@ -186,11 +184,6 @@ open class LockController: UIViewController {
 
     func getBarButton(_ title: String?) -> UIBarButtonItem {
         return UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(dismissAction))
-    }
-
-    open override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 

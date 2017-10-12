@@ -19,7 +19,7 @@ class Lock {
 
     func set(controller: UIViewController, success: controllerHandle? = nil) {
         if hasPassword {
-            print("还没有密码")
+            print("密码已设置")
         } else {
             LockManager.showSettingLockController(in: controller, success: success)
         }

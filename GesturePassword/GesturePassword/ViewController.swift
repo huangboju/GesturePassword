@@ -2,49 +2,77 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-import Eureka
-import CoreLocation
+class ViewController: UIViewController {
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: self.view.frame, style: .grouped)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return tableView
+    }()
+    
+    let data: [String] = [
+        "设置密码",
+        "验证密码",
+        "修改密码"
+    ]
 
-class ViewController: FormViewController {
+    let operationDict = [
+        "设置密码": "setPassword",
+        "验证密码": "verifyPassword",
+        "修改密码": "modifyPassword"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "手势密码"
-
-        form +++ Section("手势密码")
-            <<< ButtonRow("设置密码") {
-                $0.title = $0.tag
-                $0.onCellSelection({ _, _ in
-                    AppLock.set(controller: self, success: { controller in
-                        print(controller.title as Any)
-                    })
-                })
-            }
-            <<< ButtonRow("验证密码") {
-                $0.title = $0.tag
-                $0.onCellSelection({ _, _ in
-                    AppLock.verify(controller: self, success: { controller in
-                        print("success", controller.title as Any)
-                    }, forget: { controller in
-                        print("forget", controller.title as Any)
-                    }, overrunTimes: { controller in
-                        print("overrunTimes", controller.title as Any)
-                    })
-                })
-            }
-            <<< ButtonRow("修改密码") {
-                $0.title = $0.tag
-                $0.onCellSelection({ _, _ in
-                    AppLock.modify(controller: self, success: { _ in
-                        print("success")
-                    }, forget: { _ in
-                        print("forget")
-                    })
-                })
-            }
+        view.addSubview(tableView)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    @objc func setPassword() {
+        AppLock.set(controller: self, success: { controller in
+            print(controller.title as Any)
+        })
+    }
+
+    @objc func verifyPassword() {
+        AppLock.verify(controller: self, success: { controller in
+            print("验证成功")
+        }, forget: { controller in
+            print("忘记密码")
+        }, overrunTimes: { controller in
+            print("次数超限")
+        })
+    }
+
+    @objc func modifyPassword() {
+        AppLock.modify(controller: self, success: { _ in
+            print("success")
+        }, forget: { _ in
+            print("forget")
+        })
+    }
+}
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = data[indexPath.row]
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        guard let operationName = operationDict[data[indexPath.row]] else {
+            return
+        }
+        perform(Selector(operationName))
     }
 }
