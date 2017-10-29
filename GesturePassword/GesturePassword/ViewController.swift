@@ -10,7 +10,7 @@ class ViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
-    
+
     let data: [String] = [
         "设置密码",
         "验证密码",
@@ -40,6 +40,10 @@ class ViewController: UIViewController {
             print("验证成功")
         }, forget: { controller in
             print("忘记密码")
+            self.navigationItem.prompt = "忘记密码"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                self.navigationItem.prompt = nil
+            })
         }, overrunTimes: { controller in
             print("次数超限")
         })
