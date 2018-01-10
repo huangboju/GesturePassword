@@ -219,14 +219,12 @@ class LockView: UIView {
 
     func itemView(with touchLocation: CGPoint) -> LockItemView? {
         var item: LockItemView?
-        for subView in subviews {
-            if let itemView = (subView as? LockItemView) {
-                if !itemView.frame.contains(touchLocation) {
-                    continue
-                }
-                item = itemView
-                break
+        for case let subView as LockItemView in subviews {
+            if !subView.frame.contains(touchLocation) {
+                continue
             }
+            item = subView
+            break
         }
         return item
     }

@@ -109,9 +109,7 @@ open class LockController: UIViewController {
         lockView.verifyHandle = { [unowned self] flag in
             if flag {
                 self.label.showNormal(with: self.options.passwordCorrect)
-                if let success = self.success {
-                    success(self)
-                }
+                self.success?(self)
                 self.view.isUserInteractionEnabled = false
                 self.dismiss()
             } else {
@@ -120,9 +118,7 @@ open class LockController: UIViewController {
                     self.errorTimes += 1
                 } else {
                     self.label.showWarn(with: "错误次数已达上限")
-                    if let overrunTimes = self.overrunTimes {
-                        overrunTimes(self)
-                    }
+                    self.overrunTimes?(self)
                 }
             }
         }

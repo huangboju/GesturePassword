@@ -18,7 +18,7 @@ class LockInfoView: UIView {
     }
 
     func showSelectedItems(_ passwordStr: String) {
-        for char in passwordStr.characters {
+        for char in passwordStr {
             itemViews[Int("\(char)")!].selected = true
         }
     }

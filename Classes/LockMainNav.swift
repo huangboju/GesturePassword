@@ -7,7 +7,9 @@ class LockMainNav: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: LockManager.options.barTittleColor, NSAttributedStringKey.font: LockManager.options.barTittleFont]
+        navigationBar.titleTextAttributes = [
+            .foregroundColor: LockManager.options.barTittleColor,
+            .font: LockManager.options.barTittleFont]
 
         if LockManager.options.hideBarBottomLine {
             navigationBar.hideBottomHairline()
