@@ -60,14 +60,24 @@ class LockItemView: UIView {
     convenience init(options: LockOptions) {
         self.init(frame: .zero)
         self.options = options
+        shapeLayer?.lineWidth = options.arcLineWidth
         backgroundColor = options.backgroundColor
     }
 
+    override class var layerClass: AnyClass {
+        return CAShapeLayer.self
+    }
+
+    private var shapeLayer: CAShapeLayer? {
+        return layer as? CAShapeLayer
+    }
+
+    var mainPath = UIBezierPath()
+
     override func draw(_ rect: CGRect) {
         if let context = UIGraphicsGetCurrentContext() {
-            // 上下文旋转
-            transForm(context, rect: rect)
             // 上下文属性设置
+            mainPath.removeAllPoints()
             propertySetting(context)
             // 外环：普通
             circleNormal(context, rect: rect)
@@ -81,24 +91,12 @@ class LockItemView: UIView {
         }
     }
 
-    func transForm(_ context: CGContext, rect: CGRect) {
-        let translateXY = rect.width * 0.5
-
-        // 平移
-        context.translateBy(x: translateXY, y: translateXY)
-
-        context.rotate(by: angle ?? 0)
-
-        // 再平移回来
-        context.translateBy(x: -translateXY, y: -translateXY)
-    }
-
     /*
      *  三角形：方向标识
      */
     func directFlag(_ context: CGContext, rect: CGRect) {
         // 新建路径：三角形
-        let trianglePathM = CGMutablePath()
+        let trianglePathM = UIBezierPath()
         let marginSelectedCirclev: CGFloat = 4
         let w: CGFloat = 8
         let h: CGFloat = 5
@@ -118,50 +116,37 @@ class LockItemView: UIView {
         trianglePathM.addLine(to: CGPoint(x: rightPointX, y: leftPointY))
 
         // 将路径添加到上下文中
-        context.addPath(trianglePathM)
-
-        // 绘制圆环
-        context.fillPath()
+        mainPath.append(trianglePathM)
+        shapeLayer?.path = mainPath.cgPath
     }
 
     func propertySetting(_ context: CGContext) {
         // 设置线宽
-        context.setLineWidth(options.arcLineWidth)
         if selected {
-            options.circleLineSelectedColor.set()
+            shapeLayer?.strokeColor = options.circleLineSelectedColor.cgColor
         } else {
-            options.circleLineNormalColor.set()
+            shapeLayer?.strokeColor = options.circleLineNormalColor.cgColor
         }
     }
 
     func circleNormal(_ context: CGContext, rect _: CGRect) {
         // 新建路径：外环
-        let loopPath = CGMutablePath()
+        let loopPath = UIBezierPath()
 
         // 添加一个圆环路径
         loopPath.addEllipse(in: calRect)
-
-        // 将路径添加到上下文中
-        context.addPath(loopPath)
-
-        // 绘制圆环
-        context.strokePath()
+        shapeLayer?.fillColor = UIColor.clear.cgColor
+        mainPath.append(loopPath)
+        shapeLayer?.path = mainPath.cgPath
     }
 
     func circleSelected(_ contenxt: CGContext, rect _: CGRect) {
-        // 新建路径：外环
-        let circlePath = CGMutablePath()
-
-        // 绘制一个圆形
+        let circlePath = UIBezierPath()
         circlePath.addEllipse(in: selectedRect)
-
         options.circleLineSelectedCircleColor.set()
-
-        // 将路径添加到上下文中
-        contenxt.addPath(circlePath)
-
-        // 绘制圆环
-        contenxt.fillPath()
+        circlePath.fill()
+        mainPath.append(circlePath)
+        shapeLayer?.path = mainPath.cgPath
     }
 
     func direct(_ ctx: CGContext, rect: CGRect) {
@@ -169,8 +154,7 @@ class LockItemView: UIView {
         if direct == nil {
             return
         }
-        let trianglePathM = CGMutablePath()
-
+        let trianglePathM = UIBezierPath()
         let marginSelectedCirclev: CGFloat = 4
         let w: CGFloat = 8
         let h: CGFloat = 5
@@ -190,13 +174,18 @@ class LockItemView: UIView {
         trianglePathM.addLine(to: CGPoint(x: rightPointX, y: leftPointY))
 
         // 将路径添加到上下文中
-        ctx.addPath(trianglePathM)
-
-        // 绘制圆环
-        ctx.fillPath()
+        mainPath.append(trianglePathM)
+        trianglePathM.fill()
+        shapeLayer?.path = mainPath.cgPath
     }
 
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension UIBezierPath {
+    func addEllipse(in rect: CGRect) {
+        addArc(withCenter: CGPoint(x: rect.minX + rect.width / 2, y: rect.minY + rect.height / 2), radius: rect.width / 2, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
     }
 }
