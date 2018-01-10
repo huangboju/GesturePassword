@@ -130,15 +130,7 @@ class LockView: UIView {
 
     func handleBack() {
         if type == .set {
-            if firstPassword.isEmpty {
-                if let setPasswordHandle = setPasswordHandle {
-                    setPasswordHandle()
-                }
-            } else {
-                if let confirmPasswordHandle = confirmPasswordHandle {
-                    confirmPasswordHandle()
-                }
-            }
+            firstPassword.isEmpty ? setPasswordHandle?() : confirmPasswordHandle?()
         } else if type == .verify {
             //            if let verifyPasswordHandle = verifyPasswordHandle {
             //                verifyPasswordHandle()
@@ -153,9 +145,7 @@ class LockView: UIView {
     fileprivate func setPassword() {
         if firstPassword.isEmpty {
             firstPassword = passwordContainer
-            if let passwordFirstRightHandle = passwordFirstRightHandle {
-                passwordFirstRightHandle(firstPassword)
-            }
+            passwordFirstRightHandle?(firstPassword)
         } else {
             if firstPassword != passwordContainer {
                 passwordTwiceDifferentHandle?(firstPassword, passwordContainer)
@@ -167,16 +157,17 @@ class LockView: UIView {
 
     func lockHandle(_ touches: Set<UITouch>) {
         let location = touches.first!.location(in: self)
-        if let itemView = itemView(with: location) {
-            if itemViews.contains(itemView) {
-                return
-            }
-            itemViews.append(itemView)
-            passwordContainer += itemView.tag.description
-            calDirect()
-            itemView.selected = true
-            setNeedsDisplay()
+        guard let itemView = itemView(with: location) else {
+            return
         }
+        if itemViews.contains(itemView) {
+            return
+        }
+        itemViews.append(itemView)
+        passwordContainer += itemView.tag.description
+        calDirect()
+        itemView.selected = true
+        setNeedsDisplay()
     }
 
     func calDirect() {
