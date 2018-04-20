@@ -71,12 +71,10 @@ final class LockItemView: UIView {
         propertySetting()
         // 外环：普通
         renderRing(with: rect)
-        // 选中情况下，绘制背景色
-        guard selected else {
-            return
-        }
         // 实心圆
+        guard selected else { return }
         renderSolidCircle()
+        if case .none = direction { return }
         // 三角形：方向标识
         renderDirect(with: rect)
     }
