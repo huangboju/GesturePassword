@@ -2,9 +2,10 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-class LockInfoView: UIView {
+// 指示图
+final class LockInfoView: UIView {
 
-    fileprivate var itemViews = [LockItemView]()
+    fileprivate var itemViews: [LockItemView] = []
 
     init(frame: CGRect, options: LockOptions) {
         super.init(frame: frame)
@@ -24,9 +25,7 @@ class LockInfoView: UIView {
     }
 
     func resetItems() {
-        itemViews.forEach {
-            $0.selected = false
-        }
+        itemViews.forEach { $0.reset() }
     }
 
     required init?(coder _: NSCoder) {
