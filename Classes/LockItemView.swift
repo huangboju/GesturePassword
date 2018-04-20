@@ -71,7 +71,7 @@ class LockItemView: UIView {
         return layer as? CAShapeLayer
     }
 
-    var mainPath = UIBezierPath()
+    private var mainPath = UIBezierPath()
 
     override func draw(_ rect: CGRect) {
         // 上下文属性设置
@@ -92,7 +92,7 @@ class LockItemView: UIView {
     /*
      *  三角形：方向标识
      */
-    func directFlag(_ context: CGContext, rect: CGRect) {
+    func directFlag(rect: CGRect) {
         // 新建路径：三角形
         let trianglePathM = UIBezierPath()
         let marginSelectedCirclev: CGFloat = 4
@@ -119,12 +119,7 @@ class LockItemView: UIView {
     }
 
     func propertySetting() {
-        // 设置线宽
-        if selected {
-            shapeLayer?.strokeColor = options.circleLineSelectedColor.cgColor
-        } else {
-            shapeLayer?.strokeColor = options.circleLineNormalColor.cgColor
-        }
+        shapeLayer?.strokeColor = (selected ? options.circleLineSelectedColor : options.circleLineNormalColor).cgColor
     }
 
     func renderRing(with rect: CGRect) {
@@ -168,7 +163,6 @@ class LockItemView: UIView {
         let rightPointX = topX + w * 0.5
         trianglePathM.addLine(to: CGPoint(x: rightPointX, y: leftPointY))
 
-        // 将路径添加到上下文中
         mainPath.append(trianglePathM)
         trianglePathM.fill()
         shapeLayer?.path = mainPath.cgPath
