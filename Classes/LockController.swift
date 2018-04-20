@@ -98,7 +98,7 @@ open class LockController: UIViewController {
 
         lockView.setSuccessHandle = { [weak self] password in
             self?.label.showNormal(with: self?.options.setSuccess)
-            LockManager.storage.setStr(password, key: PASSWORD_KEY + self!.options.passwordKeySuffix)
+            LockManager.storage.set(password, forKey: self!.options.passwordKeySuffix)
             self?.view.isUserInteractionEnabled = false
             if let success = self?.success {
                 success(self!)
