@@ -21,35 +21,20 @@ enum LockItemViewDirection: Int {
     }
 }
 
-class LockItemView: UIView {
-    var direction: LockItemViewDirection = .none {
+final class LockItemView: UIView {
+    public var direction: LockItemViewDirection = .none {
         willSet {
             layer.setAffineTransform(CGAffineTransform(rotationAngle: newValue.angle))
             setNeedsDisplay()
         }
     }
 
-    var selected: Bool = false {
+    public var selected: Bool = false {
         willSet {
             setNeedsDisplay()
         }
     }
 
-    fileprivate var calRect: CGRect {
-        set {
-            storeCalRect = newValue
-        }
-        get {
-            if storeCalRect == .zero {
-                let sizeWH = bounds.width - options.arcLineWidth
-                let originXY = options.arcLineWidth * 0.5
-                self.storeCalRect = CGRect(x: originXY, y: originXY, width: sizeWH, height: sizeWH)
-            }
-            return storeCalRect
-        }
-    }
-
-    fileprivate var storeCalRect = CGRect()
     fileprivate var selectedRect: CGRect {
         let selectRectWH = bounds.width * options.scale
         let selectRectXY = bounds.width * (1 - options.scale) * 0.5
@@ -57,10 +42,6 @@ class LockItemView: UIView {
     }
 
     fileprivate var options: LockOptions!
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
 
     convenience init(options: LockOptions) {
         self.init(frame: .zero)
@@ -95,11 +76,11 @@ class LockItemView: UIView {
         renderDirect(with: rect)
     }
 
-    func propertySetting() {
+    private func propertySetting() {
         shapeLayer?.strokeColor = (selected ? options.circleLineSelectedColor : options.circleLineNormalColor).cgColor
     }
 
-    func renderRing(with rect: CGRect) {
+    private func renderRing(with rect: CGRect) {
         // 新建路径：外环
         let loopPath = UIBezierPath()
 
@@ -110,7 +91,7 @@ class LockItemView: UIView {
         shapeLayer?.path = mainPath.cgPath
     }
 
-    func renderSolidCircle() {
+    private func renderSolidCircle() {
         let circlePath = UIBezierPath()
         circlePath.addEllipse(in: selectedRect)
         options.circleLineSelectedCircleColor.set()
@@ -119,7 +100,7 @@ class LockItemView: UIView {
         shapeLayer?.path = mainPath.cgPath
     }
 
-    func renderDirect(with rect: CGRect) {
+    private func renderDirect(with rect: CGRect) {
         // 新建路径：三角形
         let trianglePathM = UIBezierPath()
         let marginSelectedCirclev: CGFloat = 4
@@ -143,10 +124,6 @@ class LockItemView: UIView {
         mainPath.append(trianglePathM)
         trianglePathM.fill()
         shapeLayer?.path = mainPath.cgPath
-    }
-
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
