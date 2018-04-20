@@ -34,6 +34,11 @@ final class LockItemView: UIView {
             setNeedsDisplay()
         }
     }
+    
+    public func reset() {
+        direction = .none
+        selected = false
+    }
 
     fileprivate var selectedRect: CGRect {
         let selectRectWH = bounds.width * options.scale
@@ -49,16 +54,16 @@ final class LockItemView: UIView {
         shapeLayer?.lineWidth = options.arcLineWidth
         backgroundColor = options.backgroundColor
     }
+    
+    private var shapeLayer: CAShapeLayer? {
+        return layer as? CAShapeLayer
+    }
+    
+    private var mainPath = UIBezierPath()
 
     override class var layerClass: AnyClass {
         return CAShapeLayer.self
     }
-
-    private var shapeLayer: CAShapeLayer? {
-        return layer as? CAShapeLayer
-    }
-
-    private var mainPath = UIBezierPath()
 
     override func draw(_ rect: CGRect) {
         // 上下文属性设置
@@ -80,17 +85,16 @@ final class LockItemView: UIView {
         shapeLayer?.strokeColor = (selected ? options.circleLineSelectedColor : options.circleLineNormalColor).cgColor
     }
 
+    // 绘制外环
     private func renderRing(with rect: CGRect) {
-        // 新建路径：外环
         let loopPath = UIBezierPath()
-
-        // 添加一个圆环路径
         loopPath.addEllipse(in: rect)
         shapeLayer?.fillColor = UIColor.clear.cgColor
         mainPath.append(loopPath)
         shapeLayer?.path = mainPath.cgPath
     }
 
+    // 绘制实心圆
     private func renderSolidCircle() {
         let circlePath = UIBezierPath()
         circlePath.addEllipse(in: selectedRect)
@@ -100,8 +104,8 @@ final class LockItemView: UIView {
         shapeLayer?.path = mainPath.cgPath
     }
 
+    // 绘制三角形
     private func renderDirect(with rect: CGRect) {
-        // 新建路径：三角形
         let trianglePathM = UIBezierPath()
         let marginSelectedCirclev: CGFloat = 4
         let w: CGFloat = 8

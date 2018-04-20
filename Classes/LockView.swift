@@ -225,10 +225,7 @@ class LockView: UIView {
     }
 
     fileprivate func resetItem() {
-        for item in itemViews {
-            item.selected = false
-            item.direction = .none
-        }
+        itemViews.forEach { $0.reset() }
         itemViews.removeAll()
         setNeedsDisplay()
         passwordContainer = ""
