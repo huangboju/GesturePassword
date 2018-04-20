@@ -15,7 +15,7 @@ class LockView: UIView {
 
     var modifyHandle: boolHandle?
 
-    fileprivate var itemViews = [LockItemView]()
+    fileprivate var itemViews: [LockItemView] = []
     fileprivate var passwordContainer = ""
     fileprivate var firstPassword = ""
 
@@ -38,8 +38,6 @@ class LockView: UIView {
         guard let context = UIGraphicsGetCurrentContext() else { return }
 
         context.addRect(rect)
-
-        itemViews.forEach { context.addEllipse(in: $0.frame) }
 
         // 剪裁
         context.clip()
@@ -132,13 +130,9 @@ class LockView: UIView {
         if type == .set {
             firstPassword.isEmpty ? setPasswordHandle?() : confirmPasswordHandle?()
         } else if type == .verify {
-            //            if let verifyPasswordHandle = verifyPasswordHandle {
-            //                verifyPasswordHandle()
-            //            }
+
         } else if type == .modify {
-            //            if let modifyPasswordHandle = modifyPasswordHandle {
-            //                modifyPasswordHandle()
-            //            }
+
         }
     }
 

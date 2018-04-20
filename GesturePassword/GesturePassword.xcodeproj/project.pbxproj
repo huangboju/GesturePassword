@@ -280,7 +280,7 @@
 				TargetAttributes = {
 					D8FB37401D55852E0031BBF4 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 3NFVM7S86S;
+						DevelopmentTeam = D2CVGDWDEG;
 						LastSwiftMigration = 0900;
 					};
 					D8FB37541D55852E0031BBF4 = {
@@ -584,7 +584,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3NFVM7S86S;
+				DEVELOPMENT_TEAM = D2CVGDWDEG;
 				INFOPLIST_FILE = GesturePassword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -602,7 +602,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3NFVM7S86S;
+				DEVELOPMENT_TEAM = D2CVGDWDEG;
 				INFOPLIST_FILE = GesturePassword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
