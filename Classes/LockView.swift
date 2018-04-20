@@ -227,7 +227,7 @@ class LockView: UIView {
     fileprivate func resetItem() {
         for item in itemViews {
             item.selected = false
-            item.direct = nil
+            item.direct = .none
         }
         itemViews.removeAll()
         setNeedsDisplay()

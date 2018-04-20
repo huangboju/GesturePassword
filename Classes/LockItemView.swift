@@ -3,7 +3,8 @@
 //
 
 enum LockItemViewDirect: Int {
-    case top = 1
+    case none
+    case top
     case rightTop
     case right
     case rightBottom
@@ -11,15 +12,20 @@ enum LockItemViewDirect: Int {
     case leftBottom
     case left
     case leftTop
+    
+    var angle: CGFloat {
+        if case .none = self {
+            return 0
+        }
+        return CGFloat.pi / 4 * CGFloat(rawValue - 1)
+    }
 }
 
 class LockItemView: UIView {
-    var direct: LockItemViewDirect? {
+    var direct: LockItemViewDirect = .none {
         willSet {
-            if let newValue = newValue {
-                angle = CGFloat.pi / 4 * CGFloat(newValue.rawValue - 1)
-                setNeedsDisplay()
-            }
+            layer.setAffineTransform(CGAffineTransform(rotationAngle: newValue.angle))
+            setNeedsDisplay()
         }
     }
 
@@ -50,7 +56,6 @@ class LockItemView: UIView {
         return CGRect(x: selectRectXY, y: selectRectXY, width: selectRectWH, height: selectRectWH)
     }
 
-    fileprivate var angle: CGFloat?
     fileprivate var options: LockOptions!
 
     override init(frame: CGRect) {
@@ -91,35 +96,6 @@ class LockItemView: UIView {
         }
     }
 
-    /*
-     *  三角形：方向标识
-     */
-    func directFlag(_ context: CGContext, rect: CGRect) {
-        // 新建路径：三角形
-        let trianglePathM = UIBezierPath()
-        let marginSelectedCirclev: CGFloat = 4
-        let w: CGFloat = 8
-        let h: CGFloat = 5
-        let topX = rect.minX + rect.width * 0.5
-        let topY = rect.minY + (rect.width * 0.5 - h - marginSelectedCirclev - selectedRect.height * 0.5)
-
-        trianglePathM.move(to: CGPoint(x: topX, y: topY))
-
-        // 添加左边点
-        let leftPointX = topX - w * 0.5
-        let leftPointY = topY + h
-
-        trianglePathM.addLine(to: CGPoint(x: leftPointX, y: leftPointY))
-
-        // 右边的点
-        let rightPointX = topX + w * 0.5
-        trianglePathM.addLine(to: CGPoint(x: rightPointX, y: leftPointY))
-
-        // 将路径添加到上下文中
-        mainPath.append(trianglePathM)
-        shapeLayer?.path = mainPath.cgPath
-    }
-
     func propertySetting(_ context: CGContext) {
         // 设置线宽
         if selected {
@@ -151,9 +127,6 @@ class LockItemView: UIView {
 
     func direct(_ ctx: CGContext, rect: CGRect) {
         // 新建路径：三角形
-        if direct == nil {
-            return
-        }
         let trianglePathM = UIBezierPath()
         let marginSelectedCirclev: CGFloat = 4
         let w: CGFloat = 8
