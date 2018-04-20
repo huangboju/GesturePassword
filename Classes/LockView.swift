@@ -182,28 +182,28 @@ class LockView: UIView {
             let last_2_y = last_2_ItemView.frame.minY
 
             if last_2_x == last_1_x && last_2_y > last_1_y {
-                last_2_ItemView.direct = .top
+                last_2_ItemView.direction = .top
             }
             if last_2_y == last_1_y && last_2_x > last_1_x {
-                last_2_ItemView.direct = .left
+                last_2_ItemView.direction = .left
             }
             if last_2_x == last_1_x && last_2_y < last_1_y {
-                last_2_ItemView.direct = .bottom
+                last_2_ItemView.direction = .bottom
             }
             if last_2_y == last_1_y && last_2_x < last_1_x {
-                last_2_ItemView.direct = .right
+                last_2_ItemView.direction = .right
             }
             if last_2_x > last_1_x && last_2_y > last_1_y {
-                last_2_ItemView.direct = .leftTop
+                last_2_ItemView.direction = .leftTop
             }
             if last_2_x < last_1_x && last_2_y > last_1_y {
-                last_2_ItemView.direct = .rightTop
+                last_2_ItemView.direction = .rightTop
             }
             if last_2_x > last_1_x && last_2_y < last_1_y {
-                last_2_ItemView.direct = .leftBottom
+                last_2_ItemView.direction = .leftBottom
             }
             if last_2_x < last_1_x && last_2_y < last_1_y {
-                last_2_ItemView.direct = .rightBottom
+                last_2_ItemView.direction = .rightBottom
             }
         }
     }
@@ -227,7 +227,7 @@ class LockView: UIView {
     fileprivate func resetItem() {
         for item in itemViews {
             item.selected = false
-            item.direct = .none
+            item.direction = .none
         }
         itemViews.removeAll()
         setNeedsDisplay()
