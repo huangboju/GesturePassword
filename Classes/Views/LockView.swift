@@ -34,9 +34,21 @@ class LockView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = LockManager.options.backgroundColor
-        for _ in 0 ..< 9 {
-            let itemView = LockItemView(options: options)
-            addSubview(itemView)
+
+        let stackView1 = UIStackView()
+        addSubview(stackView1)
+        stackView1.axis = .horizontal
+        stackView1.distribution = .equalSpacing
+        stackView1.alignment = .center
+        stackView1.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stackView1.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        stackView1.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        stackView1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+
+        for _ in 0 ..< 3 {
+            let itemView = LockItemView()
+            itemView.translatesAutoresizingMaskIntoConstraints = false
+            stackView1.addArrangedSubview(itemView)
         }
         shapeLayer?.lineWidth = 1
         shapeLayer?.lineCap = kCALineCapRound
@@ -62,20 +74,6 @@ class LockView: UIView {
             }
         }
         shapeLayer?.path = mainPath.cgPath
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let itemViewWH = (frame.width - 4 * ITEM_MARGIN) / 3
-        for (idx, subview) in subviews.enumerated() {
-            let row = CGFloat(idx % 3)
-            let col = CGFloat(idx / 3)
-            let x = ITEM_MARGIN * (row + 1) + row * itemViewWH
-            let y = ITEM_MARGIN * (col + 1) + col * itemViewWH
-            let rect = CGRect(x: x, y: y, width: itemViewWH, height: itemViewWH)
-            (subview as? LockItemView)?.index = idx
-            subview.frame = rect
-        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {

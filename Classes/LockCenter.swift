@@ -44,7 +44,7 @@ open class LockCenter {
         lockVC.type = type
         lockVC.success = success
         lockVC.controller = controller
-        controller.present(LockMainNav(rootViewController: lockVC), animated: true, completion: nil)
+        controller.present(LockMainNav(rootViewController: SetPasswordController()), animated: true, completion: nil)
         return lockVC
     }
 }

@@ -48,13 +48,20 @@ final class LockItemView: UIView {
         return CGRect(x: selectRectXY, y: selectRectXY, width: selectRectWH, height: selectRectWH)
     }
 
-    private var options: LockOptions!
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 100, height: 100)
+    }
 
-    convenience init(options: LockOptions) {
-        self.init(frame: .zero)
-        self.options = options
+    private let options = LockManager.options
+
+    init() {
+        super.init(frame: .zero)
         shapeLayer?.lineWidth = options.arcLineWidth
         backgroundColor = options.backgroundColor
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private var shapeLayer: CAShapeLayer? {

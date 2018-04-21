@@ -12,7 +12,7 @@ final class LockInfoView: UIView {
         backgroundColor = options.backgroundColor
 
         for _ in 0 ..< 9 {
-            let itemView = LockItemView(options: options)
+            let itemView = LockItemView()
             itemViews.append(itemView)
             addSubview(itemView)
         }
