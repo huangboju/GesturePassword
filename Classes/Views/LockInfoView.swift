@@ -5,7 +5,7 @@
 // 指示图
 final class LockInfoView: UIView {
 
-    fileprivate var itemViews: [LockItemView] = []
+    private var itemViews: [LockItemView] = []
 
     init(frame: CGRect, options: LockOptions) {
         super.init(frame: frame)
@@ -36,13 +36,13 @@ final class LockInfoView: UIView {
         super.layoutSubviews()
         let marginV: CGFloat = 3
         let rectWH = (frame.width - marginV * 2) / 3
-        for (idx, subview) in subviews.enumerated() {
+        for (idx, subview) in itemViews.enumerated() {
             let row = CGFloat(idx % 3)
             let col = CGFloat(idx / 3)
             let rectX = (rectWH + marginV) * row
             let rectY = (rectWH + marginV) * col
             let rect = CGRect(x: rectX, y: rectY, width: rectWH, height: rectWH)
-            subview.tag = idx
+            subview.index = idx
             subview.frame = rect
         }
     }

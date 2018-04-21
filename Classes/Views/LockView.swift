@@ -15,11 +15,21 @@ class LockView: UIView {
 
     var modifyHandle: boolHandle?
 
-    fileprivate var itemViews: [LockItemView] = []
-    fileprivate var passwordContainer = ""
-    fileprivate var firstPassword = ""
+    private var selectedItemViews: [LockItemView] = []
+    private var passwordContainer = ""
+    private var firstPassword = ""
 
-    fileprivate var options: LockOptions!
+    private var options: LockOptions!
+    
+    private var shapeLayer: CAShapeLayer? {
+        return layer as? CAShapeLayer
+    }
+    
+    private var mainPath = UIBezierPath()
+    
+    override class var layerClass: AnyClass {
+        return CAShapeLayer.self
+    }
 
     init(frame: CGRect, options: LockOptions) {
         super.init(frame: frame)
@@ -29,37 +39,26 @@ class LockView: UIView {
             let itemView = LockItemView(options: options)
             addSubview(itemView)
         }
+        shapeLayer?.lineWidth = 1
+        shapeLayer?.lineCap = kCALineCapRound
+        shapeLayer?.lineJoin = kCALineJoinRound
+        shapeLayer?.fillColor = UIColor.clear.cgColor
+        shapeLayer?.strokeColor = options.lockLineColor.cgColor
     }
 
     override func draw(_ rect: CGRect) {
 
-        if itemViews.isEmpty { return }
+        if selectedItemViews.isEmpty { return }
 
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-
-        context.addRect(rect)
-
-        // 剪裁
-        context.clip()
-
-        // 新建路径：管理线条
-        let path = CGMutablePath()
-
-        options.lockLineColor.set()
-        context.setLineCap(.round)
-        context.setLineJoin(.round)
-        context.setLineWidth(1)
-
-        for (idx, itemView) in itemViews.enumerated() {
+        for (idx, itemView) in selectedItemViews.enumerated() {
             let directPoint = itemView.center
             if idx == 0 {
-                path.move(to: directPoint)
+                mainPath.move(to: directPoint)
             } else {
-                path.addLine(to: directPoint)
+                mainPath.addLine(to: directPoint)
             }
         }
-        context.addPath(path)
-        context.strokePath()
+        shapeLayer?.path = mainPath.cgPath
     }
 
     override func layoutSubviews() {
@@ -71,7 +70,7 @@ class LockView: UIView {
             let x = ITEM_MARGIN * (row + 1) + row * itemViewWH
             let y = ITEM_MARGIN * (col + 1) + col * itemViewWH
             let rect = CGRect(x: x, y: y, width: itemViewWH, height: itemViewWH)
-            subview.tag = idx
+            (subview as? LockItemView)?.index = idx
             subview.frame = rect
         }
     }
@@ -94,9 +93,9 @@ class LockView: UIView {
         gestureEnd()
     }
 
-    func gestureEnd() {
+    private func gestureEnd() {
         if !passwordContainer.isEmpty {
-            let count = itemViews.count
+            let count = selectedItemViews.count
             if count < options.passwordMinCount {
                 if let passwordTooShortHandle = passwordTooShortHandle {
                     passwordTooShortHandle()
@@ -126,7 +125,7 @@ class LockView: UIView {
         resetItem()
     }
 
-    func handleBack() {
+    private func handleBack() {
         if type == .set {
             firstPassword.isEmpty ? setPasswordHandle?() : confirmPasswordHandle?()
         } else if type == .verify {
@@ -136,7 +135,7 @@ class LockView: UIView {
         }
     }
 
-    fileprivate func setPassword() {
+    private func setPassword() {
         if firstPassword.isEmpty {
             firstPassword = passwordContainer
             passwordFirstRightHandle?(firstPassword)
@@ -149,56 +148,57 @@ class LockView: UIView {
         }
     }
 
-    func lockHandle(_ touches: Set<UITouch>) {
+    private func lockHandle(_ touches: Set<UITouch>) {
         let location = touches.first!.location(in: self)
         guard let itemView = itemView(with: location) else {
             return
         }
-        if itemViews.contains(itemView) {
+        if selectedItemViews.contains(itemView) {
             return
         }
-        itemViews.append(itemView)
-        passwordContainer += itemView.tag.description
+        selectedItemViews.append(itemView)
+        passwordContainer += itemView.index.description
         calDirect()
         itemView.selected = true
         setNeedsDisplay()
     }
 
-    func calDirect() {
-        let count = itemViews.count
-        if itemViews.count > 1 {
-            let last_1_ItemView = itemViews.last
-            let last_2_ItemView = itemViews[count - 2]
-
-            let last_1_x = last_1_ItemView!.frame.minX
-            let last_1_y = last_1_ItemView!.frame.minY
-            let last_2_x = last_2_ItemView.frame.minX
-            let last_2_y = last_2_ItemView.frame.minY
-
-            if last_2_x == last_1_x && last_2_y > last_1_y {
-                last_2_ItemView.direction = .top
-            }
-            if last_2_y == last_1_y && last_2_x > last_1_x {
-                last_2_ItemView.direction = .left
-            }
-            if last_2_x == last_1_x && last_2_y < last_1_y {
-                last_2_ItemView.direction = .bottom
-            }
-            if last_2_y == last_1_y && last_2_x < last_1_x {
-                last_2_ItemView.direction = .right
-            }
-            if last_2_x > last_1_x && last_2_y > last_1_y {
-                last_2_ItemView.direction = .leftTop
-            }
-            if last_2_x < last_1_x && last_2_y > last_1_y {
-                last_2_ItemView.direction = .rightTop
-            }
-            if last_2_x > last_1_x && last_2_y < last_1_y {
-                last_2_ItemView.direction = .leftBottom
-            }
-            if last_2_x < last_1_x && last_2_y < last_1_y {
-                last_2_ItemView.direction = .rightBottom
-            }
+    private func calDirect() {
+        let count = selectedItemViews.count
+        guard selectedItemViews.count > 1 else {
+            return
+        }
+        let last_1_ItemView = selectedItemViews.last
+        let last_2_ItemView = selectedItemViews[count - 2]
+        
+        let last_1_x = last_1_ItemView!.frame.minX
+        let last_1_y = last_1_ItemView!.frame.minY
+        let last_2_x = last_2_ItemView.frame.minX
+        let last_2_y = last_2_ItemView.frame.minY
+        
+        if last_2_x == last_1_x && last_2_y > last_1_y {
+            last_2_ItemView.direction = .top
+        }
+        if last_2_y == last_1_y && last_2_x > last_1_x {
+            last_2_ItemView.direction = .left
+        }
+        if last_2_x == last_1_x && last_2_y < last_1_y {
+            last_2_ItemView.direction = .bottom
+        }
+        if last_2_y == last_1_y && last_2_x < last_1_x {
+            last_2_ItemView.direction = .right
+        }
+        if last_2_x > last_1_x && last_2_y > last_1_y {
+            last_2_ItemView.direction = .leftTop
+        }
+        if last_2_x < last_1_x && last_2_y > last_1_y {
+            last_2_ItemView.direction = .rightTop
+        }
+        if last_2_x > last_1_x && last_2_y < last_1_y {
+            last_2_ItemView.direction = .leftBottom
+        }
+        if last_2_x < last_1_x && last_2_y < last_1_y {
+            last_2_ItemView.direction = .rightBottom
         }
     }
 
@@ -219,8 +219,9 @@ class LockView: UIView {
     }
 
     fileprivate func resetItem() {
-        itemViews.forEach { $0.reset() }
-        itemViews.removeAll()
+        selectedItemViews.forEach { $0.reset() }
+        selectedItemViews.removeAll()
+        mainPath.removeAllPoints()
         setNeedsDisplay()
         passwordContainer = ""
     }

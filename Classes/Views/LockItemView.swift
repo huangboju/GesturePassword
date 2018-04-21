@@ -29,6 +29,8 @@ final class LockItemView: UIView {
         }
     }
 
+    public var index = 0
+
     public var selected: Bool = false {
         willSet {
             setNeedsDisplay()
@@ -40,13 +42,13 @@ final class LockItemView: UIView {
         selected = false
     }
 
-    fileprivate var selectedRect: CGRect {
+    private var selectedRect: CGRect {
         let selectRectWH = bounds.width * options.scale
         let selectRectXY = bounds.width * (1 - options.scale) * 0.5
         return CGRect(x: selectRectXY, y: selectRectXY, width: selectRectWH, height: selectRectWH)
     }
 
-    fileprivate var options: LockOptions!
+    private var options: LockOptions!
 
     convenience init(options: LockOptions) {
         self.init(frame: .zero)
@@ -58,7 +60,7 @@ final class LockItemView: UIView {
     private var shapeLayer: CAShapeLayer? {
         return layer as? CAShapeLayer
     }
-    
+
     private var mainPath = UIBezierPath()
 
     override class var layerClass: AnyClass {
@@ -85,20 +87,20 @@ final class LockItemView: UIView {
 
     // 绘制外环
     private func renderRing(with rect: CGRect) {
-        let loopPath = UIBezierPath()
-        loopPath.addEllipse(in: rect)
+        let ringPath = UIBezierPath()
+        ringPath.addEllipse(in: rect)
         shapeLayer?.fillColor = UIColor.clear.cgColor
-        mainPath.append(loopPath)
+        mainPath.append(ringPath)
         shapeLayer?.path = mainPath.cgPath
     }
 
     // 绘制实心圆
     private func renderSolidCircle() {
-        let circlePath = UIBezierPath()
-        circlePath.addEllipse(in: selectedRect)
+        let solidCirclePath = UIBezierPath()
+        solidCirclePath.addEllipse(in: selectedRect)
         options.circleLineSelectedCircleColor.set()
-        circlePath.fill()
-        mainPath.append(circlePath)
+        solidCirclePath.fill()
+        mainPath.append(solidCirclePath)
         shapeLayer?.path = mainPath.cgPath
     }
 
@@ -126,11 +128,5 @@ final class LockItemView: UIView {
         mainPath.append(trianglePathM)
         trianglePathM.fill()
         shapeLayer?.path = mainPath.cgPath
-    }
-}
-
-extension UIBezierPath {
-    func addEllipse(in rect: CGRect) {
-        addArc(withCenter: CGPoint(x: rect.minX + rect.width / 2, y: rect.minY + rect.height / 2), radius: rect.width / 2, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
     }
 }

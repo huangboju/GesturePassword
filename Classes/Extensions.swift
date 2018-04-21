@@ -128,3 +128,9 @@ extension UIColor {
         self.init(red: r / 255, green: g / 255, blue: b / 255, alpha: a)
     }
 }
+
+extension UIBezierPath {
+    func addEllipse(in rect: CGRect) {
+        addArc(withCenter: CGPoint(x: rect.minX + rect.width / 2, y: rect.minY + rect.height / 2), radius: rect.width / 2, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
+    }
+}
