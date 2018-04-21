@@ -31,10 +31,9 @@ class LockView: UIView {
         return CAShapeLayer.self
     }
 
-    init(frame: CGRect, options: LockOptions) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        self.options = options
-        backgroundColor = options.backgroundColor
+        backgroundColor = LockManager.options.backgroundColor
         for _ in 0 ..< 9 {
             let itemView = LockItemView(options: options)
             addSubview(itemView)
@@ -43,9 +42,13 @@ class LockView: UIView {
         shapeLayer?.lineCap = kCALineCapRound
         shapeLayer?.lineJoin = kCALineJoinRound
         shapeLayer?.fillColor = UIColor.clear.cgColor
-        shapeLayer?.strokeColor = options.lockLineColor.cgColor
+        shapeLayer?.strokeColor = LockManager.options.lockLineColor.cgColor
     }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func draw(_ rect: CGRect) {
 
         if selectedItemViews.isEmpty { return }
@@ -225,9 +228,5 @@ class LockView: UIView {
         shapeLayer?.path = mainPath.cgPath
         passwordContainer = ""
         setNeedsDisplay()
-    }
-
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

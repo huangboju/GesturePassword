@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7C1C2E9880A30B0AF45ED175 /* Pods_GesturePassword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC63F358680250C4319861A /* Pods_GesturePassword.framework */; };
+		BEC3B078208AD84F00A43C30 /* SetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */; };
 		D840DB161E442E2100FE1C96 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D840DB151E442E2100FE1C96 /* Lock.swift */; };
 		D8532D311E4484100018D00F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8532D301E4484100018D00F /* Keychain.swift */; };
 		D8602C751D55FEB00022E93D /* LockStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C661D55FEB00022E93D /* LockStorage.swift */; };
@@ -51,6 +52,7 @@
 		2CB02F168E83160363AAA2B8 /* Pods-GesturePassword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GesturePassword.release.xcconfig"; path = "Pods/Target Support Files/Pods-GesturePassword/Pods-GesturePassword.release.xcconfig"; sourceTree = "<group>"; };
 		83071E8A1070C7EFC331498C /* Pods_GesturePasswordTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePasswordTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC63F358680250C4319861A /* Pods_GesturePassword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePassword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordController.swift; sourceTree = "<group>"; };
 		D840DB151E442E2100FE1C96 /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		D8532D301E4484100018D00F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		D8602C621D55D91E0022E93D /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
@@ -125,9 +127,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BEC3B076208AD80E00A43C30 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		D8602C641D55FEB00022E93D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BEC3B076208AD80E00A43C30 /* Controllers */,
 				F73170ED2089E14F004F7635 /* Views */,
 				D8532D301E4484100018D00F /* Keychain.swift */,
 				D8602C661D55FEB00022E93D /* LockStorage.swift */,
@@ -410,6 +421,7 @@
 				D8602C7F1D55FEB00022E93D /* LockMainNav.swift in Sources */,
 				D8602C791D55FEB00022E93D /* LockController.swift in Sources */,
 				D8602C751D55FEB00022E93D /* LockStorage.swift in Sources */,
+				BEC3B078208AD84F00A43C30 /* SetPasswordController.swift in Sources */,
 				D8602C781D55FEB00022E93D /* LockCenter.swift in Sources */,
 				D8602C761D55FEB00022E93D /* LockConstants.swift in Sources */,
 				D8602C811D55FEB00022E93D /* LockView.swift in Sources */,
@@ -586,7 +598,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = D2CVGDWDEG;
 				INFOPLIST_FILE = GesturePassword/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -604,7 +616,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = D2CVGDWDEG;
 				INFOPLIST_FILE = GesturePassword/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -74,7 +74,7 @@ open class LockController: UIViewController {
             infoView = LockInfoView(frame: CGRect(x: (view.frame.width - INFO_VIEW_WIDTH) / 2, y: label.frame.minY - 50, width: INFO_VIEW_WIDTH, height: INFO_VIEW_WIDTH), options: options)
             view.addSubview(infoView)
         }
-        lockView = LockView(frame: CGRect(x: 0, y: label.frame.minY + 15, width: view.frame.width, height: view.frame.width), options: options)
+        lockView = LockView(frame: CGRect(x: 0, y: label.frame.minY + 15, width: view.frame.width, height: view.frame.width))
         // 添加顺序不要反 因为lockView的背景颜色不为透明
         view.addSubview(lockView)
         view.addSubview(label)
