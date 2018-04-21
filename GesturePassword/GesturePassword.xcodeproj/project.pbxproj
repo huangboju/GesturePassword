@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C1C2E9880A30B0AF45ED175 /* Pods_GesturePassword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC63F358680250C4319861A /* Pods_GesturePassword.framework */; };
 		BEC3B078208AD84F00A43C30 /* SetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */; };
+		BEC3B07A208AF2BC00A43C30 /* EqualSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3B079208AF2BC00A43C30 /* EqualSpacingView.swift */; };
 		D840DB161E442E2100FE1C96 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D840DB151E442E2100FE1C96 /* Lock.swift */; };
 		D8532D311E4484100018D00F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8532D301E4484100018D00F /* Keychain.swift */; };
 		D8602C751D55FEB00022E93D /* LockStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C661D55FEB00022E93D /* LockStorage.swift */; };
@@ -53,6 +54,7 @@
 		83071E8A1070C7EFC331498C /* Pods_GesturePasswordTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePasswordTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC63F358680250C4319861A /* Pods_GesturePassword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePassword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordController.swift; sourceTree = "<group>"; };
+		BEC3B079208AF2BC00A43C30 /* EqualSpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualSpacingView.swift; sourceTree = "<group>"; };
 		D840DB151E442E2100FE1C96 /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		D8532D301E4484100018D00F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		D8602C621D55D91E0022E93D /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				D8602C6E1D55FEB00022E93D /* LockItemView.swift */,
 				D8602C721D55FEB00022E93D /* LockView.swift */,
 				D8602C6F1D55FEB00022E93D /* LockLabel.swift */,
+				BEC3B079208AF2BC00A43C30 /* EqualSpacingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				D8602C7F1D55FEB00022E93D /* LockMainNav.swift in Sources */,
 				D8602C791D55FEB00022E93D /* LockController.swift in Sources */,
 				D8602C751D55FEB00022E93D /* LockStorage.swift in Sources */,
+				BEC3B07A208AF2BC00A43C30 /* EqualSpacingView.swift in Sources */,
 				BEC3B078208AD84F00A43C30 /* SetPasswordController.swift in Sources */,
 				D8602C781D55FEB00022E93D /* LockCenter.swift in Sources */,
 				D8602C761D55FEB00022E93D /* LockConstants.swift in Sources */,
