@@ -222,8 +222,9 @@ class LockView: UIView {
         selectedItemViews.forEach { $0.reset() }
         selectedItemViews.removeAll()
         mainPath.removeAllPoints()
-        setNeedsDisplay()
+        shapeLayer?.path = mainPath.cgPath
         passwordContainer = ""
+        setNeedsDisplay()
     }
 
     required init?(coder _: NSCoder) {
