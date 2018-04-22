@@ -24,7 +24,7 @@ class LockView: UIView {
     private var shapeLayer: CAShapeLayer? {
         return layer as? CAShapeLayer
     }
-    
+
     private var mainPath = UIBezierPath()
     
     override class var layerClass: AnyClass {
@@ -35,21 +35,15 @@ class LockView: UIView {
         super.init(frame: frame)
         backgroundColor = LockManager.options.backgroundColor
 
-        let stackView1 = UIStackView()
-        addSubview(stackView1)
-        stackView1.axis = .horizontal
-        stackView1.distribution = .equalSpacing
-        stackView1.alignment = .center
-        stackView1.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        stackView1.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        stackView1.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        stackView1.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-
+        var arrangedSubviews: [LockItemView] = []
         for _ in 0 ..< 3 {
             let itemView = LockItemView()
-            itemView.translatesAutoresizingMaskIntoConstraints = false
-            stackView1.addArrangedSubview(itemView)
+            arrangedSubviews.append(itemView)
         }
+        let equalSpacingView = EqualSpacingView(arrangedSubviews: arrangedSubviews)
+        addSubview(equalSpacingView)
+        equalSpacingView.leadingToSuperview().trailingToSuperview()
+
         shapeLayer?.lineWidth = 1
         shapeLayer?.lineCap = kCALineCapRound
         shapeLayer?.lineJoin = kCALineJoinRound

@@ -14,19 +14,7 @@ open class SetPasswordController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-
-        let subviews = (0 ..< 3).map { _ in
-            return LockItemView()
-        }
-        layout(with: subviews)
-    }
-
-    func layout(with views: [UIView]) {
-        let mainView = EqualSpacingView(arrangedSubviews: views)
-        mainView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(mainView)
-        mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        mainView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        view.addSubview(lockMainView)
+        lockMainView.centerToSuperview()
     }
 }
