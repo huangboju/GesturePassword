@@ -16,10 +16,11 @@ class LockView: UIView {
     var modifyHandle: boolHandle?
 
     private var selectedItemViews: [LockItemView] = []
+    private var allItemViews: [LockItemView] = []
     private var passwordContainer = ""
     private var firstPassword = ""
 
-    private var options: LockOptions!
+    private let options = LockManager.options
     
     private var shapeLayer: CAShapeLayer? {
         return layer as? CAShapeLayer
@@ -36,8 +37,11 @@ class LockView: UIView {
         backgroundColor = LockManager.options.backgroundColor
         
         let row0 = generateEqualSpacingView()
+        allItemViews.append(contentsOf: row0.arrangedSubviews)
         let row1 = generateEqualSpacingView()
+        allItemViews.append(contentsOf: row1.arrangedSubviews)
         let row2 = generateEqualSpacingView()
+        allItemViews.append(contentsOf: row2.arrangedSubviews)
 
         let equalSpacingView = EqualSpacingView(arrangedSubviews: [row0, row1, row2])
         equalSpacingView.axis = .vertical
@@ -50,7 +54,7 @@ class LockView: UIView {
         shapeLayer?.fillColor = UIColor.clear.cgColor
         shapeLayer?.strokeColor = LockManager.options.lockLineColor.cgColor
     }
-    
+
     private func generateEqualSpacingView() -> EqualSpacingView<LockItemView> {
         let equalSpacingView = EqualSpacingView<LockItemView>()
         for _ in 0 ..< 3 {
@@ -172,13 +176,16 @@ class LockView: UIView {
         guard selectedItemViews.count > 1 else {
             return
         }
-        let last_1_ItemView = selectedItemViews.last
+        let last_1_ItemView = selectedItemViews[count - 1]
         let last_2_ItemView = selectedItemViews[count - 2]
         
-        let last_1_x = last_1_ItemView!.frame.minX
-        let last_1_y = last_1_ItemView!.frame.minY
-        let last_2_x = last_2_ItemView.frame.minX
-        let last_2_y = last_2_ItemView.frame.minY
+        let rect1 = last_1_ItemView.superview!.convert(last_1_ItemView.frame, to: self)
+        let rect2 = last_2_ItemView.superview!.convert(last_2_ItemView.frame, to: self)
+        
+        let last_1_x = rect1.minX
+        let last_1_y = rect1.minY
+        let last_2_x = rect2.minX
+        let last_2_y = rect2.minY
         
         if last_2_x == last_1_x && last_2_y > last_1_y {
             last_2_ItemView.direction = .top
@@ -207,15 +214,14 @@ class LockView: UIView {
     }
 
     func itemView(with touchLocation: CGPoint) -> LockItemView? {
-        var item: LockItemView?
-        for case let subView as LockItemView in subviews {
-            if !subView.frame.contains(touchLocation) {
+        for subView in allItemViews {
+            let rect = subView.superview!.convert(subView.frame, to: self)
+            if !rect.contains(touchLocation) {
                 continue
             }
-            item = subView
-            break
+            return subView
         }
-        return item
+        return nil
     }
 
     func resetPassword() {

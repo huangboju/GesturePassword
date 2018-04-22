@@ -11,6 +11,7 @@
 		BEC3B078208AD84F00A43C30 /* SetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */; };
 		BEC3B07A208AF2BC00A43C30 /* EqualSpacingLayoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3B079208AF2BC00A43C30 /* EqualSpacingLayoutable.swift */; };
 		BEC3B07C208B2DE900A43C30 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3B07B208B2DE900A43C30 /* UIView+Layout.swift */; };
+		BEF691DB208C651B00EE6577 /* LockNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF691DA208C651B00EE6577 /* LockNewView.swift */; };
 		D840DB161E442E2100FE1C96 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D840DB151E442E2100FE1C96 /* Lock.swift */; };
 		D8532D311E4484100018D00F /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8532D301E4484100018D00F /* Keychain.swift */; };
 		D8602C751D55FEB00022E93D /* LockStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C661D55FEB00022E93D /* LockStorage.swift */; };
@@ -57,6 +58,7 @@
 		BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordController.swift; sourceTree = "<group>"; };
 		BEC3B079208AF2BC00A43C30 /* EqualSpacingLayoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualSpacingLayoutable.swift; sourceTree = "<group>"; };
 		BEC3B07B208B2DE900A43C30 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		BEF691DA208C651B00EE6577 /* LockNewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockNewView.swift; sourceTree = "<group>"; };
 		D840DB151E442E2100FE1C96 /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		D8532D301E4484100018D00F /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		D8602C621D55D91E0022E93D /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				D8602C721D55FEB00022E93D /* LockView.swift */,
 				D8602C6F1D55FEB00022E93D /* LockLabel.swift */,
 				BEC3B079208AF2BC00A43C30 /* EqualSpacingLayoutable.swift */,
+				BEF691DA208C651B00EE6577 /* LockNewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				BEC3B07C208B2DE900A43C30 /* UIView+Layout.swift in Sources */,
 				D8602C801D55FEB00022E93D /* LockOptions.swift in Sources */,
 				D840DB161E442E2100FE1C96 /* Lock.swift in Sources */,
+				BEF691DB208C651B00EE6577 /* LockNewView.swift in Sources */,
 				D8532D311E4484100018D00F /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
