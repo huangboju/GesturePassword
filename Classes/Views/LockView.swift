@@ -42,7 +42,7 @@ class LockView: UIView {
         }
         let equalSpacingView = EqualSpacingView(arrangedSubviews: arrangedSubviews)
         addSubview(equalSpacingView)
-        equalSpacingView.leadingToSuperview().trailingToSuperview()
+        equalSpacingView.edgesToSuperview()
 
         shapeLayer?.lineWidth = 1
         shapeLayer?.lineCap = kCALineCapRound

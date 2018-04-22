@@ -15,9 +15,10 @@ extension UIView {
                         multiplier: CGFloat = 1,
                         constant c: CGFloat = 0,
                         priority: UILayoutPriority = .required) -> UIView {
-        prepareLayout(with: attribute,
+        prepareLayout(with: .leading,
                       relatedBy: relation,
                       toItem: item,
+                      attribute: attribute,
                       multiplier: multiplier,
                       constant: c,
                       priority: priority)
@@ -31,9 +32,10 @@ extension UIView {
                          multiplier: CGFloat = 1,
                          constant c: CGFloat = 0,
                          priority: UILayoutPriority = .required) -> UIView {
-        prepareLayout(with: attribute,
+        prepareLayout(with: .trailing,
                       relatedBy: relation,
                       toItem: item,
+                      attribute: attribute,
                       multiplier: multiplier,
                       constant: c,
                       priority: priority)
@@ -47,9 +49,10 @@ extension UIView {
                     multiplier: CGFloat = 1,
                     constant c: CGFloat = 0,
                     priority: UILayoutPriority = .required) -> UIView {
-        prepareLayout(with: attribute,
+        prepareLayout(with: .top,
                       relatedBy: relation,
                       toItem: item,
+                      attribute: attribute,
                       multiplier: multiplier,
                       constant: c,
                       priority: priority)
@@ -63,9 +66,10 @@ extension UIView {
                        multiplier: CGFloat = 1,
                        constant c: CGFloat = 0,
                        priority: UILayoutPriority = .required) -> UIView {
-        prepareLayout(with: attribute,
+        prepareLayout(with: .bottom,
                       relatedBy: relation,
                       toItem: item,
+                      attribute: attribute,
                       multiplier: multiplier,
                       constant: c,
                       priority: priority)
@@ -79,9 +83,10 @@ extension UIView {
                        multiplier: CGFloat = 1,
                        constant c: CGFloat = 0,
                        priority: UILayoutPriority = .required) -> UIView {
-        prepareLayout(with: attribute,
+        prepareLayout(with: .height,
                       relatedBy: relation,
                       toItem: item,
+                      attribute: attribute,
                       multiplier: multiplier,
                       constant: c,
                       priority: priority)
@@ -95,9 +100,10 @@ extension UIView {
                       multiplier: CGFloat = 1,
                       constant c: CGFloat = 0,
                       priority: UILayoutPriority = .required) -> UIView {
-        prepareLayout(with: attribute,
+        prepareLayout(with: .width,
                       relatedBy: relation,
                       toItem: item,
+                      attribute: attribute,
                       multiplier: multiplier,
                       constant: c,
                       priority: priority)
@@ -109,11 +115,12 @@ extension UIView {
                         attribute: NSLayoutAttribute = .centerY,
                         relation: NSLayoutRelation = .equal,
                         multiplier: CGFloat = 1,
-                        constant c: CGFloat,
+                        constant c: CGFloat = 0,
                         priority: UILayoutPriority = .required) -> UIView {
-        prepareLayout(with: attribute,
+        prepareLayout(with: .centerY,
                       relatedBy: relation,
                       toItem: item,
+                      attribute: attribute,
                       multiplier: multiplier,
                       constant: c,
                       priority: priority)
@@ -127,9 +134,10 @@ extension UIView {
                                    multiplier: CGFloat = 1,
                                    constant c: CGFloat,
                                    priority: UILayoutPriority = .required) -> UIView {
-        prepareLayout(with: attribute,
+        prepareLayout(with: .centerX,
                       relatedBy: relation,
                       toItem: item,
+                      attribute: attribute,
                       multiplier: multiplier,
                       constant: c,
                       priority: priority)
@@ -157,18 +165,19 @@ extension UIView {
         return self
     }
 
-    private func prepareLayout(with attribute: NSLayoutAttribute,
+    private func prepareLayout(with attr1: NSLayoutAttribute,
                              relatedBy relation: NSLayoutRelation,
                              toItem view2: Any?,
+                             attribute attr2: NSLayoutAttribute,
                             multiplier: CGFloat,
                               constant c: CGFloat,
                               priority: UILayoutPriority) {
         translatesAutoresizingMaskIntoConstraints = false
         let constraint = NSLayoutConstraint(item: self,
-                                            attribute: attribute,
+                                            attribute: attr1,
                                             relatedBy: relation,
                                             toItem: view2,
-                                            attribute: attribute,
+                                            attribute: attr2,
                                             multiplier: multiplier,
                                             constant: c)
         constraint.priority = priority
@@ -179,6 +188,25 @@ extension UIView {
 /// superview
 extension UIView {
     @discardableResult
+    public func topToSuperview(_ attribute: NSLayoutAttribute = .top,
+                                   relation: NSLayoutRelation = .equal,
+                                   multiplier: CGFloat = 1,
+                                   constant c: CGFloat = 0,
+                                   priority: UILayoutPriority = .required) -> UIView {
+        return top(to: superview, attribute: attribute, relation: relation, multiplier: multiplier, constant: c, priority: priority)
+    }
+    
+    @discardableResult
+    public func bottomToSuperview(_ attribute: NSLayoutAttribute = .bottom,
+                               relation: NSLayoutRelation = .equal,
+                               multiplier: CGFloat = 1,
+                               constant c: CGFloat = 0,
+                               priority: UILayoutPriority = .required) -> UIView {
+        return bottom(to: superview, attribute: attribute, relation: relation, multiplier: multiplier, constant: c, priority: priority)
+    }
+    
+    
+    @discardableResult
     public func leadingToSuperview(_ attribute: NSLayoutAttribute = .leading,
                                    relation: NSLayoutRelation = .equal,
                                    multiplier: CGFloat = 1,
@@ -186,7 +214,7 @@ extension UIView {
                                    priority: UILayoutPriority = .required) -> UIView {
         return leading(to: superview, attribute: attribute, relation: relation, multiplier: multiplier, constant: c, priority: priority)
     }
-    
+
     @discardableResult
     public func trailingToSuperview(_ attribute: NSLayoutAttribute = .trailing,
                                    relation: NSLayoutRelation = .equal,
@@ -195,31 +223,35 @@ extension UIView {
                                    priority: UILayoutPriority = .required) -> UIView {
         return trailing(to: superview, attribute: attribute, relation: relation, multiplier: multiplier, constant: c, priority: priority)
     }
-    
+
     @discardableResult
     public func widthToSuperview(_ attribute: NSLayoutAttribute = .width,
                       relation: NSLayoutRelation = .equal,
                       multiplier: CGFloat = 1,
                       constant c: CGFloat = 0,
                       priority: UILayoutPriority = .required) -> UIView {
-        width(to: superview, attribute: attribute, relation: relation, multiplier: multiplier, constant: c, priority: priority)
-        return self
+        return width(to: superview, attribute: attribute, relation: relation, multiplier: multiplier, constant: c, priority: priority)
     }
-    
+
     @discardableResult
     public func heightToSuperview(_ attribute: NSLayoutAttribute = .height,
                                  relation: NSLayoutRelation = .equal,
                                  multiplier: CGFloat = 1,
                                  constant c: CGFloat = 0,
                                  priority: UILayoutPriority = .required) -> UIView {
-        height(to: superview, attribute: attribute, relation: relation, multiplier: multiplier, constant: c, priority: priority)
-        return self
+        return height(to: superview, attribute: attribute, relation: relation, multiplier: multiplier, constant: c, priority: priority)
     }
-    
+
     @discardableResult
     public func centerToSuperview(_ offset: CGPoint = .zero,
                        priority: UILayoutPriority = .required) -> UIView {
-        center(in: superview, offset: offset, priority: priority)
-        return self
+        return center(in: superview, offset: offset, priority: priority)
+    }
+    
+    @discardableResult
+    public func edgesToSuperview(_ relation: NSLayoutRelation = .equal,
+                                 insets: UIEdgeInsets = .zero,
+                                 priority: UILayoutPriority = .required) -> UIView {
+        return edges(to: superview, relation: relation, insets: insets, priority: priority)
     }
 }

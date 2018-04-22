@@ -32,7 +32,11 @@ class EqualSpacingView: UIView {
     public override func updateConstraints() {
         if invalidated {
             invalidated = false
-            horizontalLayout()
+            if case .horizontal = axis {
+                horizontalLayout()
+            } else {
+                verticalLayout()
+            }
         }
         super.updateConstraints()
     }
@@ -40,31 +44,30 @@ class EqualSpacingView: UIView {
     private func horizontalLayout() {
         var tmpGuide: UIView!
         var tmpSubview: UIView!
-        
+    
         for (index, subview) in arrangedSubviews.enumerated() {
             let guide = UIView()
             addSubview(guide)
 
-            subview.translatesAutoresizingMaskIntoConstraints = false
             insertSubview(subview, at: index)
 
             if index == 0 { // 第一个
                 guide.leadingToSuperview()
-                guide.trailingAnchor.constraint(equalTo: subview.leadingAnchor).isActive = true
+                guide.trailing(to: subview, attribute: .leading)
             } else {
-                guide.leadingAnchor.constraint(equalTo: tmpSubview.trailingAnchor).isActive = true
-                guide.trailingAnchor.constraint(equalTo: subview.leadingAnchor).isActive = true
-                guide.widthAnchor.constraint(equalTo: tmpGuide.widthAnchor).isActive = true
+                guide.leading(to: tmpSubview, attribute: .trailing)
+                guide.trailing(to: subview, attribute: .leading)
+                guide.width(to: tmpGuide)
                 // 最后一个
                 if (index == arrangedSubviews.count - 1) {
                     let lastGuide = UIView()
                     addSubview(lastGuide)
-                    lastGuide.widthAnchor.constraint(equalTo: tmpGuide.widthAnchor).isActive = true
-                    lastGuide.leadingToSuperview()
-                    lastGuide.leadingAnchor.constraint(equalTo: subview.trailingAnchor).isActive = true
+                    lastGuide.width(to: tmpGuide)
+                    lastGuide.leading(to: subview, attribute: .trailing)
+                    lastGuide.trailingToSuperview()
                 }
             }
-            subview.heightToSuperview()
+            subview.topToSuperview().bottomToSuperview()
             tmpSubview = subview
             tmpGuide = guide
         }
