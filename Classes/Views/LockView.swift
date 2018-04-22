@@ -34,13 +34,13 @@ class LockView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = LockManager.options.backgroundColor
+        
+        let row0 = generateEqualSpacingView()
+        let row1 = generateEqualSpacingView()
+        let row2 = generateEqualSpacingView()
 
-        var arrangedSubviews: [LockItemView] = []
-        for _ in 0 ..< 3 {
-            let itemView = LockItemView()
-            arrangedSubviews.append(itemView)
-        }
-        let equalSpacingView = EqualSpacingView(arrangedSubviews: arrangedSubviews)
+        let equalSpacingView = EqualSpacingView(arrangedSubviews: [row0, row1, row2])
+        equalSpacingView.axis = .vertical
         addSubview(equalSpacingView)
         equalSpacingView.edgesToSuperview()
 
@@ -49,6 +49,15 @@ class LockView: UIView {
         shapeLayer?.lineJoin = kCALineJoinRound
         shapeLayer?.fillColor = UIColor.clear.cgColor
         shapeLayer?.strokeColor = LockManager.options.lockLineColor.cgColor
+    }
+    
+    private func generateEqualSpacingView() -> EqualSpacingView<LockItemView> {
+        let equalSpacingView = EqualSpacingView<LockItemView>()
+        for _ in 0 ..< 3 {
+            let itemView = LockItemView()
+            equalSpacingView.addArrangedSubview(itemView)
+        }
+        return equalSpacingView
     }
 
     required init?(coder aDecoder: NSCoder) {

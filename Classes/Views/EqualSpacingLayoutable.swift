@@ -6,15 +6,19 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-class EqualSpacingView: UIView {
+class EqualSpacingView<V: UIView>: UIView {
     
-    public private(set) var arrangedSubviews: [UIView] = []
+    public private(set) var arrangedSubviews: [V] = []
 
     public var axis: UILayoutConstraintAxis = .horizontal {
         didSet { if axis != oldValue { invalidateLayout() } }
     }
+    
+    public convenience init() {
+        self.init(arrangedSubviews: [])
+    }
 
-    public init(arrangedSubviews views: [UIView]) {
+    public init(arrangedSubviews views: [V]) {
         super.init(frame: .zero)
         arrangedSubviews = views
         invalidateLayout()
@@ -39,6 +43,11 @@ class EqualSpacingView: UIView {
             }
         }
         super.updateConstraints()
+    }
+
+    public func addArrangedSubview(_ view: V) {
+        arrangedSubviews.append(view)
+        invalidateLayout()
     }
 
     private func horizontalLayout() {
@@ -74,33 +83,33 @@ class EqualSpacingView: UIView {
     }
     
     private func verticalLayout() {
-        var tmpGuide: UILayoutGuide!
+        var tmpGuide: UIView!
         var tmpSubview: UIView!
         
         for (index, subview) in arrangedSubviews.enumerated() {
-            let guide = UILayoutGuide()
-            addLayoutGuide(guide)
-            
+            let guide = UIView()
+            addSubview(guide)
+
             subview.translatesAutoresizingMaskIntoConstraints = false
             insertSubview(subview, at: index)
-            
+
             if index == 0 { // 第一个
-                guide.topAnchor.constraint(equalTo: topAnchor).isActive = true
-                guide.bottomAnchor.constraint(equalTo: subview.topAnchor).isActive = true
+                guide.topToSuperview()
+                guide.bottom(to: subview, attribute: .top)
             } else {
-                guide.topAnchor.constraint(equalTo: tmpSubview.bottomAnchor).isActive = true
-                guide.bottomAnchor.constraint(equalTo: subview.topAnchor).isActive = true
-                guide.widthAnchor.constraint(equalTo: tmpGuide.widthAnchor).isActive = true
+                guide.top(to: tmpSubview, attribute: .bottom)
+                guide.bottom(to: subview, attribute: .top)
+                guide.height(to: tmpGuide)
                 // 最后一个
                 if (index == arrangedSubviews.count - 1) {
-                    let lastGuide = UILayoutGuide()
-                    addLayoutGuide(lastGuide)
-                    lastGuide.widthAnchor.constraint(equalTo: tmpGuide.widthAnchor).isActive = true
-                    lastGuide.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-                    lastGuide.topAnchor.constraint(equalTo: subview.bottomAnchor).isActive = true
+                    let lastGuide = UIView()
+                    addSubview(lastGuide)
+                    lastGuide.height(to: tmpGuide)
+                    lastGuide.bottomToSuperview()
+                    lastGuide.top(to: subview, attribute: .bottom)
                 }
             }
-            subview.widthToSuperview()
+            subview.leadingToSuperview().trailingToSuperview()
             tmpSubview = subview
             tmpGuide = guide
         }

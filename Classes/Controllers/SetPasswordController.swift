@@ -15,6 +15,6 @@ open class SetPasswordController: UIViewController {
 
         view.backgroundColor = .white
         view.addSubview(lockMainView)
-        lockMainView.widthToSuperview().centerY(to: view)
+        lockMainView.widthToSuperview().centerY(to: view).height(to: lockMainView, attribute: .width)
     }
 }
