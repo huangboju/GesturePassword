@@ -73,7 +73,7 @@ class LockView: UIView {
         if selectedItemViews.isEmpty { return }
 
         for (idx, itemView) in selectedItemViews.enumerated() {
-            let directPoint = itemView.center
+            let directPoint = itemView.superview!.convert(itemView.center, to: self)
             if idx == 0 {
                 mainPath.move(to: directPoint)
             } else {
