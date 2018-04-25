@@ -63,7 +63,7 @@ final class LockItemView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private var shapeLayer: CAShapeLayer? {
         return layer as? CAShapeLayer
     }
