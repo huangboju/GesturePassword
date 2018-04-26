@@ -16,7 +16,7 @@ class LockView: UIView {
     var modifyHandle: boolHandle?
 
     private var selectedItemViews: [LockItemView] = []
-    private var allItemViews: [LockItemView] = []
+    private var allItemViews: [LockItemViewNew] = []
     private var passwordContainer = ""
     private var firstPassword = ""
 
@@ -55,10 +55,10 @@ class LockView: UIView {
         shapeLayer?.strokeColor = LockManager.options.lockLineColor.cgColor
     }
 
-    private func generateEqualSpacingView() -> EqualSpacingView<LockItemView> {
-        let equalSpacingView = EqualSpacingView<LockItemView>()
+    private func generateEqualSpacingView() -> EqualSpacingView<LockItemViewNew> {
+        let equalSpacingView = EqualSpacingView<LockItemViewNew>()
         for _ in 0 ..< 3 {
-            let itemView = LockItemView()
+            let itemView = LockItemViewNew()
             equalSpacingView.addArrangedSubview(itemView)
         }
         return equalSpacingView
@@ -214,13 +214,13 @@ class LockView: UIView {
     }
 
     func itemView(with touchLocation: CGPoint) -> LockItemView? {
-        for subView in allItemViews {
-            let rect = subView.superview!.convert(subView.frame, to: self)
-            if !rect.contains(touchLocation) {
-                continue
-            }
-            return subView
-        }
+//        for subView in allItemViews {
+//            let rect = subView.superview!.convert(subView.frame, to: self)
+//            if !rect.contains(touchLocation) {
+//                continue
+//            }
+//            return subView
+//        }
         return nil
     }
 
