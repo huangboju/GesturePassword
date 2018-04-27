@@ -24,7 +24,14 @@ enum LockItemViewDirection: Int {
 final class LockItemLayer: CAShapeLayer {
     public var direction: LockItemViewDirection = .none {
         willSet {
+            if newValue != .none {
+                drawDirect()
+                path = mainPath.cgPath
+            }
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             setAffineTransform(CGAffineTransform(rotationAngle: newValue.angle))
+            CATransaction.commit()
         }
     }
 
@@ -75,7 +82,6 @@ final class LockItemLayer: CAShapeLayer {
     public func turnHighlight() {
         borderColor = LockManager.options.circleLineSelectedColor.cgColor
         drawSolidCircle()
-        drawDirect()
         path = mainPath.cgPath
     }
     
