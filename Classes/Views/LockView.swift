@@ -15,8 +15,8 @@ class LockView: UIView {
 
     var modifyHandle: boolHandle?
 
-    private var selectedItemViews: [LockItemView] = []
-    private var allItemViews: [LockItemViewNew] = []
+    private var selectedItemViews: [LockItemLayer] = []
+    private var allItemLayers: [LockItemLayer] = []
     private var passwordContainer = ""
     private var firstPassword = ""
 
@@ -34,19 +34,10 @@ class LockView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = LockManager.options.backgroundColor
+        backgroundColor = options.backgroundColor
         
-        let row0 = generateEqualSpacingView()
-        allItemViews.append(contentsOf: row0.arrangedSubviews)
-        let row1 = generateEqualSpacingView()
-        allItemViews.append(contentsOf: row1.arrangedSubviews)
-        let row2 = generateEqualSpacingView()
-        allItemViews.append(contentsOf: row2.arrangedSubviews)
-
-        let equalSpacingView = EqualSpacingView(arrangedSubviews: [row0, row1, row2])
-        equalSpacingView.axis = .vertical
-        addSubview(equalSpacingView)
-        equalSpacingView.edgesToSuperview()
+        
+        layoutLayers()
 
         shapeLayer?.lineWidth = 1
         shapeLayer?.lineCap = kCALineCapRound
@@ -54,26 +45,36 @@ class LockView: UIView {
         shapeLayer?.fillColor = UIColor.clear.cgColor
         shapeLayer?.strokeColor = LockManager.options.lockLineColor.cgColor
     }
+    
+    private func layoutLayers() {
+        let count: CGFloat = 3
+        
+        let diameter = options.itemDiameter
+        let margin = (UIScreen.main.bounds.width - diameter * count) / (count + 1)
+        let padding = diameter + margin
 
-    private func generateEqualSpacingView() -> EqualSpacingView<LockItemViewNew> {
-        let equalSpacingView = EqualSpacingView<LockItemViewNew>()
-        for _ in 0 ..< 3 {
-            let itemView = LockItemViewNew()
-            equalSpacingView.addArrangedSubview(itemView)
+        for i in 0 ..< 9 {
+            let lockItemLayer = LockItemLayer()
+            lockItemLayer.side = diameter
+            let n = CGFloat(i)
+            let row = CGFloat(Int((n + count) / count)) - 1
+            let col = (n - row).truncatingRemainder(dividingBy: count)
+            lockItemLayer.origin = CGPoint(x: margin + padding * col, y: margin + padding * row)
+            allItemLayers.append(lockItemLayer)
+            layer.addSublayer(lockItemLayer)
         }
-        return equalSpacingView
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func draw(_ rect: CGRect) {
 
         if selectedItemViews.isEmpty { return }
 
         for (idx, itemView) in selectedItemViews.enumerated() {
-            let directPoint = itemView.superview!.convert(itemView.center, to: self)
+            let directPoint = itemView.position
             if idx == 0 {
                 mainPath.move(to: directPoint)
             } else {
@@ -167,7 +168,7 @@ class LockView: UIView {
         selectedItemViews.append(itemView)
         passwordContainer += itemView.index.description
         calDirect()
-        itemView.selected = true
+        itemView.turnHighlight()
         setNeedsDisplay()
     }
 
@@ -179,8 +180,8 @@ class LockView: UIView {
         let last_1_ItemView = selectedItemViews[count - 1]
         let last_2_ItemView = selectedItemViews[count - 2]
         
-        let rect1 = last_1_ItemView.superview!.convert(last_1_ItemView.frame, to: self)
-        let rect2 = last_2_ItemView.superview!.convert(last_2_ItemView.frame, to: self)
+        let rect1 = last_1_ItemView.frame
+        let rect2 = last_2_ItemView.frame
         
         let last_1_x = rect1.minX
         let last_1_y = rect1.minY
@@ -213,14 +214,13 @@ class LockView: UIView {
         }
     }
 
-    func itemView(with touchLocation: CGPoint) -> LockItemView? {
-//        for subView in allItemViews {
-//            let rect = subView.superview!.convert(subView.frame, to: self)
-//            if !rect.contains(touchLocation) {
-//                continue
-//            }
-//            return subView
-//        }
+    func itemView(with touchLocation: CGPoint) -> LockItemLayer? {
+        for subLayer in allItemLayers {
+            if !subLayer.frame.contains(touchLocation) {
+                continue
+            }
+            return subLayer
+        }
         return nil
     }
 

@@ -5,22 +5,22 @@
 // 指示图
 final class LockInfoView: UIView {
 
-    private var itemViews: [LockItemView] = []
+    private var itemViews: [LockItemLayer] = []
 
     init(frame: CGRect, options: LockOptions) {
         super.init(frame: frame)
         backgroundColor = options.backgroundColor
 
         for _ in 0 ..< 9 {
-            let itemView = LockItemView()
+            let itemView = LockItemLayer()
             itemViews.append(itemView)
-            addSubview(itemView)
+            layer.addSublayer(itemView)
         }
     }
 
     func showSelectedItems(_ passwordStr: String) {
         for char in passwordStr {
-            itemViews[Int("\(char)")!].selected = true
+            itemViews[Int("\(char)")!].turnHighlight()
         }
     }
 

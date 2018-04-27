@@ -5,6 +5,13 @@
 public struct LockOptions {
 
     public init() {}
+    
+    /// 圆的半径
+    public var itemDiameter: CGFloat = 80 {
+        willSet {
+            LockManager.options.itemDiameter = newValue
+        }
+    }
 
     /// 选中圆大小比例
     public var scale: CGFloat = 0.3 {

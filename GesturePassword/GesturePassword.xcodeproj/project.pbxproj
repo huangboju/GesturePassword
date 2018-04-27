@@ -20,7 +20,7 @@
 		D8602C781D55FEB00022E93D /* LockCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C691D55FEB00022E93D /* LockCenter.swift */; };
 		D8602C791D55FEB00022E93D /* LockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6A1D55FEB00022E93D /* LockController.swift */; };
 		D8602C7C1D55FEB00022E93D /* LockInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6D1D55FEB00022E93D /* LockInfoView.swift */; };
-		D8602C7D1D55FEB00022E93D /* LockItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6E1D55FEB00022E93D /* LockItemView.swift */; };
+		D8602C7D1D55FEB00022E93D /* LockItemLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6E1D55FEB00022E93D /* LockItemLayer.swift */; };
 		D8602C7E1D55FEB00022E93D /* LockLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6F1D55FEB00022E93D /* LockLabel.swift */; };
 		D8602C7F1D55FEB00022E93D /* LockMainNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C701D55FEB00022E93D /* LockMainNav.swift */; };
 		D8602C801D55FEB00022E93D /* LockOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C711D55FEB00022E93D /* LockOptions.swift */; };
@@ -68,7 +68,7 @@
 		D8602C691D55FEB00022E93D /* LockCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockCenter.swift; sourceTree = "<group>"; };
 		D8602C6A1D55FEB00022E93D /* LockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockController.swift; sourceTree = "<group>"; };
 		D8602C6D1D55FEB00022E93D /* LockInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockInfoView.swift; sourceTree = "<group>"; };
-		D8602C6E1D55FEB00022E93D /* LockItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockItemView.swift; sourceTree = "<group>"; };
+		D8602C6E1D55FEB00022E93D /* LockItemLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockItemLayer.swift; sourceTree = "<group>"; };
 		D8602C6F1D55FEB00022E93D /* LockLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockLabel.swift; sourceTree = "<group>"; };
 		D8602C701D55FEB00022E93D /* LockMainNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockMainNav.swift; sourceTree = "<group>"; };
 		D8602C711D55FEB00022E93D /* LockOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockOptions.swift; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				D8602C6D1D55FEB00022E93D /* LockInfoView.swift */,
-				D8602C6E1D55FEB00022E93D /* LockItemView.swift */,
+				D8602C6E1D55FEB00022E93D /* LockItemLayer.swift */,
 				D8602C721D55FEB00022E93D /* LockView.swift */,
 				D8602C6F1D55FEB00022E93D /* LockLabel.swift */,
 				BEC3B079208AF2BC00A43C30 /* EqualSpacingLayoutable.swift */,
@@ -300,7 +300,7 @@
 				TargetAttributes = {
 					D8FB37401D55852E0031BBF4 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = D2CVGDWDEG;
+						DevelopmentTeam = 7F5YZXGNJ3;
 						LastSwiftMigration = 0900;
 					};
 					D8FB37541D55852E0031BBF4 = {
@@ -426,7 +426,7 @@
 				D8602C7C1D55FEB00022E93D /* LockInfoView.swift in Sources */,
 				D8FB37451D55852E0031BBF4 /* AppDelegate.swift in Sources */,
 				D8602C7E1D55FEB00022E93D /* LockLabel.swift in Sources */,
-				D8602C7D1D55FEB00022E93D /* LockItemView.swift in Sources */,
+				D8602C7D1D55FEB00022E93D /* LockItemLayer.swift in Sources */,
 				D8602C7F1D55FEB00022E93D /* LockMainNav.swift in Sources */,
 				D8602C791D55FEB00022E93D /* LockController.swift in Sources */,
 				D8602C751D55FEB00022E93D /* LockStorage.swift in Sources */,
@@ -608,11 +608,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D2CVGDWDEG;
+				DEVELOPMENT_TEAM = 7F5YZXGNJ3;
 				INFOPLIST_FILE = GesturePassword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
+				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = GesturePassword/Bridging.h;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -626,11 +626,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D2CVGDWDEG;
+				DEVELOPMENT_TEAM = 7F5YZXGNJ3;
 				INFOPLIST_FILE = GesturePassword/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword.GesturePassword;
+				PRODUCT_BUNDLE_IDENTIFIER = GesturePassword;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = GesturePassword/Bridging.h;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
