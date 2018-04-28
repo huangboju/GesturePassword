@@ -6,35 +6,37 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-open class SetPasswordController: UIViewController {
+public final class SetPasswordController: UIViewController {
 
+    private let lockInfoView = LockInfoView()
     private let lockMainView = LockView()
+    
+    private let contentView = UIView()
 
     override open func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        view.addSubview(lockMainView)
-        lockMainView.widthToSuperview().centerY(to: view).height(to: lockMainView, attribute: .width)
 
-//        initRing()
-    }
-    
-    
-    open override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        highlightLayer.turnHighlight()
+        view.addSubview(contentView)
+        contentView.backgroundColor = .red
+        contentView.leadingToSuperview().centerToSuperview()
+
+        initUI()
     }
 
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        highlightLayer.turnNormal()
-    }
+    private func initUI() {
+        contentView.addSubview(lockInfoView)
+        contentView.addSubview(lockMainView)
+        
+        lockInfoView.topToSuperview()
+            .centerXToSuperview()
+            .width(to: contentView, multiplier: 1 / 8)
+            .height(to: lockInfoView, attribute: .width)
 
-    let highlightLayer = LockItemLayer()
-
-    func initRing() {
-        highlightLayer.side = 100
-        highlightLayer.position = view.center
-        view.layer.addSublayer(highlightLayer)
+        lockMainView.top(to: lockInfoView, attribute: .bottom, constant: 20)
+            .widthToSuperview()
+            .bottomToSuperview()
+            .height(to: lockMainView, attribute: .width)
     }
 }

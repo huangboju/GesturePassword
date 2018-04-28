@@ -51,8 +51,8 @@ open class LockController: UIViewController {
         }
     }
 
-    fileprivate lazy var label: LockLabel = {
-        LockLabel(frame: CGRect(x: 0, y: TOP_MARGIN, width: self.view.frame.width, height: LABEL_HEIGHT))
+    fileprivate lazy var label: LockDescLabel = {
+        LockDescLabel(frame: CGRect(x: 0, y: TOP_MARGIN, width: self.view.frame.width, height: LABEL_HEIGHT))
     }()
 
     fileprivate lazy var resetItem: UIBarButtonItem = {
@@ -71,7 +71,7 @@ open class LockController: UIViewController {
     fileprivate func onPrepare() {
         if type == .set {
             label.frame.origin.y = label.frame.minY + 30
-            infoView = LockInfoView(frame: CGRect(x: (view.frame.width - INFO_VIEW_WIDTH) / 2, y: label.frame.minY - 50, width: INFO_VIEW_WIDTH, height: INFO_VIEW_WIDTH), options: options)
+            infoView = LockInfoView(frame: CGRect(x: (view.frame.width - INFO_VIEW_WIDTH) / 2, y: label.frame.minY - 50, width: INFO_VIEW_WIDTH, height: INFO_VIEW_WIDTH))
             view.addSubview(infoView)
         }
         lockView = LockView(frame: CGRect(x: 0, y: label.frame.minY + 15, width: view.frame.width, height: view.frame.width))

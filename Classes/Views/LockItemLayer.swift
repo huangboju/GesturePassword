@@ -58,6 +58,8 @@ final class LockItemLayer: CAShapeLayer {
     
     private let mainPath = UIBezierPath()
     
+    private let options = LockManager.options
+    
     override init(layer: Any) {
         super.init(layer: layer)
     }
@@ -74,19 +76,20 @@ final class LockItemLayer: CAShapeLayer {
     }
     
     private func didInitlized() {
+        backgroundColor = options.backgroundColor.cgColor
         borderWidth = 1
-        borderColor = LockManager.options.circleLineNormalColor.cgColor
-        fillColor = LockManager.options.circleLineSelectedColor.cgColor
+        borderColor = options.circleLineNormalColor.cgColor
+        fillColor = options.circleLineSelectedColor.cgColor
     }
     
     public func turnHighlight() {
-        borderColor = LockManager.options.circleLineSelectedColor.cgColor
+        borderColor = options.circleLineSelectedColor.cgColor
         drawSolidCircle()
         path = mainPath.cgPath
     }
     
     public func turnNormal() {
-        borderColor = LockManager.options.circleLineNormalColor.cgColor
+        borderColor = options.circleLineNormalColor.cgColor
         mainPath.removeAllPoints()
         path = mainPath.cgPath
     }

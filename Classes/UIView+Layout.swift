@@ -132,7 +132,7 @@ extension UIView {
                                    attribute: NSLayoutAttribute = .centerX,
                                    relation: NSLayoutRelation = .equal,
                                    multiplier: CGFloat = 1,
-                                   constant c: CGFloat,
+                                   constant c: CGFloat = 0,
                                    priority: UILayoutPriority = .required) -> UIView {
         prepareLayout(with: .centerX,
                       relatedBy: relation,
@@ -246,6 +246,20 @@ extension UIView {
     public func centerToSuperview(_ offset: CGPoint = .zero,
                        priority: UILayoutPriority = .required) -> UIView {
         return center(in: superview, offset: offset, priority: priority)
+    }
+    
+    @discardableResult
+    public func centerXToSuperview(_ attribute: NSLayoutAttribute = .centerX,
+                                   relation: NSLayoutRelation = .equal,
+                                   multiplier: CGFloat = 1,
+                                   constant c: CGFloat = 0,
+                                   priority: UILayoutPriority = .required) -> UIView {
+        return centerX(to: superview,
+                       attribute: attribute,
+                       relation: relation,
+                       multiplier: multiplier,
+                       constant: c,
+                       priority: priority)
     }
     
     @discardableResult

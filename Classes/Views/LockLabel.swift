@@ -2,22 +2,24 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-class LockLabel: UILabel {
+class LockDescLabel: UILabel {
+
+    private let options = LockManager.options
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         textAlignment = .center
-        backgroundColor = LockManager.options.backgroundColor
+        backgroundColor = options.backgroundColor
     }
 
     func showNormal(with message: String?) {
         text = message
-        textColor = LockManager.options.normalTitleColor
+        textColor = options.normalTitleColor
     }
 
     func showWarn(with message: String?) {
         text = message
-        textColor = LockManager.options.warningTitleColor
+        textColor = options.warningTitleColor
         layer.shake()
     }
 

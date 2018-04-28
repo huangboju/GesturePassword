@@ -56,9 +56,8 @@ class LockView: UIView {
         for i in 0 ..< 9 {
             let lockItemLayer = LockItemLayer()
             lockItemLayer.side = diameter
-            let n = CGFloat(i)
-            let row = CGFloat(Int((n + count) / count)) - 1
-            let col = (n - row).truncatingRemainder(dividingBy: count)
+            let row = CGFloat(i % 3)
+            let col = CGFloat(i / 3)
             lockItemLayer.origin = CGPoint(x: margin + padding * col, y: margin + padding * row)
             allItemLayers.append(lockItemLayer)
             layer.addSublayer(lockItemLayer)

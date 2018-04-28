@@ -14,13 +14,13 @@ class ViewController: UIViewController {
     let data: [String] = [
         "设置密码",
         "验证密码",
-        "修改密码"
+        "修改密码",
     ]
 
     let operationDict = [
         "设置密码": "setPassword",
         "验证密码": "verifyPassword",
-        "修改密码": "modifyPassword"
+        "修改密码": "modifyPassword",
     ]
 
     override func viewDidLoad() {
@@ -36,15 +36,15 @@ class ViewController: UIViewController {
     }
 
     @objc func verifyPassword() {
-        AppLock.verify(controller: self, success: { controller in
+        AppLock.verify(controller: self, success: { _ in
             print("验证成功")
-        }, forget: { controller in
+        }, forget: { _ in
             print("忘记密码")
             self.navigationItem.prompt = "忘记密码"
             DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                 self.navigationItem.prompt = nil
             })
-        }, overrunTimes: { controller in
+        }, overrunTimes: { _ in
             print("次数超限")
         })
     }
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return data.count
     }
 
