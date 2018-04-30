@@ -46,9 +46,14 @@ class LockView: UIView {
         shapeLayer?.strokeColor = LockManager.options.lockLineColor.cgColor
     }
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: width, height: width)
+    }
+    
+    private var width: CGFloat = 0
+    
     private func layoutLayers() {
         let count: CGFloat = 3
-        
         let diameter = options.itemDiameter
         let margin = (UIScreen.main.bounds.width - diameter * count) / (count + 1)
         let padding = diameter + margin
@@ -58,10 +63,11 @@ class LockView: UIView {
             lockItemLayer.side = diameter
             let row = CGFloat(i % 3)
             let col = CGFloat(i / 3)
-            lockItemLayer.origin = CGPoint(x: margin + padding * col, y: margin + padding * row)
+            lockItemLayer.origin = CGPoint(x: padding * col, y: padding * row)
             allItemLayers.append(lockItemLayer)
             layer.addSublayer(lockItemLayer)
         }
+        width = allItemLayers.last?.frame.maxX ?? 0
     }
 
     required init?(coder aDecoder: NSCoder) {

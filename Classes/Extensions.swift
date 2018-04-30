@@ -138,3 +138,10 @@ extension UIBezierPath {
         addArc(withCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
     }
 }
+
+extension String {
+    var localized: String {
+        let path = Bundle(for: LockCenter.self).path(forResource: "Lock", ofType: "bundle")!
+        return NSLocalizedString(self, tableName: "Lock", bundle: Bundle(path: path)!, value: "", comment: "")
+    }
+}

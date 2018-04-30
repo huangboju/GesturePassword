@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7C1C2E9880A30B0AF45ED175 /* Pods_GesturePassword.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC63F358680250C4319861A /* Pods_GesturePassword.framework */; };
+		BE55D969209471EE004C748E /* Lock.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE55D968209471EE004C748E /* Lock.bundle */; };
+		BE55D96B20969811004C748E /* VerifyPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE55D96A20969811004C748E /* VerifyPasswordController.swift */; };
 		BEC3B078208AD84F00A43C30 /* SetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */; };
 		BEC3B07C208B2DE900A43C30 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC3B07B208B2DE900A43C30 /* UIView+Layout.swift */; };
 		D840DB161E442E2100FE1C96 /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D840DB151E442E2100FE1C96 /* Lock.swift */; };
@@ -53,6 +55,10 @@
 		2CB02F168E83160363AAA2B8 /* Pods-GesturePassword.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GesturePassword.release.xcconfig"; path = "Pods/Target Support Files/Pods-GesturePassword/Pods-GesturePassword.release.xcconfig"; sourceTree = "<group>"; };
 		83071E8A1070C7EFC331498C /* Pods_GesturePasswordTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePasswordTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC63F358680250C4319861A /* Pods_GesturePassword.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GesturePassword.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE55D96220946FD4004C748E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		BE55D96320946FD4004C748E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BE55D968209471EE004C748E /* Lock.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Lock.bundle; sourceTree = "<group>"; };
+		BE55D96A20969811004C748E /* VerifyPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPasswordController.swift; sourceTree = "<group>"; };
 		BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPasswordController.swift; sourceTree = "<group>"; };
 		BEC3B07B208B2DE900A43C30 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		D840DB151E442E2100FE1C96 /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
@@ -129,10 +135,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BE55D95F20946F6C004C748E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BE55D968209471EE004C748E /* Lock.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		BEC3B076208AD80E00A43C30 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				BEC3B077208AD84F00A43C30 /* SetPasswordController.swift */,
+				BE55D96A20969811004C748E /* VerifyPasswordController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -140,6 +155,7 @@
 		D8602C641D55FEB00022E93D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BE55D95F20946F6C004C748E /* Resources */,
 				BEC3B076208AD80E00A43C30 /* Controllers */,
 				F73170ED2089E14F004F7635 /* Views */,
 				D8532D301E4484100018D00F /* Keychain.swift */,
@@ -334,6 +350,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE55D969209471EE004C748E /* Lock.bundle in Resources */,
 				D8FB374F1D55852E0031BBF4 /* LaunchScreen.storyboard in Resources */,
 				D8FB374C1D55852E0031BBF4 /* Assets.xcassets in Resources */,
 				D8FB374A1D55852E0031BBF4 /* Main.storyboard in Resources */,
@@ -428,6 +445,7 @@
 				D8602C781D55FEB00022E93D /* LockCenter.swift in Sources */,
 				D8602C761D55FEB00022E93D /* LockConstants.swift in Sources */,
 				D8602C811D55FEB00022E93D /* LockView.swift in Sources */,
+				BE55D96B20969811004C748E /* VerifyPasswordController.swift in Sources */,
 				BEC3B07C208B2DE900A43C30 /* UIView+Layout.swift in Sources */,
 				D8602C801D55FEB00022E93D /* LockOptions.swift in Sources */,
 				D840DB161E442E2100FE1C96 /* Lock.swift in Sources */,
@@ -471,6 +489,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D8FB37491D55852E0031BBF4 /* Base */,
+				BE55D96220946FD4004C748E /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -479,6 +498,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D8FB374E1D55852E0031BBF4 /* Base */,
+				BE55D96320946FD4004C748E /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -490,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -547,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
