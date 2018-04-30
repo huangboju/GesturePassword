@@ -40,15 +40,15 @@ final class LockInfoView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let marginV: CGFloat = 3
-        let rectWH = (frame.width - marginV * 2) / 3
+        let side = options.itemDiameter * 1 / 8
+        let margin = (frame.width - side * 3) / 2
         for (idx, subview) in itemLayers.enumerated() {
             let row = CGFloat(idx % 3)
             let col = CGFloat(idx / 3)
-            let rectX = (rectWH + marginV) * row
-            let rectY = (rectWH + marginV) * col
+            let rectX = (side + margin) * row
+            let rectY = (side + margin) * col
             subview.index = idx
-            subview.side = rectWH
+            subview.side = side
             subview.origin = CGPoint(x: rectX, y: rectY)
         }
     }

@@ -22,15 +22,19 @@ open class LockCenter {
     }
 
     open func showSettingLockController(in controller: UIViewController, success: controllerHandle? = nil) {
-        let lockVC = self.lockVC(controller, title: options.settingTittle, type: .set, success: success)
-        lockVC.success = success
+        controller.present(LockMainNav(rootViewController: SetPasswordController()), animated: true, completion: nil)
+//        let lockVC = self.lockVC(SetPasswordController(), title: options.settingTittle, type: .set, success: success)
+//        lockVC.success = success
     }
 
     open func showVerifyLockController(in controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) {
-        let lockVC = self.lockVC(controller, title: options.verifyPassword, type: .verify, success: success)
-        lockVC.success = success
-        lockVC.forget = forget
-        lockVC.overrunTimes = overrunTimes
+        
+        controller.present(LockMainNav(rootViewController: VerifyPasswordController()), animated: true, completion: nil)
+        
+//        let lockVC = self.lockVC(VerifyPasswordController(), title: options.verifyPassword, type: .verify, success: success)
+//        lockVC.success = success
+//        lockVC.forget = forget
+//        lockVC.overrunTimes = overrunTimes
     }
 
     open func showModifyLockController(in controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil) {
@@ -44,7 +48,7 @@ open class LockCenter {
         lockVC.type = type
         lockVC.success = success
         lockVC.controller = controller
-        controller.present(LockMainNav(rootViewController: SetPasswordController()), animated: true, completion: nil)
+        controller.present(LockMainNav(rootViewController: controller), animated: true, completion: nil)
         return lockVC
     }
 }

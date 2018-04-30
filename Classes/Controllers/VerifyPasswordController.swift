@@ -10,61 +10,57 @@ import UIKit
 
 class VerifyPasswordController: UIViewController {
 
-    private let lockInfoView = LockInfoView()
     private let lockDescLabel = LockDescLabel()
     private let lockMainView = LockView()
+    
+    private lazy var forgotButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("forgotParttern".localized, for: .normal)
+        button.setTitleColor(UIColor.red, for: .normal)
+        button.setTitleColor(UIColor(white: 0.9, alpha: 1), for: .highlighted)
+        button.addTarget(self, action: #selector(forgotAction), for: .touchUpInside)
+        return button
+    }()
     
     private let contentView = UIView()
     
     override open func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "verifyPasswordTitle".localized
+
         view.backgroundColor = .white
         
         view.addSubview(contentView)
         contentView.backgroundColor = .white
         contentView.widthToSuperview().centerY(to: view, constant: 32)
-        
-        initBarButtons()
+
         initUI()
     }
-    
-    private func initBarButtons() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelAction))
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "redraw".localized, style: .plain, target: self, action: #selector(redrawAction))
-    }
-    
-    @objc
-    private func cancelAction() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc
-    private func redrawAction() {
-        
-    }
-    
+
     private func initUI() {
-        contentView.addSubview(lockInfoView)
         contentView.addSubview(lockDescLabel)
         contentView.addSubview(lockMainView)
+        contentView.addSubview(forgotButton)
         
-        lockInfoView.topToSuperview()
-            .centerXToSuperview()
-            .width(to: contentView, multiplier: 1 / 8)
-            .height(to: lockInfoView, attribute: .width)
-        
-        lockDescLabel.top(to: lockInfoView,
-                          attribute: .bottom,
-                          constant: 30).centerXToSuperview()
+        lockDescLabel.topToSuperview().centerXToSuperview()
         lockDescLabel.showNormal(with: "verifyPasswordTitle".localized)
-        
+
         lockMainView.top(to: lockDescLabel,
                          attribute: .bottom,
                          constant: 30)
             .centerXToSuperview()
-            .bottomToSuperview()
             .height(to: lockMainView, attribute: .width)
+
+        forgotButton.top(to: lockMainView,
+                         attribute: .bottom,
+                         constant: 30)
+            .centerXToSuperview()
+            .bottomToSuperview()
+    }
+
+    @objc
+    private func forgotAction() {
+        
     }
 }
