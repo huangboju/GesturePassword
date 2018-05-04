@@ -2,7 +2,7 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-enum LockItemViewDirection: Int {
+public enum LockItemViewDirection: Int {
     case none
     case top
     case rightTop
@@ -21,7 +21,8 @@ enum LockItemViewDirection: Int {
     }
 }
 
-final class LockItemLayer: CAShapeLayer {
+open class LockItemLayer: CAShapeLayer {
+    /// Default LockItemViewDirection.none
     public var direction: LockItemViewDirection = .none {
         willSet {
             if newValue != .none {
@@ -35,30 +36,36 @@ final class LockItemLayer: CAShapeLayer {
         }
     }
 
+    /// Default 0
     public var index = 0
-
-    public func reset() {
-        direction = .none
-        turnNormal()
-    }
 
     ///: 边长
     public var side: CGFloat = 0 {
         didSet {
-            self.frame.size = CGSize(width: side, height: side)
+            frame.size = CGSize(width: side, height: side)
             cornerRadius = side / 2
         }
     }
-    
+
+    /// Default .zero
     public var origin: CGPoint = .zero {
         didSet {
-            self.frame.origin = origin
+            frame.origin = origin
         }
+    }
+
+    /// Default UIColor(r: 0, g: 191, b: 255)
+    public var highlightColor = UIColor(r: 0, g: 191, b: 255)
+    
+    /// Default UIColor(r: 173, g: 216, b: 230)
+    public var normalColor = UIColor(r: 173, g: 216, b: 230)
+    
+    public func reset() {
+        direction = .none
+        turnNormal()
     }
     
     private let mainPath = UIBezierPath()
-    
-    private let options = LockManager.options
     
     override init(layer: Any) {
         super.init(layer: layer)
@@ -76,26 +83,26 @@ final class LockItemLayer: CAShapeLayer {
     }
     
     private func didInitlized() {
-        backgroundColor = options.backgroundColor.cgColor
+        backgroundColor = UIColor.white.cgColor
         borderWidth = 1
-        borderColor = options.circleLineNormalColor.cgColor
-        fillColor = options.circleLineSelectedColor.cgColor
+        borderColor = normalColor.cgColor
+        fillColor = highlightColor.cgColor
     }
     
     public func turnHighlight() {
-        borderColor = options.circleLineSelectedColor.cgColor
+        borderColor = highlightColor.cgColor
         drawSolidCircle()
         path = mainPath.cgPath
     }
     
     public func turnNormal() {
-        borderColor = options.circleLineNormalColor.cgColor
+        borderColor = normalColor.cgColor
         mainPath.removeAllPoints()
         path = mainPath.cgPath
     }
-    
+
     private let goldenRatio: CGFloat = 0.382
-    
+
     private var center: CGPoint {
         return CGPoint(x: side / 2, y: side / 2)
     }
@@ -130,7 +137,7 @@ final class LockItemLayer: CAShapeLayer {
         mainPath.append(bezier2Path)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
