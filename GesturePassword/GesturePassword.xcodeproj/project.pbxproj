@@ -18,7 +18,6 @@
 		D8602C761D55FEB00022E93D /* LockConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C671D55FEB00022E93D /* LockConstants.swift */; };
 		D8602C771D55FEB00022E93D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C681D55FEB00022E93D /* Extensions.swift */; };
 		D8602C781D55FEB00022E93D /* LockCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C691D55FEB00022E93D /* LockCenter.swift */; };
-		D8602C791D55FEB00022E93D /* LockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6A1D55FEB00022E93D /* LockController.swift */; };
 		D8602C7C1D55FEB00022E93D /* LockInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6D1D55FEB00022E93D /* LockInfoView.swift */; };
 		D8602C7D1D55FEB00022E93D /* LockItemLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6E1D55FEB00022E93D /* LockItemLayer.swift */; };
 		D8602C7E1D55FEB00022E93D /* LockLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6F1D55FEB00022E93D /* LockLabel.swift */; };
@@ -68,7 +67,6 @@
 		D8602C671D55FEB00022E93D /* LockConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockConstants.swift; sourceTree = "<group>"; };
 		D8602C681D55FEB00022E93D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D8602C691D55FEB00022E93D /* LockCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockCenter.swift; sourceTree = "<group>"; };
-		D8602C6A1D55FEB00022E93D /* LockController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockController.swift; sourceTree = "<group>"; };
 		D8602C6D1D55FEB00022E93D /* LockInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockInfoView.swift; sourceTree = "<group>"; };
 		D8602C6E1D55FEB00022E93D /* LockItemLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockItemLayer.swift; sourceTree = "<group>"; };
 		D8602C6F1D55FEB00022E93D /* LockLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockLabel.swift; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				D8602C671D55FEB00022E93D /* LockConstants.swift */,
 				D8602C681D55FEB00022E93D /* Extensions.swift */,
 				D8602C691D55FEB00022E93D /* LockCenter.swift */,
-				D8602C6A1D55FEB00022E93D /* LockController.swift */,
 				D8602C701D55FEB00022E93D /* LockMainNav.swift */,
 				D8602C711D55FEB00022E93D /* LockOptions.swift */,
 				BEC3B07B208B2DE900A43C30 /* UIView+Layout.swift */,
@@ -439,7 +436,6 @@
 				D8602C7E1D55FEB00022E93D /* LockLabel.swift in Sources */,
 				D8602C7D1D55FEB00022E93D /* LockItemLayer.swift in Sources */,
 				D8602C7F1D55FEB00022E93D /* LockMainNav.swift in Sources */,
-				D8602C791D55FEB00022E93D /* LockController.swift in Sources */,
 				D8602C751D55FEB00022E93D /* LockStorage.swift in Sources */,
 				BEC3B078208AD84F00A43C30 /* SetPasswordController.swift in Sources */,
 				D8602C781D55FEB00022E93D /* LockCenter.swift in Sources */,

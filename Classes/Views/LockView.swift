@@ -3,17 +3,6 @@
 //
 
 class LockView: UIView {
-    var type: CoreLockType?
-    var setPasswordHandle: handle?
-    var confirmPasswordHandle: handle?
-    var passwordTooShortHandle: handle?
-    var passwordTwiceDifferentHandle: ((_ password1: String, _ passwordNow: String) -> Void)?
-    var passwordFirstRightHandle: strHandle?
-    var setSuccessHandle: strHandle?
-
-    var verifyHandle: boolHandle?
-
-    var modifyHandle: boolHandle?
 
     private var selectedItemViews: [LockItemLayer] = []
     private var allItemLayers: [LockItemLayer] = []
@@ -108,58 +97,58 @@ class LockView: UIView {
     }
 
     private func gestureEnd() {
-        if !passwordContainer.isEmpty {
-            let count = selectedItemViews.count
-            if count < options.passwordMinCount {
-                if let passwordTooShortHandle = passwordTooShortHandle {
-                    passwordTooShortHandle()
-                }
-                delay(0.4, handle: {
-                    self.resetItem()
-                })
-                return
-            }
-
-            if type == .set {
-                setPassword()
-            } else if type == .verify {
-                if let verifyHandle = verifyHandle {
-                    let pwdLocal = LockManager.storage.str(forKey: PASSWORD_KEY + options.passwordKeySuffix)
-                    let result = (pwdLocal == passwordContainer)
-                    verifyHandle(result)
-                }
-            } else if type == .modify {
-                let pwdLocal = LockManager.storage.str(forKey: PASSWORD_KEY + options.passwordKeySuffix)
-                let result = (pwdLocal == passwordContainer)
-                if let modifyHandle = modifyHandle {
-                    modifyHandle(result)
-                }
-            }
-        }
+//        if !passwordContainer.isEmpty {
+//            let count = selectedItemViews.count
+//            if count < options.passwordMinCount {
+//                if let passwordTooShortHandle = passwordTooShortHandle {
+//                    passwordTooShortHandle()
+//                }
+//                delay(0.4, handle: {
+//                    self.resetItem()
+//                })
+//                return
+//            }
+//
+//            if type == .set {
+//                setPassword()
+//            } else if type == .verify {
+//                if let verifyHandle = verifyHandle {
+//                    let pwdLocal = LockManager.storage.str(forKey: PASSWORD_KEY + options.passwordKeySuffix)
+//                    let result = (pwdLocal == passwordContainer)
+//                    verifyHandle(result)
+//                }
+//            } else if type == .modify {
+//                let pwdLocal = LockManager.storage.str(forKey: PASSWORD_KEY + options.passwordKeySuffix)
+//                let result = (pwdLocal == passwordContainer)
+//                if let modifyHandle = modifyHandle {
+//                    modifyHandle(result)
+//                }
+//            }
+//        }
         resetItem()
     }
 
     private func handleBack() {
-        if type == .set {
-            firstPassword.isEmpty ? setPasswordHandle?() : confirmPasswordHandle?()
-        } else if type == .verify {
-
-        } else if type == .modify {
-
-        }
+//        if type == .set {
+//            firstPassword.isEmpty ? setPasswordHandle?() : confirmPasswordHandle?()
+//        } else if type == .verify {
+//
+//        } else if type == .modify {
+//
+//        }
     }
 
     private func setPassword() {
-        if firstPassword.isEmpty {
-            firstPassword = passwordContainer
-            passwordFirstRightHandle?(firstPassword)
-        } else {
-            if firstPassword != passwordContainer {
-                passwordTwiceDifferentHandle?(firstPassword, passwordContainer)
-            } else {
-                setSuccessHandle?(firstPassword)
-            }
-        }
+//        if firstPassword.isEmpty {
+//            firstPassword = passwordContainer
+//            passwordFirstRightHandle?(firstPassword)
+//        } else {
+//            if firstPassword != passwordContainer {
+//                passwordTwiceDifferentHandle?(firstPassword, passwordContainer)
+//            } else {
+//                setSuccessHandle?(firstPassword)
+//            }
+//        }
     }
 
     private func lockHandle(_ touches: Set<UITouch>) {

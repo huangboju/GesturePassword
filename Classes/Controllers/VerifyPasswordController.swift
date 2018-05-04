@@ -44,7 +44,6 @@ class VerifyPasswordController: UIViewController {
         contentView.addSubview(forgotButton)
         
         lockDescLabel.topToSuperview().centerXToSuperview()
-        lockDescLabel.showNormal(with: "verifyPasswordTitle".localized)
 
         lockMainView.top(to: lockDescLabel,
                          attribute: .bottom,
@@ -54,7 +53,7 @@ class VerifyPasswordController: UIViewController {
 
         forgotButton.top(to: lockMainView,
                          attribute: .bottom,
-                         constant: 30)
+                         constant: 50)
             .centerXToSuperview()
             .bottomToSuperview()
     }

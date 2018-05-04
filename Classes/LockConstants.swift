@@ -20,7 +20,7 @@ typealias strHandle = (String) -> Void
 
 typealias boolHandle = (Bool) -> Void
 
-public typealias controllerHandle = (LockController) -> Void
+public typealias controllerHandle = (UIViewController) -> Void
 
 func delay(_ interval: TimeInterval, handle: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + interval, execute: handle)
