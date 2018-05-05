@@ -173,15 +173,15 @@ class LockView: UIView {
         }
         let last_1_ItemView = selectedItemViews[count - 1]
         let last_2_ItemView = selectedItemViews[count - 2]
-        
+
         let rect1 = last_1_ItemView.frame
         let rect2 = last_2_ItemView.frame
-        
+
         let last_1_x = rect1.minX
         let last_1_y = rect1.minY
         let last_2_x = rect2.minX
         let last_2_y = rect2.minY
-        
+
         if last_2_x == last_1_x && last_2_y > last_1_y {
             last_2_ItemView.direction = .top
         }

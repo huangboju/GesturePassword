@@ -64,17 +64,17 @@ open class LockItemLayer: CAShapeLayer {
         direction = .none
         turnNormal()
     }
-    
+
     private let mainPath = UIBezierPath()
     
     override init(layer: Any) {
         super.init(layer: layer)
     }
-    
+
     convenience override init() {
         self.init(origin: .zero, side: 0)
     }
-    
+
     init(origin: CGPoint, side: CGFloat) {
         super.init()
         self.side = side

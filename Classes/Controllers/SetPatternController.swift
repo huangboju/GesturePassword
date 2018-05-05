@@ -6,12 +6,12 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-public final class SetPasswordController: UIViewController {
+public final class SetPatternController: UIViewController {
 
     private let lockInfoView = LockInfoView()
     private let lockDescLabel = LockDescLabel()
     private let lockMainView = LockView()
-    
+
     private let contentView = UIView()
 
     override open func viewDidLoad() {
@@ -29,7 +29,7 @@ public final class SetPasswordController: UIViewController {
     
     private func initBarButtons() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelAction))
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "redraw".localized, style: .plain, target: self, action: #selector(redrawAction))
     }
 
@@ -47,7 +47,7 @@ public final class SetPasswordController: UIViewController {
         contentView.addSubview(lockInfoView)
         contentView.addSubview(lockDescLabel)
         contentView.addSubview(lockMainView)
-        
+
         lockInfoView.topToSuperview()
             .centerXToSuperview()
             .width(to: contentView, multiplier: 1 / 8)

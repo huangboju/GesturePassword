@@ -22,14 +22,14 @@ open class LockCenter {
     }
 
     open func showSettingLockController(in controller: UIViewController, success: controllerHandle? = nil) {
-        controller.present(LockMainNav(rootViewController: SetPasswordController()), animated: true, completion: nil)
+        controller.present(LockMainNav(rootViewController: SetPatternController()), animated: true, completion: nil)
 //        let lockVC = self.lockVC(SetPasswordController(), title: options.settingTittle, type: .set, success: success)
 //        lockVC.success = success
     }
 
     open func showVerifyLockController(in controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) {
         
-        controller.present(LockMainNav(rootViewController: VerifyPasswordController()), animated: true, completion: nil)
+        controller.present(LockMainNav(rootViewController: VerifyPatternController()), animated: true, completion: nil)
         
 //        let lockVC = self.lockVC(VerifyPasswordController(), title: options.verifyPassword, type: .verify, success: success)
 //        lockVC.success = success
@@ -38,6 +38,7 @@ open class LockCenter {
     }
 
     open func showModifyLockController(in controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil) {
+        controller.present(LockMainNav(rootViewController: ChangePatternController()), animated: true, completion: nil)
 //        let lockVC = self.lockVC(controller, title: options.modifyPassword, type: .modify, success: success)
 //        lockVC.forget = forget
     }

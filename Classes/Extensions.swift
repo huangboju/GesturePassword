@@ -7,8 +7,8 @@ public protocol BackBarButtonItemDelegate {
     func viewControllerShouldPopOnBackBarButtonItem() -> Bool
 }
 
-extension UINavigationController {
-    public func navigationBar(_ navigationBar: UINavigationBar, shouldPopItem _: UINavigationItem) -> Bool {
+extension UINavigationController: UINavigationBarDelegate {
+    public func navigationBar(_ navigationBar: UINavigationBar, shouldPop _: UINavigationItem) -> Bool {
         if viewControllers.count < (navigationBar.items?.count)! {
             return true
         }

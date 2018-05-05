@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VerifyPasswordController: UIViewController {
+class VerifyPatternController: UIViewController {
 
     private let lockDescLabel = LockDescLabel()
     private let lockMainView = LockView()

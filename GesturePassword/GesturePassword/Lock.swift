@@ -26,21 +26,22 @@ class Lock {
     }
 
     func verify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?, overrunTimes: controllerHandle?) {
-//        if !hasPassword {
-//            print("没有密码")
-//        } else {
-//            LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
-//        }
-        
+        //        if !hasPassword {
+        //            print("没有密码")
+        //        } else {
+        //            LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
+        //        }
+
         LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
     }
 
     func modify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?) {
-        if !hasPassword {
-            print("没有密码")
-        } else {
-            LockManager.showModifyLockController(in: controller, success: success, forget: forget)
-        }
+        //        if !hasPassword {
+        //            print("没有密码")
+        //        } else {
+        //            LockManager.showModifyLockController(in: controller, success: success, forget: forget)
+        //        }
+        LockManager.showModifyLockController(in: controller, success: success, forget: forget)
     }
 
     var hasPassword: Bool {
