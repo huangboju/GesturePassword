@@ -130,9 +130,6 @@ extension UIColor {
 }
 
 extension UIBezierPath {
-    func addEllipse(in rect: CGRect) {
-        addArc(withCenter: CGPoint(x: rect.minX + rect.width / 2, y: rect.minY + rect.height / 2), radius: rect.width / 2, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
-    }
 
     func addEllipse(with center: CGPoint, radius: CGFloat) {
         addArc(withCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
