@@ -63,7 +63,7 @@ class LockView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func draw(_ rect: CGRect) {
+    private func drawLine() {
 
         if selectedItemViews.isEmpty { return }
 
@@ -80,7 +80,6 @@ class LockView: UIView {
 
     override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         lockHandle(touches)
-        handleBack()
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
@@ -88,15 +87,15 @@ class LockView: UIView {
     }
 
     override func touchesEnded(_: Set<UITouch>, with _: UIEvent?) {
-        gestureEnd()
+        touchesEnd()
     }
 
     // 电话等打断触摸过程时，会调用这个方法。
     override func touchesCancelled(_: Set<UITouch>?, with _: UIEvent?) {
-        gestureEnd()
+        touchesEnd()
     }
 
-    private func gestureEnd() {
+    private func touchesEnd() {
 //        if !passwordContainer.isEmpty {
 //            let count = selectedItemViews.count
 //            if count < options.passwordMinCount {
@@ -128,16 +127,6 @@ class LockView: UIView {
         resetItem()
     }
 
-    private func handleBack() {
-//        if type == .set {
-//            firstPassword.isEmpty ? setPasswordHandle?() : confirmPasswordHandle?()
-//        } else if type == .verify {
-//
-//        } else if type == .modify {
-//
-//        }
-    }
-
     private func setPassword() {
 //        if firstPassword.isEmpty {
 //            firstPassword = passwordContainer
@@ -163,7 +152,7 @@ class LockView: UIView {
         passwordContainer += itemView.index.description
         calDirect()
         itemView.turnHighlight()
-        setNeedsDisplay()
+        drawLine()
     }
 
     private func calDirect() {
@@ -228,6 +217,6 @@ class LockView: UIView {
         mainPath.removeAllPoints()
         shapeLayer?.path = mainPath.cgPath
         passwordContainer = ""
-        setNeedsDisplay()
+        drawLine()
     }
 }
