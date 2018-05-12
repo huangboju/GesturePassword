@@ -2,65 +2,99 @@
 //  Copyright © 2016年 xiAo_Ju. All rights reserved.
 //
 
-class LockView: UIView {
+public protocol LockViewDelegate: class {
+    func lockViewDidTouchesEnd(_ lockView: LockView)
+}
+
+open class LockView: UIView {
+    
+    open weak var delegate: LockViewDelegate?
+    
+    open var strokeColor: UIColor? {
+        didSet {
+            shapeLayer?.strokeColor = strokeColor?.cgColor
+        }
+    }
+
+    open var lineWidth: CGFloat = 1 {
+        didSet {
+            shapeLayer?.lineWidth = lineWidth
+        }
+    }
+    
+    open var itemDiameter: CGFloat = 80 {
+        didSet {
+            relayoutLayers()
+        }
+    }
 
     private var selectedItemViews: [LockItemLayer] = []
     private var allItemLayers: [LockItemLayer] = []
-    private var passwordContainer = ""
-    private var firstPassword = ""
-
-    private let options = LockManager.options
+    private(set) var passwordContainer = ""
     
     private var shapeLayer: CAShapeLayer? {
         return layer as? CAShapeLayer
     }
 
     private var mainPath = UIBezierPath()
-    
-    override class var layerClass: AnyClass {
+
+    override open class var layerClass: AnyClass {
         return CAShapeLayer.self
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = options.backgroundColor
-        
-        
+
         layoutLayers()
 
-        shapeLayer?.lineWidth = 1
         shapeLayer?.lineCap = kCALineCapRound
         shapeLayer?.lineJoin = kCALineJoinRound
         shapeLayer?.fillColor = UIColor.clear.cgColor
-        shapeLayer?.strokeColor = LockManager.options.lockLineColor.cgColor
     }
-    
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: width, height: width)
+
+    override open var intrinsicContentSize: CGSize {
+        let side = preferedSide
+        return CGSize(width: side, height: side)
     }
-    
-    private var width: CGFloat = 0
-    
+
     private func layoutLayers() {
-        let count: CGFloat = 3
-        let diameter = options.itemDiameter
-        let margin = (UIScreen.main.bounds.width - diameter * count) / (count + 1)
-        let padding = diameter + margin
+        let padding = self.padding
 
         for i in 0 ..< 9 {
             let lockItemLayer = LockItemLayer()
-            lockItemLayer.side = diameter
+            lockItemLayer.side = itemDiameter
             let row = CGFloat(i % 3)
             let col = CGFloat(i / 3)
             lockItemLayer.origin = CGPoint(x: padding * col, y: padding * row)
             allItemLayers.append(lockItemLayer)
             layer.addSublayer(lockItemLayer)
         }
-        width = allItemLayers.last?.frame.maxX ?? 0
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    private func relayoutLayers() {
+        let padding = self.padding
+
+        for (i, lockItemLayer) in allItemLayers.enumerated() {
+            lockItemLayer.side = itemDiameter
+            let row = CGFloat(i % 3)
+            let col = CGFloat(i / 3)
+            lockItemLayer.origin = CGPoint(x: padding * col, y: padding * row)
+        }
+        invalidateIntrinsicContentSize()
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private var padding: CGFloat {
+        let count: CGFloat = 3
+        let margin = (UIScreen.main.bounds.width - itemDiameter * count) / (count + 1)
+        return itemDiameter + margin
+    }
+    
+    private var preferedSide: CGFloat {
+        return allItemLayers.last?.frame.maxX ?? 0
     }
 
     private func drawLine() {
@@ -78,66 +112,26 @@ class LockView: UIView {
         shapeLayer?.path = mainPath.cgPath
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
+    override open func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
         lockHandle(touches)
     }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
+    override open func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
         lockHandle(touches)
     }
 
-    override func touchesEnded(_: Set<UITouch>, with _: UIEvent?) {
+    override open func touchesEnded(_: Set<UITouch>, with _: UIEvent?) {
         touchesEnd()
     }
 
     // 电话等打断触摸过程时，会调用这个方法。
-    override func touchesCancelled(_: Set<UITouch>?, with _: UIEvent?) {
+    override open func touchesCancelled(_: Set<UITouch>?, with _: UIEvent?) {
         touchesEnd()
     }
 
     private func touchesEnd() {
-//        if !passwordContainer.isEmpty {
-//            let count = selectedItemViews.count
-//            if count < options.passwordMinCount {
-//                if let passwordTooShortHandle = passwordTooShortHandle {
-//                    passwordTooShortHandle()
-//                }
-//                delay(0.4, handle: {
-//                    self.resetItem()
-//                })
-//                return
-//            }
-//
-//            if type == .set {
-//                setPassword()
-//            } else if type == .verify {
-//                if let verifyHandle = verifyHandle {
-//                    let pwdLocal = LockManager.storage.str(forKey: PASSWORD_KEY + options.passwordKeySuffix)
-//                    let result = (pwdLocal == passwordContainer)
-//                    verifyHandle(result)
-//                }
-//            } else if type == .modify {
-//                let pwdLocal = LockManager.storage.str(forKey: PASSWORD_KEY + options.passwordKeySuffix)
-//                let result = (pwdLocal == passwordContainer)
-//                if let modifyHandle = modifyHandle {
-//                    modifyHandle(result)
-//                }
-//            }
-//        }
+        delegate?.lockViewDidTouchesEnd(self)
         resetItem()
-    }
-
-    private func setPassword() {
-//        if firstPassword.isEmpty {
-//            firstPassword = passwordContainer
-//            passwordFirstRightHandle?(firstPassword)
-//        } else {
-//            if firstPassword != passwordContainer {
-//                passwordTwiceDifferentHandle?(firstPassword, passwordContainer)
-//            } else {
-//                setSuccessHandle?(firstPassword)
-//            }
-//        }
     }
 
     private func lockHandle(_ touches: Set<UITouch>) {
@@ -197,7 +191,7 @@ class LockView: UIView {
         }
     }
 
-    func itemView(with touchLocation: CGPoint) -> LockItemLayer? {
+    private func itemView(with touchLocation: CGPoint) -> LockItemLayer? {
         for subLayer in allItemLayers {
             if !subLayer.frame.contains(touchLocation) {
                 continue
@@ -207,11 +201,7 @@ class LockView: UIView {
         return nil
     }
 
-    func resetPassword() {
-        firstPassword = ""
-    }
-
-    fileprivate func resetItem() {
+    private func resetItem() {
         selectedItemViews.forEach { $0.reset() }
         selectedItemViews.removeAll()
         mainPath.removeAllPoints()

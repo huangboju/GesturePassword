@@ -6,16 +6,13 @@
 final class LockInfoView: UIView {
 
     private var itemLayers: [LockItemLayer] = []
-    
-    private let options = LockManager.options
-    
+
     convenience init() {
         self.init(frame: .zero)
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = options.backgroundColor
 
         for _ in 0 ..< 9 {
             let itemView = LockItemLayer()
@@ -40,16 +37,16 @@ final class LockInfoView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let side = options.itemDiameter * 1 / 8
+        let side: CGFloat = 80 * 1 / 8
         let margin = (frame.width - side * 3) / 2
-        for (idx, subview) in itemLayers.enumerated() {
+        for (idx, sublayer) in itemLayers.enumerated() {
             let row = CGFloat(idx % 3)
             let col = CGFloat(idx / 3)
             let rectX = (side + margin) * row
             let rectY = (side + margin) * col
-            subview.index = idx
-            subview.side = side
-            subview.origin = CGPoint(x: rectX, y: rectY)
+            sublayer.index = idx
+            sublayer.side = side
+            sublayer.origin = CGPoint(x: rectX, y: rectY)
         }
     }
 }

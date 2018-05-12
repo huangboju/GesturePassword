@@ -66,3 +66,9 @@ public final class SetPatternController: UIViewController {
             .height(to: lockMainView, attribute: .width)
     }
 }
+
+extension SetPatternController: LockViewDelegate {
+    public func lockViewDidTouchesEnd(_ lockView: LockView) {
+
+    }
+}
