@@ -21,7 +21,7 @@ open class LockCenter {
     open func removePassword(for key: String? = nil) {
         storage.removeValue(forKey: suffix(with: key))
     }
-    
+
     open func set(_ password: String, forKey key: String? = nil) {
         storage.set(password, forKey: suffix(with: key))
     }
@@ -30,16 +30,24 @@ open class LockCenter {
         return PASSWORD_KEY + (str ?? options.passwordKeySuffix)
     }
 
-    open func showSettingLockController(in controller: UIViewController, success: controllerHandle? = nil) {
-        controller.present(LockMainNav(rootViewController: SetPatternController()), animated: true, completion: nil)
+    @discardableResult
+    open func showSetPattern(in controller: UIViewController) -> SetPatternController {
+        let vc = SetPatternController()
+        controller.present(LockMainNav(rootViewController: vc), animated: true, completion: nil)
+        return vc
     }
 
-    open func showVerifyLockController(in controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil, overrunTimes: controllerHandle? = nil) {
-        
-        controller.present(LockMainNav(rootViewController: VerifyPatternController()), animated: true, completion: nil)
+    @discardableResult
+    open func showVerifyPattern(in controller: UIViewController) -> VerifyPatternController {
+        let vc = VerifyPatternController()
+        controller.present(LockMainNav(rootViewController: vc), animated: true, completion: nil)
+        return vc
     }
 
-    open func showModifyLockController(in controller: UIViewController, success: controllerHandle? = nil, forget: controllerHandle? = nil) {
-        controller.present(LockMainNav(rootViewController: ChangePatternController()), animated: true, completion: nil)
+    @discardableResult
+    open func showModifyPattern(in controller: UIViewController) -> ChangePatternController {
+        let vc = ChangePatternController()
+        controller.present(LockMainNav(rootViewController: vc), animated: true, completion: nil)
+        return vc
     }
 }

@@ -17,31 +17,30 @@ class Lock {
         options.lockLineColor = options.circleLineSelectedColor
     }
 
-    func set(controller: UIViewController, success: controllerHandle? = nil) {
+    func set(controller: UIViewController) {
         if hasPassword {
             print("密码已设置")
         } else {
-            LockManager.showSettingLockController(in: controller, success: success)
+            LockManager.showSetPattern(in: controller)
         }
     }
 
-    func verify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?, overrunTimes: controllerHandle?) {
+    func verify(controller: UIViewController) {
         //        if !hasPassword {
         //            print("没有密码")
         //        } else {
         //            LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
         //        }
-
-        LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
+        LockManager.showVerifyPattern(in: controller)
     }
 
-    func modify(controller: UIViewController, success: controllerHandle?, forget: controllerHandle?) {
+    func modify(controller: UIViewController) {
         //        if !hasPassword {
         //            print("没有密码")
         //        } else {
         //            LockManager.showModifyLockController(in: controller, success: success, forget: forget)
         //        }
-        LockManager.showModifyLockController(in: controller, success: success, forget: forget)
+        LockManager.showModifyPattern(in: controller)
     }
 
     var hasPassword: Bool {
