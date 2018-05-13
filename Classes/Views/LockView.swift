@@ -10,9 +10,9 @@ open class LockView: UIView {
     
     open weak var delegate: LockViewDelegate?
     
-    open var strokeColor: UIColor? {
+    open var lineColor: UIColor = UIColor(r: 0, g: 191, b: 255) {
         didSet {
-            shapeLayer?.strokeColor = strokeColor?.cgColor
+            shapeLayer?.strokeColor = lineColor.cgColor
         }
     }
 
@@ -50,6 +50,7 @@ open class LockView: UIView {
         shapeLayer?.lineCap = kCALineCapRound
         shapeLayer?.lineJoin = kCALineJoinRound
         shapeLayer?.fillColor = UIColor.clear.cgColor
+        shapeLayer?.strokeColor = lineColor.cgColor
     }
 
     override open var intrinsicContentSize: CGSize {
@@ -86,7 +87,7 @@ open class LockView: UIView {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private var padding: CGFloat {
         let count: CGFloat = 3
         let margin = (UIScreen.main.bounds.width - itemDiameter * count) / (count + 1)
