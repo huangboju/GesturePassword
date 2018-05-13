@@ -10,6 +10,7 @@ open class LockCenter {
     var storage: Storagable = LockUserDefaults()
 
     open static let shared = LockCenter()
+
     // 私有化构造方法，阻止其他对象使用这个类的默认的'()'构造方法
     fileprivate init() {}
 

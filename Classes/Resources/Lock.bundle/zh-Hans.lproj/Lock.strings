@@ -12,6 +12,12 @@
 
 "setPasswordTitle" = "绘制解锁图案";
 
+"setPasswordTooShortTitle" = "至少连接4个点，请重新输入";
+
+"setPasswordMismatchTitle" = "与上一次绘制不一致，请重新绘制";
+
+"setPasswordAgainTitle" = "再次绘制解锁图案";
+
 "verifyPasswordTitle" = "验证密码";
 
 "forgotParttern" = "忘记密码？";

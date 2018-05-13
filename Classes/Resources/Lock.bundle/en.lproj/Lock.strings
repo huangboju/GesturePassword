@@ -12,6 +12,12 @@
 
 "setPasswordTitle" = "Draw your pattern";
 
+"setPasswordTooShortTitle" = "At least 4 points required";
+
+"setPasswordMismatchTitle" = "Not match, please draw it again";
+
+"setPasswordAgainTitle" = "Draw pattern again";
+
 "verifyPasswordTitle" = "Verify password";
 
 "forgotParttern" = "Forgot pattern?";

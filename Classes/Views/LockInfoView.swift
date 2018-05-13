@@ -21,13 +21,13 @@ final class LockInfoView: UIView {
         }
     }
 
-    func showSelectedItems(_ passwordStr: String) {
+    public func showSelectedItems(_ passwordStr: String) {
         for char in passwordStr {
             itemLayers[Int("\(char)")!].turnHighlight()
         }
     }
 
-    func resetItems() {
+    public func reset() {
         itemLayers.forEach { $0.reset() }
     }
 

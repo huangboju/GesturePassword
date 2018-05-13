@@ -8,11 +8,13 @@
 
 public final class SetPatternController: UIViewController {
 
+    private let contentView = UIView()
+
     private let lockInfoView = LockInfoView()
     private let lockDescLabel = LockDescLabel()
-    private let lockMainView = LockView()
-
-    private let contentView = UIView()
+    let lockMainView = LockView()
+    
+    var firstPassword: String?
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +31,18 @@ public final class SetPatternController: UIViewController {
     
     private func initBarButtons() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelAction))
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "redraw".localized, style: .plain, target: self, action: #selector(redrawAction))
+    }
+    
+    private func showRedrawBarButton() {
+        if firstPassword == nil { return }
+        let redraw = UIBarButtonItem(title: "redraw".localized, style: .plain, target: self, action: #selector(redrawAction))
+        navigationItem.rightBarButtonItem = redraw
     }
 
+    private func hiddenRedrawBarButton() {
+        navigationItem.rightBarButtonItem = nil
+    }
+    
     @objc
     private func cancelAction() {
         dismiss(animated: true, completion: nil)
@@ -40,7 +50,11 @@ public final class SetPatternController: UIViewController {
 
     @objc
     private func redrawAction() {
-        
+        hiddenRedrawBarButton()
+
+        lockDescLabel.showNormal(with: "setPasswordTitle".localized)
+        lockInfoView.reset()
+        lockMainView.reset()
     }
 
     private func initUI() {
@@ -58,6 +72,7 @@ public final class SetPatternController: UIViewController {
                           constant: 30).centerXToSuperview()
         lockDescLabel.showNormal(with: "setPasswordTitle".localized)
 
+        lockMainView.delegate = self
         lockMainView.top(to: lockDescLabel,
                          attribute: .bottom,
                          constant: 30)
@@ -69,6 +84,28 @@ public final class SetPatternController: UIViewController {
 
 extension SetPatternController: LockViewDelegate {
     public func lockViewDidTouchesEnd(_ lockView: LockView) {
+        LockMediator.setPattern(with: self)
+    }
+}
 
+extension SetPatternController: SetPatternDelegate {
+
+    func firstDrawedState() {
+        lockInfoView.showSelectedItems(lockMainView.password)
+        lockDescLabel.showNormal(with: "setPasswordAgainTitle".localized)
+    }
+
+    func tooShortState() {
+        showRedrawBarButton()
+        lockDescLabel.showWarn(with: "setPasswordTooShortTitle".localized)
+    }
+
+    func mismatchState() {
+        showRedrawBarButton()
+        lockDescLabel.showWarn(with: "setPasswordMismatchTitle".localized)
+    }
+
+    func successState() {
+        cancelAction()
     }
 }

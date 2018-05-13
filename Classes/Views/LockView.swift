@@ -30,8 +30,8 @@ open class LockView: UIView {
 
     private var selectedItemViews: [LockItemLayer] = []
     private var allItemLayers: [LockItemLayer] = []
-    private(set) var passwordContainer = ""
-    
+    private(set) var password = ""
+
     private var shapeLayer: CAShapeLayer? {
         return layer as? CAShapeLayer
     }
@@ -58,59 +58,8 @@ open class LockView: UIView {
         return CGSize(width: side, height: side)
     }
 
-    private func layoutLayers() {
-        let padding = self.padding
-
-        for i in 0 ..< 9 {
-            let lockItemLayer = LockItemLayer()
-            lockItemLayer.side = itemDiameter
-            let row = CGFloat(i % 3)
-            let col = CGFloat(i / 3)
-            lockItemLayer.origin = CGPoint(x: padding * col, y: padding * row)
-            allItemLayers.append(lockItemLayer)
-            layer.addSublayer(lockItemLayer)
-        }
-    }
-
-    private func relayoutLayers() {
-        let padding = self.padding
-
-        for (i, lockItemLayer) in allItemLayers.enumerated() {
-            lockItemLayer.side = itemDiameter
-            let row = CGFloat(i % 3)
-            let col = CGFloat(i / 3)
-            lockItemLayer.origin = CGPoint(x: padding * col, y: padding * row)
-        }
-        invalidateIntrinsicContentSize()
-    }
-
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    private var padding: CGFloat {
-        let count: CGFloat = 3
-        let margin = (UIScreen.main.bounds.width - itemDiameter * count) / (count + 1)
-        return itemDiameter + margin
-    }
-    
-    private var preferedSide: CGFloat {
-        return allItemLayers.last?.frame.maxX ?? 0
-    }
-
-    private func drawLine() {
-
-        if selectedItemViews.isEmpty { return }
-
-        for (idx, itemView) in selectedItemViews.enumerated() {
-            let directPoint = itemView.position
-            if idx == 0 {
-                mainPath.move(to: directPoint)
-            } else {
-                mainPath.addLine(to: directPoint)
-            }
-        }
-        shapeLayer?.path = mainPath.cgPath
     }
 
     override open func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
@@ -130,9 +79,61 @@ open class LockView: UIView {
         touchesEnd()
     }
 
+    private func layoutLayers() {
+        let padding = self.padding
+        
+        for i in 0 ..< 9 {
+            let lockItemLayer = LockItemLayer()
+            lockItemLayer.side = itemDiameter
+            lockItemLayer.index = i
+            let row = CGFloat(i % 3)
+            let col = CGFloat(i / 3)
+            lockItemLayer.origin = CGPoint(x: padding * row, y: padding * col)
+            allItemLayers.append(lockItemLayer)
+            layer.addSublayer(lockItemLayer)
+        }
+    }
+
+    private func relayoutLayers() {
+        let padding = self.padding
+        
+        for (i, lockItemLayer) in allItemLayers.enumerated() {
+            lockItemLayer.side = itemDiameter
+            let row = CGFloat(i % 3)
+            let col = CGFloat(i / 3)
+            lockItemLayer.origin = CGPoint(x: padding * col, y: padding * row)
+        }
+        invalidateIntrinsicContentSize()
+    }
+    
+    private var padding: CGFloat {
+        let count: CGFloat = 3
+        let margin = (UIScreen.main.bounds.width - itemDiameter * count) / (count + 1)
+        return itemDiameter + margin
+    }
+    
+    private var preferedSide: CGFloat {
+        return allItemLayers.last?.frame.maxX ?? 0
+    }
+    
+    private func drawLine() {
+        
+        if selectedItemViews.isEmpty { return }
+        
+        for (idx, itemView) in selectedItemViews.enumerated() {
+            let directPoint = itemView.position
+            if idx == 0 {
+                mainPath.move(to: directPoint)
+            } else {
+                mainPath.addLine(to: directPoint)
+            }
+        }
+        shapeLayer?.path = mainPath.cgPath
+    }
+
     private func touchesEnd() {
         delegate?.lockViewDidTouchesEnd(self)
-        resetItem()
+        reset()
     }
 
     private func lockHandle(_ touches: Set<UITouch>) {
@@ -144,7 +145,7 @@ open class LockView: UIView {
             return
         }
         selectedItemViews.append(itemView)
-        passwordContainer += itemView.index.description
+        password += itemView.index.description
         calDirect()
         itemView.turnHighlight()
         drawLine()
@@ -202,12 +203,12 @@ open class LockView: UIView {
         return nil
     }
 
-    private func resetItem() {
+    public func reset() {
         selectedItemViews.forEach { $0.reset() }
         selectedItemViews.removeAll()
         mainPath.removeAllPoints()
         shapeLayer?.path = mainPath.cgPath
-        passwordContainer = ""
+        password = ""
         drawLine()
     }
 }
