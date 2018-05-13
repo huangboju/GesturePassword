@@ -6,9 +6,7 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-import UIKit
-
-class VerifyPatternController: UIViewController {
+open class VerifyPatternController: UIViewController {
 
     private let lockDescLabel = LockDescLabel()
     private let lockMainView = LockView()

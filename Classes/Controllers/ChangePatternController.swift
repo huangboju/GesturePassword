@@ -6,9 +6,9 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-class ChangePatternController: UIViewController {
+open class ChangePatternController: UIViewController {
 
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         didInitialize()
