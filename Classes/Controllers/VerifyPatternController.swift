@@ -6,10 +6,11 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-open class VerifyPatternController: UIViewController {
+public final class VerifyPatternController: UIViewController {
 
+    private let contentView = UIView()
     private let lockDescLabel = LockDescLabel()
-    let lockMainView = LockView()
+    public let lockMainView = LockView()
 
     private lazy var forgotButton: UIButton = {
        let button = UIButton()
@@ -19,8 +20,6 @@ open class VerifyPatternController: UIViewController {
         button.addTarget(self, action: #selector(forgotAction), for: .touchUpInside)
         return button
     }()
-
-    private let contentView = UIView()
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +58,7 @@ open class VerifyPatternController: UIViewController {
 
     @objc
     private func forgotAction() {
-        
+        dismiss(animated: true, completion: nil)
     }
 }
 

@@ -8,13 +8,15 @@
 
 public final class SetPatternController: UIViewController {
 
+    var successHandle: ((SetPatternController) -> Void)?
+
     private let contentView = UIView()
 
     private let lockInfoView = LockInfoView()
     private let lockDescLabel = LockDescLabel()
-    let lockMainView = LockView()
-    
-    var firstPassword: String?
+    public let lockMainView = LockView()
+
+    public var firstPassword = ""
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -28,13 +30,13 @@ public final class SetPatternController: UIViewController {
         initBarButtons()
         initUI()
     }
-    
+
     private func initBarButtons() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelAction))
     }
-    
+
     private func showRedrawBarButton() {
-        if firstPassword == nil { return }
+        if firstPassword.isEmpty { return }
         let redraw = UIBarButtonItem(title: "redraw".localized, style: .plain, target: self, action: #selector(redrawAction))
         navigationItem.rightBarButtonItem = redraw
     }
@@ -45,6 +47,10 @@ public final class SetPatternController: UIViewController {
     
     @objc
     private func cancelAction() {
+        dismiss()
+    }
+
+    public func dismiss() {
         dismiss(animated: true, completion: nil)
     }
 
@@ -90,22 +96,23 @@ extension SetPatternController: LockViewDelegate {
 
 extension SetPatternController: SetPatternDelegate {
 
-    func firstDrawedState() {
+    public func firstDrawedState() {
         lockInfoView.showSelectedItems(lockMainView.password)
         lockDescLabel.showNormal(with: "setPasswordAgainTitle".localized)
     }
 
-    func tooShortState() {
+    public func tooShortState() {
         showRedrawBarButton()
         lockDescLabel.showWarn(with: "setPasswordTooShortTitle".localized)
     }
 
-    func mismatchState() {
+    public func mismatchState() {
         showRedrawBarButton()
         lockDescLabel.showWarn(with: "setPasswordMismatchTitle".localized)
     }
 
-    func successState() {
-        cancelAction()
+    public func successState() {
+        successHandle?(self)
+        dismiss()
     }
 }

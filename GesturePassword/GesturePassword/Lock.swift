@@ -11,7 +11,7 @@ class Lock {
     private init() {
         // 在这里自定义你的UI
         var options = LockOptions()
-        options.passwordKeySuffix = "test"
+        options.passwordKeySuffix = "user1"
         options.usingKeychain = true
         options.circleLineSelectedCircleColor = options.circleLineSelectedColor
         options.lockLineColor = options.circleLineSelectedColor
@@ -20,32 +20,36 @@ class Lock {
     func set(controller: UIViewController) {
         if hasPassword {
             print("密码已设置")
+            print("🍀🍀🍀 \(password) 🍀🍀🍀")
         } else {
-            LockManager.showSetPattern(in: controller)
+            showSetPattern(in: controller).successHandle = {
+                LockManager.set($0.firstPassword)
+                $0.dismiss()
+            }
         }
     }
 
     func verify(controller: UIViewController) {
-        //        if !hasPassword {
-        //            print("没有密码")
-        //        } else {
-        //            LockManager.showVerifyLockController(in: controller, success: success, forget: forget, overrunTimes: overrunTimes)
-        //        }
-        LockManager.showVerifyPattern(in: controller)
+        if hasPassword {
+            print("密码已设置")
+            print("🍀🍀🍀 \(password) 🍀🍀🍀")
+            showVerifyPattern(in: controller)
+        } else {
+            print("❌❌❌ 还没有设置密码 ❌❌❌")
+        }
     }
 
     func modify(controller: UIViewController) {
-        //        if !hasPassword {
-        //            print("没有密码")
-        //        } else {
-        //            LockManager.showModifyLockController(in: controller, success: success, forget: forget)
-        //        }
-        LockManager.showModifyPattern(in: controller)
+        showModifyPattern(in: controller)
     }
 
     var hasPassword: Bool {
         // 这里密码后缀可以自己传值，默认为上面设置的passwordKeySuffix
         return LockManager.hasPassword()
+    }
+    
+    var password: String {
+        return LockManager.password() ?? ""
     }
 
     func removePassword() {

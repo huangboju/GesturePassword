@@ -13,7 +13,7 @@ open class ChangePatternController: UIViewController {
 
         didInitialize()
     }
-    
+
     func didInitialize() {
 
         let childVC = VerifyPatternController()
@@ -21,7 +21,7 @@ open class ChangePatternController: UIViewController {
         view.addSubview(childVC.view)
         childVC.view.edgesToSuperview()
         didMove(toParentViewController: childVC)
-        
+    
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelAction))
     }
 

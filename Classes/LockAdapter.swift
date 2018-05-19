@@ -6,20 +6,20 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-protocol LockViewPresentable: class {
+public protocol LockViewPresentable: class {
     var lockMainView: LockView { get }
 }
 
-protocol SetPatternDelegate: LockViewPresentable {
-    
-    var firstPassword: String? { set get }
-    
+public protocol SetPatternDelegate: LockViewPresentable {
+
+    var firstPassword: String { set get }
+
     func firstDrawedState()
-    
+
     func tooShortState()
 
     func mismatchState()
-    
+
     func successState()
 }
 
@@ -39,12 +39,12 @@ extension LockAdapter {
             controller.tooShortState()
             return
         }
-        guard let firstPassword = controller.firstPassword else {
+        if controller.firstPassword.isEmpty {
             controller.firstPassword = password
             controller.firstDrawedState()
             return
         }
-        guard firstPassword == password else {
+        guard controller.firstPassword == password else {
             controller.mismatchState()
             return
         }
@@ -53,7 +53,7 @@ extension LockAdapter {
 
     static func reset(with controller: SetPatternDelegate) {
         controller.lockMainView.reset()
-        controller.firstPassword = nil
+        controller.firstPassword = ""
     }
 }
 
