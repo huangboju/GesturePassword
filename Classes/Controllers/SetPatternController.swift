@@ -59,7 +59,7 @@ public final class SetPatternController: UIViewController {
         hiddenRedrawBarButton()
 
         LockAdapter.reset(with: self)
-        lockDescLabel.showNormal(with: "setPasswordTitle".localized)
+        lockDescLabel.showNormal(with: LockManager.options.setPassword)
         lockInfoView.reset()
     }
 
@@ -76,7 +76,7 @@ public final class SetPatternController: UIViewController {
         lockDescLabel.top(to: lockInfoView,
                           attribute: .bottom,
                           constant: 30).centerXToSuperview()
-        lockDescLabel.showNormal(with: "setPasswordTitle".localized)
+        lockDescLabel.showNormal(with: LockManager.options.setPassword)
 
         lockMainView.delegate = self
         lockMainView.top(to: lockDescLabel,
@@ -98,17 +98,17 @@ extension SetPatternController: SetPatternDelegate {
 
     public func firstDrawedState() {
         lockInfoView.showSelectedItems(lockMainView.password)
-        lockDescLabel.showNormal(with: "setPasswordAgainTitle".localized)
+        lockDescLabel.showNormal(with: LockManager.options.secondPassword)
     }
 
     public func tooShortState() {
         showRedrawBarButton()
-        lockDescLabel.showWarn(with: "setPasswordTooShortTitle".localized)
+        lockDescLabel.showWarn(with: LockManager.options.tooShortTitle)
     }
 
     public func mismatchState() {
         showRedrawBarButton()
-        lockDescLabel.showWarn(with: "setPasswordMismatchTitle".localized)
+        lockDescLabel.showWarn(with: LockManager.options.differentPassword)
     }
 
     public func successState() {

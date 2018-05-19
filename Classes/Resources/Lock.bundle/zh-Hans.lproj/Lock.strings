@@ -12,7 +12,7 @@
 
 "setPasswordTitle" = "绘制解锁图案";
 
-"setPasswordTooShortTitle" = "至少连接4个点，请重新输入";
+"setPasswordTooShortTitle" = "至少连接$个点，请重新输入";
 
 "setPasswordMismatchTitle" = "与上一次绘制不一致，请重新绘制";
 

@@ -11,6 +11,8 @@ public final class VerifyPatternController: UIViewController {
     private let contentView = UIView()
     private let lockDescLabel = LockDescLabel()
     public let lockMainView = LockView()
+    
+    public var successHandle: ((VerifyPatternController) -> Void)?
 
     private lazy var forgotButton: UIButton = {
        let button = UIButton()
@@ -39,7 +41,7 @@ public final class VerifyPatternController: UIViewController {
         contentView.addSubview(lockDescLabel)
         contentView.addSubview(lockMainView)
         contentView.addSubview(forgotButton)
-        
+
         lockDescLabel.topToSuperview().centerXToSuperview()
 
         lockMainView.delegate = self
@@ -58,6 +60,10 @@ public final class VerifyPatternController: UIViewController {
 
     @objc
     private func forgotAction() {
+        dismiss()
+    }
+    
+    public func dismiss() {
         dismiss(animated: true, completion: nil)
     }
 }
@@ -70,10 +76,10 @@ extension VerifyPatternController: LockViewDelegate {
 
 extension VerifyPatternController: VerifyPatternDelegate {
     func successState() {
-        
+        successHandle?(self)
     }
 
     func errorState() {
-        
+        let errorTimes = LockManager.options.errorTimes
     }
 }

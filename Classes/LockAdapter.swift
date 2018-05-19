@@ -60,6 +60,12 @@ extension LockAdapter {
 /// VerifyPatternDelegate
 extension LockAdapter {
     static func verifyPattern(with controller: VerifyPatternDelegate) {
-        
+        let inputPassword = controller.lockMainView.password
+        let localPassword = LockManager.password()
+        guard inputPassword == localPassword else {
+            controller.errorState()
+            return
+        }
+        controller.successState()
     }
 }

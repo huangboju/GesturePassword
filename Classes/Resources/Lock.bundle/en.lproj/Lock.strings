@@ -12,7 +12,7 @@
 
 "setPasswordTitle" = "Draw your pattern";
 
-"setPasswordTooShortTitle" = "At least 4 points required";
+"setPasswordTooShortTitle" = "At least $ points required";
 
 "setPasswordMismatchTitle" = "Not match, please draw it again";
 

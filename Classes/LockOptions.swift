@@ -42,14 +42,13 @@ public struct LockOptions {
     }
 
     // MARK: - 设置密码
-
-    /// 最低设置密码数目
     public var settingTittle = "设置密码" {
         willSet {
             LockManager.options.settingTittle = newValue
         }
     }
 
+    /// 最低设置密码数目
     public var passwordMinCount = 4 {
         willSet {
             LockManager.options.passwordMinCount = newValue
@@ -64,14 +63,14 @@ public struct LockOptions {
     }
 
     /// 设置密码提示文字
-    public var setPassword = "请滑动设置新密码" {
+    public var setPassword = "setPasswordTitle".localized {
         willSet {
             LockManager.options.setPassword = newValue
         }
     }
 
     /// 重绘密码提示文字
-    public var secondPassword = "请重新绘制新密码" {
+    public var secondPassword = "setPasswordAgainTitle".localized {
         willSet {
             LockManager.options.secondPassword = newValue
         }
@@ -85,9 +84,16 @@ public struct LockOptions {
     }
 
     /// 设置密码提示文字：再次密码不一致
-    public var differentPassword = "再次密码输入不一致" {
+    public var differentPassword = "setPasswordMismatchTitle".localized {
         willSet {
             LockManager.options.differentPassword = newValue
+        }
+    }
+    
+    /// "至少连接$个点，请重新输入"
+    public var tooShortTitle = "setPasswordTooShortTitle".localized.replacingOccurrences(of: "$0", with: LockManager.options.passwordMinCount.description) {
+        willSet {
+            LockManager.options.tooShortTitle = newValue
         }
     }
 

@@ -33,14 +33,22 @@ class Lock {
         if hasPassword {
             print("密码已设置")
             print("🍀🍀🍀 \(password) 🍀🍀🍀")
-            showVerifyPattern(in: controller)
+            showVerifyPattern(in: controller).successHandle = {
+                $0.dismiss()
+            }
         } else {
             print("❌❌❌ 还没有设置密码 ❌❌❌")
         }
     }
 
     func modify(controller: UIViewController) {
-        showModifyPattern(in: controller)
+        if hasPassword {
+            print("密码已设置")
+            print("🍀🍀🍀 \(password) 🍀🍀🍀")
+            showModifyPattern(in: controller)
+        } else {
+            print("❌❌❌ 还没有设置密码 ❌❌❌")
+        }
     }
 
     var hasPassword: Bool {
