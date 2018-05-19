@@ -6,8 +6,11 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-protocol SetPatternDelegate: class {
+protocol LockViewPresentable: class {
     var lockMainView: LockView { get }
+}
+
+protocol SetPatternDelegate: LockViewPresentable {
     
     var firstPassword: String? { set get }
     
@@ -20,8 +23,16 @@ protocol SetPatternDelegate: class {
     func successState()
 }
 
-struct LockMediator {
+protocol VerifyPatternDelegate: LockViewPresentable {
+    func successState()
+    
+    func errorState()
+}
 
+struct LockAdapter {}
+
+/// SetPatternDelegate
+extension LockAdapter {
     static func setPattern(with controller: SetPatternDelegate) {
         let password = controller.lockMainView.password
         if password.count < LockManager.options.passwordMinCount {
@@ -38,5 +49,17 @@ struct LockMediator {
             return
         }
         controller.successState()
+    }
+
+    static func reset(with controller: SetPatternDelegate) {
+        controller.lockMainView.reset()
+        controller.firstPassword = nil
+    }
+}
+
+/// VerifyPatternDelegate
+extension LockAdapter {
+    static func verifyPattern(with controller: VerifyPatternDelegate) {
+        
     }
 }

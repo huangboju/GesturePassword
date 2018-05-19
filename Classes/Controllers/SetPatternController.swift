@@ -52,9 +52,9 @@ public final class SetPatternController: UIViewController {
     private func redrawAction() {
         hiddenRedrawBarButton()
 
+        LockAdapter.reset(with: self)
         lockDescLabel.showNormal(with: "setPasswordTitle".localized)
         lockInfoView.reset()
-        lockMainView.reset()
     }
 
     private func initUI() {
@@ -84,7 +84,7 @@ public final class SetPatternController: UIViewController {
 
 extension SetPatternController: LockViewDelegate {
     public func lockViewDidTouchesEnd(_ lockView: LockView) {
-        LockMediator.setPattern(with: self)
+        LockAdapter.setPattern(with: self)
     }
 }
 

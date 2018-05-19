@@ -9,8 +9,8 @@
 open class VerifyPatternController: UIViewController {
 
     private let lockDescLabel = LockDescLabel()
-    private let lockMainView = LockView()
-    
+    let lockMainView = LockView()
+
     private lazy var forgotButton: UIButton = {
        let button = UIButton()
         button.setTitle("forgotParttern".localized, for: .normal)
@@ -43,6 +43,7 @@ open class VerifyPatternController: UIViewController {
         
         lockDescLabel.topToSuperview().centerXToSuperview()
 
+        lockMainView.delegate = self
         lockMainView.top(to: lockDescLabel,
                          attribute: .bottom,
                          constant: 30)
@@ -58,6 +59,22 @@ open class VerifyPatternController: UIViewController {
 
     @objc
     private func forgotAction() {
+        
+    }
+}
+
+extension VerifyPatternController: LockViewDelegate {
+    public func lockViewDidTouchesEnd(_ lockView: LockView) {
+        LockAdapter.verifyPattern(with: self)
+    }
+}
+
+extension VerifyPatternController: VerifyPatternDelegate {
+    func successState() {
+        
+    }
+
+    func errorState() {
         
     }
 }
