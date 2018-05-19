@@ -19,9 +19,9 @@ open class VerifyPatternController: UIViewController {
         button.addTarget(self, action: #selector(forgotAction), for: .touchUpInside)
         return button
     }()
-    
+
     private let contentView = UIView()
-    
+
     override open func viewDidLoad() {
         super.viewDidLoad()
         
