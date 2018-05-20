@@ -56,9 +56,31 @@ public struct LockOptions {
     }
 
     /// 密码错误次数
-    public var errorTimes = 5 {
-        willSet {
-            LockManager.options.errorTimes = newValue
+    /// Default 5
+    public var errorTimes: Int {
+        set {
+            LockOptions.errorTimes = newValue
+        }
+        get {
+            return LockOptions.errorTimes
+        }
+    }
+    
+    static var errorTimes: Int {
+        set {
+            let storage =  LockUserDefaults()
+            let key = PASSWORD_KEY + "error_times" + LockManager.options.passwordKeySuffix
+            storage.set(newValue, forKey: key)
+        }
+        get {
+            let storage =  LockUserDefaults()
+            let key = PASSWORD_KEY + "error_times" + LockManager.options.passwordKeySuffix
+            var result = storage.integer(forKey: key)
+            if result == 0 && storage.str(forKey: key) == nil {
+                result = 5
+                storage.set(result, forKey: key)
+            }
+            return result
         }
     }
 
@@ -89,12 +111,16 @@ public struct LockOptions {
             LockManager.options.differentPassword = newValue
         }
     }
-    
+
     /// "至少连接$个点，请重新输入"
-    public var tooShortTitle = "setPasswordTooShortTitle".localized.replacingOccurrences(of: "$0", with: LockManager.options.passwordMinCount.description) {
-        willSet {
-            LockManager.options.tooShortTitle = newValue
-        }
+    public func tooShortTitle(with count: Int = LockManager.options.passwordMinCount) -> String {
+        let title = "setPasswordTooShortTitle".localized
+        return title.replacingOccurrences(of: "$", with: count.description)
+    }
+
+    public func invalidPasswordTitle(with times: Int) -> String {
+        let title = "invalidPasswordTitle".localized
+        return title.replacingOccurrences(of: "$", with: times.description)
     }
 
     /// 设置密码提示文字：设置成功

@@ -22,3 +22,5 @@
 
 "forgotParttern" = "Forgot pattern?";
 
+"invalidPasswordTitle" = "Invalid passwod, $ attempt(s) left";
+

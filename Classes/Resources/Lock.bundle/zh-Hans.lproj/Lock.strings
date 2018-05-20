@@ -21,3 +21,5 @@
 "verifyPasswordTitle" = "验证密码";
 
 "forgotParttern" = "忘记手势？";
+
+"invalidPasswordTitle" = "密码错误，还可以再输入$次";

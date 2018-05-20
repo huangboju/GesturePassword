@@ -10,9 +10,12 @@ public final class VerifyPatternController: UIViewController {
 
     private let contentView = UIView()
     private let lockDescLabel = LockDescLabel()
+
     public let lockMainView = LockView()
-    
+
     public var successHandle: ((VerifyPatternController) -> Void)?
+    
+    public var overTimesHandle: ((VerifyPatternController) -> Void)?
 
     private lazy var forgotButton: UIButton = {
        let button = UIButton()
@@ -79,7 +82,12 @@ extension VerifyPatternController: VerifyPatternDelegate {
         successHandle?(self)
     }
 
-    func errorState() {
-        let errorTimes = LockManager.options.errorTimes
+    func overTimesState() {
+        overTimesHandle?(self)
+    }
+
+    func errorState(_ remainTimes: Int) {
+        let text = LockManager.options.invalidPasswordTitle(with: remainTimes)
+        lockDescLabel.showWarn(with: text)
     }
 }

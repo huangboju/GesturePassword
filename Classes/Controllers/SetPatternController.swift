@@ -103,7 +103,8 @@ extension SetPatternController: SetPatternDelegate {
 
     public func tooShortState() {
         showRedrawBarButton()
-        lockDescLabel.showWarn(with: LockManager.options.tooShortTitle)
+        let text = LockManager.options.tooShortTitle()
+        lockDescLabel.showWarn(with: text)
     }
 
     public func mismatchState() {

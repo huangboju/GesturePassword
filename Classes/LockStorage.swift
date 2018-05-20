@@ -53,6 +53,14 @@ struct LockUserDefaults: Storagable {
     func str(forKey key: String) -> String? {
         return defaults.string(forKey: key)
     }
+    
+    func set(_ value: Int, forKey key: String) {
+        defaults.set(value, forKey: key)
+    }
+
+    func integer(forKey key: String) -> Int {
+        return  defaults.integer(forKey: key)
+    }
 
     func removeValue(forKey key: String) {
         defaults.removeObject(forKey: key)

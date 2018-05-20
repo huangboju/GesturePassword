@@ -26,7 +26,9 @@ public protocol SetPatternDelegate: LockViewPresentable {
 protocol VerifyPatternDelegate: LockViewPresentable {
     func successState()
     
-    func errorState()
+    func errorState(_ remainTimes: Int)
+    
+    func overTimesState()
 }
 
 struct LockAdapter {}
@@ -62,10 +64,16 @@ extension LockAdapter {
     static func verifyPattern(with controller: VerifyPatternDelegate) {
         let inputPassword = controller.lockMainView.password
         let localPassword = LockManager.password()
-        guard inputPassword == localPassword else {
-            controller.errorState()
+        if inputPassword == localPassword {
+            controller.successState()
             return
         }
-        controller.successState()
+        LockOptions.errorTimes -= 1
+        let errorTimes = LockOptions.errorTimes
+        guard errorTimes == 0 else {
+            controller.errorState(errorTimes)
+            return
+        }
+        controller.overTimesState()
     }
 }
