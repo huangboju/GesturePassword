@@ -24,10 +24,11 @@ public protocol SetPatternDelegate: LockViewPresentable {
 }
 
 protocol VerifyPatternDelegate: LockViewPresentable {
+
     func successState()
-    
+
     func errorState(_ remainTimes: Int)
-    
+
     func overTimesState()
 }
 

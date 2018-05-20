@@ -13,9 +13,11 @@ public final class VerifyPatternController: UIViewController {
 
     public let lockMainView = LockView()
 
-    public var successHandle: ((VerifyPatternController) -> Void)?
+    public typealias VerifyPattern = (VerifyPatternController) -> Void
     
-    public var overTimesHandle: ((VerifyPatternController) -> Void)?
+    private var successHandle: VerifyPattern?
+    private var overTimesHandle: VerifyPattern?
+    private var forgetHandle: VerifyPattern?
 
     private lazy var forgotButton: UIButton = {
        let button = UIButton()
@@ -63,11 +65,32 @@ public final class VerifyPatternController: UIViewController {
 
     @objc
     private func forgotAction() {
-        dismiss()
+        forgetHandle?(self)
     }
-    
+
     public func dismiss() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+/// Handle
+extension VerifyPatternController {
+    @discardableResult
+    func successHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
+        successHandle = handle
+        return self
+    }
+    
+    @discardableResult
+    func overTimesHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
+        overTimesHandle = handle
+        return self
+    }
+    
+    @discardableResult
+    func forgetHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
+        forgetHandle = handle
+        return self
     }
 }
 
@@ -78,6 +101,7 @@ extension VerifyPatternController: LockViewDelegate {
 }
 
 extension VerifyPatternController: VerifyPatternDelegate {
+
     func successState() {
         successHandle?(self)
     }

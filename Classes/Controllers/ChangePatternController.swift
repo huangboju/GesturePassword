@@ -8,6 +8,8 @@
 
 open class ChangePatternController: UIViewController {
 
+    private let verifyPatternVC = VerifyPatternController()
+
     override open func viewDidLoad() {
         super.viewDidLoad()
 
@@ -16,17 +18,29 @@ open class ChangePatternController: UIViewController {
 
     func didInitialize() {
 
-        let childVC = VerifyPatternController()
-        addChildViewController(childVC)
-        view.addSubview(childVC.view)
-        childVC.view.edgesToSuperview()
-        didMove(toParentViewController: childVC)
-    
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelAction))
+        addChildViewController(verifyPatternVC)
+        view.addSubview(verifyPatternVC.view)
+        verifyPatternVC.view.edgesToSuperview()
+        verifyPatternVC.didMove(toParentViewController: self)
+
+        verifyPatternVC.successHandle { [weak self] vc in
+            self?.transitionToSetPattern()
+        }
     }
 
-    @objc
-    private func cancelAction() {
-        dismiss(animated: true, completion: nil)
+    func transitionToSetPattern() {
+        let setPatternVC = SetPatternController()
+        verifyPatternVC.willMove(toParentViewController: nil)
+        addChildViewController(setPatternVC)
+        view.addSubview(setPatternVC.view)
+        setPatternVC.view.edgesToSuperview()
+
+        transition(from: verifyPatternVC, to: setPatternVC, duration: 0.25, options: .curveEaseIn, animations: {
+        }, completion: {
+            guard $0 else { return }
+            self.verifyPatternVC.view.removeFromSuperview()
+            self.verifyPatternVC.removeFromParentViewController()
+            setPatternVC.didMove(toParentViewController: self)
+        })
     }
 }

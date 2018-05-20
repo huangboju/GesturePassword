@@ -52,6 +52,6 @@ public func showVerifyPattern(in controller: UIViewController) -> VerifyPatternC
 @discardableResult
 public func showModifyPattern(in controller: UIViewController) -> ChangePatternController {
     let vc = ChangePatternController()
-    controller.present(LockMainNav(rootViewController: vc), animated: true, completion: nil)
+    controller.navigationController?.pushViewController(vc, animated: true)
     return vc
 }

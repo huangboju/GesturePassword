@@ -33,8 +33,14 @@ class Lock {
         if hasPassword {
             print("密码已设置")
             print("🍀🍀🍀 \(password) 🍀🍀🍀")
-            showVerifyPattern(in: controller).successHandle = {
+            showVerifyPattern(in: controller).successHandle {
                 $0.dismiss()
+            }.overTimesHandle { _ in
+                LockManager.removePassword()
+                assertionFailure("你必须做错误超限后的处理")
+            }.forgetHandle {
+                $0.dismiss()
+                assertionFailure("忘记密码，请做相应处理")
             }
         } else {
             print("❌❌❌ 还没有设置密码 ❌❌❌")
@@ -55,7 +61,7 @@ class Lock {
         // 这里密码后缀可以自己传值，默认为上面设置的passwordKeySuffix
         return LockManager.hasPassword()
     }
-    
+
     var password: String {
         return LockManager.password() ?? ""
     }
