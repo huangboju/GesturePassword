@@ -12,6 +12,7 @@ open class ChangePatternController: UIViewController {
 
     override open func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
 
         didInitialize()
     }
@@ -23,8 +24,8 @@ open class ChangePatternController: UIViewController {
         verifyPatternVC.view.edgesToSuperview()
         verifyPatternVC.didMove(toParentViewController: self)
 
-        verifyPatternVC.successHandle { [weak self] vc in
-            self?.transitionToSetPattern()
+        verifyPatternVC.successHandle { [unowned self] vc in
+            self.transitionToSetPattern()
         }
     }
 
