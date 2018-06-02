@@ -7,6 +7,12 @@ final class LockInfoView: UIView {
 
     private var itemLayers: [LockItemLayer] = []
 
+    open var itemDiameter: CGFloat = 10 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+
     convenience init() {
         self.init(frame: .zero)
     }
@@ -37,15 +43,14 @@ final class LockInfoView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let side: CGFloat = 80 * 1 / 8
-        let margin = (frame.width - side * 3) / 2
+        let margin = (frame.width - itemDiameter * 3) / 2
         for (idx, sublayer) in itemLayers.enumerated() {
             let row = CGFloat(idx % 3)
             let col = CGFloat(idx / 3)
-            let rectX = (side + margin) * row
-            let rectY = (side + margin) * col
+            let rectX = (itemDiameter + margin) * row
+            let rectY = (itemDiameter + margin) * col
             sublayer.index = idx
-            sublayer.side = side
+            sublayer.side = itemDiameter
             sublayer.origin = CGPoint(x: rectX, y: rectY)
         }
     }

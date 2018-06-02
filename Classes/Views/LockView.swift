@@ -7,9 +7,9 @@ public protocol LockViewDelegate: class {
 }
 
 open class LockView: UIView {
-    
+
     open weak var delegate: LockViewDelegate?
-    
+
     open var lineColor: UIColor = UIColor(r: 0, g: 191, b: 255) {
         didSet {
             shapeLayer?.strokeColor = lineColor.cgColor
@@ -96,7 +96,7 @@ open class LockView: UIView {
 
     private func relayoutLayers() {
         let padding = self.padding
-        
+
         for (i, lockItemLayer) in allItemLayers.enumerated() {
             lockItemLayer.side = itemDiameter
             let row = CGFloat(i % 3)
@@ -105,21 +105,21 @@ open class LockView: UIView {
         }
         invalidateIntrinsicContentSize()
     }
-    
+
     private var padding: CGFloat {
         let count: CGFloat = 3
         let margin = (UIScreen.main.bounds.width - itemDiameter * count) / (count + 1)
         return itemDiameter + margin
     }
-    
+
     private var preferedSide: CGFloat {
         return allItemLayers.last?.frame.maxX ?? 0
     }
-    
+
     private func drawLine() {
-        
+
         if selectedItemViews.isEmpty { return }
-        
+
         for (idx, itemView) in selectedItemViews.enumerated() {
             let directPoint = itemView.position
             if idx == 0 {

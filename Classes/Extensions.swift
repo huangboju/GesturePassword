@@ -95,7 +95,7 @@ extension UINavigationBar {
         } else {
             setBackgroundImage(UIImage(), for: .default)
             shadowImage = UIImage()
-            
+
             let view = UIView(frame: CGRect(x: 0, y: -20, width: UIScreen.main.bounds.width, height: bounds.height + 20))
             view.isUserInteractionEnabled = false
             view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -104,7 +104,7 @@ extension UINavigationBar {
             view.backgroundColor = color
             coverView = view
         }
-        titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white.withAlphaComponent(alpha)]
+        titleTextAttributes = [.foregroundColor: UIColor.white.withAlphaComponent(alpha)]
     }
 
     func setMyBackgroundColorAlpha(_ alpha: CGFloat) {
