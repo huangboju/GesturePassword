@@ -12,7 +12,7 @@ public protocol LockViewPresentable: class {
 
 public protocol SetPatternDelegate: LockViewPresentable {
 
-    var firstPassword: String { set get }
+    var password: String { set get }
 
     func firstDrawedState()
 
@@ -42,12 +42,12 @@ extension LockAdapter {
             controller.tooShortState()
             return
         }
-        if controller.firstPassword.isEmpty {
-            controller.firstPassword = password
+        if controller.password.isEmpty {
+            controller.password = password
             controller.firstDrawedState()
             return
         }
-        guard controller.firstPassword == password else {
+        guard controller.password == password else {
             controller.mismatchState()
             return
         }
@@ -56,7 +56,7 @@ extension LockAdapter {
 
     static func reset(with controller: SetPatternDelegate) {
         controller.lockMainView.reset()
-        controller.firstPassword = ""
+        controller.password = ""
     }
 }
 

@@ -23,8 +23,7 @@ class Lock {
             print("🍀🍀🍀 \(password) 🍀🍀🍀")
         } else {
             showSetPattern(in: controller).successHandle = {
-                LockManager.set($0.firstPassword)
-                $0.dismiss()
+                LockManager.set($0)
             }
         }
     }
@@ -55,6 +54,8 @@ class Lock {
                 
             }.overTimesHandle { vc in
                 
+            }.resetSuccessHandle {
+                print("🍀🍀🍀 \($0) 🍀🍀🍀")
             }
         } else {
             print("❌❌❌ 还没有设置密码 ❌❌❌")

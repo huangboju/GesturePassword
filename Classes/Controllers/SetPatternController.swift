@@ -8,7 +8,7 @@
 
 public final class SetPatternController: UIViewController {
 
-    var successHandle: ((SetPatternController) -> Void)?
+    var successHandle: ((String) -> Void)?
 
     private let contentView = UIView()
 
@@ -16,11 +16,11 @@ public final class SetPatternController: UIViewController {
     private let lockDescLabel = LockDescLabel()
     public let lockMainView = LockView()
 
-    public var firstPassword = ""
+    public var password = ""
 
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.title = "setPasswordTitle".localized
 
         view.backgroundColor = .white
@@ -33,7 +33,7 @@ public final class SetPatternController: UIViewController {
     }
 
     private func showRedrawBarButton() {
-        if firstPassword.isEmpty { return }
+        if password.isEmpty { return }
         let redraw = UIBarButtonItem(title: "redraw".localized, style: .plain, target: self, action: #selector(redrawAction))
         navigationItem.rightBarButtonItem = redraw
     }
@@ -105,7 +105,7 @@ extension SetPatternController: SetPatternDelegate {
     }
 
     public func successState() {
-        successHandle?(self)
+        successHandle?(password)
         dismiss()
     }
 }

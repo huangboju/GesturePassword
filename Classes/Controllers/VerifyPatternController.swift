@@ -30,7 +30,7 @@ public final class VerifyPatternController: UIViewController {
 
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.title = "verifyPasswordTitle".localized
 
         view.backgroundColor = .white

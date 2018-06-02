@@ -12,15 +12,11 @@ open class ResetPatternController: UIViewController {
 
     private lazy var setPatternVC: SetPatternController = {
         let setPatternVC = SetPatternController()
-        setPatternVC.successHandle = { vc in
-            self.resetSuccessHandle?(self)
-        }
         return setPatternVC
     }()
 
     public typealias ResetPattern = (ResetPatternController) -> Void
-    
-    private var resetSuccessHandle: ResetPattern?
+
     private var overTimesHandle: ResetPattern?
     private var forgetHandle: ResetPattern?
 
@@ -79,8 +75,8 @@ extension ResetPatternController {
     }
 
     @discardableResult
-    func resetSuccessHandle(_ handle: @escaping ResetPattern) -> ResetPatternController {
-        resetSuccessHandle = handle
+    func resetSuccessHandle(_ handle: ((String) -> Void)?) -> ResetPatternController {
+        setPatternVC.successHandle = handle
         return self
     }
 }
