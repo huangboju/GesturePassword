@@ -29,9 +29,4 @@ class LockMainNav: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return LockManager.options.statusBarStyle
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }
