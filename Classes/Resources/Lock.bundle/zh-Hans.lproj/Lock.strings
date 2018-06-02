@@ -10,7 +10,9 @@
 
 "redraw" = "重绘";
 
-"setPasswordTitle" = "绘制解锁图案";
+"setPasswordTitle" = "设置手势密码";
+
+"setPasswordDescTitle" = "绘制解锁图案";
 
 "setPasswordTooShortTitle" = "至少连接$个点，请重新输入";
 

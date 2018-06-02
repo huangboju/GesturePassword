@@ -85,7 +85,7 @@ public struct LockOptions {
     }
 
     /// 设置密码提示文字
-    public var setPassword = "setPasswordTitle".localized {
+    public var setPassword = "setPasswordDescTitle".localized {
         willSet {
             LockManager.options.setPassword = newValue
         }

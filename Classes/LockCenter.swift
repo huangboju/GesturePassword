@@ -38,7 +38,7 @@ open class LockCenter {
 @discardableResult
 public func showSetPattern(in controller: UIViewController) -> SetPatternController {
     let vc = SetPatternController()
-    controller.present(LockMainNav(rootViewController: vc), animated: true, completion: nil)
+    controller.navigationController?.pushViewController(vc, animated: true)
     return vc
 }
 
@@ -50,8 +50,8 @@ public func showVerifyPattern(in controller: UIViewController) -> VerifyPatternC
 }
 
 @discardableResult
-public func showModifyPattern(in controller: UIViewController) -> ChangePatternController {
-    let vc = ChangePatternController()
+public func showModifyPattern(in controller: UIViewController) -> ResetPatternController {
+    let vc = ResetPatternController()
     controller.navigationController?.pushViewController(vc, animated: true)
     return vc
 }

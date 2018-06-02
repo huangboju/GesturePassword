@@ -20,6 +20,8 @@ public final class SetPatternController: UIViewController {
 
     override open func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "setPasswordTitle".localized
 
         view.backgroundColor = .white
 
@@ -27,12 +29,7 @@ public final class SetPatternController: UIViewController {
         contentView.backgroundColor = .white
         contentView.widthToSuperview().centerY(to: view, constant: 32)
 
-        initBarButtons()
         initUI()
-    }
-
-    private func initBarButtons() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "cancel".localized, style: .plain, target: self, action: #selector(cancelAction))
     }
 
     private func showRedrawBarButton() {
@@ -44,14 +41,9 @@ public final class SetPatternController: UIViewController {
     private func hiddenRedrawBarButton() {
         navigationItem.rightBarButtonItem = nil
     }
-    
-    @objc
-    private func cancelAction() {
-        dismiss()
-    }
 
     public func dismiss() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 
     @objc

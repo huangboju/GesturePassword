@@ -10,7 +10,9 @@
 
 "redraw" = "Redraw";
 
-"setPasswordTitle" = "Draw your pattern";
+"setPasswordTitle" = "Draw pattern";
+
+"setPasswordDescTitle" = "Draw your pattern";
 
 "setPasswordTooShortTitle" = "At least $ points required";
 
