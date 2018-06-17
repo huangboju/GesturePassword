@@ -50,10 +50,10 @@ class Lock {
         if hasPassword {
             print("密码已设置")
             print("🍀🍀🍀 \(password) 🍀🍀🍀")
-            showModifyPattern(in: controller).forgetHandle { vc in
-                
-            }.overTimesHandle { vc in
-                
+            showModifyPattern(in: controller).forgetHandle { _ in
+
+            }.overTimesHandle { _ in
+
             }.resetSuccessHandle {
                 print("🍀🍀🍀 \($0) 🍀🍀🍀")
             }

@@ -22,9 +22,9 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 import Foundation
 import Security
+import LocalAuthentication
 
 public let KeychainAccessErrorDomain = "com.kishikawakatsumi.KeychainAccess.error"
 
@@ -116,7 +116,6 @@ public enum Accessibility {
      without a passcode. Disabling the device passcode will cause all
      items in this class to be deleted.
      */
-    @available(iOS 8.0, OSX 10.10, *)
     case whenPasscodeSetThisDeviceOnly
 
     /**
@@ -155,9 +154,8 @@ public struct AuthenticationPolicy: OptionSet {
      even if fingers are added or removed.
      */
     @available(iOS 8.0, OSX 10.10, *)
-    @available(watchOS, unavailable)
     public static let userPresence = AuthenticationPolicy(rawValue: 1 << 0)
-
+    
     /**
      Constraint: Touch ID (any finger). Touch ID must be available and
      at least one finger must be enrolled. Item is still accessible by
@@ -167,7 +165,7 @@ public struct AuthenticationPolicy: OptionSet {
     @available(OSX, unavailable)
     @available(watchOS, unavailable)
     public static let touchIDAny = AuthenticationPolicy(rawValue: 1 << 1)
-
+    
     /**
      Constraint: Touch ID from the set of currently enrolled fingers.
      Touch ID must be available and at least one finger must be enrolled.
@@ -177,14 +175,14 @@ public struct AuthenticationPolicy: OptionSet {
     @available(OSX, unavailable)
     @available(watchOS, unavailable)
     public static let touchIDCurrentSet = AuthenticationPolicy(rawValue: 1 << 3)
-
+    
     /**
      Constraint: Device passcode
      */
     @available(iOS 9.0, OSX 10.11, *)
     @available(watchOS, unavailable)
     public static let devicePasscode = AuthenticationPolicy(rawValue: 1 << 4)
-
+    
     /**
      Constraint logic operation: when using more than one constraint,
      at least one of them must be satisfied.
@@ -193,7 +191,7 @@ public struct AuthenticationPolicy: OptionSet {
     @available(OSX, unavailable)
     @available(watchOS, unavailable)
     public static let or = AuthenticationPolicy(rawValue: 1 << 14)
-
+    
     /**
      Constraint logic operation: when using more than one constraint,
      all must be satisfied.
@@ -202,7 +200,7 @@ public struct AuthenticationPolicy: OptionSet {
     @available(OSX, unavailable)
     @available(watchOS, unavailable)
     public static let and = AuthenticationPolicy(rawValue: 1 << 15)
-
+    
     /**
      Create access control for private key operations (i.e. sign operation)
      */
@@ -210,7 +208,7 @@ public struct AuthenticationPolicy: OptionSet {
     @available(OSX, unavailable)
     @available(watchOS, unavailable)
     public static let privateKeyUsage = AuthenticationPolicy(rawValue: 1 << 30)
-
+    
     /**
      Security: Application provided password for data encryption key generation.
      This is not a constraint but additional item encryption mechanism.
@@ -219,20 +217,19 @@ public struct AuthenticationPolicy: OptionSet {
     @available(OSX, unavailable)
     @available(watchOS, unavailable)
     public static let applicationPassword = AuthenticationPolicy(rawValue: 1 << 31)
-
+    
     #if swift(>=2.3)
-        public let rawValue: UInt
-
-        public init(rawValue: UInt) {
-            self.rawValue = rawValue
-        }
-
+    public let rawValue: UInt
+    
+    public init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
     #else
-        public let rawValue: Int
-
-        public init(rawValue: Int) {
-            self.rawValue = rawValue
-        }
+    public let rawValue: Int
+    
+    public init(rawValue: Int) {
+    self.rawValue = rawValue
+    }
     #endif
 }
 
@@ -240,23 +237,19 @@ public struct Attributes {
     public var `class`: String? {
         return attributes[Class] as? String
     }
-
     public var data: Data? {
         return attributes[ValueData] as? Data
     }
-
     public var ref: Data? {
         return attributes[ValueRef] as? Data
     }
-
     public var persistentRef: Data? {
         return attributes[ValuePersistentRef] as? Data
     }
-
+    
     public var accessible: String? {
         return attributes[AttributeAccessible] as? String
     }
-
     public var accessControl: SecAccessControl? {
         if #available(OSX 10.10, *) {
             if let accessControl = attributes[AttributeAccessControl] {
@@ -267,155 +260,85 @@ public struct Attributes {
             return nil
         }
     }
-
     public var accessGroup: String? {
         return attributes[AttributeAccessGroup] as? String
     }
-
     public var synchronizable: Bool? {
         return attributes[AttributeSynchronizable] as? Bool
     }
-
     public var creationDate: Date? {
         return attributes[AttributeCreationDate] as? Date
     }
-
     public var modificationDate: Date? {
         return attributes[AttributeModificationDate] as? Date
     }
-
     public var attributeDescription: String? {
         return attributes[AttributeDescription] as? String
     }
-
     public var comment: String? {
         return attributes[AttributeComment] as? String
     }
-
     public var creator: String? {
         return attributes[AttributeCreator] as? String
     }
-
     public var type: String? {
         return attributes[AttributeType] as? String
     }
-
     public var label: String? {
         return attributes[AttributeLabel] as? String
     }
-
     public var isInvisible: Bool? {
         return attributes[AttributeIsInvisible] as? Bool
     }
-
     public var isNegative: Bool? {
         return attributes[AttributeIsNegative] as? Bool
     }
-
     public var account: String? {
         return attributes[AttributeAccount] as? String
     }
-
     public var service: String? {
         return attributes[AttributeService] as? String
     }
-
     public var generic: Data? {
         return attributes[AttributeGeneric] as? Data
     }
-
     public var securityDomain: String? {
         return attributes[AttributeSecurityDomain] as? String
     }
-
     public var server: String? {
         return attributes[AttributeServer] as? String
     }
-
     public var `protocol`: String? {
         return attributes[AttributeProtocol] as? String
     }
-
     public var authenticationType: String? {
         return attributes[AttributeAuthenticationType] as? String
     }
-
     public var port: Int? {
         return attributes[AttributePort] as? Int
     }
-
     public var path: String? {
         return attributes[AttributePath] as? String
     }
-
+    
     fileprivate let attributes: [String: Any]
-
+    
     init(attributes: [String: Any]) {
         self.attributes = attributes
     }
-
+    
     public subscript(key: String) -> Any? {
-        return attributes[key]
+        get {
+            return attributes[key]
+        }
     }
 }
 
 public final class Keychain {
-    public var itemClass: ItemClass {
-        return options.itemClass
-    }
-
-    public var service: String {
-        return options.service
-    }
-
-    public var accessGroup: String? {
-        return options.accessGroup
-    }
-
-    public var server: URL {
-        return options.server
-    }
-
-    public var protocolType: ProtocolType {
-        return options.protocolType
-    }
-
-    public var authenticationType: AuthenticationType {
-        return options.authenticationType
-    }
-
-    public var accessibility: Accessibility {
-        return options.accessibility
-    }
-
-    @available(iOS 8.0, OSX 10.10, *)
-    @available(watchOS, unavailable)
-    public var authenticationPolicy: AuthenticationPolicy? {
-        return options.authenticationPolicy
-    }
-
-    public var synchronizable: Bool {
-        return options.synchronizable
-    }
-
-    public var label: String? {
-        return options.label
-    }
-
-    public var comment: String? {
-        return options.comment
-    }
-
-    @available(iOS 8.0, OSX 10.10, *)
-    @available(watchOS, unavailable)
-    public var authenticationPrompt: String? {
-        return options.authenticationPrompt
-    }
-
+    
     fileprivate let options: Options
-
+    
     // MARK:
-
     public convenience init() {
         var options = Options()
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
@@ -423,103 +346,18 @@ public final class Keychain {
         }
         self.init(options)
     }
-
-    public convenience init(service: String) {
-        var options = Options()
-        options.service = service
-        self.init(options)
-    }
-
-    public convenience init(accessGroup: String) {
-        var options = Options()
-        if let bundleIdentifier = Bundle.main.bundleIdentifier {
-            options.service = bundleIdentifier
-        }
-        options.accessGroup = accessGroup
-        self.init(options)
-    }
-
-    public convenience init(service: String, accessGroup: String) {
-        var options = Options()
-        options.service = service
-        options.accessGroup = accessGroup
-        self.init(options)
-    }
-
-    public convenience init(server: String, protocolType: ProtocolType, authenticationType: AuthenticationType = .default) {
-        self.init(server: URL(string: server)!, protocolType: protocolType, authenticationType: authenticationType)
-    }
-
-    public convenience init(server: URL, protocolType: ProtocolType, authenticationType: AuthenticationType = .default) {
-        var options = Options()
-        options.itemClass = .internetPassword
-        options.server = server
-        options.protocolType = protocolType
-        options.authenticationType = authenticationType
-        self.init(options)
-    }
-
+    
     fileprivate init(_ opts: Options) {
         options = opts
     }
 
     // MARK:
-
-    public func accessibility(_ accessibility: Accessibility) -> Keychain {
-        var options = self.options
-        options.accessibility = accessibility
-        return Keychain(options)
-    }
-
-    @available(iOS 8.0, OSX 10.10, *)
-    @available(watchOS, unavailable)
-    public func accessibility(_ accessibility: Accessibility, authenticationPolicy: AuthenticationPolicy) -> Keychain {
-        var options = self.options
-        options.accessibility = accessibility
-        options.authenticationPolicy = authenticationPolicy
-        return Keychain(options)
-    }
-
-    public func synchronizable(_ synchronizable: Bool) -> Keychain {
-        var options = self.options
-        options.synchronizable = synchronizable
-        return Keychain(options)
-    }
-
-    public func label(_ label: String) -> Keychain {
-        var options = self.options
-        options.label = label
-        return Keychain(options)
-    }
-
-    public func comment(_ comment: String) -> Keychain {
-        var options = self.options
-        options.comment = comment
-        return Keychain(options)
-    }
-
-    public func attributes(_ attributes: [String: Any]) -> Keychain {
-        var options = self.options
-        attributes.forEach { options.attributes.updateValue($1, forKey: $0) }
-        return Keychain(options)
-    }
-
-    @available(iOS 8.0, OSX 10.10, *)
-    @available(watchOS, unavailable)
-    public func authenticationPrompt(_ authenticationPrompt: String) -> Keychain {
-        var options = self.options
-        options.authenticationPrompt = authenticationPrompt
-        return Keychain(options)
-    }
-
-    // MARK:
-
     public func get(_ key: String) throws -> String? {
         return try getString(key)
     }
-
+    
     public func getString(_ key: String) throws -> String? {
-        guard let data = try getData(key) else {
+        guard let data = try getData(key) else  {
             return nil
         }
         guard let string = String(data: data, encoding: .utf8) else {
@@ -528,18 +366,18 @@ public final class Keychain {
         }
         return string
     }
-
+    
     public func getData(_ key: String) throws -> Data? {
         var query = options.query()
-
+        
         query[MatchLimit] = MatchLimitOne
         query[ReturnData] = kCFBooleanTrue
-
+        
         query[AttributeAccount] = key
-
+        
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
-
+        
         switch status {
         case errSecSuccess:
             guard let data = result as? Data else {
@@ -552,22 +390,22 @@ public final class Keychain {
             throw securityError(status: status)
         }
     }
-
+    
     public func get<T>(_ key: String, handler: (Attributes?) -> T) throws -> T {
         var query = options.query()
-
+        
         query[MatchLimit] = MatchLimitOne
-
+        
         query[ReturnData] = kCFBooleanTrue
         query[ReturnAttributes] = kCFBooleanTrue
         query[ReturnRef] = kCFBooleanTrue
         query[ReturnPersistentRef] = kCFBooleanTrue
-
+        
         query[AttributeAccount] = key
-
+        
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
-
+        
         switch status {
         case errSecSuccess:
             guard let attributes = result as? [String: Any] else {
@@ -580,9 +418,8 @@ public final class Keychain {
             throw securityError(status: status)
         }
     }
-
+    
     // MARK:
-
     public func set(_ value: String, key: String) throws {
         guard let data = value.data(using: .utf8, allowLossyConversion: false) else {
             print("failed to convert string to data")
@@ -590,62 +427,48 @@ public final class Keychain {
         }
         try set(data, key: key)
     }
-
+    
     public func set(_ value: Data, key: String) throws {
         var query = options.query()
         query[AttributeAccount] = key
-        #if os(iOS)
-            if #available(iOS 9.0, *) {
-                query[UseAuthenticationUI] = UseAuthenticationUIFail
-            } else {
-                query[UseNoAuthenticationUI] = kCFBooleanTrue
-            }
-        #elseif os(OSX)
-            query[ReturnData] = kCFBooleanTrue
-            if #available(OSX 10.11, *) {
-                query[UseAuthenticationUI] = UseAuthenticationUIFail
-            }
-        #endif
-
+        if #available(iOS 9.0, *) {
+            query[UseAuthenticationUI] = UseAuthenticationUIFail
+        } else {
+            query[UseNoAuthenticationUI] = kCFBooleanTrue
+        }
+        
         var status = SecItemCopyMatching(query as CFDictionary, nil)
         switch status {
         case errSecSuccess, errSecInteractionNotAllowed:
             var query = options.query()
             query[AttributeAccount] = key
-
+            
             var (attributes, error) = options.attributes(key: nil, value: value)
             if let error = error {
                 print(error.localizedDescription)
                 throw error
             }
-
+            
             options.attributes.forEach { attributes.updateValue($1, forKey: $0) }
 
-            #if os(iOS)
-                if status == errSecInteractionNotAllowed && floor(NSFoundationVersionNumber) <= floor(NSFoundationVersionNumber_iOS_8_0) {
-                    try remove(key)
-                    try set(value, key: key)
-                } else {
-                    status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
-                    if status != errSecSuccess {
-                        throw securityError(status: status)
-                    }
-                }
-            #else
+            if status == errSecInteractionNotAllowed && floor(NSFoundationVersionNumber) <= floor(NSFoundationVersionNumber_iOS_8_0) {
+                try remove(key)
+                try set(value, key: key)
+            } else {
                 status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
                 if status != errSecSuccess {
                     throw securityError(status: status)
                 }
-            #endif
+            }
         case errSecItemNotFound:
             var (attributes, error) = options.attributes(key: key, value: value)
             if let error = error {
                 print(error.localizedDescription)
                 throw error
             }
-
+            
             options.attributes.forEach { attributes.updateValue($1, forKey: $0) }
-
+            
             status = SecItemAdd(attributes as CFDictionary, nil)
             if status != errSecSuccess {
                 throw securityError(status: status)
@@ -654,12 +477,12 @@ public final class Keychain {
             throw securityError(status: status)
         }
     }
-
+    
     public subscript(key: String) -> String? {
         get {
             return (try? get(key)).flatMap { $0 }
         }
-
+        
         set {
             if let value = newValue {
                 do {
@@ -672,380 +495,37 @@ public final class Keychain {
             }
         }
     }
-
+    
     public subscript(string key: String) -> String? {
         get {
             return self[key]
         }
-
+        
         set {
             self[key] = newValue
         }
     }
 
-    public subscript(data key: String) -> Data? {
-        get {
-            return (try? getData(key)).flatMap { $0 }
-        }
-
-        set {
-            if let value = newValue {
-                do {
-                    try set(value, key: key)
-                } catch {}
-            } else {
-                do {
-                    try remove(key)
-                } catch {}
-            }
-        }
-    }
-
-    public subscript(attributes key: String) -> Attributes? {
-        return (try? get(key) { $0 }).flatMap { $0 }
-    }
-
     // MARK:
-
     public func remove(_ key: String) throws {
         var query = options.query()
         query[AttributeAccount] = key
-
+        
         let status = SecItemDelete(query as CFDictionary)
         if status != errSecSuccess && status != errSecItemNotFound {
             throw securityError(status: status)
         }
     }
-
-    public func removeAll() throws {
-        var query = options.query()
-        #if !os(iOS) && !os(watchOS) && !os(tvOS)
-            query[MatchLimit] = MatchLimitAll
-        #endif
-
-        let status = SecItemDelete(query as CFDictionary)
-        if status != errSecSuccess && status != errSecItemNotFound {
-            throw securityError(status: status)
-        }
-    }
-
+    
     // MARK:
-
-    public func contains(_ key: String) throws -> Bool {
-        var query = options.query()
-        query[AttributeAccount] = key
-
-        let status = SecItemCopyMatching(query as CFDictionary, nil)
-        switch status {
-        case errSecSuccess:
-            return true
-        case errSecItemNotFound:
-            return false
-        default:
-            throw securityError(status: status)
-        }
-    }
-
-    // MARK:
-
-    public class func allKeys(_ itemClass: ItemClass) -> [(String, String)] {
-        var query = [String: Any]()
-        query[Class] = itemClass.rawValue
-        query[AttributeSynchronizable] = SynchronizableAny
-        query[MatchLimit] = MatchLimitAll
-        query[ReturnAttributes] = kCFBooleanTrue
-
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
-
-        switch status {
-        case errSecSuccess:
-            if let items = result as? [[String: Any]] {
-                return prettify(itemClass: itemClass, items: items).map {
-                    switch itemClass {
-                    case .genericPassword:
-                        return (($0["service"] ?? "") as! String, ($0["key"] ?? "") as! String)
-                    case .internetPassword:
-                        return (($0["server"] ?? "") as! String, ($0["key"] ?? "") as! String)
-                    }
-                }
-            }
-        case errSecItemNotFound:
-            return []
-        default: ()
-        }
-
-        securityError(status: status)
-        return []
-    }
-
-    public func allKeys() -> [String] {
-        return type(of: self).prettify(itemClass: itemClass, items: items()).map { $0["key"] as! String }
-    }
-
-    public class func allItems(_ itemClass: ItemClass) -> [[String: Any]] {
-        var query = [String: Any]()
-        query[Class] = itemClass.rawValue
-        query[MatchLimit] = MatchLimitAll
-        query[ReturnAttributes] = kCFBooleanTrue
-        #if os(iOS) || os(watchOS) || os(tvOS)
-            query[ReturnData] = kCFBooleanTrue
-        #endif
-
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
-
-        switch status {
-        case errSecSuccess:
-            if let items = result as? [[String: Any]] {
-                return prettify(itemClass: itemClass, items: items)
-            }
-        case errSecItemNotFound:
-            return []
-        default: ()
-        }
-
-        securityError(status: status)
-        return []
-    }
-
-    public func allItems() -> [[String: Any]] {
-        return type(of: self).prettify(itemClass: itemClass, items: items())
-    }
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        public func getSharedPassword(_ completion: @escaping (_ account: String?, _ password: String?, _ error: Error?) -> Void = { _, _, _ -> Void in }) {
-            if let domain = server.host {
-                type(of: self).requestSharedWebCredential(domain: domain, account: nil) { (credentials, error) -> Void in
-                    if let credential = credentials.first {
-                        let account = credential["account"]
-                        let password = credential["password"]
-                        completion(account, password, error)
-                    } else {
-                        completion(nil, nil, error)
-                    }
-                }
-            } else {
-                let error = securityError(status: Status.param.rawValue)
-                completion(nil, nil, error)
-            }
-        }
-    #endif
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        public func getSharedPassword(_ account: String, completion: @escaping (_ password: String?, _ error: Error?) -> Void = { _, _ -> Void in }) {
-            if let domain = server.host {
-                type(of: self).requestSharedWebCredential(domain: domain, account: account) { (credentials, error) -> Void in
-                    if let credential = credentials.first {
-                        if let password = credential["password"] {
-                            completion(password, error)
-                        } else {
-                            completion(nil, error)
-                        }
-                    } else {
-                        completion(nil, error)
-                    }
-                }
-            } else {
-                let error = securityError(status: Status.param.rawValue)
-                completion(nil, error)
-            }
-        }
-    #endif
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        public func setSharedPassword(_ password: String, account: String, completion: @escaping (_ error: Error?) -> Void = { _ -> Void in }) {
-            setSharedPassword(password as String?, account: account, completion: completion)
-        }
-    #endif
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        fileprivate func setSharedPassword(_ password: String?, account: String, completion: @escaping (_ error: Error?) -> Void = { _ -> Void in }) {
-            if let domain = server.host {
-                SecAddSharedWebCredential(domain as CFString, account as CFString, password as CFString?) { error -> Void in
-                    if let error = error {
-                        completion(error.error)
-                    } else {
-                        completion(nil)
-                    }
-                }
-            } else {
-                let error = securityError(status: Status.param.rawValue)
-                completion(error)
-            }
-        }
-    #endif
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        public func removeSharedPassword(_ account: String, completion: @escaping (_ error: Error?) -> Void = { _ -> Void in }) {
-            setSharedPassword(nil, account: account, completion: completion)
-        }
-    #endif
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        public class func requestSharedWebCredential(_ completion: @escaping (_ credentials: [[String: String]], _ error: Error?) -> Void = { _, _ -> Void in }) {
-            requestSharedWebCredential(domain: nil, account: nil, completion: completion)
-        }
-    #endif
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        public class func requestSharedWebCredential(domain: String, completion: @escaping (_ credentials: [[String: String]], _ error: Error?) -> Void = { _, _ -> Void in }) {
-            requestSharedWebCredential(domain: domain, account: nil, completion: completion)
-        }
-    #endif
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        public class func requestSharedWebCredential(domain: String, account: String, completion: @escaping (_ credentials: [[String: String]], _ error: Error?) -> Void = { _, _ -> Void in }) {
-            requestSharedWebCredential(domain: Optional(domain), account: Optional(account)!, completion: completion)
-        }
-    #endif
-
-    #if os(iOS)
-        @available(iOS 8.0, *)
-        fileprivate class func requestSharedWebCredential(domain: String?, account: String?, completion: @escaping (_ credentials: [[String: String]], _ error: Error?) -> Void) {
-            SecRequestSharedWebCredential(domain as CFString?, account as CFString?) { (credentials, error) -> Void in
-                var remoteError: NSError?
-                if let error = error {
-                    remoteError = error.error
-                    if remoteError?.code != Int(errSecItemNotFound) {
-                        print("error:[\(remoteError!.code)] \(remoteError!.localizedDescription)")
-                    }
-                }
-                if let credentials = credentials {
-                    let credentials = (credentials as NSArray).map { credentials -> [String: String] in
-                        var credential = [String: String]()
-                        if let credentials = credentials as? [String: String] {
-                            if let server = credentials[AttributeServer] {
-                                credential["server"] = server
-                            }
-                            if let account = credentials[AttributeAccount] {
-                                credential["account"] = account
-                            }
-                            if let password = credentials[SharedPassword] {
-                                credential["password"] = password
-                            }
-                        }
-                        return credential
-                    }
-                    completion(credentials, remoteError)
-                } else {
-                    completion([], remoteError)
-                }
-            }
-        }
-    #endif
-
-    #if os(iOS)
-        /**
-         @abstract Returns a randomly generated password.
-         @return String password in the form xxx-xxx-xxx-xxx where x is taken from the sets "abcdefghkmnopqrstuvwxy", "ABCDEFGHJKLMNPQRSTUVWXYZ", "3456789" with at least one character from each set being present.
-         */
-        @available(iOS 8.0, *)
-        public class func generatePassword() -> String {
-            return SecCreateSharedWebCredentialPassword()! as String
-        }
-    #endif
-
-    // MARK:
-
-    fileprivate func items() -> [[String: Any]] {
-        var query = options.query()
-        query[MatchLimit] = MatchLimitAll
-        query[ReturnAttributes] = kCFBooleanTrue
-        #if os(iOS) || os(watchOS) || os(tvOS)
-            query[ReturnData] = kCFBooleanTrue
-        #endif
-
-        var result: AnyObject?
-        let status = SecItemCopyMatching(query as CFDictionary, &result)
-
-        switch status {
-        case errSecSuccess:
-            if let items = result as? [[String: Any]] {
-                return items
-            }
-        case errSecItemNotFound:
-            return []
-        default: ()
-        }
-
-        securityError(status: status)
-        return []
-    }
-
-    fileprivate class func prettify(itemClass: ItemClass, items: [[String: Any]]) -> [[String: Any]] {
-        let items = items.map { attributes -> [String: Any] in
-            var item = [String: Any]()
-
-            item["class"] = itemClass.description
-
-            switch itemClass {
-            case .genericPassword:
-                if let service = attributes[AttributeService] as? String {
-                    item["service"] = service
-                }
-                if let accessGroup = attributes[AttributeAccessGroup] as? String {
-                    item["accessGroup"] = accessGroup
-                }
-            case .internetPassword:
-                if let server = attributes[AttributeServer] as? String {
-                    item["server"] = server
-                }
-                if let proto = attributes[AttributeProtocol] as? String {
-                    if let protocolType = ProtocolType(rawValue: proto) {
-                        item["protocol"] = protocolType.description
-                    }
-                }
-                if let auth = attributes[AttributeAuthenticationType] as? String {
-                    if let authenticationType = AuthenticationType(rawValue: auth) {
-                        item["authenticationType"] = authenticationType.description
-                    }
-                }
-            }
-
-            if let key = attributes[AttributeAccount] as? String {
-                item["key"] = key
-            }
-            if let data = attributes[ValueData] as? Data {
-                if let text = String(data: data, encoding: .utf8) {
-                    item["value"] = text
-                } else {
-                    item["value"] = data
-                }
-            }
-
-            if let accessible = attributes[AttributeAccessible] as? String {
-                if let accessibility = Accessibility(rawValue: accessible) {
-                    item["accessibility"] = accessibility.description
-                }
-            }
-            if let synchronizable = attributes[AttributeSynchronizable] as? Bool {
-                item["synchronizable"] = synchronizable ? "true" : "false"
-            }
-
-            return item
-        }
-        return items
-    }
-
-    // MARK:
-
     @discardableResult
     fileprivate class func securityError(status: OSStatus) -> Error {
         let error = Status(status: status)
         print("OSStatus error:[\(error.errorCode)] \(error.description)")
-
+        
         return error
     }
-
+    
     @discardableResult
     fileprivate func securityError(status: OSStatus) -> Error {
         return type(of: self).securityError(status: status)
@@ -1054,24 +534,25 @@ public final class Keychain {
 
 struct Options {
     var itemClass: ItemClass = .genericPassword
-
+    
     var service: String = ""
-    var accessGroup: String?
-
+    var accessGroup: String? = nil
+    
     var server: URL!
     var protocolType: ProtocolType!
     var authenticationType: AuthenticationType = .default
-
+    
     var accessibility: Accessibility = .afterFirstUnlock
     var authenticationPolicy: AuthenticationPolicy?
-
+    
     var synchronizable: Bool = false
-
+    
     var label: String?
     var comment: String?
-
+    
     var authenticationPrompt: String?
-
+    var authenticationContext: AnyObject?
+    
     var attributes = [String: Any]()
 }
 
@@ -1128,8 +609,8 @@ private let ValuePersistentRef = String(kSecValuePersistentRef)
 private let UseOperationPrompt = String(kSecUseOperationPrompt)
 
 #if os(iOS)
-    @available(iOS, introduced: 8.0, deprecated: 9.0, message: "Use a UseAuthenticationUI instead.")
-    private let UseNoAuthenticationUI = String(kSecUseNoAuthenticationUI)
+@available(iOS, introduced: 8.0, deprecated: 9.0, message: "Use a UseAuthenticationUI instead.")
+private let UseNoAuthenticationUI = String(kSecUseNoAuthenticationUI)
 #endif
 
 @available(iOS 9.0, OSX 10.11, *)
@@ -1153,46 +634,26 @@ private let UseAuthenticationUIFail = String(kSecUseAuthenticationUIFail)
 private let UseAuthenticationUISkip = String(kSecUseAuthenticationUISkip)
 
 #if os(iOS)
-    /** Credential Key Constants */
-    private let SharedPassword = String(kSecSharedPassword)
+/** Credential Key Constants */
+private let SharedPassword = String(kSecSharedPassword)
 #endif
 
-extension Keychain: CustomStringConvertible, CustomDebugStringConvertible {
-    public var description: String {
-        let items = allItems()
-        if items.isEmpty {
-            return "[]"
-        }
-        var description = "[\n"
-        for item in items {
-            description += "  "
-            description += "\(item)\n"
-        }
-        description += "]"
-        return description
-    }
-
-    public var debugDescription: String {
-        return "\(items())"
-    }
-}
-
 extension Options {
-
+    
     func query() -> [String: Any] {
         var query = [String: Any]()
-
+        
         query[Class] = itemClass.rawValue
         query[AttributeSynchronizable] = SynchronizableAny
-
+        
         switch itemClass {
         case .genericPassword:
             query[AttributeService] = service
             // Access group is not supported on any simulators.
             #if (!arch(i386) && !arch(x86_64)) || (!os(iOS) && !os(watchOS) && !os(tvOS))
-                if let accessGroup = self.accessGroup {
-                    query[AttributeAccessGroup] = accessGroup
-                }
+            if let accessGroup = self.accessGroup {
+                query[AttributeAccessGroup] = accessGroup
+            }
             #endif
         case .internetPassword:
             query[AttributeServer] = server.host
@@ -1200,35 +661,43 @@ extension Options {
             query[AttributeProtocol] = protocolType.rawValue
             query[AttributeAuthenticationType] = authenticationType.rawValue
         }
-
+        
         if #available(OSX 10.10, *) {
             if authenticationPrompt != nil {
                 query[UseOperationPrompt] = authenticationPrompt
             }
         }
-
+        
+        #if !os(watchOS)
+        if #available(iOS 9.0, OSX 10.11, *) {
+            if authenticationContext != nil {
+                query[UseAuthenticationContext] = authenticationContext
+            }
+        }
+        #endif
+        
         return query
     }
-
+    
     func attributes(key: String?, value: Data) -> ([String: Any], Error?) {
         var attributes: [String: Any]
-
+        
         if key != nil {
             attributes = query()
             attributes[AttributeAccount] = key
         } else {
             attributes = [String: Any]()
         }
-
+        
         attributes[ValueData] = value
-
+        
         if label != nil {
             attributes[AttributeLabel] = label
         }
         if comment != nil {
             attributes[AttributeComment] = comment
         }
-
+        
         if let policy = authenticationPolicy {
             if #available(OSX 10.10, *) {
                 var error: Unmanaged<CFError>?
@@ -1236,7 +705,7 @@ extension Options {
                     if let error = error?.takeUnretainedValue() {
                         return (attributes, error.error)
                     }
-
+                    
                     return (attributes, Status.unexpectedError)
                 }
                 attributes[AttributeAccessControl] = accessControl
@@ -1246,27 +715,26 @@ extension Options {
         } else {
             attributes[AttributeAccessible] = accessibility.rawValue
         }
-
+        
         attributes[AttributeSynchronizable] = synchronizable ? kCFBooleanTrue : kCFBooleanFalse
-
+        
         return (attributes, nil)
     }
 }
 
 // MARK:
-
 extension Attributes: CustomStringConvertible, CustomDebugStringConvertible {
     public var description: String {
         return "\(attributes)"
     }
-
+    
     public var debugDescription: String {
         return description
     }
 }
 
 extension ItemClass: RawRepresentable, CustomStringConvertible {
-
+    
     public init?(rawValue: String) {
         switch rawValue {
         case String(kSecClassGenericPassword):
@@ -1277,7 +745,7 @@ extension ItemClass: RawRepresentable, CustomStringConvertible {
             return nil
         }
     }
-
+    
     public var rawValue: String {
         switch self {
         case .genericPassword:
@@ -1286,7 +754,7 @@ extension ItemClass: RawRepresentable, CustomStringConvertible {
             return String(kSecClassInternetPassword)
         }
     }
-
+    
     public var description: String {
         switch self {
         case .genericPassword:
@@ -1298,7 +766,7 @@ extension ItemClass: RawRepresentable, CustomStringConvertible {
 }
 
 extension ProtocolType: RawRepresentable, CustomStringConvertible {
-
+    
     public init?(rawValue: String) {
         switch rawValue {
         case String(kSecAttrProtocolFTP):
@@ -1367,7 +835,7 @@ extension ProtocolType: RawRepresentable, CustomStringConvertible {
             return nil
         }
     }
-
+    
     public var rawValue: String {
         switch self {
         case .ftp:
@@ -1434,7 +902,7 @@ extension ProtocolType: RawRepresentable, CustomStringConvertible {
             return String(kSecAttrProtocolPOP3S)
         }
     }
-
+    
     public var description: String {
         switch self {
         case .ftp:
@@ -1504,7 +972,7 @@ extension ProtocolType: RawRepresentable, CustomStringConvertible {
 }
 
 extension AuthenticationType: RawRepresentable, CustomStringConvertible {
-
+    
     public init?(rawValue: String) {
         switch rawValue {
         case String(kSecAttrAuthenticationTypeNTLM):
@@ -1522,12 +990,12 @@ extension AuthenticationType: RawRepresentable, CustomStringConvertible {
         case String(kSecAttrAuthenticationTypeHTMLForm):
             self = .htmlForm
         case String(kSecAttrAuthenticationTypeDefault):
-            self = .default
+            self = .`default`
         default:
             return nil
         }
     }
-
+    
     public var rawValue: String {
         switch self {
         case .ntlm:
@@ -1544,11 +1012,11 @@ extension AuthenticationType: RawRepresentable, CustomStringConvertible {
             return String(kSecAttrAuthenticationTypeHTTPDigest)
         case .htmlForm:
             return String(kSecAttrAuthenticationTypeHTMLForm)
-        case .default:
+        case .`default`:
             return String(kSecAttrAuthenticationTypeDefault)
         }
     }
-
+    
     public var description: String {
         switch self {
         case .ntlm:
@@ -1565,14 +1033,14 @@ extension AuthenticationType: RawRepresentable, CustomStringConvertible {
             return "HTTPDigest"
         case .htmlForm:
             return "HTMLForm"
-        case .default:
+        case .`default`:
             return "Default"
         }
     }
 }
 
 extension Accessibility: RawRepresentable, CustomStringConvertible {
-
+    
     public init?(rawValue: String) {
         if #available(OSX 10.10, *) {
             switch rawValue {
@@ -1612,7 +1080,7 @@ extension Accessibility: RawRepresentable, CustomStringConvertible {
             }
         }
     }
-
+    
     public var rawValue: String {
         switch self {
         case .whenUnlocked:
@@ -1635,7 +1103,7 @@ extension Accessibility: RawRepresentable, CustomStringConvertible {
             return String(kSecAttrAccessibleAlwaysThisDeviceOnly)
         }
     }
-
+    
     public var description: String {
         switch self {
         case .whenUnlocked:
@@ -1660,420 +1128,420 @@ extension CFError {
     var error: NSError {
         let domain = CFErrorGetDomain(self) as String
         let code = CFErrorGetCode(self)
-        let userInfo = CFErrorCopyUserInfo(self) as? [String: Any]
-
+        let userInfo = CFErrorCopyUserInfo(self) as! [String: Any]
+        
         return NSError(domain: domain, code: code, userInfo: userInfo)
     }
 }
 
 public enum Status: OSStatus, Error {
-    case success = 0
-    case unimplemented = -4
-    case diskFull = -34
-    case io = -36
-    case opWr = -49
-    case param = -50
-    case wrPerm = -61
-    case allocate = -108
-    case userCanceled = -128
-    case badReq = -909
-    case internalComponent = -2070
-    case notAvailable = -25291
-    case readOnly = -25292
-    case authFailed = -25293
-    case noSuchKeychain = -25294
-    case invalidKeychain = -25295
-    case duplicateKeychain = -25296
-    case duplicateCallback = -25297
-    case invalidCallback = -25298
-    case duplicateItem = -25299
-    case itemNotFound = -25300
-    case bufferTooSmall = -25301
-    case dataTooLarge = -25302
-    case noSuchAttr = -25303
-    case invalidItemRef = -25304
-    case invalidSearchRef = -25305
-    case noSuchClass = -25306
-    case noDefaultKeychain = -25307
-    case interactionNotAllowed = -25308
-    case readOnlyAttr = -25309
-    case wrongSecVersion = -25310
-    case keySizeNotAllowed = -25311
-    case noStorageModule = -25312
-    case noCertificateModule = -25313
-    case noPolicyModule = -25314
-    case interactionRequired = -25315
-    case dataNotAvailable = -25316
-    case dataNotModifiable = -25317
-    case createChainFailed = -25318
-    case invalidPrefsDomain = -25319
-    case inDarkWake = -25320
-    case aclNotSimple = -25240
-    case policyNotFound = -25241
-    case invalidTrustSetting = -25242
-    case noAccessForItem = -25243
-    case invalidOwnerEdit = -25244
-    case trustNotAvailable = -25245
-    case unsupportedFormat = -25256
-    case unknownFormat = -25257
-    case keyIsSensitive = -25258
-    case multiplePrivKeys = -25259
-    case passphraseRequired = -25260
-    case invalidPasswordRef = -25261
-    case invalidTrustSettings = -25262
-    case noTrustSettings = -25263
-    case pkcs12VerifyFailure = -25264
-    case invalidCertificate = -26265
-    case notSigner = -26267
-    case policyDenied = -26270
-    case invalidKey = -26274
-    case decode = -26275
-    case `internal` = -26276
-    case unsupportedAlgorithm = -26268
-    case unsupportedOperation = -26271
-    case unsupportedPadding = -26273
-    case itemInvalidKey = -34000
-    case itemInvalidKeyType = -34001
-    case itemInvalidValue = -34002
-    case itemClassMissing = -34003
-    case itemMatchUnsupported = -34004
-    case useItemListUnsupported = -34005
-    case useKeychainUnsupported = -34006
-    case useKeychainListUnsupported = -34007
-    case returnDataUnsupported = -34008
-    case returnAttributesUnsupported = -34009
-    case returnRefUnsupported = -34010
-    case returnPersitentRefUnsupported = -34011
-    case valueRefUnsupported = -34012
-    case valuePersistentRefUnsupported = -34013
-    case returnMissingPointer = -34014
-    case matchLimitUnsupported = -34015
-    case itemIllegalQuery = -34016
-    case waitForCallback = -34017
-    case missingEntitlement = -34018
-    case upgradePending = -34019
-    case mpSignatureInvalid = -25327
-    case otrTooOld = -25328
-    case otrIDTooNew = -25329
-    case serviceNotAvailable = -67585
-    case insufficientClientID = -67586
-    case deviceReset = -67587
-    case deviceFailed = -67588
-    case appleAddAppACLSubject = -67589
-    case applePublicKeyIncomplete = -67590
-    case appleSignatureMismatch = -67591
-    case appleInvalidKeyStartDate = -67592
-    case appleInvalidKeyEndDate = -67593
-    case conversionError = -67594
-    case appleSSLv2Rollback = -67595
-    case quotaExceeded = -67596
-    case fileTooBig = -67597
-    case invalidDatabaseBlob = -67598
-    case invalidKeyBlob = -67599
-    case incompatibleDatabaseBlob = -67600
-    case incompatibleKeyBlob = -67601
-    case hostNameMismatch = -67602
-    case unknownCriticalExtensionFlag = -67603
-    case noBasicConstraints = -67604
-    case noBasicConstraintsCA = -67605
-    case invalidAuthorityKeyID = -67606
-    case invalidSubjectKeyID = -67607
-    case invalidKeyUsageForPolicy = -67608
-    case invalidExtendedKeyUsage = -67609
-    case invalidIDLinkage = -67610
-    case pathLengthConstraintExceeded = -67611
-    case invalidRoot = -67612
-    case crlExpired = -67613
-    case crlNotValidYet = -67614
-    case crlNotFound = -67615
-    case crlServerDown = -67616
-    case crlBadURI = -67617
-    case unknownCertExtension = -67618
-    case unknownCRLExtension = -67619
-    case crlNotTrusted = -67620
-    case crlPolicyFailed = -67621
-    case idpFailure = -67622
-    case smimeEmailAddressesNotFound = -67623
-    case smimeBadExtendedKeyUsage = -67624
-    case smimeBadKeyUsage = -67625
-    case smimeKeyUsageNotCritical = -67626
-    case smimeNoEmailAddress = -67627
-    case smimeSubjAltNameNotCritical = -67628
-    case sslBadExtendedKeyUsage = -67629
-    case ocspBadResponse = -67630
-    case ocspBadRequest = -67631
-    case ocspUnavailable = -67632
-    case ocspStatusUnrecognized = -67633
-    case endOfData = -67634
-    case incompleteCertRevocationCheck = -67635
-    case networkFailure = -67636
-    case ocspNotTrustedToAnchor = -67637
-    case recordModified = -67638
-    case ocspSignatureError = -67639
-    case ocspNoSigner = -67640
-    case ocspResponderMalformedReq = -67641
-    case ocspResponderInternalError = -67642
-    case ocspResponderTryLater = -67643
-    case ocspResponderSignatureRequired = -67644
-    case ocspResponderUnauthorized = -67645
-    case ocspResponseNonceMismatch = -67646
-    case codeSigningBadCertChainLength = -67647
-    case codeSigningNoBasicConstraints = -67648
+    case success                            = 0
+    case unimplemented                      = -4
+    case diskFull                           = -34
+    case io                                 = -36
+    case opWr                               = -49
+    case param                              = -50
+    case wrPerm                             = -61
+    case allocate                           = -108
+    case userCanceled                       = -128
+    case badReq                             = -909
+    case internalComponent                  = -2070
+    case notAvailable                       = -25291
+    case readOnly                           = -25292
+    case authFailed                         = -25293
+    case noSuchKeychain                     = -25294
+    case invalidKeychain                    = -25295
+    case duplicateKeychain                  = -25296
+    case duplicateCallback                  = -25297
+    case invalidCallback                    = -25298
+    case duplicateItem                      = -25299
+    case itemNotFound                       = -25300
+    case bufferTooSmall                     = -25301
+    case dataTooLarge                       = -25302
+    case noSuchAttr                         = -25303
+    case invalidItemRef                     = -25304
+    case invalidSearchRef                   = -25305
+    case noSuchClass                        = -25306
+    case noDefaultKeychain                  = -25307
+    case interactionNotAllowed              = -25308
+    case readOnlyAttr                       = -25309
+    case wrongSecVersion                    = -25310
+    case keySizeNotAllowed                  = -25311
+    case noStorageModule                    = -25312
+    case noCertificateModule                = -25313
+    case noPolicyModule                     = -25314
+    case interactionRequired                = -25315
+    case dataNotAvailable                   = -25316
+    case dataNotModifiable                  = -25317
+    case createChainFailed                  = -25318
+    case invalidPrefsDomain                 = -25319
+    case inDarkWake                         = -25320
+    case aclNotSimple                       = -25240
+    case policyNotFound                     = -25241
+    case invalidTrustSetting                = -25242
+    case noAccessForItem                    = -25243
+    case invalidOwnerEdit                   = -25244
+    case trustNotAvailable                  = -25245
+    case unsupportedFormat                  = -25256
+    case unknownFormat                      = -25257
+    case keyIsSensitive                     = -25258
+    case multiplePrivKeys                   = -25259
+    case passphraseRequired                 = -25260
+    case invalidPasswordRef                 = -25261
+    case invalidTrustSettings               = -25262
+    case noTrustSettings                    = -25263
+    case pkcs12VerifyFailure                = -25264
+    case invalidCertificate                 = -26265
+    case notSigner                          = -26267
+    case policyDenied                       = -26270
+    case invalidKey                         = -26274
+    case decode                             = -26275
+    case `internal`                         = -26276
+    case unsupportedAlgorithm               = -26268
+    case unsupportedOperation               = -26271
+    case unsupportedPadding                 = -26273
+    case itemInvalidKey                     = -34000
+    case itemInvalidKeyType                 = -34001
+    case itemInvalidValue                   = -34002
+    case itemClassMissing                   = -34003
+    case itemMatchUnsupported               = -34004
+    case useItemListUnsupported             = -34005
+    case useKeychainUnsupported             = -34006
+    case useKeychainListUnsupported         = -34007
+    case returnDataUnsupported              = -34008
+    case returnAttributesUnsupported        = -34009
+    case returnRefUnsupported               = -34010
+    case returnPersitentRefUnsupported      = -34011
+    case valueRefUnsupported                = -34012
+    case valuePersistentRefUnsupported      = -34013
+    case returnMissingPointer               = -34014
+    case matchLimitUnsupported              = -34015
+    case itemIllegalQuery                   = -34016
+    case waitForCallback                    = -34017
+    case missingEntitlement                 = -34018
+    case upgradePending                     = -34019
+    case mpSignatureInvalid                 = -25327
+    case otrTooOld                          = -25328
+    case otrIDTooNew                        = -25329
+    case serviceNotAvailable                = -67585
+    case insufficientClientID               = -67586
+    case deviceReset                        = -67587
+    case deviceFailed                       = -67588
+    case appleAddAppACLSubject              = -67589
+    case applePublicKeyIncomplete           = -67590
+    case appleSignatureMismatch             = -67591
+    case appleInvalidKeyStartDate           = -67592
+    case appleInvalidKeyEndDate             = -67593
+    case conversionError                    = -67594
+    case appleSSLv2Rollback                 = -67595
+    case quotaExceeded                      = -67596
+    case fileTooBig                         = -67597
+    case invalidDatabaseBlob                = -67598
+    case invalidKeyBlob                     = -67599
+    case incompatibleDatabaseBlob           = -67600
+    case incompatibleKeyBlob                = -67601
+    case hostNameMismatch                   = -67602
+    case unknownCriticalExtensionFlag       = -67603
+    case noBasicConstraints                 = -67604
+    case noBasicConstraintsCA               = -67605
+    case invalidAuthorityKeyID              = -67606
+    case invalidSubjectKeyID                = -67607
+    case invalidKeyUsageForPolicy           = -67608
+    case invalidExtendedKeyUsage            = -67609
+    case invalidIDLinkage                   = -67610
+    case pathLengthConstraintExceeded       = -67611
+    case invalidRoot                        = -67612
+    case crlExpired                         = -67613
+    case crlNotValidYet                     = -67614
+    case crlNotFound                        = -67615
+    case crlServerDown                      = -67616
+    case crlBadURI                          = -67617
+    case unknownCertExtension               = -67618
+    case unknownCRLExtension                = -67619
+    case crlNotTrusted                      = -67620
+    case crlPolicyFailed                    = -67621
+    case idpFailure                         = -67622
+    case smimeEmailAddressesNotFound        = -67623
+    case smimeBadExtendedKeyUsage           = -67624
+    case smimeBadKeyUsage                   = -67625
+    case smimeKeyUsageNotCritical           = -67626
+    case smimeNoEmailAddress                = -67627
+    case smimeSubjAltNameNotCritical        = -67628
+    case sslBadExtendedKeyUsage             = -67629
+    case ocspBadResponse                    = -67630
+    case ocspBadRequest                     = -67631
+    case ocspUnavailable                    = -67632
+    case ocspStatusUnrecognized             = -67633
+    case endOfData                          = -67634
+    case incompleteCertRevocationCheck      = -67635
+    case networkFailure                     = -67636
+    case ocspNotTrustedToAnchor             = -67637
+    case recordModified                     = -67638
+    case ocspSignatureError                 = -67639
+    case ocspNoSigner                       = -67640
+    case ocspResponderMalformedReq          = -67641
+    case ocspResponderInternalError         = -67642
+    case ocspResponderTryLater              = -67643
+    case ocspResponderSignatureRequired     = -67644
+    case ocspResponderUnauthorized          = -67645
+    case ocspResponseNonceMismatch          = -67646
+    case codeSigningBadCertChainLength      = -67647
+    case codeSigningNoBasicConstraints      = -67648
     case codeSigningBadPathLengthConstraint = -67649
-    case codeSigningNoExtendedKeyUsage = -67650
-    case codeSigningDevelopment = -67651
-    case resourceSignBadCertChainLength = -67652
-    case resourceSignBadExtKeyUsage = -67653
-    case trustSettingDeny = -67654
-    case invalidSubjectName = -67655
-    case unknownQualifiedCertStatement = -67656
-    case mobileMeRequestQueued = -67657
-    case mobileMeRequestRedirected = -67658
-    case mobileMeServerError = -67659
-    case mobileMeServerNotAvailable = -67660
-    case mobileMeServerAlreadyExists = -67661
-    case mobileMeServerServiceErr = -67662
-    case mobileMeRequestAlreadyPending = -67663
-    case mobileMeNoRequestPending = -67664
-    case mobileMeCSRVerifyFailure = -67665
-    case mobileMeFailedConsistencyCheck = -67666
-    case notInitialized = -67667
-    case invalidHandleUsage = -67668
-    case pvcReferentNotFound = -67669
-    case functionIntegrityFail = -67670
-    case internalError = -67671
-    case memoryError = -67672
-    case invalidData = -67673
-    case mdsError = -67674
-    case invalidPointer = -67675
-    case selfCheckFailed = -67676
-    case functionFailed = -67677
-    case moduleManifestVerifyFailed = -67678
-    case invalidGUID = -67679
-    case invalidHandle = -67680
-    case invalidDBList = -67681
-    case invalidPassthroughID = -67682
-    case invalidNetworkAddress = -67683
-    case crlAlreadySigned = -67684
-    case invalidNumberOfFields = -67685
-    case verificationFailure = -67686
-    case unknownTag = -67687
-    case invalidSignature = -67688
-    case invalidName = -67689
-    case invalidCertificateRef = -67690
-    case invalidCertificateGroup = -67691
-    case tagNotFound = -67692
-    case invalidQuery = -67693
-    case invalidValue = -67694
-    case callbackFailed = -67695
-    case aclDeleteFailed = -67696
-    case aclReplaceFailed = -67697
-    case aclAddFailed = -67698
-    case aclChangeFailed = -67699
-    case invalidAccessCredentials = -67700
-    case invalidRecord = -67701
-    case invalidACL = -67702
-    case invalidSampleValue = -67703
-    case incompatibleVersion = -67704
-    case privilegeNotGranted = -67705
-    case invalidScope = -67706
-    case pvcAlreadyConfigured = -67707
-    case invalidPVC = -67708
-    case emmLoadFailed = -67709
-    case emmUnloadFailed = -67710
-    case addinLoadFailed = -67711
-    case invalidKeyRef = -67712
-    case invalidKeyHierarchy = -67713
-    case addinUnloadFailed = -67714
-    case libraryReferenceNotFound = -67715
-    case invalidAddinFunctionTable = -67716
-    case invalidServiceMask = -67717
-    case moduleNotLoaded = -67718
-    case invalidSubServiceID = -67719
-    case attributeNotInContext = -67720
-    case moduleManagerInitializeFailed = -67721
-    case moduleManagerNotFound = -67722
-    case eventNotificationCallbackNotFound = -67723
-    case inputLengthError = -67724
-    case outputLengthError = -67725
-    case privilegeNotSupported = -67726
-    case deviceError = -67727
-    case attachHandleBusy = -67728
-    case notLoggedIn = -67729
-    case algorithmMismatch = -67730
-    case keyUsageIncorrect = -67731
-    case keyBlobTypeIncorrect = -67732
-    case keyHeaderInconsistent = -67733
-    case unsupportedKeyFormat = -67734
-    case unsupportedKeySize = -67735
-    case invalidKeyUsageMask = -67736
-    case unsupportedKeyUsageMask = -67737
-    case invalidKeyAttributeMask = -67738
-    case unsupportedKeyAttributeMask = -67739
-    case invalidKeyLabel = -67740
-    case unsupportedKeyLabel = -67741
-    case invalidKeyFormat = -67742
-    case unsupportedVectorOfBuffers = -67743
-    case invalidInputVector = -67744
-    case invalidOutputVector = -67745
-    case invalidContext = -67746
-    case invalidAlgorithm = -67747
-    case invalidAttributeKey = -67748
-    case missingAttributeKey = -67749
-    case invalidAttributeInitVector = -67750
-    case missingAttributeInitVector = -67751
-    case invalidAttributeSalt = -67752
-    case missingAttributeSalt = -67753
-    case invalidAttributePadding = -67754
-    case missingAttributePadding = -67755
-    case invalidAttributeRandom = -67756
-    case missingAttributeRandom = -67757
-    case invalidAttributeSeed = -67758
-    case missingAttributeSeed = -67759
-    case invalidAttributePassphrase = -67760
-    case missingAttributePassphrase = -67761
-    case invalidAttributeKeyLength = -67762
-    case missingAttributeKeyLength = -67763
-    case invalidAttributeBlockSize = -67764
-    case missingAttributeBlockSize = -67765
-    case invalidAttributeOutputSize = -67766
-    case missingAttributeOutputSize = -67767
-    case invalidAttributeRounds = -67768
-    case missingAttributeRounds = -67769
-    case invalidAlgorithmParms = -67770
-    case missingAlgorithmParms = -67771
-    case invalidAttributeLabel = -67772
-    case missingAttributeLabel = -67773
-    case invalidAttributeKeyType = -67774
-    case missingAttributeKeyType = -67775
-    case invalidAttributeMode = -67776
-    case missingAttributeMode = -67777
-    case invalidAttributeEffectiveBits = -67778
-    case missingAttributeEffectiveBits = -67779
-    case invalidAttributeStartDate = -67780
-    case missingAttributeStartDate = -67781
-    case invalidAttributeEndDate = -67782
-    case missingAttributeEndDate = -67783
-    case invalidAttributeVersion = -67784
-    case missingAttributeVersion = -67785
-    case invalidAttributePrime = -67786
-    case missingAttributePrime = -67787
-    case invalidAttributeBase = -67788
-    case missingAttributeBase = -67789
-    case invalidAttributeSubprime = -67790
-    case missingAttributeSubprime = -67791
-    case invalidAttributeIterationCount = -67792
-    case missingAttributeIterationCount = -67793
-    case invalidAttributeDLDBHandle = -67794
-    case missingAttributeDLDBHandle = -67795
-    case invalidAttributeAccessCredentials = -67796
-    case missingAttributeAccessCredentials = -67797
-    case invalidAttributePublicKeyFormat = -67798
-    case missingAttributePublicKeyFormat = -67799
-    case invalidAttributePrivateKeyFormat = -67800
-    case missingAttributePrivateKeyFormat = -67801
+    case codeSigningNoExtendedKeyUsage      = -67650
+    case codeSigningDevelopment             = -67651
+    case resourceSignBadCertChainLength     = -67652
+    case resourceSignBadExtKeyUsage         = -67653
+    case trustSettingDeny                   = -67654
+    case invalidSubjectName                 = -67655
+    case unknownQualifiedCertStatement      = -67656
+    case mobileMeRequestQueued              = -67657
+    case mobileMeRequestRedirected          = -67658
+    case mobileMeServerError                = -67659
+    case mobileMeServerNotAvailable         = -67660
+    case mobileMeServerAlreadyExists        = -67661
+    case mobileMeServerServiceErr           = -67662
+    case mobileMeRequestAlreadyPending      = -67663
+    case mobileMeNoRequestPending           = -67664
+    case mobileMeCSRVerifyFailure           = -67665
+    case mobileMeFailedConsistencyCheck     = -67666
+    case notInitialized                     = -67667
+    case invalidHandleUsage                 = -67668
+    case pvcReferentNotFound                = -67669
+    case functionIntegrityFail              = -67670
+    case internalError                      = -67671
+    case memoryError                        = -67672
+    case invalidData                        = -67673
+    case mdsError                           = -67674
+    case invalidPointer                     = -67675
+    case selfCheckFailed                    = -67676
+    case functionFailed                     = -67677
+    case moduleManifestVerifyFailed         = -67678
+    case invalidGUID                        = -67679
+    case invalidHandle                      = -67680
+    case invalidDBList                      = -67681
+    case invalidPassthroughID               = -67682
+    case invalidNetworkAddress              = -67683
+    case crlAlreadySigned                   = -67684
+    case invalidNumberOfFields              = -67685
+    case verificationFailure                = -67686
+    case unknownTag                         = -67687
+    case invalidSignature                   = -67688
+    case invalidName                        = -67689
+    case invalidCertificateRef              = -67690
+    case invalidCertificateGroup            = -67691
+    case tagNotFound                        = -67692
+    case invalidQuery                       = -67693
+    case invalidValue                       = -67694
+    case callbackFailed                     = -67695
+    case aclDeleteFailed                    = -67696
+    case aclReplaceFailed                   = -67697
+    case aclAddFailed                       = -67698
+    case aclChangeFailed                    = -67699
+    case invalidAccessCredentials           = -67700
+    case invalidRecord                      = -67701
+    case invalidACL                         = -67702
+    case invalidSampleValue                 = -67703
+    case incompatibleVersion                = -67704
+    case privilegeNotGranted                = -67705
+    case invalidScope                       = -67706
+    case pvcAlreadyConfigured               = -67707
+    case invalidPVC                         = -67708
+    case emmLoadFailed                      = -67709
+    case emmUnloadFailed                    = -67710
+    case addinLoadFailed                    = -67711
+    case invalidKeyRef                      = -67712
+    case invalidKeyHierarchy                = -67713
+    case addinUnloadFailed                  = -67714
+    case libraryReferenceNotFound           = -67715
+    case invalidAddinFunctionTable          = -67716
+    case invalidServiceMask                 = -67717
+    case moduleNotLoaded                    = -67718
+    case invalidSubServiceID                = -67719
+    case attributeNotInContext              = -67720
+    case moduleManagerInitializeFailed      = -67721
+    case moduleManagerNotFound              = -67722
+    case eventNotificationCallbackNotFound  = -67723
+    case inputLengthError                   = -67724
+    case outputLengthError                  = -67725
+    case privilegeNotSupported              = -67726
+    case deviceError                        = -67727
+    case attachHandleBusy                   = -67728
+    case notLoggedIn                        = -67729
+    case algorithmMismatch                  = -67730
+    case keyUsageIncorrect                  = -67731
+    case keyBlobTypeIncorrect               = -67732
+    case keyHeaderInconsistent              = -67733
+    case unsupportedKeyFormat               = -67734
+    case unsupportedKeySize                 = -67735
+    case invalidKeyUsageMask                = -67736
+    case unsupportedKeyUsageMask            = -67737
+    case invalidKeyAttributeMask            = -67738
+    case unsupportedKeyAttributeMask        = -67739
+    case invalidKeyLabel                    = -67740
+    case unsupportedKeyLabel                = -67741
+    case invalidKeyFormat                   = -67742
+    case unsupportedVectorOfBuffers         = -67743
+    case invalidInputVector                 = -67744
+    case invalidOutputVector                = -67745
+    case invalidContext                     = -67746
+    case invalidAlgorithm                   = -67747
+    case invalidAttributeKey                = -67748
+    case missingAttributeKey                = -67749
+    case invalidAttributeInitVector         = -67750
+    case missingAttributeInitVector         = -67751
+    case invalidAttributeSalt               = -67752
+    case missingAttributeSalt               = -67753
+    case invalidAttributePadding            = -67754
+    case missingAttributePadding            = -67755
+    case invalidAttributeRandom             = -67756
+    case missingAttributeRandom             = -67757
+    case invalidAttributeSeed               = -67758
+    case missingAttributeSeed               = -67759
+    case invalidAttributePassphrase         = -67760
+    case missingAttributePassphrase         = -67761
+    case invalidAttributeKeyLength          = -67762
+    case missingAttributeKeyLength          = -67763
+    case invalidAttributeBlockSize          = -67764
+    case missingAttributeBlockSize          = -67765
+    case invalidAttributeOutputSize         = -67766
+    case missingAttributeOutputSize         = -67767
+    case invalidAttributeRounds             = -67768
+    case missingAttributeRounds             = -67769
+    case invalidAlgorithmParms              = -67770
+    case missingAlgorithmParms              = -67771
+    case invalidAttributeLabel              = -67772
+    case missingAttributeLabel              = -67773
+    case invalidAttributeKeyType            = -67774
+    case missingAttributeKeyType            = -67775
+    case invalidAttributeMode               = -67776
+    case missingAttributeMode               = -67777
+    case invalidAttributeEffectiveBits      = -67778
+    case missingAttributeEffectiveBits      = -67779
+    case invalidAttributeStartDate          = -67780
+    case missingAttributeStartDate          = -67781
+    case invalidAttributeEndDate            = -67782
+    case missingAttributeEndDate            = -67783
+    case invalidAttributeVersion            = -67784
+    case missingAttributeVersion            = -67785
+    case invalidAttributePrime              = -67786
+    case missingAttributePrime              = -67787
+    case invalidAttributeBase               = -67788
+    case missingAttributeBase               = -67789
+    case invalidAttributeSubprime           = -67790
+    case missingAttributeSubprime           = -67791
+    case invalidAttributeIterationCount     = -67792
+    case missingAttributeIterationCount     = -67793
+    case invalidAttributeDLDBHandle         = -67794
+    case missingAttributeDLDBHandle         = -67795
+    case invalidAttributeAccessCredentials  = -67796
+    case missingAttributeAccessCredentials  = -67797
+    case invalidAttributePublicKeyFormat    = -67798
+    case missingAttributePublicKeyFormat    = -67799
+    case invalidAttributePrivateKeyFormat   = -67800
+    case missingAttributePrivateKeyFormat   = -67801
     case invalidAttributeSymmetricKeyFormat = -67802
     case missingAttributeSymmetricKeyFormat = -67803
-    case invalidAttributeWrappedKeyFormat = -67804
-    case missingAttributeWrappedKeyFormat = -67805
-    case stagedOperationInProgress = -67806
-    case stagedOperationNotStarted = -67807
-    case verifyFailed = -67808
-    case querySizeUnknown = -67809
-    case blockSizeMismatch = -67810
-    case publicKeyInconsistent = -67811
-    case deviceVerifyFailed = -67812
-    case invalidLoginName = -67813
-    case alreadyLoggedIn = -67814
-    case invalidDigestAlgorithm = -67815
-    case invalidCRLGroup = -67816
-    case certificateCannotOperate = -67817
-    case certificateExpired = -67818
-    case certificateNotValidYet = -67819
-    case certificateRevoked = -67820
-    case certificateSuspended = -67821
-    case insufficientCredentials = -67822
-    case invalidAction = -67823
-    case invalidAuthority = -67824
-    case verifyActionFailed = -67825
-    case invalidCertAuthority = -67826
-    case invaldCRLAuthority = -67827
-    case invalidCRLEncoding = -67828
-    case invalidCRLType = -67829
-    case invalidCRL = -67830
-    case invalidFormType = -67831
-    case invalidID = -67832
-    case invalidIdentifier = -67833
-    case invalidIndex = -67834
-    case invalidPolicyIdentifiers = -67835
-    case invalidTimeString = -67836
-    case invalidReason = -67837
-    case invalidRequestInputs = -67838
-    case invalidResponseVector = -67839
-    case invalidStopOnPolicy = -67840
-    case invalidTuple = -67841
-    case multipleValuesUnsupported = -67842
-    case notTrusted = -67843
-    case noDefaultAuthority = -67844
-    case rejectedForm = -67845
-    case requestLost = -67846
-    case requestRejected = -67847
-    case unsupportedAddressType = -67848
-    case unsupportedService = -67849
-    case invalidTupleGroup = -67850
-    case invalidBaseACLs = -67851
-    case invalidTupleCredendtials = -67852
-    case invalidEncoding = -67853
-    case invalidValidityPeriod = -67854
-    case invalidRequestor = -67855
-    case requestDescriptor = -67856
-    case invalidBundleInfo = -67857
-    case invalidCRLIndex = -67858
-    case noFieldValues = -67859
-    case unsupportedFieldFormat = -67860
-    case unsupportedIndexInfo = -67861
-    case unsupportedLocality = -67862
-    case unsupportedNumAttributes = -67863
-    case unsupportedNumIndexes = -67864
-    case unsupportedNumRecordTypes = -67865
-    case fieldSpecifiedMultiple = -67866
-    case incompatibleFieldFormat = -67867
-    case invalidParsingModule = -67868
-    case databaseLocked = -67869
-    case datastoreIsOpen = -67870
-    case missingValue = -67871
-    case unsupportedQueryLimits = -67872
-    case unsupportedNumSelectionPreds = -67873
-    case unsupportedOperator = -67874
-    case invalidDBLocation = -67875
-    case invalidAccessRequest = -67876
-    case invalidIndexInfo = -67877
-    case invalidNewOwner = -67878
-    case invalidModifyMode = -67879
-    case missingRequiredExtension = -67880
-    case extendedKeyUsageNotCritical = -67881
-    case timestampMissing = -67882
-    case timestampInvalid = -67883
-    case timestampNotTrusted = -67884
-    case timestampServiceNotAvailable = -67885
-    case timestampBadAlg = -67886
-    case timestampBadRequest = -67887
-    case timestampBadDataFormat = -67888
-    case timestampTimeNotAvailable = -67889
-    case timestampUnacceptedPolicy = -67890
-    case timestampUnacceptedExtension = -67891
-    case timestampAddInfoNotAvailable = -67892
-    case timestampSystemFailure = -67893
-    case signingTimeMissing = -67894
-    case timestampRejection = -67895
-    case timestampWaiting = -67896
-    case timestampRevocationWarning = -67897
-    case timestampRevocationNotification = -67898
-    case unexpectedError = -99999
+    case invalidAttributeWrappedKeyFormat   = -67804
+    case missingAttributeWrappedKeyFormat   = -67805
+    case stagedOperationInProgress          = -67806
+    case stagedOperationNotStarted          = -67807
+    case verifyFailed                       = -67808
+    case querySizeUnknown                   = -67809
+    case blockSizeMismatch                  = -67810
+    case publicKeyInconsistent              = -67811
+    case deviceVerifyFailed                 = -67812
+    case invalidLoginName                   = -67813
+    case alreadyLoggedIn                    = -67814
+    case invalidDigestAlgorithm             = -67815
+    case invalidCRLGroup                    = -67816
+    case certificateCannotOperate           = -67817
+    case certificateExpired                 = -67818
+    case certificateNotValidYet             = -67819
+    case certificateRevoked                 = -67820
+    case certificateSuspended               = -67821
+    case insufficientCredentials            = -67822
+    case invalidAction                      = -67823
+    case invalidAuthority                   = -67824
+    case verifyActionFailed                 = -67825
+    case invalidCertAuthority               = -67826
+    case invaldCRLAuthority                 = -67827
+    case invalidCRLEncoding                 = -67828
+    case invalidCRLType                     = -67829
+    case invalidCRL                         = -67830
+    case invalidFormType                    = -67831
+    case invalidID                          = -67832
+    case invalidIdentifier                  = -67833
+    case invalidIndex                       = -67834
+    case invalidPolicyIdentifiers           = -67835
+    case invalidTimeString                  = -67836
+    case invalidReason                      = -67837
+    case invalidRequestInputs               = -67838
+    case invalidResponseVector              = -67839
+    case invalidStopOnPolicy                = -67840
+    case invalidTuple                       = -67841
+    case multipleValuesUnsupported          = -67842
+    case notTrusted                         = -67843
+    case noDefaultAuthority                 = -67844
+    case rejectedForm                       = -67845
+    case requestLost                        = -67846
+    case requestRejected                    = -67847
+    case unsupportedAddressType             = -67848
+    case unsupportedService                 = -67849
+    case invalidTupleGroup                  = -67850
+    case invalidBaseACLs                    = -67851
+    case invalidTupleCredendtials           = -67852
+    case invalidEncoding                    = -67853
+    case invalidValidityPeriod              = -67854
+    case invalidRequestor                   = -67855
+    case requestDescriptor                  = -67856
+    case invalidBundleInfo                  = -67857
+    case invalidCRLIndex                    = -67858
+    case noFieldValues                      = -67859
+    case unsupportedFieldFormat             = -67860
+    case unsupportedIndexInfo               = -67861
+    case unsupportedLocality                = -67862
+    case unsupportedNumAttributes           = -67863
+    case unsupportedNumIndexes              = -67864
+    case unsupportedNumRecordTypes          = -67865
+    case fieldSpecifiedMultiple             = -67866
+    case incompatibleFieldFormat            = -67867
+    case invalidParsingModule               = -67868
+    case databaseLocked                     = -67869
+    case datastoreIsOpen                    = -67870
+    case missingValue                       = -67871
+    case unsupportedQueryLimits             = -67872
+    case unsupportedNumSelectionPreds       = -67873
+    case unsupportedOperator                = -67874
+    case invalidDBLocation                  = -67875
+    case invalidAccessRequest               = -67876
+    case invalidIndexInfo                   = -67877
+    case invalidNewOwner                    = -67878
+    case invalidModifyMode                  = -67879
+    case missingRequiredExtension           = -67880
+    case extendedKeyUsageNotCritical        = -67881
+    case timestampMissing                   = -67882
+    case timestampInvalid                   = -67883
+    case timestampNotTrusted                = -67884
+    case timestampServiceNotAvailable       = -67885
+    case timestampBadAlg                    = -67886
+    case timestampBadRequest                = -67887
+    case timestampBadDataFormat             = -67888
+    case timestampTimeNotAvailable          = -67889
+    case timestampUnacceptedPolicy          = -67890
+    case timestampUnacceptedExtension       = -67891
+    case timestampAddInfoNotAvailable       = -67892
+    case timestampSystemFailure             = -67893
+    case signingTimeMissing                 = -67894
+    case timestampRejection                 = -67895
+    case timestampWaiting                   = -67896
+    case timestampRevocationWarning         = -67897
+    case timestampRevocationNotification    = -67898
+    case unexpectedError                    = -99999
 }
 
 extension Status: RawRepresentable, CustomStringConvertible {
-
+    
     public init(status: OSStatus) {
         if let mappedStatus = Status(rawValue: status) {
             self = mappedStatus
@@ -2081,7 +1549,7 @@ extension Status: RawRepresentable, CustomStringConvertible {
             self = .unexpectedError
         }
     }
-
+    
     public var description: String {
         switch self {
         case .success:
@@ -2206,7 +1674,7 @@ extension Status: RawRepresentable, CustomStringConvertible {
             return "The provided key material was not valid."
         case .decode:
             return "Unable to decode the provided data."
-        case .internal:
+        case .`internal`:
             return "An internal error occurred in the Security framework."
         case .unsupportedAlgorithm:
             return "An unsupported algorithm was encountered."
@@ -2895,16 +2363,13 @@ extension Status: RawRepresentable, CustomStringConvertible {
 }
 
 extension Status: CustomNSError {
-
-    public static var errorDomain: String {
-        return KeychainAccessErrorDomain
-    }
-
+    public static let errorDomain = KeychainAccessErrorDomain
+    
     public var errorCode: Int {
         return Int(rawValue)
     }
-
-    public var errorUserInfo: [String: Any] {
+    
+    public var errorUserInfo: [String : Any] {
         return [NSLocalizedDescriptionKey: description]
     }
 }

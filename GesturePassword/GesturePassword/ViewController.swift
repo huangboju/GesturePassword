@@ -35,26 +35,26 @@ class ViewController: UIViewController {
 
     @objc func verifyPassword() {
         AppLock.verify(controller: self)
-//        AppLock.verify(controller: self, success: { _ in
-//            print("验证成功")
-//        }, forget: { _ in
-//            print("忘记密码")
-//            self.navigationItem.prompt = "忘记密码"
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-//                self.navigationItem.prompt = nil
-//            })
-//        }, overrunTimes: { _ in
-//            print("次数超限")
-//        })
+        //        AppLock.verify(controller: self, success: { _ in
+        //            print("验证成功")
+        //        }, forget: { _ in
+        //            print("忘记密码")
+        //            self.navigationItem.prompt = "忘记密码"
+        //            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        //                self.navigationItem.prompt = nil
+        //            })
+        //        }, overrunTimes: { _ in
+        //            print("次数超限")
+        //        })
     }
 
     @objc func modifyPassword() {
         AppLock.modify(controller: self)
-//        AppLock.modify(controller: self, success: { _ in
-//            print("success")
-//        }, forget: { _ in
-//            print("forget")
-//        })
+        //        AppLock.modify(controller: self, success: { _ in
+        //            print("success")
+        //        }, forget: { _ in
+        //            print("forget")
+        //        })
     }
 }
 
