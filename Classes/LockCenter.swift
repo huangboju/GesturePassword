@@ -4,6 +4,8 @@
 
 public let LockManager = LockCenter.shared
 
+let PASSWORD_KEY = "gesture_password_key_"
+
 open class LockCenter {
     open var options = LockOptions()
 
@@ -54,4 +56,8 @@ public func showModifyPattern(in controller: UIViewController) -> ResetPatternCo
     let vc = ResetPatternController()
     controller.navigationController?.pushViewController(vc, animated: true)
     return vc
+}
+
+func delay(_ interval: TimeInterval, handle: @escaping () -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + interval, execute: handle)
 }
