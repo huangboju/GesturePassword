@@ -218,109 +218,14 @@ public struct AuthenticationPolicy: OptionSet {
     @available(watchOS, unavailable)
     public static let applicationPassword = AuthenticationPolicy(rawValue: 1 << 31)
     
-    #if swift(>=2.3)
     public let rawValue: UInt
     
     public init(rawValue: UInt) {
         self.rawValue = rawValue
     }
-    #else
-    public let rawValue: Int
-    
-    public init(rawValue: Int) {
-    self.rawValue = rawValue
-    }
-    #endif
 }
 
 public struct Attributes {
-    public var `class`: String? {
-        return attributes[Class] as? String
-    }
-    public var data: Data? {
-        return attributes[ValueData] as? Data
-    }
-    public var ref: Data? {
-        return attributes[ValueRef] as? Data
-    }
-    public var persistentRef: Data? {
-        return attributes[ValuePersistentRef] as? Data
-    }
-    
-    public var accessible: String? {
-        return attributes[AttributeAccessible] as? String
-    }
-    public var accessControl: SecAccessControl? {
-        if #available(OSX 10.10, *) {
-            if let accessControl = attributes[AttributeAccessControl] {
-                return (accessControl as! SecAccessControl)
-            }
-            return nil
-        } else {
-            return nil
-        }
-    }
-    public var accessGroup: String? {
-        return attributes[AttributeAccessGroup] as? String
-    }
-    public var synchronizable: Bool? {
-        return attributes[AttributeSynchronizable] as? Bool
-    }
-    public var creationDate: Date? {
-        return attributes[AttributeCreationDate] as? Date
-    }
-    public var modificationDate: Date? {
-        return attributes[AttributeModificationDate] as? Date
-    }
-    public var attributeDescription: String? {
-        return attributes[AttributeDescription] as? String
-    }
-    public var comment: String? {
-        return attributes[AttributeComment] as? String
-    }
-    public var creator: String? {
-        return attributes[AttributeCreator] as? String
-    }
-    public var type: String? {
-        return attributes[AttributeType] as? String
-    }
-    public var label: String? {
-        return attributes[AttributeLabel] as? String
-    }
-    public var isInvisible: Bool? {
-        return attributes[AttributeIsInvisible] as? Bool
-    }
-    public var isNegative: Bool? {
-        return attributes[AttributeIsNegative] as? Bool
-    }
-    public var account: String? {
-        return attributes[AttributeAccount] as? String
-    }
-    public var service: String? {
-        return attributes[AttributeService] as? String
-    }
-    public var generic: Data? {
-        return attributes[AttributeGeneric] as? Data
-    }
-    public var securityDomain: String? {
-        return attributes[AttributeSecurityDomain] as? String
-    }
-    public var server: String? {
-        return attributes[AttributeServer] as? String
-    }
-    public var `protocol`: String? {
-        return attributes[AttributeProtocol] as? String
-    }
-    public var authenticationType: String? {
-        return attributes[AttributeAuthenticationType] as? String
-    }
-    public var port: Int? {
-        return attributes[AttributePort] as? Int
-    }
-    public var path: String? {
-        return attributes[AttributePath] as? String
-    }
-    
     fileprivate let attributes: [String: Any]
     
     init(attributes: [String: Any]) {
@@ -633,10 +538,8 @@ private let UseAuthenticationUIFail = String(kSecUseAuthenticationUIFail)
 @available(watchOS, unavailable)
 private let UseAuthenticationUISkip = String(kSecUseAuthenticationUISkip)
 
-#if os(iOS)
 /** Credential Key Constants */
 private let SharedPassword = String(kSecSharedPassword)
-#endif
 
 extension Options {
     
@@ -655,11 +558,8 @@ extension Options {
                 query[AttributeAccessGroup] = accessGroup
             }
             #endif
-        case .internetPassword:
-            query[AttributeServer] = server.host
-            query[AttributePort] = server.port
-            query[AttributeProtocol] = protocolType.rawValue
-            query[AttributeAuthenticationType] = authenticationType.rawValue
+        default:
+            fatalError("错误啦")
         }
         
         if #available(OSX 10.10, *) {
@@ -667,14 +567,12 @@ extension Options {
                 query[UseOperationPrompt] = authenticationPrompt
             }
         }
-        
-        #if !os(watchOS)
+
         if #available(iOS 9.0, OSX 10.11, *) {
             if authenticationContext != nil {
                 query[UseAuthenticationContext] = authenticationContext
             }
         }
-        #endif
         
         return query
     }

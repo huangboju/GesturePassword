@@ -12,7 +12,7 @@ class Lock {
         // 在这里自定义你的UI
         var options = LockOptions()
         options.passwordKeySuffix = "user1"
-        options.usingKeychain = false
+        options.usingKeychain = true
         options.circleLineSelectedCircleColor = options.circleLineSelectedColor
         options.lockLineColor = options.circleLineSelectedColor
     }
