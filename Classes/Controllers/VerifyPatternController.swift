@@ -14,7 +14,7 @@ public final class VerifyPatternController: UIViewController {
     public let lockMainView = LockView()
 
     public typealias VerifyPattern = (VerifyPatternController) -> Void
-    
+
     private var successHandle: VerifyPattern?
     private var overTimesHandle: VerifyPattern?
     private var forgetHandle: VerifyPattern?
@@ -76,19 +76,19 @@ public final class VerifyPatternController: UIViewController {
 /// Handle
 extension VerifyPatternController {
     @discardableResult
-    func successHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
+    public func successHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
         successHandle = handle
         return self
     }
 
     @discardableResult
-    func overTimesHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
+    public func overTimesHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
         overTimesHandle = handle
         return self
     }
 
     @discardableResult
-    func forgetHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
+    public func forgetHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
         forgetHandle = handle
         return self
     }

@@ -66,19 +66,19 @@ open class ResetPatternController: UIViewController {
 extension ResetPatternController {
 
     @discardableResult
-    func overTimesHandle(_ handle: @escaping ResetPattern) -> ResetPatternController {
+    public func overTimesHandle(_ handle: @escaping ResetPattern) -> ResetPatternController {
         overTimesHandle = handle
         return self
     }
 
     @discardableResult
-    func forgetHandle(_ handle: @escaping ResetPattern) -> ResetPatternController {
+    public func forgetHandle(_ handle: @escaping ResetPattern) -> ResetPatternController {
         forgetHandle = handle
         return self
     }
 
     @discardableResult
-    func resetSuccessHandle(_ handle: ((String) -> Void)?) -> ResetPatternController {
+    public func resetSuccessHandle(_ handle: ((String) -> Void)?) -> ResetPatternController {
         setPatternVC.successHandle = handle
         return self
     }
