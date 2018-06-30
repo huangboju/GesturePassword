@@ -8,11 +8,6 @@ public struct LockCenter {
 
     static var storage: Storagable = LockUserDefaults()
 
-    // 私有化构造方法，阻止其他对象使用这个类的默认的'()'构造方法
-    fileprivate init() {}
-
-    public static let shared = LockCenter()
-
     public static func hasPassword(for key: String? = nil) -> Bool {
         return storage.str(forKey: suffix(with: key)) != nil
     }
