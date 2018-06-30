@@ -11,8 +11,7 @@ class Lock {
     private init() {
         // 在这里自定义你的UI
         LockCenter.passwordKeySuffix = "user1"
-        LockCenter.usingKeychain = true
-//        options.lineHighlightColor = .red
+//        LockCenter.usingKeychain = true
     }
 
     func set(controller: UIViewController) {
@@ -47,18 +46,19 @@ class Lock {
     }
 
     func modify(controller: UIViewController) {
-        if hasPassword {
-            print("密码已设置")
-            print("🍀🍀🍀 \(password) 🍀🍀🍀")
-            showModifyPattern(in: controller).forgetHandle { _ in
-
+        guard hasPassword else {
+            print("❌❌❌ 还没有设置密码 ❌❌❌")
+            return
+        }
+        
+        print("密码已设置")
+        print("🍀🍀🍀 \(password) 🍀🍀🍀")
+        showModifyPattern(in: controller).forgetHandle { _ in
+            
             }.overTimesHandle { _ in
-
+                
             }.resetSuccessHandle {
                 print("🍀🍀🍀 \($0) 🍀🍀🍀")
-            }
-        } else {
-            print("❌❌❌ 还没有设置密码 ❌❌❌")
         }
     }
 
