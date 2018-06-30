@@ -6,7 +6,7 @@
 //  Copyright © 2018 xiAo_Ju. All rights reserved.
 //
 
-open class ResetPatternController: UIViewController {
+public final  class ResetPatternController: UIViewController {
 
     private let verifyPatternVC = VerifyPatternController()
 
