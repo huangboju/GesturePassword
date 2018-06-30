@@ -8,7 +8,7 @@
 
 public final class SetPatternController: UIViewController {
 
-    var successHandle: ((String) -> Void)?
+    public var successHandle: ((String) -> Void)?
 
     private let contentView = UIView()
 
