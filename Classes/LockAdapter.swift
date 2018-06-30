@@ -66,11 +66,14 @@ extension LockAdapter {
         let inputPassword = controller.lockMainView.password
         let localPassword = LockCenter.password()
         if inputPassword == localPassword {
+            // 成功了删除一些之前的错误
+            LockCenter.removeErrorTimes()
             controller.successState()
             return
         }
-        LockCenter.errorTimes -= 1
-        let errorTimes = LockCenter.errorTimes
+        var errorTimes = LockCenter.errorTimes()
+        errorTimes -= 1
+        LockCenter.setErrorTimes(errorTimes)
         guard errorTimes == 0 else {
             controller.errorState(errorTimes)
             return

@@ -36,12 +36,13 @@ class Lock {
         print("🍀🍀🍀 \(password) 🍀🍀🍀")
         showVerifyPattern(in: controller).successHandle {
             $0.dismiss()
-            }.overTimesHandle { _ in
-                LockCenter.removePassword()
-                assertionFailure("你必须做错误超限后的处理")
-            }.forgetHandle {
-                $0.dismiss()
-                assertionFailure("忘记密码，请做相应处理")
+        }.overTimesHandle {
+            LockCenter.removePassword()
+            $0.dismiss()
+//            assertionFailure("你必须做错误超限后的处理")
+        }.forgetHandle {
+            $0.dismiss()
+            assertionFailure("忘记密码，请做相应处理")
         }
     }
 

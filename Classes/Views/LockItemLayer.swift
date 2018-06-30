@@ -29,10 +29,7 @@ open class LockItemLayer: CAShapeLayer {
                 drawDirect()
                 path = mainPath.cgPath
             }
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
             setAffineTransform(CGAffineTransform(rotationAngle: newValue.angle))
-            CATransaction.commit()
         }
     }
 
@@ -80,6 +77,14 @@ open class LockItemLayer: CAShapeLayer {
 
     init(origin: CGPoint, side: CGFloat) {
         super.init()
+
+        // 去除隐士动画
+        actions = [
+            "fillColor": NSNull(),
+            "borderColor": NSNull(),
+            "transform": NSNull()
+        ]
+
         self.side = side
         self.frame = CGRect(origin: origin, size: CGSize(width: side, height: side))
         didInitlized()
@@ -99,6 +104,7 @@ open class LockItemLayer: CAShapeLayer {
     }
 
     public func turnNormal() {
+        fillColor = highlightColor.cgColor
         borderColor = normalColor.cgColor
         mainPath.removeAllPoints()
         path = mainPath.cgPath
@@ -106,7 +112,7 @@ open class LockItemLayer: CAShapeLayer {
 
     public func turnWarn() {
         borderColor = warnColor.cgColor
-        path = mainPath.cgPath
+        fillColor = warnColor.cgColor
     }
 
     private let goldenRatio: CGFloat = 0.382

@@ -39,6 +39,8 @@ open class LockView: UIView {
     }
 
     private var mainPath = UIBezierPath()
+    
+    private var interval: TimeInterval = 0
 
     override open class var layerClass: AnyClass {
         return CAShapeLayer.self
@@ -135,7 +137,9 @@ open class LockView: UIView {
 
     private func touchesEnd() {
         delegate?.lockViewDidTouchesEnd(self)
-        reset()
+        delay(interval) {
+            self.reset()
+        }
     }
 
     private func processTouch(_ touches: Set<UITouch>) {
@@ -204,13 +208,16 @@ open class LockView: UIView {
         }
         return nil
     }
-    
+
     public func warn() {
+        interval = 1
         selectedItemViews.forEach { $0.turnWarn() }
         shapeLayer?.strokeColor = lineWarnColor.cgColor
     }
 
     public func reset() {
+        interval = 0
+        shapeLayer?.strokeColor = lineColor.cgColor
         selectedItemViews.forEach { $0.reset() }
         selectedItemViews.removeAll()
         mainPath.removeAllPoints()

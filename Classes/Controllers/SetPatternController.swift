@@ -37,6 +37,12 @@ public final class SetPatternController: UIViewController {
         let redraw = UIBarButtonItem(title: LockCenter.redraw, style: .plain, target: self, action: #selector(redrawAction))
         navigationItem.rightBarButtonItem = redraw
     }
+    
+    private func processErrorState() {
+        lockMainView.warn()
+        showRedrawBarButton()
+    }
+    
 
     private func hiddenRedrawBarButton() {
         navigationItem.rightBarButtonItem = nil
@@ -94,13 +100,13 @@ extension SetPatternController: SetPatternDelegate {
     }
 
     public func tooShortState() {
-        showRedrawBarButton()
+        processErrorState()
         let text = LockCenter.tooShortTitle()
         lockDescLabel.showWarn(with: text)
     }
 
     public func mismatchState() {
-        showRedrawBarButton()
+        processErrorState()
         lockDescLabel.showWarn(with: LockCenter.differentPassword)
     }
 

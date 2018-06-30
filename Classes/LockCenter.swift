@@ -34,12 +34,12 @@ public struct LockCenter {
         let key = errorTimesKey(with: key)
         var result = storage.integer(forKey: key)
         if result == 0 && storage.str(forKey: key) == nil {
-            result = 5
+            result = errorTimes
             storage.set(result, forKey: key)
         }
         return result
     }
-    
+
     public static func removeErrorTimes(forKey key: String? = nil) {
         let key = errorTimesKey(with: key)
         storage.removeValue(forKey: key)
@@ -57,10 +57,10 @@ public struct LockCenter {
 extension LockCenter {
     /// 密码后缀
     public static var passwordKeySuffix = ""
-    
+
     // MARK: - 存放格式
     public static var usingKeychain: Bool = false
-    
+
     // MARK: - 设置密码（"设置手势密码"）
     public static var settingTittle = "setPasswordTitle".localized
     
@@ -94,16 +94,8 @@ extension LockCenter {
     
     /// 密码错误次数
     /// Default 5
-    
-    static var errorTimes: Int {
-        set {
-            setErrorTimes(newValue)
-        }
-        get {
-            return errorTimes()
-        }
-    }
-    
+    static var errorTimes = 5
+
     public static var verifyPasswordTitle = "verifyPasswordTitle".localized
     
     public static var forgotBtnTitle = "forgotParttern".localized
@@ -132,10 +124,10 @@ extension LockCenter {
     public static var lineHighlightColor = UIColor(r: 0, g: 191, b: 255)
     
     /// 外环线条颜色：错误
-    public static var lineWarnColor = UIColor.red
-    
+    public static var lineWarnColor = warningTitleColor
+
     /// 警示文字颜色
-    public static var warningTitleColor = UIColor(r: 254, g: 82, b: 92)
+    public static var warningTitleColor = UIColor.red
     
     /// 普通文字颜色
     public static var normalTitleColor = UIColor(r: 192, g: 192, b: 192)
