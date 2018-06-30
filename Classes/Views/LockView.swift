@@ -10,21 +10,21 @@ open class LockView: UIView {
 
     open weak var delegate: LockViewDelegate?
 
-    open var lineColor: UIColor = LockManager.options.lineHighlightColor {
+    open var lineColor: UIColor = LockCenter.lineHighlightColor {
         didSet {
             shapeLayer?.strokeColor = lineColor.cgColor
         }
     }
 
-    open var lineWarnColor: UIColor = LockManager.options.lineWarnColor
+    open var lineWarnColor: UIColor = LockCenter.lineWarnColor
 
-    open var lineWidth: CGFloat = LockManager.options.lineWidth {
+    open var lineWidth: CGFloat = LockCenter.lineWidth {
         didSet {
             shapeLayer?.lineWidth = lineWidth
         }
     }
     
-    open var itemDiameter: CGFloat = LockManager.options.itemDiameter {
+    open var itemDiameter: CGFloat = LockCenter.itemDiameter {
         didSet {
             relayoutLayers()
         }

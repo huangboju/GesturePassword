@@ -10,9 +10,8 @@ class Lock {
 
     private init() {
         // 在这里自定义你的UI
-        var options = LockOptions()
-        options.passwordKeySuffix = "user1"
-        options.usingKeychain = true
+        LockCenter.passwordKeySuffix = "user1"
+        LockCenter.usingKeychain = true
 //        options.lineHighlightColor = .red
     }
 
@@ -22,7 +21,7 @@ class Lock {
             print("🍀🍀🍀 \(password) 🍀🍀🍀")
         } else {
             showSetPattern(in: controller).successHandle = {
-                LockManager.set($0)
+                LockCenter.set($0)
             }
         }
     }
@@ -38,7 +37,7 @@ class Lock {
         showVerifyPattern(in: controller).successHandle {
             $0.dismiss()
             }.overTimesHandle { _ in
-                LockManager.removePassword()
+                LockCenter.removePassword()
                 assertionFailure("你必须做错误超限后的处理")
             }.forgetHandle {
                 $0.dismiss()
@@ -64,15 +63,15 @@ class Lock {
 
     var hasPassword: Bool {
         // 这里密码后缀可以自己传值，默认为上面设置的passwordKeySuffix
-        return LockManager.hasPassword()
+        return LockCenter.hasPassword()
     }
 
     var password: String {
-        return LockManager.password() ?? ""
+        return LockCenter.password() ?? ""
     }
 
     func removePassword() {
         // 这里密码后缀可以自己传值，默认为上面设置的passwordKeySuffix
-        LockManager.removePassword()
+        LockCenter.removePassword()
     }
 }

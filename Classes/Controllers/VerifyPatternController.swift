@@ -18,12 +18,10 @@ public final class VerifyPatternController: UIViewController {
     private var successHandle: VerifyPattern?
     private var overTimesHandle: VerifyPattern?
     private var forgetHandle: VerifyPattern?
-    
-    private let options = LockManager.options
 
     private lazy var forgotButton: UIButton = {
        let button = UIButton()
-        button.setTitle(options.forgotBtnTitle, for: .normal)
+        button.setTitle(LockCenter.forgotBtnTitle, for: .normal)
         button.setTitleColor(UIColor.red, for: .normal)
         button.setTitleColor(UIColor(white: 0.9, alpha: 1), for: .highlighted)
         button.addTarget(self, action: #selector(forgotAction), for: .touchUpInside)
@@ -33,9 +31,9 @@ public final class VerifyPatternController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = options.verifyPasswordTitle
+        navigationItem.title = LockCenter.verifyPasswordTitle
 
-        view.backgroundColor = options.backgroundColor
+        view.backgroundColor = LockCenter.backgroundColor
         
         view.addSubview(contentView)
         contentView.backgroundColor = .white
@@ -114,7 +112,7 @@ extension VerifyPatternController: VerifyPatternDelegate {
 
     func errorState(_ remainTimes: Int) {
         lockMainView.warn()
-        let text = options.invalidPasswordTitle(with: remainTimes)
+        let text = LockCenter.invalidPasswordTitle(with: remainTimes)
         lockDescLabel.showWarn(with: text)
     }
 }

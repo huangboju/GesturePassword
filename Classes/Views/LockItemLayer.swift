@@ -55,13 +55,13 @@ open class LockItemLayer: CAShapeLayer {
     }
 
     /// Default UIColor(r: 0, g: 191, b: 255)
-    public var highlightColor = LockManager.options.lineHighlightColor
+    public var highlightColor = LockCenter.lineHighlightColor
     
     /// Default UIColor(r: 173, g: 216, b: 230)
-    public var normalColor = LockManager.options.lineNormalColor
+    public var normalColor = LockCenter.lineNormalColor
     
     /// Default UIColor.red
-    public var warnColor = LockManager.options.lineWarnColor
+    public var warnColor = LockCenter.lineWarnColor
     
     public func reset() {
         direction = .none

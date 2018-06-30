@@ -23,7 +23,6 @@
 		D8602C7D1D55FEB00022E93D /* LockItemLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6E1D55FEB00022E93D /* LockItemLayer.swift */; };
 		D8602C7E1D55FEB00022E93D /* LockLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C6F1D55FEB00022E93D /* LockLabel.swift */; };
 		D8602C7F1D55FEB00022E93D /* LockMainNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C701D55FEB00022E93D /* LockMainNav.swift */; };
-		D8602C801D55FEB00022E93D /* LockOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C711D55FEB00022E93D /* LockOptions.swift */; };
 		D8602C811D55FEB00022E93D /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8602C721D55FEB00022E93D /* LockView.swift */; };
 		D8FB37451D55852E0031BBF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37441D55852E0031BBF4 /* AppDelegate.swift */; };
 		D8FB37471D55852E0031BBF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FB37461D55852E0031BBF4 /* ViewController.swift */; };
@@ -73,7 +72,6 @@
 		D8602C6E1D55FEB00022E93D /* LockItemLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockItemLayer.swift; sourceTree = "<group>"; };
 		D8602C6F1D55FEB00022E93D /* LockLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockLabel.swift; sourceTree = "<group>"; };
 		D8602C701D55FEB00022E93D /* LockMainNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockMainNav.swift; sourceTree = "<group>"; };
-		D8602C711D55FEB00022E93D /* LockOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockOptions.swift; sourceTree = "<group>"; };
 		D8602C721D55FEB00022E93D /* LockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 		D8FB37411D55852E0031BBF4 /* GesturePassword.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GesturePassword.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8FB37441D55852E0031BBF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				D8602C681D55FEB00022E93D /* Extensions.swift */,
 				D8602C691D55FEB00022E93D /* LockCenter.swift */,
 				D8602C701D55FEB00022E93D /* LockMainNav.swift */,
-				D8602C711D55FEB00022E93D /* LockOptions.swift */,
 				BEC3B07B208B2DE900A43C30 /* UIView+Layout.swift */,
 				BED3F6C7209DA5C100591BE5 /* LockAdapter.swift */,
 			);
@@ -447,7 +444,6 @@
 				D8602C811D55FEB00022E93D /* LockView.swift in Sources */,
 				BE55D96B20969811004C748E /* VerifyPatternController.swift in Sources */,
 				BEC3B07C208B2DE900A43C30 /* UIView+Layout.swift in Sources */,
-				D8602C801D55FEB00022E93D /* LockOptions.swift in Sources */,
 				D840DB161E442E2100FE1C96 /* Lock.swift in Sources */,
 				D8532D311E4484100018D00F /* Keychain.swift in Sources */,
 			);

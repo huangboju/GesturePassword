@@ -19,13 +19,11 @@ open class ResetPatternController: UIViewController {
 
     private var overTimesHandle: ResetPattern?
     private var forgetHandle: ResetPattern?
-    
-    private let options = LockManager.options
 
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = options.resetPatternTitle
+        navigationItem.title = LockCenter.resetPatternTitle
         
         view.backgroundColor = .white
 

@@ -12,21 +12,21 @@ class LockMainNav: UINavigationController {
 
     func didInitialize() {
         navigationBar.titleTextAttributes = [
-            .foregroundColor: LockManager.options.barTittleColor,
-            .font: LockManager.options.barTittleFont
+            .foregroundColor: LockCenter.barTittleColor,
+            .font: LockCenter.barTittleFont
         ]
         
-        if LockManager.options.hideBarBottomLine {
+        if LockCenter.hideBarBottomLine {
             navigationBar.hideBottomHairline()
         }
 
-        if let backgroundColor = LockManager.options.barBackgroundColor {
+        if let backgroundColor = LockCenter.barBackgroundColor {
             navigationBar.setMyBackgroundColor(backgroundColor)
         }
-        navigationBar.tintColor = LockManager.options.barTintColor
+        navigationBar.tintColor = LockCenter.barTintColor
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return LockManager.options.statusBarStyle
+        return LockCenter.statusBarStyle
     }
 }

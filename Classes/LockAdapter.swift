@@ -38,7 +38,7 @@ struct LockAdapter {}
 extension LockAdapter {
     static func setPattern(with controller: SetPatternDelegate) {
         let password = controller.lockMainView.password
-        if password.count < LockManager.options.passwordMinCount {
+        if password.count < LockCenter.passwordMinCount {
             controller.tooShortState()
             return
         }
@@ -64,13 +64,13 @@ extension LockAdapter {
 extension LockAdapter {
     static func verifyPattern(with controller: VerifyPatternDelegate) {
         let inputPassword = controller.lockMainView.password
-        let localPassword = LockManager.password()
+        let localPassword = LockCenter.password()
         if inputPassword == localPassword {
             controller.successState()
             return
         }
-        LockOptions.errorTimes -= 1
-        let errorTimes = LockOptions.errorTimes
+        LockCenter.errorTimes -= 1
+        let errorTimes = LockCenter.errorTimes
         guard errorTimes == 0 else {
             controller.errorState(errorTimes)
             return
