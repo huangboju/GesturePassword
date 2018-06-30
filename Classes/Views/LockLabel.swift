@@ -4,9 +4,9 @@
 
 open class LockDescLabel: UILabel {
 
-    open var normalTextColor = UIColor(r: 192, g: 192, b: 192)
-    
-    open var warningTitleColor = UIColor(r: 254, g: 82, b: 92)
+    open var normalTextColor = LockManager.options.normalTitleColor
+
+    open var warningTitleColor = LockManager.options.warningTitleColor
 
     override init(frame: CGRect) {
         super.init(frame: frame)
