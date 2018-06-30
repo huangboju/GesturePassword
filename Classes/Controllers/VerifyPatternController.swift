@@ -37,7 +37,7 @@ public final class VerifyPatternController: UIViewController {
         
         view.addSubview(contentView)
         contentView.backgroundColor = .white
-        contentView.widthToSuperview().centerY(to: view, constant: 32)
+        contentView.widthToSuperview().bottom(to: view, constant: -44)
 
         initUI()
     }
@@ -52,13 +52,13 @@ public final class VerifyPatternController: UIViewController {
         lockMainView.delegate = self
         lockMainView.top(to: lockDescLabel,
                          attribute: .bottom,
-                         constant: 30)
+                         constant: 44)
             .centerXToSuperview()
             .height(to: lockMainView, attribute: .width)
 
         forgotButton.top(to: lockMainView,
                          attribute: .bottom,
-                         constant: 50)
+                         constant: 30)
             .centerXToSuperview()
             .bottomToSuperview()
     }

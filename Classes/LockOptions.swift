@@ -7,7 +7,7 @@ public struct LockOptions {
     public init() {}
     
     /// 圆的半径
-    public var itemDiameter: CGFloat = 80 {
+    public var itemDiameter: CGFloat = 66 {
         willSet {
             LockManager.options.itemDiameter = newValue
         }
@@ -41,10 +41,38 @@ public struct LockOptions {
         }
     }
 
-    // MARK: - 设置密码
-    public var settingTittle = "设置密码" {
+    // MARK: - 设置密码（"设置手势密码"）
+    public var settingTittle = "setPasswordTitle".localized {
         willSet {
             LockManager.options.settingTittle = newValue
+        }
+    }
+
+    /// 设置密码提示文字（"绘制解锁图案"）
+    public var setPasswordDescTitle = "setPasswordDescTitle".localized {
+        willSet {
+            LockManager.options.setPasswordDescTitle = newValue
+        }
+    }
+
+    /// 重绘密码提示文字（"再次绘制解锁图案"）
+    public var secondPassword = "setPasswordAgainTitle".localized {
+        willSet {
+            LockManager.options.secondPassword = newValue
+        }
+    }
+
+    /// 设置密码提示文字（"与上一次绘制不一致，请重新绘制"）
+    public var differentPassword = "setPasswordMismatchTitle".localized {
+        willSet {
+            LockManager.options.differentPassword = newValue
+        }
+    }
+    
+    /// 设置密码重绘按钮（重绘）
+    public var redraw = "redraw".localized {
+        willSet {
+            LockManager.options.redraw = newValue
         }
     }
 
@@ -55,6 +83,26 @@ public struct LockOptions {
         }
     }
 
+    /// "至少连接$个点，请重新输入"
+    public func tooShortTitle(with count: Int = LockManager.options.passwordMinCount) -> String {
+        let title = "setPasswordTooShortTitle".localized
+        return title.replacingOccurrences(of: "$", with: count.description)
+    }
+
+    public func invalidPasswordTitle(with times: Int) -> String {
+        let title = "invalidPasswordTitle".localized
+        return title.replacingOccurrences(of: "$", with: times.description)
+    }
+
+    /// 设置密码提示文字：设置成功
+    public var setSuccess = "密码设置成功!" {
+        willSet {
+            LockManager.options.setSuccess = newValue
+        }
+    }
+
+    // MARK: - 验证密码
+    
     /// 密码错误次数
     /// Default 5
     public var errorTimes: Int {
@@ -83,54 +131,6 @@ public struct LockOptions {
             return result
         }
     }
-
-    /// 设置密码提示文字
-    public var setPassword = "setPasswordDescTitle".localized {
-        willSet {
-            LockManager.options.setPassword = newValue
-        }
-    }
-
-    /// 重绘密码提示文字
-    public var secondPassword = "setPasswordAgainTitle".localized {
-        willSet {
-            LockManager.options.secondPassword = newValue
-        }
-    }
-
-    /// 设置密码提示文字：确认
-    public var confirmPassword = "请再次输入确认密码" {
-        willSet {
-            LockManager.options.confirmPassword = newValue
-        }
-    }
-
-    /// 设置密码提示文字：再次密码不一致
-    public var differentPassword = "setPasswordMismatchTitle".localized {
-        willSet {
-            LockManager.options.differentPassword = newValue
-        }
-    }
-
-    /// "至少连接$个点，请重新输入"
-    public func tooShortTitle(with count: Int = LockManager.options.passwordMinCount) -> String {
-        let title = "setPasswordTooShortTitle".localized
-        return title.replacingOccurrences(of: "$", with: count.description)
-    }
-
-    public func invalidPasswordTitle(with times: Int) -> String {
-        let title = "invalidPasswordTitle".localized
-        return title.replacingOccurrences(of: "$", with: times.description)
-    }
-
-    /// 设置密码提示文字：设置成功
-    public var setSuccess = "密码设置成功!" {
-        willSet {
-            LockManager.options.setSuccess = newValue
-        }
-    }
-
-    // MARK: - 验证密码
 
     public var verifyPassword = "验证密码" {
         willSet {

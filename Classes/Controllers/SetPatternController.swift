@@ -17,11 +17,13 @@ public final class SetPatternController: UIViewController {
     public let lockMainView = LockView()
 
     public var password = ""
+    
+    private let options = LockManager.options
 
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "setPasswordTitle".localized
+        navigationItem.title = options.settingTittle
 
         view.backgroundColor = .white
 
@@ -34,7 +36,7 @@ public final class SetPatternController: UIViewController {
 
     private func showRedrawBarButton() {
         if password.isEmpty { return }
-        let redraw = UIBarButtonItem(title: "redraw".localized, style: .plain, target: self, action: #selector(redrawAction))
+        let redraw = UIBarButtonItem(title: options.redraw, style: .plain, target: self, action: #selector(redrawAction))
         navigationItem.rightBarButtonItem = redraw
     }
 
@@ -51,7 +53,7 @@ public final class SetPatternController: UIViewController {
         hiddenRedrawBarButton()
 
         LockAdapter.reset(with: self)
-        lockDescLabel.showNormal(with: LockManager.options.setPassword)
+        lockDescLabel.showNormal(with: options.setPasswordDescTitle)
         lockInfoView.reset()
     }
 
@@ -68,7 +70,7 @@ public final class SetPatternController: UIViewController {
         lockDescLabel.top(to: lockInfoView,
                           attribute: .bottom,
                           constant: 30).centerXToSuperview()
-        lockDescLabel.showNormal(with: LockManager.options.setPassword)
+        lockDescLabel.showNormal(with: options.setPasswordDescTitle)
 
         lockMainView.delegate = self
         lockMainView.top(to: lockDescLabel,
@@ -90,18 +92,18 @@ extension SetPatternController: SetPatternDelegate {
 
     public func firstDrawedState() {
         lockInfoView.showSelectedItems(lockMainView.password)
-        lockDescLabel.showNormal(with: LockManager.options.secondPassword)
+        lockDescLabel.showNormal(with: options.secondPassword)
     }
 
     public func tooShortState() {
         showRedrawBarButton()
-        let text = LockManager.options.tooShortTitle()
+        let text = options.tooShortTitle()
         lockDescLabel.showWarn(with: text)
     }
 
     public func mismatchState() {
         showRedrawBarButton()
-        lockDescLabel.showWarn(with: LockManager.options.differentPassword)
+        lockDescLabel.showWarn(with: options.differentPassword)
     }
 
     public func successState() {

@@ -22,7 +22,7 @@ open class LockView: UIView {
         }
     }
     
-    open var itemDiameter: CGFloat = 80 {
+    open var itemDiameter: CGFloat = 66 {
         didSet {
             relayoutLayers()
         }
