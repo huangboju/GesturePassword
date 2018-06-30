@@ -82,13 +82,13 @@ extension VerifyPatternController {
         successHandle = handle
         return self
     }
-    
+
     @discardableResult
     func overTimesHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
         overTimesHandle = handle
         return self
     }
-    
+
     @discardableResult
     func forgetHandle(_ handle: @escaping VerifyPattern) -> VerifyPatternController {
         forgetHandle = handle
