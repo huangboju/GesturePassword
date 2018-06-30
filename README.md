@@ -119,3 +119,6 @@ class Lock {
 ```
 
 # 版本记录
+* [2.0](https://github.com/huangboju/GesturePassword/blob/master/Doc/MigrationGuide2.0.md)
+* [1.0](https://github.com/huangboju/GesturePassword/blob/master/Doc/MigrationGuide1.0.md)
+
