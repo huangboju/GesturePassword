@@ -109,45 +109,59 @@ extension LockCenter {
     // MARK: - UI
     
     /// 圆的半径
+    /// Default: 66
     public static var itemDiameter: CGFloat = 66
     
     /// 选中圆大小的线宽
+    /// Default: 1
     public static var lineWidth: CGFloat = 1
     
     /// 背景色
+    /// Default: UIColor(r: 255, g: 255, b: 255)
     public static var backgroundColor = UIColor(r: 255, g: 255, b: 255)
     
     /// 外环线条颜色：默认
+    /// Default: UIColor(r: 173, g: 216, b: 230)
     public static var lineNormalColor = UIColor(r: 173, g: 216, b: 230)
     
     /// 外环线条颜色：选中
+    /// Default: UIColor(r: 0, g: 191, b: 255)
     public static var lineHighlightColor = UIColor(r: 0, g: 191, b: 255)
     
     /// 外环线条颜色：错误
+    /// Default: warningTitleColor
     public static var lineWarnColor = warningTitleColor
 
     /// 警示文字颜色
+    /// Default: UIColor.red
     public static var warningTitleColor = UIColor.red
     
     /// 普通文字颜色
+    /// Default: UIColor(r: 192, g: 192, b: 192)
     public static var normalTitleColor = UIColor(r: 192, g: 192, b: 192)
     
-    /// 导航栏titleColor Default black
-    public static var barTittleColor: UIColor = UIColor.black
+    /// 导航栏titleColor
+    /// Default: UIColor.black
+    public static var barTittleColor = UIColor.black
     
-    /// 导航栏底部黑线是否隐藏 Default false
-    public static var hideBarBottomLine: Bool = false
+    /// 导航栏底部黑线是否隐藏
+    /// Default: false
+    public static var hideBarBottomLine = false
     
-    /// barButton文字颜色 Default red
-    public static var barTintColor: UIColor = UIColor.red
+    /// barButton文字颜色
+    /// Default: UIColor.red
+    public static var barTintColor = UIColor.red
     
-    /// barButton文字大小 Default 18
-    public static var barTittleFont: UIFont = UIFont.systemFont(ofSize: 18)
+    /// barButton文字大小
+    /// Default: UIFont.systemFont(ofSize: 18)
+    public static var barTittleFont = UIFont.systemFont(ofSize: 18)
     
-    /// 导航栏背景颜色 Default nil
+    /// 导航栏背景颜色
+    /// Default: nil
     public static var barBackgroundColor: UIColor?
     
-    /// 状态栏字体颜色 Default black
+    /// 状态栏字体颜色
+    /// Default: UIStatusBarStyle.default
     public static var statusBarStyle: UIStatusBarStyle = .default
 }
 
