@@ -1,7 +1,43 @@
-//
-//  Copyright © 2016年 cmcaifu.com. All rights reserved.
-//
+# GesturePassword 是一个Swift的手势密码库
+* 采用底层CALayer实现
+* 业务逻辑和UI分离，可以高度定制
+* 采用UserDefaults和Keychain两套密码缓存机制
 
+# Cocoapods
+
+```ruby
+pod 'GesturePassword'
+```
+
+
+
+### 1.设置密码
+
+
+![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/setting.gif)
+
+>
+
+### 2.验证密码
+
+![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/Verify.gif)
+
+
+>
+
+
+### 3.修改密码
+
+![Alt text](https://github.com/huangboju/GesturePassword/blob/master/Resources/Modify.gif)
+
+
+>
+
+
+# Usage
+1. 将Lock.swift文件拖入你的工程
+2. 使用二次封装的AppLock类自己调用**设置密码**、**修改密码**、**验证密码**
+```swift
 let AppLock = Lock.shared
 
 class Lock {
@@ -33,7 +69,7 @@ class Lock {
             print("❌❌❌ 还没有设置密码 ❌❌❌")
             return
         }
-        
+
         print("密码已设置")
         print("🍀🍀🍀 \(password) 🍀🍀🍀")
         showVerifyPattern(in: controller).successHandle {
@@ -53,13 +89,13 @@ class Lock {
             print("❌❌❌ 还没有设置密码 ❌❌❌")
             return
         }
-        
+
         print("密码已设置")
         print("🍀🍀🍀 \(password) 🍀🍀🍀")
         showModifyPattern(in: controller).forgetHandle { _ in
-            
+
             }.overTimesHandle { _ in
-                
+
             }.resetSuccessHandle {
                 print("🍀🍀🍀 \($0) 🍀🍀🍀")
         }
@@ -79,3 +115,7 @@ class Lock {
         LockCenter.removePassword()
     }
 }
+
+```
+
+# 版本记录
