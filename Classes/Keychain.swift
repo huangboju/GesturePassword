@@ -33,17 +33,6 @@ public enum ItemClass {
     case internetPassword
 }
 
-public enum AuthenticationType {
-    case ntlm
-    case msn
-    case dpa
-    case rpa
-    case httpBasic
-    case httpDigest
-    case htmlForm
-    case `default`
-}
-
 public enum Accessibility {
     /**
      Item data can only be accessed
@@ -410,7 +399,6 @@ struct Options {
     var accessGroup: String? = nil
     
     var server: URL!
-    var authenticationType: AuthenticationType = .default
     
     var accessibility: Accessibility = .afterFirstUnlock
     var authenticationPolicy: AuthenticationPolicy?
