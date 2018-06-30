@@ -25,7 +25,7 @@ public final class SetPatternController: UIViewController {
 
         navigationItem.title = options.settingTittle
 
-        view.backgroundColor = .white
+        view.backgroundColor = options.backgroundColor
 
         view.addSubview(contentView)
         contentView.backgroundColor = .white

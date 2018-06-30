@@ -35,7 +35,7 @@ public final class VerifyPatternController: UIViewController {
 
         navigationItem.title = options.verifyPasswordTitle
 
-        view.backgroundColor = .white
+        view.backgroundColor = options.backgroundColor
         
         view.addSubview(contentView)
         contentView.backgroundColor = .white

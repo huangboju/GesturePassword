@@ -5,27 +5,6 @@
 public struct LockOptions {
 
     public init() {}
-    
-    /// 圆的半径
-    public var itemDiameter: CGFloat = 66 {
-        willSet {
-            LockManager.options.itemDiameter = newValue
-        }
-    }
-
-    /// 选中圆大小比例
-    public var scale: CGFloat = 0.3 {
-        willSet {
-            LockManager.options.scale = newValue
-        }
-    }
-
-    /// 选中圆大小的线宽
-    public var arcLineWidth: CGFloat = 1 {
-        willSet {
-            LockManager.options.arcLineWidth = newValue
-        }
-    }
 
     /// 密码后缀
     public var passwordKeySuffix = "" {
@@ -154,7 +133,28 @@ public struct LockOptions {
         }
     }
 
-    // MARK: - 颜色
+    // MARK: - UI
+
+    /// 圆的半径
+    public var itemDiameter: CGFloat = 66 {
+        willSet {
+            LockManager.options.itemDiameter = newValue
+        }
+    }
+
+    /// 选中圆大小比例
+    public var scale: CGFloat = 0.3 {
+        willSet {
+            LockManager.options.scale = newValue
+        }
+    }
+    
+    /// 选中圆大小的线宽
+    public var lineWidth: CGFloat = 1 {
+        willSet {
+            LockManager.options.lineWidth = newValue
+        }
+    }
 
     /// 背景色
     public var backgroundColor = UIColor(r: 255, g: 255, b: 255) {

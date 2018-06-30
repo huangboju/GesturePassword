@@ -16,13 +16,13 @@ open class LockView: UIView {
         }
     }
 
-    open var lineWidth: CGFloat = 1 {
+    open var lineWidth: CGFloat = LockManager.options.lineWidth {
         didSet {
             shapeLayer?.lineWidth = lineWidth
         }
     }
     
-    open var itemDiameter: CGFloat = 66 {
+    open var itemDiameter: CGFloat = LockManager.options.itemDiameter {
         didSet {
             relayoutLayers()
         }
