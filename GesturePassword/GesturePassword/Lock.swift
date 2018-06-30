@@ -28,20 +28,21 @@ class Lock {
     }
 
     func verify(controller: UIViewController) {
-        if hasPassword {
-            print("密码已设置")
-            print("🍀🍀🍀 \(password) 🍀🍀🍀")
-            showVerifyPattern(in: controller).successHandle {
-                $0.dismiss()
+        guard hasPassword else {
+            print("❌❌❌ 还没有设置密码 ❌❌❌")
+            return
+        }
+        
+        print("密码已设置")
+        print("🍀🍀🍀 \(password) 🍀🍀🍀")
+        showVerifyPattern(in: controller).successHandle {
+            $0.dismiss()
             }.overTimesHandle { _ in
                 LockManager.removePassword()
                 assertionFailure("你必须做错误超限后的处理")
             }.forgetHandle {
                 $0.dismiss()
                 assertionFailure("忘记密码，请做相应处理")
-            }
-        } else {
-            print("❌❌❌ 还没有设置密码 ❌❌❌")
         }
     }
 
