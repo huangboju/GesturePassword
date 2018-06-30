@@ -94,13 +94,6 @@ public struct LockOptions {
         return title.replacingOccurrences(of: "$", with: times.description)
     }
 
-    /// 设置密码提示文字：设置成功
-    public var setSuccess = "密码设置成功!" {
-        willSet {
-            LockManager.options.setSuccess = newValue
-        }
-    }
-
     // MARK: - 验证密码
     
     /// 密码错误次数
@@ -132,38 +125,25 @@ public struct LockOptions {
         }
     }
 
-    public var verifyPassword = "验证密码" {
+    public var verifyPasswordTitle = "verifyPasswordTitle".localized {
         willSet {
-            LockManager.options.verifyPassword = newValue
+            LockManager.options.verifyPasswordTitle = newValue
         }
     }
-
-    /// 验证密码：普通提示文字
-    public var enterPassword = "请滑动输入密码" {
+    
+    public var forgotBtnTitle = "forgotParttern".localized {
         willSet {
-            LockManager.options.enterPassword = newValue
+            LockManager.options.forgotBtnTitle = newValue
         }
     }
-
-    /// 验证密码：密码错误
-    public var passwordWrong = "输入密码错误" {
-        willSet {
-            LockManager.options.passwordWrong = newValue
-        }
-    }
-
-    /// 验证密码：验证成功
-    public var passwordCorrect = "密码正确" {
-        willSet {
-            LockManager.options.passwordCorrect = newValue
-        }
-    }
+    
 
     // MARK: - 修改密码
 
-    public var modifyPassword = "修改密码" {
+    //
+    public var resetPatternTitle = "resetPatternTitle".localized {
         willSet {
-            LockManager.options.modifyPassword = newValue
+            LockManager.options.resetPatternTitle = newValue
         }
     }
 

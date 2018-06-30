@@ -10,19 +10,21 @@
 
 "redraw" = "Redraw";
 
-"setPasswordTitle" = "Draw pattern";
+"setPasswordTitle" = "Draw Pattern";
 
-"setPasswordDescTitle" = "Draw your pattern";
+"setPasswordDescTitle" = "Draw Your Pattern";
 
-"setPasswordTooShortTitle" = "At least $ points required";
+"setPasswordTooShortTitle" = "At Least $ Points Required";
 
-"setPasswordMismatchTitle" = "Not match, please draw it again";
+"setPasswordMismatchTitle" = "Not Match, Please Draw It Again";
 
-"setPasswordAgainTitle" = "Draw pattern again";
+"setPasswordAgainTitle" = "Draw Pattern Again";
 
-"verifyPasswordTitle" = "Verify password";
+"verifyPasswordTitle" = "Verify Password";
 
-"forgotParttern" = "Forgot pattern?";
+"forgotParttern" = "Forgot Pattern?";
 
-"invalidPasswordTitle" = "Invalid passwod, $ attempt(s) left";
+"invalidPasswordTitle" = "Invalid Passwod, $ Attempt(s) Left";
+
+"resetPatternTitle" = "Pattern Verification";
 
