@@ -78,6 +78,7 @@ open class LockItemLayer: CAShapeLayer {
     init(origin: CGPoint, side: CGFloat) {
         super.init()
 
+        
         // 去除隐士动画
         actions = [
             "fillColor": NSNull(),
@@ -92,7 +93,7 @@ open class LockItemLayer: CAShapeLayer {
     
     private func didInitlized() {
         backgroundColor = UIColor.white.cgColor
-        borderWidth = 1
+        borderWidth = LockCenter.lineWidth
         borderColor = normalColor.cgColor
         fillColor = highlightColor.cgColor
     }
