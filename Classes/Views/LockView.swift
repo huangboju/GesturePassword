@@ -10,7 +10,7 @@ open class LockView: UIView {
 
     open weak var delegate: LockViewDelegate?
 
-    open var lineColor: UIColor = UIColor(r: 0, g: 191, b: 255) {
+    open var lineColor: UIColor = LockManager.options.lineHighlightColor {
         didSet {
             shapeLayer?.strokeColor = lineColor.cgColor
         }

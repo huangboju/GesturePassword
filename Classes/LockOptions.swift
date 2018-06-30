@@ -141,13 +141,6 @@ public struct LockOptions {
             LockManager.options.itemDiameter = newValue
         }
     }
-
-    /// 选中圆大小比例
-    public var scale: CGFloat = 0.3 {
-        willSet {
-            LockManager.options.scale = newValue
-        }
-    }
     
     /// 选中圆大小的线宽
     public var lineWidth: CGFloat = 1 {
@@ -164,30 +157,16 @@ public struct LockOptions {
     }
 
     /// 外环线条颜色：默认
-    public var circleLineNormalColor = UIColor(r: 173, g: 216, b: 230) {
+    public var lineNormalColor = UIColor(r: 173, g: 216, b: 230) {
         willSet {
-            LockManager.options.circleLineNormalColor = newValue
+            LockManager.options.lineNormalColor = newValue
         }
     }
 
     /// 外环线条颜色：选中
-    public var circleLineSelectedColor = UIColor(r: 0, g: 191, b: 255) {
+    public var lineHighlightColor = UIColor(r: 0, g: 191, b: 255) {
         willSet {
-            LockManager.options.circleLineSelectedColor = newValue
-        }
-    }
-
-    /// 实心圆
-    public var circleLineSelectedCircleColor = UIColor(r: 0, g: 191, b: 255) {
-        willSet {
-            LockManager.options.circleLineSelectedCircleColor = newValue
-        }
-    }
-
-    /// 连线颜色
-    public var lockLineColor = UIColor(r: 0, g: 191, b: 255) {
-        willSet {
-            LockManager.options.lockLineColor = newValue
+            LockManager.options.lineHighlightColor = newValue
         }
     }
 
@@ -204,8 +183,6 @@ public struct LockOptions {
             LockManager.options.normalTitleColor = newValue
         }
     }
-
-    // MARK: - LockDelegate
 
     /// 导航栏titleColor Default black
     public var barTittleColor: UIColor = UIColor.black {

@@ -13,8 +13,7 @@ class Lock {
         var options = LockOptions()
         options.passwordKeySuffix = "user1"
         options.usingKeychain = true
-        options.circleLineSelectedCircleColor = options.circleLineSelectedColor
-        options.lockLineColor = options.circleLineSelectedColor
+        options.lineHighlightColor = .red
     }
 
     func set(controller: UIViewController) {
