@@ -16,6 +16,8 @@ open class LockView: UIView {
         }
     }
 
+    open var lineWarnColor: UIColor = LockManager.options.lineWarnColor
+
     open var lineWidth: CGFloat = LockManager.options.lineWidth {
         didSet {
             shapeLayer?.lineWidth = lineWidth
@@ -63,11 +65,11 @@ open class LockView: UIView {
     }
 
     override open func touchesBegan(_ touches: Set<UITouch>, with _: UIEvent?) {
-        lockHandle(touches)
+        processTouch(touches)
     }
 
     override open func touchesMoved(_ touches: Set<UITouch>, with _: UIEvent?) {
-        lockHandle(touches)
+        processTouch(touches)
     }
 
     override open func touchesEnded(_: Set<UITouch>, with _: UIEvent?) {
@@ -136,7 +138,7 @@ open class LockView: UIView {
         reset()
     }
 
-    private func lockHandle(_ touches: Set<UITouch>) {
+    private func processTouch(_ touches: Set<UITouch>) {
         let location = touches.first!.location(in: self)
         guard let itemView = itemView(with: location) else {
             return
@@ -201,6 +203,11 @@ open class LockView: UIView {
             return subLayer
         }
         return nil
+    }
+    
+    public func warn() {
+        selectedItemViews.forEach { $0.turnWarn() }
+        shapeLayer?.strokeColor = lineWarnColor.cgColor
     }
 
     public func reset() {

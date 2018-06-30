@@ -113,6 +113,7 @@ extension VerifyPatternController: VerifyPatternDelegate {
     }
 
     func errorState(_ remainTimes: Int) {
+        lockMainView.warn()
         let text = options.invalidPasswordTitle(with: remainTimes)
         lockDescLabel.showWarn(with: text)
     }

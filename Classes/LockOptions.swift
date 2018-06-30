@@ -85,22 +85,13 @@ public struct LockOptions {
             return LockOptions.errorTimes
         }
     }
-    
+
     static var errorTimes: Int {
         set {
-            let storage =  LockUserDefaults()
-            let key = PASSWORD_KEY + "error_times" + LockManager.options.passwordKeySuffix
-            storage.set(newValue, forKey: key)
+            LockManager.setErrorTimes(newValue)
         }
         get {
-            let storage =  LockUserDefaults()
-            let key = PASSWORD_KEY + "error_times" + LockManager.options.passwordKeySuffix
-            var result = storage.integer(forKey: key)
-            if result == 0 && storage.str(forKey: key) == nil {
-                result = 5
-                storage.set(result, forKey: key)
-            }
-            return result
+            return LockManager.errorTimes()
         }
     }
 
@@ -167,6 +158,13 @@ public struct LockOptions {
     public var lineHighlightColor = UIColor(r: 0, g: 191, b: 255) {
         willSet {
             LockManager.options.lineHighlightColor = newValue
+        }
+    }
+
+    /// 外环线条颜色：错误
+    public var lineWarnColor = UIColor.red {
+        willSet {
+            LockManager.options.lineWarnColor = newValue
         }
     }
 

@@ -22,6 +22,7 @@ open class LockCenter {
 
     open func removePassword(for key: String? = nil) {
         storage.removeValue(forKey: suffix(with: key))
+        removeErrorTimes(forKey: options.passwordKeySuffix)
     }
 
     open func set(_ password: String, forKey key: String? = nil) {
@@ -30,6 +31,30 @@ open class LockCenter {
     
     open func password(forKey key: String? = nil) -> String? {
         return storage.str(forKey: suffix(with: key))
+    }
+
+    func setErrorTimes(_ value: Int, forKey key: String? = nil) {
+        let key = errorTimesKey(with: key)
+        storage.set(value, forKey: key)
+    }
+
+    func errorTimes(forKey key: String? = nil) -> Int {
+        let key = errorTimesKey(with: key)
+        var result = storage.integer(forKey: key)
+        if result == 0 && storage.str(forKey: key) == nil {
+            result = 5
+            storage.set(result, forKey: key)
+        }
+        return result
+    }
+    
+    func removeErrorTimes(forKey key: String? = nil) {
+        let key = errorTimesKey(with: key)
+        storage.removeValue(forKey: key)
+    }
+
+    func errorTimesKey(with suffix: String?) -> String {
+        return PASSWORD_KEY + "error_times_" + (suffix ?? options.passwordKeySuffix)
     }
 
     private func suffix(with str: String?) -> String {

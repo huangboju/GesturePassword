@@ -7,7 +7,13 @@ import Security
 protocol Storagable {
 
     func set(_ value: String, forKey key: String)
+
     func str(forKey key: String) -> String?
+    
+    func set(_ value: Int, forKey key: String)
+
+    func integer(forKey key: String) -> Int
+
     func removeValue(forKey key: String)
 }
 
@@ -25,6 +31,14 @@ struct LockKeychain: Storagable {
 
     func str(forKey key: String) -> String? {
         return keychain[key]
+    }
+    
+    func set(_ value: Int, forKey key: String) {
+        keychain[key] = value.description
+    }
+    
+    func integer(forKey key: String) -> Int {
+        return  Int(keychain[key] ?? "0") ?? 0
     }
 
     func removeValue(forKey key: String) {

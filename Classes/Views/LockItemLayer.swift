@@ -60,6 +60,9 @@ open class LockItemLayer: CAShapeLayer {
     /// Default UIColor(r: 173, g: 216, b: 230)
     public var normalColor = LockManager.options.lineNormalColor
     
+    /// Default UIColor.red
+    public var warnColor = LockManager.options.lineWarnColor
+    
     public func reset() {
         direction = .none
         turnNormal()
@@ -94,10 +97,15 @@ open class LockItemLayer: CAShapeLayer {
         drawSolidCircle()
         path = mainPath.cgPath
     }
-    
+
     public func turnNormal() {
         borderColor = normalColor.cgColor
         mainPath.removeAllPoints()
+        path = mainPath.cgPath
+    }
+
+    public func turnWarn() {
+        borderColor = warnColor.cgColor
         path = mainPath.cgPath
     }
 
@@ -120,7 +128,7 @@ open class LockItemLayer: CAShapeLayer {
         solidCirclePath.addEllipse(with: center, radius: radius)
         mainPath.append(solidCirclePath)
     }
-    
+
     private func drawDirect() {
         let side = diameter * goldenRatio
         let height = side * 0.8
