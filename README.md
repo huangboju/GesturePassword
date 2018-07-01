@@ -1,6 +1,7 @@
 # GesturePassword 是一个Swift的手势密码库
 * 采用底层CALayer实现
 * 业务逻辑和UI分离，可以高度定制
+* 支持中英文
 * 采用UserDefaults和Keychain两套密码缓存机制
 
 # Cocoapods
