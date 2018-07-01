@@ -139,6 +139,6 @@ extension UIBezierPath {
 extension String {
     var localized: String {
         let path = Bundle(for: LockView.self).path(forResource: "Lock", ofType: "bundle")!
-        return NSLocalizedString(self, tableName: "Lock", bundle: Bundle(path: path)!, value: "", comment: "")
+        return NSLocalizedString(self, tableName: "Lock", bundle: Bundle(path: path)!, comment: "")
     }
 }
