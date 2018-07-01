@@ -2,6 +2,8 @@
 //  Copyright © 2016年 cmcaifu.com. All rights reserved.
 //
 
+import GesturePassword
+
 let AppLock = Lock.shared
 
 class Lock {

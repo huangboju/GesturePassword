@@ -1,0 +1,16 @@
+PODS:
+  - GesturePassword (2.0.2)
+
+DEPENDENCIES:
+  - GesturePassword (from `../`)
+
+EXTERNAL SOURCES:
+  GesturePassword:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  GesturePassword: 40abcb285edb5db351edd7d9d31c221aa12d5b1a
+
+PODFILE CHECKSUM: 233caafae751fd11a27c6762908c0434ea3a7705
+
+COCOAPODS: 1.5.3

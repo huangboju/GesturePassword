@@ -1,0 +1,29 @@
+/* 
+  Lock.strings
+  GesturePassword
+
+  Created by 黄伯驹 on 2018/4/28.
+  Copyright © 2018 xiAo_Ju. All rights reserved.
+*/
+
+"cancel" = "取消";
+
+"redraw" = "重绘";
+
+"setPasswordTitle" = "设置手势密码";
+
+"setPasswordDescTitle" = "绘制解锁图案";
+
+"setPasswordTooShortTitle" = "至少连接$个点，请重新输入";
+
+"setPasswordMismatchTitle" = "与上一次绘制不一致，请重新绘制";
+
+"setPasswordAgainTitle" = "再次绘制解锁图案";
+
+"verifyPasswordTitle" = "验证密码";
+
+"forgotParttern" = "忘记手势？";
+
+"invalidPasswordTitle" = "密码错误，还可以再输入$次";
+
+"resetPatternTitle" = "验证手势密码";

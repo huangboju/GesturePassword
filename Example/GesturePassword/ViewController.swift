@@ -10,29 +10,29 @@ class ViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableView
     }()
-
+    
     let data: [String] = [
         "设置密码",
         "验证密码",
         "修改密码",
-    ]
-
+        ]
+    
     let operationDict = [
         "设置密码": "setPassword",
         "验证密码": "verifyPassword",
         "修改密码": "modifyPassword",
-    ]
-
+        ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "手势密码"
         view.addSubview(tableView)
     }
-
+    
     @objc func setPassword() {
         AppLock.set(controller: self)
     }
-
+    
     @objc func verifyPassword() {
         AppLock.verify(controller: self)
         //        AppLock.verify(controller: self, success: { _ in
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         //            print("次数超限")
         //        })
     }
-
+    
     @objc func modifyPassword() {
         AppLock.modify(controller: self)
         //        AppLock.modify(controller: self, success: { _ in
@@ -62,7 +62,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return data.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = data[indexPath.row]
