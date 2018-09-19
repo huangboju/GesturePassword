@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
     
     s.name         = "GesturePassword"
-    s.version      = "2.0.2"
+    s.version      = "2.0.3"
     s.summary      = "GesturePassword is a simple gesture password written in Swift"
     s.homepage     = "https://github.com/huangboju/GesturePassword"
     s.license      = "MIT"
@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
     }
     s.framework    = "UIKit"
     s.requires_arc = true
-    s.pod_target_xcconfig = { "SWIFT_VERSION" => "4.0" }
+    s.pod_target_xcconfig = { "SWIFT_VERSION" => "4.2" }
 end
