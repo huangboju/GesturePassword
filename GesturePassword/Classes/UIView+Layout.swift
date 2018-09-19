@@ -10,8 +10,8 @@ extension UIView {
 
     @discardableResult
     public func leading(to item: Any?,
-                        attribute: NSLayoutAttribute = .leading,
-                        relation: NSLayoutRelation = .equal,
+                        attribute: NSLayoutConstraint.Attribute = .leading,
+                        relation: NSLayoutConstraint.Relation = .equal,
                         multiplier: CGFloat = 1,
                         constant c: CGFloat = 0,
                         priority: UILayoutPriority = .required) -> UIView {
@@ -27,8 +27,8 @@ extension UIView {
     
     @discardableResult
     public func trailing(to item: Any?,
-                         attribute: NSLayoutAttribute = .trailing,
-                         relation: NSLayoutRelation = .equal,
+                         attribute: NSLayoutConstraint.Attribute = .trailing,
+                         relation: NSLayoutConstraint.Relation = .equal,
                          multiplier: CGFloat = 1,
                          constant c: CGFloat = 0,
                          priority: UILayoutPriority = .required) -> UIView {
@@ -44,8 +44,8 @@ extension UIView {
     
     @discardableResult
     public func top(to item: Any?,
-                    attribute: NSLayoutAttribute = .top,
-                    relation: NSLayoutRelation = .equal,
+                    attribute: NSLayoutConstraint.Attribute = .top,
+                    relation: NSLayoutConstraint.Relation = .equal,
                     multiplier: CGFloat = 1,
                     constant c: CGFloat = 0,
                     priority: UILayoutPriority = .required) -> UIView {
@@ -61,8 +61,8 @@ extension UIView {
     
     @discardableResult
     public func bottom(to item: Any?,
-                       attribute: NSLayoutAttribute = .bottom,
-                       relation: NSLayoutRelation = .equal,
+                       attribute: NSLayoutConstraint.Attribute = .bottom,
+                       relation: NSLayoutConstraint.Relation = .equal,
                        multiplier: CGFloat = 1,
                        constant c: CGFloat = 0,
                        priority: UILayoutPriority = .required) -> UIView {
@@ -78,8 +78,8 @@ extension UIView {
     
     @discardableResult
     public func height(to item: Any?,
-                       attribute: NSLayoutAttribute = .height,
-                       relation: NSLayoutRelation = .equal,
+                       attribute: NSLayoutConstraint.Attribute = .height,
+                       relation: NSLayoutConstraint.Relation = .equal,
                        multiplier: CGFloat = 1,
                        constant c: CGFloat = 0,
                        priority: UILayoutPriority = .required) -> UIView {
@@ -95,8 +95,8 @@ extension UIView {
     
     @discardableResult
     public func width(to item: Any?,
-                      attribute: NSLayoutAttribute = .width,
-                      relation: NSLayoutRelation = .equal,
+                      attribute: NSLayoutConstraint.Attribute = .width,
+                      relation: NSLayoutConstraint.Relation = .equal,
                       multiplier: CGFloat = 1,
                       constant c: CGFloat = 0,
                       priority: UILayoutPriority = .required) -> UIView {
@@ -112,8 +112,8 @@ extension UIView {
 
     @discardableResult
     public func centerY(to item: Any?,
-                        attribute: NSLayoutAttribute = .centerY,
-                        relation: NSLayoutRelation = .equal,
+                        attribute: NSLayoutConstraint.Attribute = .centerY,
+                        relation: NSLayoutConstraint.Relation = .equal,
                         multiplier: CGFloat = 1,
                         constant c: CGFloat = 0,
                         priority: UILayoutPriority = .required) -> UIView {
@@ -129,8 +129,8 @@ extension UIView {
     
     @discardableResult
     public func centerX(to item: Any?,
-                                   attribute: NSLayoutAttribute = .centerX,
-                                   relation: NSLayoutRelation = .equal,
+                                   attribute: NSLayoutConstraint.Attribute = .centerX,
+                                   relation: NSLayoutConstraint.Relation = .equal,
                                    multiplier: CGFloat = 1,
                                    constant c: CGFloat = 0,
                                    priority: UILayoutPriority = .required) -> UIView {
@@ -155,7 +155,7 @@ extension UIView {
 
     @discardableResult
     public func edges(to item: Any?,
-                      relation: NSLayoutRelation = .equal,
+                      relation: NSLayoutConstraint.Relation = .equal,
                       insets: UIEdgeInsets = .zero,
                       priority: UILayoutPriority = .required) -> UIView {
         top(to: item, attribute: .top, relation: relation, constant: insets.top, priority: priority)
@@ -165,10 +165,10 @@ extension UIView {
         return self
     }
 
-    private func prepareLayout(with attr1: NSLayoutAttribute,
-                             relatedBy relation: NSLayoutRelation,
+    private func prepareLayout(with attr1: NSLayoutConstraint.Attribute,
+                             relatedBy relation: NSLayoutConstraint.Relation,
                              toItem view2: Any?,
-                             attribute attr2: NSLayoutAttribute,
+                             attribute attr2: NSLayoutConstraint.Attribute,
                             multiplier: CGFloat,
                               constant c: CGFloat,
                               priority: UILayoutPriority) {
@@ -188,8 +188,8 @@ extension UIView {
 /// superview
 extension UIView {
     @discardableResult
-    public func topToSuperview(_ attribute: NSLayoutAttribute = .top,
-                                   relation: NSLayoutRelation = .equal,
+    public func topToSuperview(_ attribute: NSLayoutConstraint.Attribute = .top,
+                                   relation: NSLayoutConstraint.Relation = .equal,
                                    multiplier: CGFloat = 1,
                                    constant c: CGFloat = 0,
                                    priority: UILayoutPriority = .required) -> UIView {
@@ -197,8 +197,8 @@ extension UIView {
     }
     
     @discardableResult
-    public func bottomToSuperview(_ attribute: NSLayoutAttribute = .bottom,
-                               relation: NSLayoutRelation = .equal,
+    public func bottomToSuperview(_ attribute: NSLayoutConstraint.Attribute = .bottom,
+                               relation: NSLayoutConstraint.Relation = .equal,
                                multiplier: CGFloat = 1,
                                constant c: CGFloat = 0,
                                priority: UILayoutPriority = .required) -> UIView {
@@ -207,8 +207,8 @@ extension UIView {
     
     
     @discardableResult
-    public func leadingToSuperview(_ attribute: NSLayoutAttribute = .leading,
-                                   relation: NSLayoutRelation = .equal,
+    public func leadingToSuperview(_ attribute: NSLayoutConstraint.Attribute = .leading,
+                                   relation: NSLayoutConstraint.Relation = .equal,
                                    multiplier: CGFloat = 1,
                                    constant c: CGFloat = 0,
                                    priority: UILayoutPriority = .required) -> UIView {
@@ -216,8 +216,8 @@ extension UIView {
     }
 
     @discardableResult
-    public func trailingToSuperview(_ attribute: NSLayoutAttribute = .trailing,
-                                   relation: NSLayoutRelation = .equal,
+    public func trailingToSuperview(_ attribute: NSLayoutConstraint.Attribute = .trailing,
+                                   relation: NSLayoutConstraint.Relation = .equal,
                                    multiplier: CGFloat = 1,
                                    constant c: CGFloat = 0,
                                    priority: UILayoutPriority = .required) -> UIView {
@@ -225,8 +225,8 @@ extension UIView {
     }
 
     @discardableResult
-    public func widthToSuperview(_ attribute: NSLayoutAttribute = .width,
-                      relation: NSLayoutRelation = .equal,
+    public func widthToSuperview(_ attribute: NSLayoutConstraint.Attribute = .width,
+                      relation: NSLayoutConstraint.Relation = .equal,
                       multiplier: CGFloat = 1,
                       constant c: CGFloat = 0,
                       priority: UILayoutPriority = .required) -> UIView {
@@ -234,8 +234,8 @@ extension UIView {
     }
 
     @discardableResult
-    public func heightToSuperview(_ attribute: NSLayoutAttribute = .height,
-                                 relation: NSLayoutRelation = .equal,
+    public func heightToSuperview(_ attribute: NSLayoutConstraint.Attribute = .height,
+                                 relation: NSLayoutConstraint.Relation = .equal,
                                  multiplier: CGFloat = 1,
                                  constant c: CGFloat = 0,
                                  priority: UILayoutPriority = .required) -> UIView {
@@ -249,8 +249,8 @@ extension UIView {
     }
     
     @discardableResult
-    public func centerXToSuperview(_ attribute: NSLayoutAttribute = .centerX,
-                                   relation: NSLayoutRelation = .equal,
+    public func centerXToSuperview(_ attribute: NSLayoutConstraint.Attribute = .centerX,
+                                   relation: NSLayoutConstraint.Relation = .equal,
                                    multiplier: CGFloat = 1,
                                    constant c: CGFloat = 0,
                                    priority: UILayoutPriority = .required) -> UIView {
@@ -263,7 +263,7 @@ extension UIView {
     }
     
     @discardableResult
-    public func edgesToSuperview(_ relation: NSLayoutRelation = .equal,
+    public func edgesToSuperview(_ relation: NSLayoutConstraint.Relation = .equal,
                                  insets: UIEdgeInsets = .zero,
                                  priority: UILayoutPriority = .required) -> UIView {
         return edges(to: superview, relation: relation, insets: insets, priority: priority)

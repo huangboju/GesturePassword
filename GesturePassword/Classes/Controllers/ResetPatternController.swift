@@ -20,7 +20,7 @@ public final  class ResetPatternController: UIViewController {
     private var overTimesHandle: ResetPattern?
     private var forgetHandle: ResetPattern?
 
-    override open func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = LockCenter.resetPatternTitle
@@ -32,10 +32,10 @@ public final  class ResetPatternController: UIViewController {
 
     func didInitialize() {
 
-        addChildViewController(verifyPatternVC)
+        addChild(verifyPatternVC)
         view.addSubview(verifyPatternVC.view)
         verifyPatternVC.view.edgesToSuperview()
-        verifyPatternVC.didMove(toParentViewController: self)
+        verifyPatternVC.didMove(toParent: self)
 
         navigationItem.title = verifyPatternVC.navigationItem.title
 

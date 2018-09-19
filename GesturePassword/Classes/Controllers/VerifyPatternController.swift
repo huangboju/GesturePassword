@@ -28,7 +28,7 @@ public final class VerifyPatternController: UIViewController {
         return button
     }()
 
-    override open func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = LockCenter.verifyPasswordTitle

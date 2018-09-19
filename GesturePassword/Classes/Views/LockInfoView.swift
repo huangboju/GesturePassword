@@ -7,7 +7,7 @@ final class LockInfoView: UIView {
 
     private var itemLayers: [LockItemLayer] = []
 
-    open var itemDiameter: CGFloat = 10 {
+    public var itemDiameter: CGFloat = 10 {
         didSet {
             setNeedsLayout()
         }

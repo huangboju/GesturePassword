@@ -18,7 +18,7 @@ public final class SetPatternController: UIViewController {
 
     public var password = ""
 
-    override open func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = LockCenter.settingTittle

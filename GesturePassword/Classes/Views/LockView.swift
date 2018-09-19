@@ -52,8 +52,8 @@ open class LockView: UIView {
         layoutLayers()
 
         shapeLayer?.lineWidth = lineWidth
-        shapeLayer?.lineCap = kCALineCapRound
-        shapeLayer?.lineJoin = kCALineJoinRound
+        shapeLayer?.lineCap = .round
+        shapeLayer?.lineJoin = .round
         shapeLayer?.fillColor = UIColor.clear.cgColor
         shapeLayer?.strokeColor = lineColor.cgColor
     }
