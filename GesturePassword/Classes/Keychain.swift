@@ -340,7 +340,7 @@ public final class Keychain {
     
     public subscript(key: String) -> String? {
         get {
-            return (try? get(key)).flatMap { $0 }
+            return (((try? get(key)) as String??)).flatMap { $0 }
         }
         
         set {
